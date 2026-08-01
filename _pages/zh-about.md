@@ -27,7 +27,7 @@ lang_alt: /
 
 🌟 有趣的分享 🌟
 ======
-在权衡是否攻读博士时，我偶然发现了一款很棒的游戏——[**博士模拟器**](https://research.wmz.ninja/projects/phd/index.html)！我很想把它推荐给更多人。想深入了解细节，[**请阅读完整故事**](https://qiuhan-star.github.io/hanrachelqiu.github.io/game-details.html)。
+在考虑是否读博时，我偶然发现了一款很有意思的游戏——[**博士模拟器**](https://research.wmz.ninja/projects/phd/index.html)！我很想把它推荐给更多人。想了解背后的细节，欢迎[**阅读完整故事**](https://qiuhan-star.github.io/hanrachelqiu.github.io/game-details.html)。
 <br><br>
 
 🔥 最新动态
