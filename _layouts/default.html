@@ -20,7 +20,7 @@ layout: compress
     </script>
 
     <style>
-      /* ===== 站点开屏动画（同一会话只播一次）===== */
+      /* ===== 站点开屏动画（同一浏览器永久只播一次）===== */
       .preloader {
         display: none;
         position: fixed;
@@ -144,14 +144,14 @@ layout: compress
     {% include scripts.html %}
 
     <script>
-      /* ===== 站点开屏动画（同一会话只播一次）===== */
+      /* ===== 站点开屏动画（同一浏览器永久只播一次）===== */
       (function () {
         var PRELOADER_TEXT = "Han (Rachel) Qiu";
         var PLAY_MS = 2800, CURTAIN_MS = 950, HARD_CAP_MS = 6500;
 
         var played = false;
-        try { played = sessionStorage.getItem('hq-anim-played') === '1'; } catch (e) {}
-        if (played) return; /* 本会话已播过，直接显示页面 */
+        try { played = localStorage.getItem('hq-anim-played') === '1'; } catch (e) {}
+        if (played) return; /* 已播过（同一浏览器永久只播一次），直接显示页面 */
 
         var preloader = document.getElementById('preloader');
         if (!preloader) return;
@@ -185,7 +185,7 @@ layout: compress
           if (done) return;
           done = true;
           preloader.classList.add('hide');
-          try { sessionStorage.setItem('hq-anim-played', '1'); } catch (e) {}
+          try { localStorage.setItem('hq-anim-played', '1'); } catch (e) {}
           setTimeout(function () {
             preloader.style.display = 'none';
             document.documentElement.style.overflow = '';
