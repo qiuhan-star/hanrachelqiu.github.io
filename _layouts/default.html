@@ -57,15 +57,16 @@ layout: compress
         0%, 100% { transform: scale(1) translate(0, 0); }
         50%      { transform: scale(1.14) translate(2vmax, -1.5vmax); }
       }
-      /* 几只缓慢飞舞的小蝴蝶（克制、低饱和，不抢戏） */
+      /* 几只缓慢飞舞的小蝴蝶（更大、更多、低饱和） */
       .butterflies { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
-      .bf { position: absolute; width: 30px; height: 30px; opacity: 0.6; }
+      .bf { position: absolute; width: 40px; height: 40px; opacity: 0.7; }
       .bf svg { width: 100%; height: 100%; display: block; }
       .bf .wings { transform-origin: 50% 50%; animation: hqFlap 0.45s ease-in-out infinite; }
       @keyframes hqFlap { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.45); } }
-      .bf1 { left: 16%; top: 32%; color: rgba(125,155,255,0.7); animation: hqFly1 23s ease-in-out infinite; }
-      .bf2 { left: 72%; top: 26%; color: rgba(185,167,255,0.7); animation: hqFly2 27s ease-in-out infinite; animation-delay: -6s; }
-      .bf3 { left: 52%; top: 70%; color: rgba(255,170,200,0.6); width: 24px; height: 24px; animation: hqFly3 31s ease-in-out infinite; animation-delay: -12s; }
+      .bf1 { left: 14%; top: 28%; color: rgba(125,155,255,0.78); animation: hqFly1 24s ease-in-out infinite; }
+      .bf2 { left: 74%; top: 22%; color: rgba(185,167,255,0.78); animation: hqFly2 28s ease-in-out infinite; animation-delay: -6s; }
+      .bf3 { left: 52%; top: 66%; color: rgba(255,170,200,0.68); width: 34px; height: 34px; animation: hqFly3 32s ease-in-out infinite; animation-delay: -12s; }
+      .bf4 { left: 30%; top: 48%; color: rgba(150,205,195,0.68); width: 36px; height: 36px; animation: hqFly4 30s ease-in-out infinite; animation-delay: -18s; }
       @keyframes hqFly1 {
         0%   { transform: translate(0,0) rotate(0deg); }
         25%  { transform: translate(12vw,-7vh) rotate(14deg); }
@@ -86,6 +87,22 @@ layout: compress
         60%  { transform: translate(-8vw,-16vh) rotate(-14deg); }
         100% { transform: translate(0,0) rotate(0deg); }
       }
+      @keyframes hqFly4 {
+        0%   { transform: translate(0,0) rotate(0deg); }
+        30%  { transform: translate(-12vw,12vh) rotate(-16deg); }
+        60%  { transform: translate(10vw,18vh) rotate(12deg); }
+        100% { transform: translate(0,0) rotate(0deg); }
+      }
+      /* 下滑进入提示（无边框，克制） */
+      .enter-hint {
+        position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+        display: flex; flex-direction: column; align-items: center; gap: 6px;
+        color: #5b6472; font-size: 0.82rem; letter-spacing: 0.12em;
+        opacity: 0; z-index: 2;
+        animation: hqHintIn 0.8s ease 2.6s forwards, hqFloatY 2.4s ease-in-out 3.4s infinite;
+      }
+      @keyframes hqHintIn { to { opacity: 1; } }
+      @keyframes hqFloatY { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 6px); } }
       .ml13 {
         font-size: clamp(2.2rem, 8.5vw, 4.4rem);
         font-weight: 650;
@@ -144,6 +161,7 @@ layout: compress
         .ml13 { color: #f2f3f5; }
         .preloader-divider { background: linear-gradient(90deg, transparent, #9aa3b2, transparent); }
         .preloader-tagline { color: #9aa3b2; }
+        .enter-hint { color: #9aa3b2; }
       }
     </style>
   </head>
@@ -157,10 +175,15 @@ layout: compress
         <span class="bf bf1"><svg viewBox="0 0 64 64"><g class="wings" fill="currentColor"><path d="M32 30C24 6 2 8 8 28c3 10 18 8 24 2Z"/><path d="M32 30c8-24 30-22 24-2-3 10-18 8-24 2Z"/><path d="M32 31c-6 5-18 9-14 19 4 8 12-6 14-19Z"/><path d="M32 31c6 5 18 9 14 19-4 8-12-6-14-19Z"/></g><rect x="31" y="14" width="2" height="34" rx="1" fill="currentColor"/></svg></span>
         <span class="bf bf2"><svg viewBox="0 0 64 64"><g class="wings" fill="currentColor"><path d="M32 30C24 6 2 8 8 28c3 10 18 8 24 2Z"/><path d="M32 30c8-24 30-22 24-2-3 10-18 8-24 2Z"/><path d="M32 31c-6 5-18 9-14 19 4 8 12-6 14-19Z"/><path d="M32 31c6 5 18 9 14 19-4 8-12-6-14-19Z"/></g><rect x="31" y="14" width="2" height="34" rx="1" fill="currentColor"/></svg></span>
         <span class="bf bf3"><svg viewBox="0 0 64 64"><g class="wings" fill="currentColor"><path d="M32 30C24 6 2 8 8 28c3 10 18 8 24 2Z"/><path d="M32 30c8-24 30-22 24-2-3 10-18 8-24 2Z"/><path d="M32 31c-6 5-18 9-14 19 4 8 12-6 14-19Z"/><path d="M32 31c6 5 18 9 14 19-4 8-12-6-14-19Z"/></g><rect x="31" y="14" width="2" height="34" rx="1" fill="currentColor"/></svg></span>
+        <span class="bf bf4"><svg viewBox="0 0 64 64"><g class="wings" fill="currentColor"><path d="M32 30C24 6 2 8 8 28c3 10 18 8 24 2Z"/><path d="M32 30c8-24 30-22 24-2-3 10-18 8-24 2Z"/><path d="M32 31c-6 5-18 9-14 19 4 8 12-6 14-19Z"/><path d="M32 31c6 5 18 9 14 19-4 8-12-6-14-19Z"/></g><rect x="31" y="14" width="2" height="34" rx="1" fill="currentColor"/></svg></span>
       </div>
       <h1 class="ml13" id="ml13"></h1>
       <div class="preloader-divider"></div>
       <div class="preloader-tagline">PhD Student &middot; Public Administration</div>
+      <div class="enter-hint" aria-hidden="true">
+        <span>下滑进入</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      </div>
     </div>
 
     {% include browser-upgrade.html %}
@@ -181,7 +204,7 @@ layout: compress
       /* ===== 站点开屏动画（同一浏览器永久只播一次）===== */
       (function () {
         var PRELOADER_TEXT = "Han (Rachel) Qiu";
-        var PLAY_MS = 5200, CURTAIN_MS = 950, HARD_CAP_MS = 7000;
+        var CURTAIN_MS = 950, HARD_CAP_MS = 15000;
 
         var played = false;
         try { played = localStorage.getItem('hq-anim-played') === '1'; } catch (e) {}
@@ -226,8 +249,23 @@ layout: compress
             document.body.style.overflow = '';
           }, CURTAIN_MS);
         }
-        setTimeout(enterSite, PLAY_MS);   /* 序列播完自动进入 */
-        setTimeout(enterSite, HARD_CAP_MS); /* 兜底 */
+
+        /* 下滑 / 手势进入主页（不再自动跳走，停留由访客掌控） */
+        function onIntent(e) {
+          var down = false;
+          if (e.type === 'wheel') down = e.deltaY > 0;
+          else if (e.type === 'keydown') down = (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown' || e.key === 'Enter');
+          if (down) enterSite();
+        }
+        window.addEventListener('wheel', onIntent, { passive: true });
+        window.addEventListener('keydown', onIntent);
+        var tStartY = null;
+        window.addEventListener('touchstart', function (e) { tStartY = e.touches[0].clientY; }, { passive: true });
+        window.addEventListener('touchmove', function (e) {
+          if (tStartY !== null && e.touches[0].clientY < tStartY - 40) enterSite();
+        }, { passive: true });
+
+        setTimeout(enterSite, HARD_CAP_MS); /* 兜底：15 秒后自动进入 */
       })();
     </script>
 
