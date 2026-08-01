@@ -169,6 +169,8 @@ layout: compress
         position: relative;
         z-index: 2;
       }
+      .preloader-name-pinyin ruby { ruby-align: center; }
+      .preloader-name-pinyin rt { font-size: 0.50em; font-family: inherit; }
       @keyframes hqPinyinIn { to { opacity: 1; transform: translateY(0); } }
       @media (prefers-color-scheme: dark) {
         .preloader {
@@ -199,7 +201,7 @@ layout: compress
       </div>
       <h1 class="ml13" id="ml13"></h1>
       <div class="preloader-divider"></div>
-      <div class="preloader-name-pinyin">邱涵 Qiū Hán</div>
+      <div class="preloader-name-pinyin"><ruby>邱<rt>Qiū</rt>涵<rt>Hán</rt></ruby></div>
       <div class="preloader-tagline">PhD Student &middot; Public Administration</div>
       <div class="enter-hint" aria-hidden="true">
         <span>下滑进入</span>

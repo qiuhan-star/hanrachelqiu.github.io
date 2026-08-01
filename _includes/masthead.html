@@ -114,13 +114,24 @@
     border-bottom: 1px solid #333;
   }
 
+  /* 把顶栏内包装改成 flex，让菜单占满中间、切换器顶在最右侧 */
+  .masthead__inner-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .masthead__menu {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
   /* 切换器容器：顶在 masthead 顶栏右侧，不参与悬浮覆盖 */
   .theme-toggle {
     margin-left: auto; /* 把开关推到顶栏最右 */
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    padding-left: 1rem;
+    padding-left: 0.75rem;
   }
 
   /* 隐藏实际的复选框，仅用作切换主题的触发器（不占布局空间） */
