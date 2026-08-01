@@ -10,12 +10,12 @@ redirect_from:
 <style>
   /* 中文名拼音上标放大，便于阅读 */
   ruby rt { font-size: 0.8em; font-weight: 500; }
-  /* 两个汉字之间的拼音明显分开：给第二个 ruby 加左间距 */
-  ruby + ruby { margin-left: 1.03em; }
+  /* 两个汉字之间的拼音间距：用 px 精确控制（已去掉字面空格，间距=此值） */
+  ruby + ruby { margin-left: 14px; }
 </style>
 
 ## Who Am I?
-Hello! I'm Han Qiu (<ruby>邱<rt>Qiū</rt></ruby> <ruby>涵<rt>Hán</rt></ruby>), also known as Rachel.
+Hello! I'm Han Qiu (<ruby>邱<rt>Qiū</rt></ruby><ruby>涵<rt>Hán</rt></ruby>), also known as Rachel.
 
 I am currently a PhD student in Public Administration at the [School of Public Affairs](https://www.spa.zju.edu.cn/), [Zhejiang University](https://www.zju.edu.cn/), where I am fortunate to be advised by [Professor Zhongsheng Wu](https://mypage.zju.edu.cn/en/0022142).
 
