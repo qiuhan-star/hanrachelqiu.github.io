@@ -7,15 +7,15 @@ redirect_from:
   - /about.html
 ---
 ## Who Am I?
-Hello there! I'm Han Qiu (邱涵), also known as Rachel. Occasionally, I step out of my usual zone to engage in meetings and share insights at various [talks](https://qiuhan-star.github.io/hanrachelqiu.github.io/talks/).
+Hello! I'm Han Qiu (邱涵), also known as Rachel.
 
-I completed my M.A. in Public Administration at the [School of Public Affairs](https://spa.xmu.edu.cn/), [Xiamen University](https://www.xmu.edu.cn/), where I was fortunate to be guided by [Professor Wenxuan Yu](https://spa.xmu.edu.cn/info/1237/3095.htm). 
+I am currently a PhD student in Public Administration at the [School of Public Affairs](https://www.spa.zju.edu.cn/), [Zhejiang University](https://www.zju.edu.cn/), where I am fortunate to be advised by [Professor Zhongsheng Wu](https://mypage.zju.edu.cn/en/0022142).
 
-I am currently a PhD student in Public Administration at [Zhejiang University](https://www.zju.edu.cn/), beginning in 2025.
+I completed my M.A. in Public Administration at the [School of Public Affairs](https://spa.xmu.edu.cn/), [Xiamen University](https://www.xmu.edu.cn/), where I was fortunate to be guided by [Professor Wenxuan Yu](https://spa.xmu.edu.cn/info/1237/3095.htm).
 
 I hold a B.S. degree in Public Service & Public Policy from [Arizona State University](https://www.asu.edu/) (2022) and a B.A. degree in Public Administration from [Hainan University](https://www.hainanu.edu.cn/) (2022), where I was fortunate to be mentored by [Professor Haiying Lin](https://haitc.hainanu.edu.cn/cslm/jzyg/szdw/xzgl.htm).
 
-My research interests broadly lie in the areas of public finance, public and nonprofit management, digital government, government transparency, information technology and politics, and environmental policy. [**Read More**](https://qiuhan-star.github.io/hanrachelqiu.github.io/portfolio/)
+My research interests lie in public and nonprofit management, government transparency and accountability, digital government and GovTech, co-production and collaborative governance, and environmental governance. [**Read More**](https://qiuhan-star.github.io/hanrachelqiu.github.io/portfolio/)
 
 I am always glad to discuss research collaboration and academic exchange. If you are interested in my work or would like to connect, please feel free to reach out to me at rachel.hanqiu@gmail.com!
 
