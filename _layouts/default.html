@@ -169,10 +169,40 @@ layout: compress
         .preloader-tagline { color: #9aa3b2; }
         .enter-hint { color: #9aa3b2; }
       }
+
+      /* 暗色模式开关：固定在顶栏右上方，始终位于开屏层之上 */
+      body > .theme-toggle {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 10000;
+        margin: 0;
+        padding: 0;
+      }
+      /* 手动切换暗色时，开屏页也跟随变暗 */
+      body.dark .preloader {
+        background:
+          radial-gradient(620px 420px at 18% 22%, rgba(124,155,255,0.10), transparent 62%),
+          radial-gradient(720px 520px at 84% 78%, rgba(168,128,255,0.09), transparent 62%),
+          linear-gradient(180deg, #13151a, #1a1d25);
+      }
+      body.dark .ml13 { color: #f2f3f5; }
+      body.dark .preloader-divider { background: linear-gradient(90deg, transparent, #9aa3b2, transparent); }
+      body.dark .preloader-tagline { color: #9aa3b2; }
+      body.dark .enter-hint { color: #9aa3b2; }
     </style>
   </head>
 
   <body>
+
+    <div class="theme-toggle" aria-label="Toggle dark mode">
+      <input type="checkbox" class="checkbox" id="checkbox">
+      <label for="checkbox" class="checkbox-label" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <i class="fas fa-moon" aria-hidden="true"></i>
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <span class="ball"></span>
+      </label>
+    </div>
 
     <div class="preloader" id="preloader" aria-hidden="true">
       <div class="preloader-glow g1"></div>
@@ -185,7 +215,7 @@ layout: compress
       </div>
       <h1 class="ml13" id="ml13"></h1>
       <div class="preloader-divider"></div>
-      <div class="preloader-tagline">PhD Student &middot; Public Administration</div>
+      <div class="preloader-tagline">思接星海，行落人间</div>
       <div class="enter-hint" aria-hidden="true">
         <span>下滑进入</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
@@ -268,6 +298,13 @@ layout: compress
 
         setTimeout(enterSite, HARD_CAP_MS); /* 兜底：15 秒后自动进入 */
       })();
+    </script>
+
+    <script type="text/javascript">
+      const checkbox = document.getElementById("checkbox");
+      checkbox.addEventListener("change", () => {
+        document.body.classList.toggle("dark");
+      });
     </script>
 
   </body>
