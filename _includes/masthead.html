@@ -19,16 +19,15 @@
         <ul class="hidden-links hidden"></ul>
       </nav>
     </div>
+    <div class="theme-toggle">
+      <input type="checkbox" class="checkbox" id="checkbox">
+      <label for="checkbox" class="checkbox-label" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <i class="fas fa-moon" aria-hidden="true"></i>
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <span class="ball"></span>
+      </label>
+    </div>
   </div>
-</div>
-
-<div style="position: fixed; top: 10px; right: 64px; z-index: 1000; margin: 0;">
-  <input type="checkbox" class="checkbox" id="checkbox">
-  <label for="checkbox" class="checkbox-label">
-    <i class="fas fa-moon"></i>
-    <i class="fas fa-sun"></i>
-    <span class="ball"></span>
-  </label>
 </div>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
@@ -62,6 +61,7 @@
   /* 暗色主题补充：正文、链接、导航、侧边栏与页脚 */
   body.dark {
     color: #d0d3d8;
+    color-scheme: dark;
   }
   body.dark a {
     color: #8ab4f8;
@@ -70,6 +70,7 @@
   body.dark .sidebar,
   body.dark .page__footer {
     background-color: #1b1d21;
+    border-color: #333;
   }
   body.dark .author__name,
   body.dark .author__bio,
@@ -77,10 +78,58 @@
   body.dark .masthead__menu-item a {
     color: #e6e6e6;
   }
+  /* 暗色主题下页面正文与通用组件的配色 */
+  body.dark .page__content,
+  body.dark #main,
+  body.dark .page,
+  body.dark .archive,
+  body.dark .sidebar > * {
+    color: #d0d3d8;
+  }
+  body.dark .page__content h1,
+  body.dark .page__content h2,
+  body.dark .page__content h3,
+  body.dark .page__content h4 {
+    color: #ffffff;
+  }
+  body.dark hr,
+  body.dark .sidebar hr,
+  body.dark .page__content hr {
+    border-color: #333;
+  }
+  body.dark code,
+  body.dark pre {
+    background-color: #2b2e33;
+    color: #e6e6e6;
+  }
+  body.dark .notice,
+  body.dark .notice--info,
+  body.dark .notice--warning,
+  body.dark .notice--danger {
+    background-color: #23262b;
+    color: #d0d3d8;
+  }
+  body.dark .masthead,
+  body.dark .page__footer {
+    border-bottom: 1px solid #333;
+  }
 
-  /* 隐藏实际的复选框，仅用作切换主题的触发器 */
+  /* 切换器容器：顶在 masthead 顶栏右侧，不参与悬浮覆盖 */
+  .theme-toggle {
+    margin-left: auto; /* 把开关推到顶栏最右 */
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding-left: 1rem;
+  }
+
+  /* 隐藏实际的复选框，仅用作切换主题的触发器（不占布局空间） */
   .checkbox {
-    opacity: 0; /* 隐藏复选框 */
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0;
   }
 
   /* 定义复选框标签的样式，作为切换按钮的视觉表现 */
@@ -93,6 +142,7 @@
     padding: 5px; /* 内边距 */
     cursor: pointer; /* 鼠标悬停时显示手形光标 */
     display: flex; /* 使用flex布局 */
+    flex-shrink: 0;
     justify-content: space-between; /* 子元素在主轴上两端对齐 */
     align-items: center; /* 子元素在交叉轴上居中对齐 */
   }

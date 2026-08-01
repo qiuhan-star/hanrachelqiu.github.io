@@ -157,6 +157,19 @@ layout: compress
         text-transform: uppercase;
       }
       @keyframes hqTagline { to { opacity: 1; transform: translateY(0); } }
+      .preloader-name-pinyin {
+        margin-top: 0.55rem;
+        font-size: clamp(1rem, 3vw, 1.25rem);
+        font-weight: 500;
+        letter-spacing: 0.10em;
+        color: #41495a;
+        opacity: 0;
+        transform: translateY(10px);
+        animation: hqPinyinIn 0.9s ease 1.5s forwards;
+        position: relative;
+        z-index: 2;
+      }
+      @keyframes hqPinyinIn { to { opacity: 1; transform: translateY(0); } }
       @media (prefers-color-scheme: dark) {
         .preloader {
           background:
@@ -167,6 +180,7 @@ layout: compress
         .ml13 { color: #f2f3f5; }
         .preloader-divider { background: linear-gradient(90deg, transparent, #9aa3b2, transparent); }
         .preloader-tagline { color: #9aa3b2; }
+        .preloader-name-pinyin { color: #c3cad6; }
         .enter-hint { color: #9aa3b2; }
       }
     </style>
@@ -185,6 +199,7 @@ layout: compress
       </div>
       <h1 class="ml13" id="ml13"></h1>
       <div class="preloader-divider"></div>
+      <div class="preloader-name-pinyin">邱涵 Qiū Hán</div>
       <div class="preloader-tagline">PhD Student &middot; Public Administration</div>
       <div class="enter-hint" aria-hidden="true">
         <span>下滑进入</span>
