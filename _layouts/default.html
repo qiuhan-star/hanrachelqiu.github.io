@@ -287,23 +287,13 @@ layout: compress
     {% include scripts.html %}
 
     <script>
-      /* ===== 站点开屏动画（仅首页播放；CV/About 等子页面不播放）===== */
+      /* ===== 站点开屏动画（每次页面加载都播放；蝴蝶代码保持不变）===== */
       (function () {
         var PRELOADER_TEXT = "Han (Rachel) Qiu";
         var CURTAIN_MS = 950, HARD_CAP_MS = 15000;
 
         var preloader = document.getElementById('preloader');
         if (!preloader) return;
-
-        /* 仅首页才播放开屏；其余页面（CV/About/各子页）直接隐藏，避免站内跳转也弹动画 */
-        function isHome() {
-          var p = location.pathname;
-          return p === '/' || p === '' || p === '/index.html' || p.slice(-11) === '/index.html';
-        }
-        if (!isHome()) {
-          preloader.style.display = 'none';
-          return;
-        }
 
         preloader.classList.add('show');
 
