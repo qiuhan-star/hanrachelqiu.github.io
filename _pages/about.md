@@ -7,6 +7,11 @@ redirect_from:
   - /about/
   - /about.html
 ---
+<style>
+  /* 中文名拼音上标放大，便于阅读 */
+  ruby rt { font-size: 0.75em; font-weight: 500; }
+</style>
+
 ## Who Am I?
 Hello! I'm Han Qiu (<ruby>邱<rt>Qiū</rt>涵<rt>Hán</rt></ruby>), also known as Rachel.
 
