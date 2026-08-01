@@ -125,8 +125,8 @@
       Blog up for &nbsp;<span id="days">0</span>&nbsp;Days, <span id="hours">0</span>&nbsp;Hrs, <span id="minutes">0</span>&nbsp;Min, <span id="seconds">0</span>&nbsp;Sec
     </div>
     <div class="footer-right runtime">
-      VISITOR COUNT <span class="visitor-count">18</span><br>
-      TOTAL PAGE VIEWS <span class="page-views">15</span>
+      VISITOR COUNT <span id="busuanzi_value_site_uv">-</span><br>
+      TOTAL PAGE VIEWS <span id="busuanzi_value_site_pv">-</span>
     </div>
   </div>
 </footer>
@@ -157,37 +157,8 @@ setInterval(updateUptime, 1000);
 updateUptime();
 </script>
 
-<script>
-// 假设的服务器端 API 路径
-const visitorCountApi = '/api/visitor-count';
-const pageViewsApi = '/api/page-views';
-
-// 获取访问者计数
-function fetchVisitorCount() {
-  fetch(visitorCountApi)
-    .then(response => response.json())
-    .then(data => {
-      document.querySelector('.visitor-count').textContent = data.count;
-    })
-    .catch(error => console.error('Error fetching visitor count:', error));
-}
-
-// 获取页面浏览量
-function fetchPageViews() {
-  fetch(pageViewsApi)
-    .then(response => response.json())
-    .then(data => {
-      document.querySelector('.page-views').textContent = data.count;
-    })
-    .catch(error => console.error('Error fetching page views:', error));
-}
-
-// 页面加载时获取计数
-document.addEventListener('DOMContentLoaded', () => {
-  fetchVisitorCount();
-  fetchPageViews();
-});
-</script>
+<!-- 不蒜子：真实访客数(UV)与浏览量(PV)，零后端，由 busuanzi 公共服务统计 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 </html>
 

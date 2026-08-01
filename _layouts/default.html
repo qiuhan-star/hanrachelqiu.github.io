@@ -99,7 +99,7 @@ layout: compress
         color: #5b6472;
         opacity: 0;
         transform: translateY(10px);
-        animation: hqTagline 0.9s ease 1.8s forwards;
+        animation: hqTagline 0.9s ease 1.1s forwards;
         position: relative;
         z-index: 2;
         text-transform: uppercase;
@@ -147,7 +147,7 @@ layout: compress
       /* ===== 站点开屏动画（同一浏览器永久只播一次）===== */
       (function () {
         var PRELOADER_TEXT = "Han (Rachel) Qiu";
-        var PLAY_MS = 2800, CURTAIN_MS = 950, HARD_CAP_MS = 6500;
+        var PLAY_MS = 5200, CURTAIN_MS = 950, HARD_CAP_MS = 7000;
 
         var played = false;
         try { played = localStorage.getItem('hq-anim-played') === '1'; } catch (e) {}
