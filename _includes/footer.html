@@ -9,23 +9,22 @@
   .heart {
     display: inline-block;
     position: relative;
-    width: 20px; /* 调整宽度 */
-    height: 18px; /* 调整高度 */
-    transform: scale(0.7);
+    width: 16px; /* 调整宽度 */
+    height: 14px; /* 调整高度 */
   }
   .heart:before,
   .heart:after {
     content: "";
     position: absolute;
-    width: 10px; /* 调整宽度 */
-    height: 16px; /* 调整高度 */
+    width: 8px; /* 调整宽度 */
+    height: 13px; /* 调整高度 */
     background: red;
     border-radius: 50px 50px 0 0;
     transform: rotate(-45deg);
     transform-origin: 0 100%;
   }
   .heart:after {
-    left: 10px; /* 调整位置 */
+    left: 8px; /* 调整位置 */
     transform: rotate(45deg);
     transform-origin: 100% 100%;
   }
@@ -120,7 +119,7 @@
       </div>
 
     <div class="footer-center page__footer-copyright">
-      <div>© {{ site.time | date: "%Y" }} <span class="heart"> </span> Han (Rachel) Qiu.</div>
+      <div>© {{ site.time | date: "%Y" }} <span class="heart"> </span> Han (Rachel) Qiu.<span class="heart"> </span></div>
       Last updated {{ site.time | date: "%Y-%m-%d" }}. <br>
       Blog up for &nbsp;<span id="days">0</span>&nbsp;Days, <span id="hours">0</span>&nbsp;Hrs, <span id="minutes">0</span>&nbsp;Min, <span id="seconds">0</span>&nbsp;Sec
     </div>
