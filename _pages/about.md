@@ -13,7 +13,7 @@ redirect_from:
 </style>
 
 ## Who Am I?
-Hello! I'm Han Qiu (<ruby>邱<rt>Qiū</rt>涵<rt>Hán</rt></ruby>), also known as Rachel.
+Hello! I'm Han Qiu (<ruby>邱<rt>Qiū</rt></ruby> <ruby>涵<rt>Hán</rt></ruby>), also known as Rachel.
 
 I am currently a PhD student in Public Administration at the [School of Public Affairs](https://www.spa.zju.edu.cn/), [Zhejiang University](https://www.zju.edu.cn/), where I am fortunate to be advised by [Professor Zhongsheng Wu](https://mypage.zju.edu.cn/en/0022142).
 
