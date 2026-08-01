@@ -243,6 +243,14 @@
     white-space: nowrap;
   }
 
+  /* 强制侧栏图标统一固定宽度并居中，确保文字左对齐（不依赖 fa-fw/ai-fw 是否生效） */
+  .fa,
+  .ai {
+    display: inline-block;
+    width: 1.4em;
+    text-align: center;
+  }
+
   a {
     display: block;
     margin-bottom: 5px;
