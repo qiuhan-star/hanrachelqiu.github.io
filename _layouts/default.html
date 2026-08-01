@@ -57,41 +57,47 @@ layout: compress
         0%, 100% { transform: scale(1) translate(0, 0); }
         50%      { transform: scale(1.14) translate(2vmax, -1.5vmax); }
       }
-      /* 几只缓慢飞舞的小蝴蝶（更大、更多、低饱和） */
+      /* 一群从屏幕底部飞出、缓缓上升的小蝴蝶（克制、低饱和） */
       .butterflies { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
-      .bf { position: absolute; width: 40px; height: 40px; opacity: 0.7; }
+      .bf { position: absolute; top: 0; opacity: 0; }
       .bf svg { width: 100%; height: 100%; display: block; }
       .bf .wings { transform-origin: 50% 50%; animation: hqFlap 0.45s ease-in-out infinite; }
       @keyframes hqFlap { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.45); } }
-      .bf1 { left: 14%; top: 28%; color: rgba(125,155,255,0.78); animation: hqFly1 24s ease-in-out infinite; }
-      .bf2 { left: 74%; top: 22%; color: rgba(185,167,255,0.78); animation: hqFly2 28s ease-in-out infinite; animation-delay: -6s; }
-      .bf3 { left: 52%; top: 66%; color: rgba(255,170,200,0.68); width: 34px; height: 34px; animation: hqFly3 32s ease-in-out infinite; animation-delay: -12s; }
-      .bf4 { left: 30%; top: 48%; color: rgba(150,205,195,0.68); width: 36px; height: 36px; animation: hqFly4 30s ease-in-out infinite; animation-delay: -18s; }
-      @keyframes hqFly1 {
-        0%   { transform: translate(0,0) rotate(0deg); }
-        25%  { transform: translate(12vw,-7vh) rotate(14deg); }
-        50%  { transform: translate(22vw,5vh) rotate(-9deg); }
-        75%  { transform: translate(9vw,14vh) rotate(11deg); }
-        100% { transform: translate(0,0) rotate(0deg); }
+      .bf1 { left: 8%;  width: 42px; height: 42px; color: rgba(125,155,255,0.8);  animation: riseA 20s linear infinite; }
+      .bf2 { left: 22%; width: 34px; height: 34px; color: rgba(185,167,255,0.8); animation: riseB 24s linear infinite; animation-delay: -4s; }
+      .bf3 { left: 36%; width: 38px; height: 38px; color: rgba(255,170,200,0.72);animation: riseC 28s linear infinite; animation-delay: -9s; }
+      .bf4 { left: 50%; width: 30px; height: 30px; color: rgba(150,205,195,0.72);animation: riseD 22s linear infinite; animation-delay: -14s; }
+      .bf5 { left: 62%; width: 40px; height: 40px; color: rgba(125,155,255,0.8); animation: riseA 26s linear infinite; animation-delay: -7s; }
+      .bf6 { left: 74%; width: 32px; height: 32px; color: rgba(185,167,255,0.8); animation: riseB 30s linear infinite; animation-delay: -11s; }
+      .bf7 { left: 86%; width: 36px; height: 36px; color: rgba(255,170,200,0.72);animation: riseC 23s linear infinite; animation-delay: -5s; }
+      .bf8 { left: 16%; width: 30px; height: 30px; color: rgba(150,205,195,0.72);animation: riseD 27s linear infinite; animation-delay: -17s; }
+      @keyframes riseA {
+        0%   { transform: translate(0,95vh) rotate(0deg); opacity: 0; }
+        12%  { opacity: .8; }
+        50%  { transform: translate(12vw,0) rotate(12deg); }
+        88%  { opacity: .8; }
+        100% { transform: translate(6vw,-100vh) rotate(-8deg); opacity: 0; }
       }
-      @keyframes hqFly2 {
-        0%   { transform: translate(0,0) rotate(0deg); }
-        25%  { transform: translate(-14vw,8vh) rotate(-12deg); }
-        50%  { transform: translate(-24vw,-4vh) rotate(10deg); }
-        75%  { transform: translate(-10vw,-12vh) rotate(-8deg); }
-        100% { transform: translate(0,0) rotate(0deg); }
+      @keyframes riseB {
+        0%   { transform: translate(0,95vh) rotate(0deg); opacity: 0; }
+        12%  { opacity: .8; }
+        50%  { transform: translate(-12vw,0) rotate(-12deg); }
+        88%  { opacity: .8; }
+        100% { transform: translate(-6vw,-100vh) rotate(8deg); opacity: 0; }
       }
-      @keyframes hqFly3 {
-        0%   { transform: translate(0,0) rotate(0deg); }
-        30%  { transform: translate(10vw,-10vh) rotate(16deg); }
-        60%  { transform: translate(-8vw,-16vh) rotate(-14deg); }
-        100% { transform: translate(0,0) rotate(0deg); }
+      @keyframes riseC {
+        0%   { transform: translate(0,95vh) rotate(0deg); opacity: 0; }
+        12%  { opacity: .8; }
+        50%  { transform: translate(7vw,2vh) rotate(9deg); }
+        88%  { opacity: .8; }
+        100% { transform: translate(3vw,-100vh) rotate(-6deg); opacity: 0; }
       }
-      @keyframes hqFly4 {
-        0%   { transform: translate(0,0) rotate(0deg); }
-        30%  { transform: translate(-12vw,12vh) rotate(-16deg); }
-        60%  { transform: translate(10vw,18vh) rotate(12deg); }
-        100% { transform: translate(0,0) rotate(0deg); }
+      @keyframes riseD {
+        0%   { transform: translate(0,95vh) rotate(0deg); opacity: 0; }
+        12%  { opacity: .8; }
+        50%  { transform: translate(-7vw,2vh) rotate(-9deg); }
+        88%  { opacity: .8; }
+        100% { transform: translate(-3vw,-100vh) rotate(6deg); opacity: 0; }
       }
       /* 下滑进入提示（无边框，克制） */
       .enter-hint {

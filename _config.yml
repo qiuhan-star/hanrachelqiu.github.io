@@ -4,7 +4,7 @@ title                    : "Rachel's Personal Homepage"
 title_separator          : "-"
 name                     : &name "Rachel"
 description              : &description "personal description"
-url                      : https://qiuhan-star.github.io/hanrachelqiu.github.io/
+url                      : https://qiuhan-star.github.io/hanrachelqiu.github.io
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "qiuhan-star/hanrachelqiu.github.io"
 

@@ -1,18 +1,18 @@
-# Authors
+# Site Authors
+#
+# This site currently uses the single-author block defined in _config.yml
+# (author: "Han (Rachel) Qiu"), so this file is optional.
+# It is kept here (with the real author's details) for future multi-author
+# use and to replace the original template placeholder entries.
 
-Name Name:
-  name        : "Name Name"
-  uri         : "http://name.com"
-  email       : "name@name.com"
-  bio         : "This is the first name."
-  avatar      : "bio-photo-2.jpg"
-  twitter     : "name"
-  google_plus : "Name"
-
-Name2 Name2:
-  name        : "Name2 Name2"
-  email       : "name2@name2.com"
-  bio         : "I ordered what?"
-  avatar      : "bio-photo.jpg"
-  twitter     : "name2"
-  google_plus : "Name"
+Han (Rachel) Qiu:
+  name         : "Han (Rachel) Qiu"
+  email        : "rachel.hanqiu@gmail.com"
+  bio          : "PhD student in Public Administration, Zhejiang University"
+  avatar       : "ID-photo.PNG"
+  uri          : "https://qiuhan-star.github.io/hanrachelqiu.github.io/"
+  googlescholar: "https://scholar.google.com/citations?hl=zh-CN&user=9rbR2YsAAAAJ"
+  orcid        : "https://orcid.org/0009-0005-3691-6226"
+  researchgate : "https://www.researchgate.net/profile/Han-Qiu-20"
+  linkedin     : "https://www.linkedin.com/in/han-qiu-2b3793336/"
+  webofscience : "https://www.webofscience.com/wos/author/record/LTM-0273-2024"

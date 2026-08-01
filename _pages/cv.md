@@ -43,7 +43,8 @@ You can access Rachel's latest C.V. [here](https://raw.githubusercontent.com/qiu
 
 <button class="collapsible">Education</button>
 <div class="content">
-  <p>* M.A. in Administration Management, Xiamen University, Sept. 2022 - Jun. 2025 (Expected)</p>
+  <p>* Ph.D. in Public Administration, Zhejiang University, Sept. 2025 - Present</p>
+  <p>* M.A. in Administration Management, Xiamen University, Sept. 2022 - Jun. 2025</p>
   <p>* B.A. in Public Administration, Hainan University, Sept. 2018 - Jun. 2022</p>
   <p>* B.S. in Public Service and Public Policy, Arizona State University, Sept. 2018 - May. 2022</p>
 </div>
