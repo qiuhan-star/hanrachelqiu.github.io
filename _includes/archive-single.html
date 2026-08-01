@@ -53,10 +53,7 @@
     {% endif %}
     
     {% if post.citation %}
-      <p>Recommended citation: {{ post.citation }}<br />
-      {% if post.viewpaperurl %}<a href="{{ post.viewpaperurl }}" target="_blank">View Paper</a>{% if post.paperurl or post.slidesurl %} | {% endif %}{% endif %}{% if post.paperurl %}<a href="{{ post.paperurl }}" download>Download Paper</a>{% if post.slidesurl %} | {% endif %}{% endif %}{% if post.slidesurl %}<a href="{{ post.slidesurl }}" download>Download Slides</a>{% endif %}</p>
-    {% elsif post.viewpaperurl or post.paperurl or post.slidesurl %}
-      <p>{% if post.viewpaperurl %}<a href="{{ post.viewpaperurl }}" target="_blank">View Paper</a>{% if post.paperurl or post.slidesurl %} | {% endif %}{% endif %}{% if post.paperurl %}<a href="{{ post.paperurl }}" download>Download Paper</a>{% if post.slidesurl %} | {% endif %}{% endif %}{% if post.slidesurl %}<a href="{{ post.slidesurl }}" download>Download Slides</a>{% endif %}</p>
+      <p>Recommended citation: {{ post.citation }}</p>
     {% endif %}
 
   </article>
