@@ -47,20 +47,11 @@ layout: default
       <section class="page__content" itemprop="text">
         {{ content }}
 
-        {% if page.citation and page.viewpaperurl and page.downloadurl and page.slidesurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.viewpaperurl }}">View Paper</a> | <a href="{{ page.downloadurl }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a></p>
-        {% elsif page.citation and page.viewpaperurl and page.downloadurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.viewpaperurl }}">View Paper</a> | <a href="{{ page.downloadurl }}">Download Paper</a></p>
-        {% elsif page.citation and page.viewpaperurl and page.slidesurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.viewpaperurl }}">View Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a></p>
-        {% elsif page.citation and page.downloadurl and page.slidesurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.downloadurl }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a></p>
-        {% elsif page.citation and page.viewpaperurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.viewpaperurl }}">View Paper</a></p>
-        {% elsif page.citation and page.downloadurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.downloadurl }}">Download Paper</a></p>
-        {% elsif page.citation and page.slidesurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.slidesurl }}">Download Slides</a></p>
+        {% if page.citation %}
+          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br />
+          {% if page.viewpaperurl %}<a href="{{ page.viewpaperurl }}" target="_blank">View Paper</a>{% if page.paperurl or page.slidesurl %} | {% endif %}{% endif %}{% if page.paperurl %}<a href="{{ page.paperurl }}" download>Download Paper</a>{% if page.slidesurl %} | {% endif %}{% endif %}{% if page.slidesurl %}<a href="{{ page.slidesurl }}" download>Download Slides</a>{% endif %}</p>
+        {% elsif page.viewpaperurl or page.paperurl or page.slidesurl %}
+          <p style="font-size: smaller">{% if page.viewpaperurl %}<a href="{{ page.viewpaperurl }}" target="_blank">View Paper</a>{% if page.paperurl or page.slidesurl %} | {% endif %}{% endif %}{% if page.paperurl %}<a href="{{ page.paperurl }}" download>Download Paper</a>{% if page.slidesurl %} | {% endif %}{% endif %}{% if page.slidesurl %}<a href="{{ page.slidesurl }}" download>Download Slides</a>{% endif %}</p>
         {% endif %}
 
         {% if page.link %}<div><a href="{{ page.link }}" class="btn">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
