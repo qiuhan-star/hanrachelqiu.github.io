@@ -11,7 +11,7 @@ redirect_from:
   /* 中文名拼音上标放大，便于阅读 */
   ruby rt { font-size: 0.8em; font-weight: 500; }
   /* 两个汉字之间的拼音间距：用 px 精确控制（已去掉字面空格，间距=此值） */
-  ruby + ruby { margin-left: 12px; }
+  ruby + ruby { margin-left: 6px; }
 </style>
 
 ## Who Am I?
