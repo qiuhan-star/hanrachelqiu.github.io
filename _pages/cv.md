@@ -3,6 +3,7 @@ layout: archive
 title: "CV"
 permalink: /cv/
 author_profile: true
+lang_alt: /zh/cv/
 redirect_from:
   - /Resume_Han_(Rachel)_QIU.pdf
 ---

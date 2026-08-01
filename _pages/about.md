@@ -2,6 +2,7 @@
 permalink: /
 title: "About"
 author_profile: true
+lang_alt: /zh/
 redirect_from: 
   - /about/
   - /about.html
