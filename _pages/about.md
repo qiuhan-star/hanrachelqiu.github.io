@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Greetings and Welcome to My Homepage"
+title: "About"
 author_profile: true
 redirect_from: 
   - /about/
@@ -27,7 +27,7 @@ I am always glad to discuss research collaboration and academic exchange. If you
 
 🌟 Interesting Sharing 🌟
 ======
-As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal game -- the [**PhD Simulator**](https://research.wmz.ninja/projects/phd/index.html)! I'm eager to spread the word. For a deeper dive into the details, [**Click Here**](https://qiuhan-star.github.io/hanrachelqiu.github.io/game-details.html/).
+As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal game -- the [**PhD Simulator**](https://research.wmz.ninja/projects/phd/index.html)! I'm eager to spread the word. For a deeper dive into the details, [**read the full story**](https://qiuhan-star.github.io/hanrachelqiu.github.io/game-details.html).
 <br><br>
 
 🔥 Latest News
@@ -49,4 +49,4 @@ As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal gam
 
 <span style="color: #888888;">**[May 2022]**</span> 🎓 **I've graduated!** *Summa Cum Laude Achievement with Heartfelt Thanks to My Supporters!* 🌟👩‍🎓>> [**View More**](https://qiuhan-star.github.io/hanrachelqiu.github.io/news-2022.html)
 
-**Show more...**
+[Show more →](/year-archive/)

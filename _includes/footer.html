@@ -9,32 +9,33 @@
   .heart {
     display: inline-block;
     position: relative;
-    width: 16px; /* 调整宽度 */
-    height: 14px; /* 调整高度 */
+    width: 20px; /* 调整宽度 */
+    height: 18px; /* 调整高度 */
+    transform: scale(0.7);
   }
   .heart:before,
   .heart:after {
     content: "";
     position: absolute;
-    width: 8px; /* 调整宽度 */
-    height: 13px; /* 调整高度 */
+    width: 10px; /* 调整宽度 */
+    height: 16px; /* 调整高度 */
     background: red;
     border-radius: 50px 50px 0 0;
     transform: rotate(-45deg);
     transform-origin: 0 100%;
   }
   .heart:after {
-    left: 8px; /* 调整位置 */
+    left: 10px; /* 调整位置 */
     transform: rotate(45deg);
     transform-origin: 100% 100%;
   }
-  /*动画：仅做缩放脉冲，不旋转，红心保持正立、左右对称*/
+  /*动画*/
   @keyframes beat {
-    0% { transform: scale(1); }
-    25% { transform: scale(1.12); }
-    50% { transform: scale(1); }
-    75% { transform: scale(1.12); }
-    100% { transform: scale(1); }
+    0% { transform: scale(1) rotate(-45deg); }
+    25% { transform: scale(1.1) rotate(-45deg); }
+    50% { transform: scale(1) rotate(-45deg); }
+    75% { transform: scale(1.1) rotate(-45deg); }
+    100% { transform: scale(1) rotate(-45deg); }
   }
   .heart {
     animation: beat 1s infinite;
@@ -119,7 +120,7 @@
       </div>
 
     <div class="footer-center page__footer-copyright">
-      <div>© {{ site.time | date: "%Y" }} <span class="heart"> </span> Han (Rachel) Qiu.<span class="heart"> </span></div>
+      <div>© {{ site.time | date: "%Y" }} <span class="heart"> </span> Han (Rachel) Qiu.</div>
       Last updated {{ site.time | date: "%Y-%m-%d" }}. <br>
       Blog up for &nbsp;<span id="days">0</span>&nbsp;Days, <span id="hours">0</span>&nbsp;Hrs, <span id="minutes">0</span>&nbsp;Min, <span id="seconds">0</span>&nbsp;Sec
     </div>

@@ -3,7 +3,7 @@ locale                   : "en-US"
 title                    : "Rachel's Personal Homepage"
 title_separator          : "-"
 name                     : &name "Rachel"
-description              : &description "personal description"
+description              : &description "PhD student in Public Administration at Zhejiang University, researching public & nonprofit management, government transparency and accountability, digital government, and collaborative governance."
 url                      : https://qiuhan-star.github.io/hanrachelqiu.github.io
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "qiuhan-star/hanrachelqiu.github.io"
@@ -94,7 +94,7 @@ comments:
   disqus:
     shortname            :
   discourse:
-    server               : https://qiuhan-star.github.io/hanrachelqiu.github.io//
+    server               : https://qiuhan-star.github.io/hanrachelqiu.github.io
   facebook:
     appid                :
     num_posts            : # 5 (default)

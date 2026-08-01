@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<div>
+<div style="position: fixed; top: 10px; right: 64px; z-index: 1000; margin: 0;">
   <input type="checkbox" class="checkbox" id="checkbox">
   <label for="checkbox" class="checkbox-label">
     <i class="fas fa-moon"></i>
@@ -51,10 +51,31 @@
     background-color: #292c35; /* 暗色背景 */
   }
 
-  /* 暗色主题下的h1和.support a链接的颜色 */
+  /* 暗色主题下的h1/h2/h3和.support a链接的颜色 */
   body.dark h1,
+  body.dark h2,
+  body.dark h3,
   body.dark .support a {
     color: #fff; /* 文字颜色变为白色 */
+  }
+
+  /* 暗色主题补充：正文、链接、导航、侧边栏与页脚 */
+  body.dark {
+    color: #d0d3d8;
+  }
+  body.dark a {
+    color: #8ab4f8;
+  }
+  body.dark .masthead,
+  body.dark .sidebar,
+  body.dark .page__footer {
+    background-color: #1b1d21;
+  }
+  body.dark .author__name,
+  body.dark .author__bio,
+  body.dark .page__footer,
+  body.dark .masthead__menu-item a {
+    color: #e6e6e6;
   }
 
   /* 隐藏实际的复选框，仅用作切换主题的触发器 */
