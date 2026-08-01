@@ -244,13 +244,19 @@
     display: flex;
     align-items: center;
 
-    /* 图标区钉死固定宽度，文字必然从同一位置开始 */
-    > i {
+    /* 图标区钉死固定宽度（覆盖所有位置：直接子元素 / 在 <a> 内部） */
+    i {
       flex-shrink: 0;
       width: 1.6em;
       margin-right: 0.5em;
+      text-align: center;
     }
   }
+
+  /* 链接行：<a> 也需为 flex 容器，使其内部的 i + 文字横向排列 */
+  a {
+    display: flex;
+    align-items: center;
 
   a {
     display: block;
