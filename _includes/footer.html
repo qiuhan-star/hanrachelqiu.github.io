@@ -28,19 +28,19 @@
     transform: rotate(45deg);
     transform-origin: 100% 100%;
   }
-  /*动画*/
+  /*动画：仅做缩放脉冲，不旋转，红心保持正立、左右对称*/
   @keyframes beat {
-    0% { transform: scale(1) rotate(-45deg); }
-    25% { transform: scale(1.1) rotate(-45deg); }
-    50% { transform: scale(1) rotate(-45deg); }
-    75% { transform: scale(1.1) rotate(-45deg); }
-    100% { transform: scale(1) rotate(-45deg); }
+    0% { transform: scale(1); }
+    25% { transform: scale(1.12); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.12); }
+    100% { transform: scale(1); }
   }
   .heart {
     animation: beat 1s infinite;
   }
    .footer {
-      font-size: 0.7rem; /* 默认页脚字体大小 */
+      font-size: 0.8rem; /* 默认页脚字体大小 */
       color: #333;
       margin-bottom: 0; /* 确保没有底部外边距 */
     }
@@ -51,7 +51,7 @@
     }
     .footer-center {
       text-align: center;
-      font-size: 0.7rem;
+      font-size: 0.8rem;
     }
     .footer-left {
       text-align: left;
