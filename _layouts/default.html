@@ -190,19 +190,69 @@ layout: compress
       body.dark .preloader-divider { background: linear-gradient(90deg, transparent, #9aa3b2, transparent); }
       body.dark .preloader-tagline { color: #9aa3b2; }
       body.dark .enter-hint { color: #9aa3b2; }
+
+      /* ===== 亮/暗切换按钮（al-folio 同款三态：跟随系统 → 亮 → 暗）===== */
+      /* 全站渐变过渡：切换主题时所有元素在 750ms 内平滑变亮 / 变暗 */
+      html.transition,
+      html.transition *,
+      html.transition *::before,
+      html.transition *::after {
+        transition: all 750ms !important;
+        transition-delay: 0 !important;
+      }
+
+      /* 按钮外观 */
+      .theme-toggle {
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        color: #4a4a4a;
+        font-size: 1.3rem;
+        line-height: 1;
+        padding: 4px 6px;
+        border-radius: 8px;
+      }
+      .theme-toggle:hover { color: #000; }
+      body.dark .theme-toggle { color: #cfcfcf; }
+      body.dark .theme-toggle:hover { color: #fff; }
+
+      /* 三个 icon 按当前模式显示其一 */
+      #light-toggle-system { display: block; }
+      #light-toggle-dark { display: none; }
+      #light-toggle-light { display: none; }
+      html[data-theme-setting="dark"] #light-toggle-system { display: none; }
+      html[data-theme-setting="dark"] #light-toggle-dark { display: block; }
+      html[data-theme-setting="dark"] #light-toggle-light { display: none; }
+      html[data-theme-setting="light"] #light-toggle-system { display: none; }
+      html[data-theme-setting="light"] #light-toggle-dark { display: none; }
+      html[data-theme-setting="light"] #light-toggle-light { display: block; }
     </style>
+
+    <!-- Tabler Icons（亮/暗切换按钮图标，与参考站点同款） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.17.0/dist/tabler-icons.min.css">
+    <script>
+      /* 首屏前计算主题，避免闪屏（system = 跟随系统） */
+      (function () {
+        var s = localStorage.getItem('theme');
+        var order = ['system', 'light', 'dark'];
+        if (order.indexOf(s) < 0) s = 'system';
+        var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (s === 'system') ? (dark ? 'dark' : 'light') : s;
+        document.documentElement.setAttribute('data-theme-setting', s);
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
   </head>
 
   <body>
 
-    <div class="theme-toggle" aria-label="Toggle dark mode">
-      <input type="checkbox" class="checkbox" id="checkbox">
-      <label for="checkbox" class="checkbox-label" aria-label="Toggle dark mode" title="Toggle dark mode">
-        <i class="fas fa-moon" aria-hidden="true"></i>
-        <i class="fas fa-sun" aria-hidden="true"></i>
-        <span class="ball"></span>
-      </label>
-    </div>
+    <script>if (document.documentElement.getAttribute('data-theme') === 'dark') document.body.classList.add('dark');</script>
+
+    <button id="light-toggle" class="theme-toggle" title="Change theme" aria-label="Change theme">
+      <i class="ti ti-sun-moon" id="light-toggle-system"></i>
+      <i class="ti ti-moon-filled" id="light-toggle-dark"></i>
+      <i class="ti ti-sun-filled" id="light-toggle-light"></i>
+    </button>
 
     <div class="preloader" id="preloader" aria-hidden="true">
       <div class="preloader-glow g1"></div>
@@ -312,10 +362,44 @@ layout: compress
     </script>
 
     <script type="text/javascript">
-      const checkbox = document.getElementById("checkbox");
-      checkbox.addEventListener("change", () => {
-        document.body.classList.toggle("dark");
-      });
+      /* ===== 亮/暗切换：跟随系统 → 亮 → 暗 三态循环，icon 随状态变化 ===== */
+      (function () {
+        var SETTINGS = ['system', 'light', 'dark'];
+        function getSetting() {
+          var t = localStorage.getItem('theme');
+          return SETTINGS.indexOf(t) >= 0 ? t : 'system';
+        }
+        function compute(setting) {
+          if (setting === 'system') {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          return setting;
+        }
+        function apply(setting, withTransition) {
+          var theme = compute(setting);
+          var html = document.documentElement;
+          html.setAttribute('data-theme-setting', setting);
+          html.setAttribute('data-theme', theme);
+          document.body.classList.toggle('dark', theme === 'dark');
+          if (withTransition) {
+            html.classList.add('transition');
+            setTimeout(function () { html.classList.remove('transition'); }, 800);
+          }
+        }
+        var btn = document.getElementById('light-toggle');
+        if (btn) {
+          btn.addEventListener('click', function () {
+            var cur = getSetting();
+            var next = SETTINGS[(SETTINGS.indexOf(cur) + 1) % SETTINGS.length];
+            localStorage.setItem('theme', next);
+            apply(next, true);
+          });
+          // 处于「跟随系统」时，系统主题变了也实时跟随
+          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+            if (getSetting() === 'system') apply('system', true);
+          });
+        }
+      })();
     </script>
 
   </body>
