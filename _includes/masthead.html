@@ -30,11 +30,11 @@
       <ul class="lang-dropdown__menu">
         <li>
           <a class="lang-dropdown__item{% unless is_zh %} is-current{% endunless %}"
-             href="{% if is_zh %}{{ page.lang_alt | default: '/' | relative_url }}{% else %}{{ page.url | default: '/' | relative_url }}{% endif %}">English</a>
+             href="{% if is_zh %}{{ page.lang_alt | default: '/' | absolute_url }}{% else %}{{ page.url | default: '/' | absolute_url }}{% endif %}">English</a>
         </li>
         <li>
           <a class="lang-dropdown__item{% if is_zh %} is-current{% endif %}"
-             href="{% if is_zh %}{{ page.url | default: '/zh/' | relative_url }}{% else %}{{ page.lang_alt | default: '/zh/' | relative_url }}{% endif %}">&#20013;&#25991;</a>
+             href="{% if is_zh %}{{ page.url | default: '/zh/' | absolute_url }}{% else %}{{ page.lang_alt | default: '/zh/' | absolute_url }}{% endif %}">&#20013;&#25991;</a>
         </li>
       </ul>
     </details>
