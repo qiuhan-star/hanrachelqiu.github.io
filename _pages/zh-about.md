@@ -11,7 +11,7 @@ lang_alt: /
 
 我目前是[浙江大学](https://www.zju.edu.cn/)[公共管理学院](https://www.spa.zju.edu.cn/)公共管理专业的博士研究生，很荣幸由[吴中盛教授](https://mypage.zju.edu.cn/en/0022142)指导。
 
-我曾在[厦门大学](https://www.xmu.edu.cn/)[公共管理学院](https://spa.xmu.edu.cn/)攻读公共管理硕士，师从[余文轩教授](https://spa.xmu.edu.net/info/1237/3095.htm)。
+我曾在[厦门大学](https://www.xmu.edu.cn/)[公共管理学院](https://spa.xmu.edu.cn/)攻读公共管理硕士，师从[余文轩教授](https://spa.xmu.edu.cn/info/1237/3095.htm)。
 
 我拥有[亚利桑那州立大学](https://www.asu.edu/)公共服务与公共政策理学学士学位（2022），以及[海南大学](https://www.hainanu.edu.cn/)公共管理文学学士学位（2022），在校期间受[林海英教授](https://haitc.hainanu.edu.cn/cslm/jzyg/szdw/xzgl.htm)指导。
 
