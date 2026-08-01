@@ -7,17 +7,17 @@ lang_alt: /
 ---
 
 ## 我是谁？
-你好！我是邱涵（Han Qiu），也可以叫我 Rachel。
+你好！我是邱涵（Han Qiu），英文名 Rachel。
 
-我目前是[浙江大学](https://www.zju.edu.cn/)[公共管理学院](https://www.spa.zju.edu.cn/)公共管理专业的博士研究生，很荣幸由[吴中盛教授](https://mypage.zju.edu.cn/en/0022142)指导。
+现为[浙江大学](https://www.zju.edu.cn/)[公共管理学院](https://www.spa.zju.edu.cn/)行政管理专业博士研究生，导师为[吴中盛教授](https://mypage.zju.edu.cn/en/0022142)。
 
-我曾在[厦门大学](https://www.xmu.edu.cn/)[公共管理学院](https://spa.xmu.edu.cn/)攻读公共管理硕士，师从[余文轩教授](https://spa.xmu.edu.cn/info/1237/3095.htm)。
+硕士阶段同样就读于[厦门大学](https://www.xmu.edu.cn/)[公共管理学院](https://spa.xmu.edu.cn/)行政管理专业，导师为[于文轩教授](https://spa.xmu.edu.cn/info/1237/3095.htm)。
 
-我拥有[亚利桑那州立大学](https://www.asu.edu/)公共服务与公共政策理学学士学位（2022），以及[海南大学](https://www.hainanu.edu.cn/)公共管理文学学士学位（2022），在校期间受[林海英教授](https://haitc.hainanu.edu.cn/cslm/jzyg/szdw/xzgl.htm)指导。
+2022 年获[亚利桑那州立大学](https://www.asu.edu/)公共服务与公共政策理学学士与[海南大学](https://www.hainanu.edu.cn/)行政管理文学学士；海南大学期间师从[林海英教授](https://haitc.hainanu.edu.cn/cslm/jzyg/szdw/xzgl.htm)。
 
-我的研究兴趣涵盖公共与非营利组织管理、政府透明与问责、数字政府与政务科技（GovTech）、共同生产与协同治理，以及环境治理。[**了解更多**](https://qiuhan-star.github.io/hanrachelqiu.github.io/portfolio/)
+我的研究兴趣包括公共与非营利组织管理、数字治理、政府透明度、共同生产以及环境治理。[**了解更多**](https://qiuhan-star.github.io/hanrachelqiu.github.io/portfolio/)
 
-我始终乐于探讨科研合作与学术交流。如果你对我的研究感兴趣，或希望建立联系，欢迎随时通过 rachel.hanqiu@gmail.com 与我交流！
+欢迎对上述研究感兴趣，或希望开展学术交流、探讨合作可能的同仁与我联系（邮箱：rachel.hanqiu@gmail.com）。
 
 ## 工作之外：
 - 我是社会公平的坚定倡导者，也深信公共服务的变革力量。心系公共福祉，我一直在寻找为社群贡献力量、创造切实改变的方式。
