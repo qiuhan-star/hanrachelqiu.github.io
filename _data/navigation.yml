@@ -28,3 +28,27 @@ main:
 
   - title: "PhD Simulator"
     url: /game-details.html
+
+zh-CN:
+  - title: "关于"
+    url: /zh/
+  - title: "出版物"
+    url: /publications/
+  - title: "演讲"
+    url: /talks/
+  - title: "经历"
+    url: /experience/
+  - title: "获奖"
+    url: /awards/
+  - title: "服务"
+    url: /services/
+  - title: "简历"
+    url: /zh/cv/
+  - title: "作品集"
+    url: /portfolio/
+  - title: "指南"
+    url: /markdown/
+  - title: "博客"
+    url: /year-archive/
+  - title: "PhD 模拟器"
+    url: /game-details.html

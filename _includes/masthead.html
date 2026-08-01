@@ -7,7 +7,8 @@
         <button><div class="navicon"></div></button>
         <ul class="visible-links">
           <li class="masthead__menu-item masthead__menu-item--lg"><a href="{{ base_path }}/">{{ site.title }}</a></li>
-          {% for link in site.data.navigation.main %}
+          {% assign nav_locale = page.lang | default: "main" %}
+          {% for link in site.data.navigation[nav_locale] %}
             {% if link.url contains 'http' %}
               {% assign domain = '' %}
               {% else %}
@@ -18,6 +19,18 @@
         </ul>
         <ul class="hidden-links hidden"></ul>
       </nav>
+    </div>
+    {% assign is_zh = false %}{% if page.lang == "zh-CN" %}{% assign is_zh = true %}{% endif %}
+    <div class="lang-switch">
+      {% if is_zh %}
+        <a href="{{ page.lang_alt | default: '/' | relative_url }}" class="lang-link">EN</a>
+        <span class="lang-sep">/</span>
+        <span class="lang-link lang-current">中文</span>
+      {% else %}
+        <span class="lang-link lang-current">EN</span>
+        <span class="lang-sep">/</span>
+        <a href="{{ page.lang_alt | default: '/zh/' | relative_url }}" class="lang-link">中文</a>
+      {% endif %}
     </div>
     <div class="theme-toggle">
       <input type="checkbox" class="checkbox" id="checkbox">
@@ -187,6 +200,29 @@
   .checkbox:checked + .checkbox-label .ball {
     transform: translateX(26px); /* 移动小球 */
   }
+
+  /* 语言切换器：顶在顶栏最右，与暗色模式开关相邻 */
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding-right: 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    gap: 0.35rem;
+    letter-spacing: 0.02em;
+  }
+  .lang-switch .lang-link {
+    color: #5b6472;
+    text-decoration: none;
+  }
+  .lang-switch .lang-link:hover { color: #4f7cff; }
+  .lang-switch .lang-current { color: #14161c; cursor: default; }
+  .lang-switch .lang-sep { color: #cccccc; }
+  body.dark .lang-switch .lang-link { color: #9aa3b2; }
+  body.dark .lang-switch .lang-link:hover { color: #7c9bff; }
+  body.dark .lang-switch .lang-current { color: #f2f3f5; }
+  body.dark .lang-switch .lang-sep { color: #444444; }
 </style>
 
 <script type="text/javascript">
