@@ -9,7 +9,9 @@ redirect_from:
 ---
 <style>
   /* 中文名拼音上标放大，便于阅读 */
-  ruby rt { font-size: 0.75em; font-weight: 500; }
+  ruby rt { font-size: 0.8em; font-weight: 500; }
+  /* 两个汉字之间的拼音明显分开：给第二个 ruby 加左间距 */
+  ruby + ruby { margin-left: 0.9em; }
 </style>
 
 ## Who Am I?

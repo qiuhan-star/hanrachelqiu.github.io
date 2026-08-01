@@ -253,13 +253,10 @@
     }
   }
 
-  /* 链接行：<a> 也需为 flex 容器，使其内部的 i + 文字横向排列 */
+  /* 链接行：<a> 为 flex 容器，使其内部的 i + 文字横向排列 */
   a {
     display: flex;
     align-items: center;
-
-  a {
-    display: block;
     margin-bottom: 5px;
     padding-right: 5px;
     padding-top: 2px;

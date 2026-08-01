@@ -20,18 +20,24 @@
         <ul class="hidden-links hidden"></ul>
       </nav>
     </div>
+    {% comment %} 语言切换：点击展开下拉选择框，便于以后扩展更多语言（如韩语） {% endcomment %}
     {% assign is_zh = false %}{% if page.lang == "zh-CN" %}{% assign is_zh = true %}{% endif %}
-    <div class="lang-switch">
-      {% if is_zh %}
-        <a href="{{ page.lang_alt | default: '/' | relative_url }}" class="lang-link">EN</a>
-        <span class="lang-sep">/</span>
-        <span class="lang-link lang-current">中文</span>
-      {% else %}
-        <span class="lang-link lang-current">EN</span>
-        <span class="lang-sep">/</span>
-        <a href="{{ page.lang_alt | default: '/zh/' | relative_url }}" class="lang-link">中文</a>
-      {% endif %}
-    </div>
+    <details class="lang-dropdown">
+      <summary class="lang-dropdown__toggle" aria-label="选择语言 / Select language">
+        <span class="lang-dropdown__current">{% if is_zh %}中文{% else %}EN{% endif %}</span>
+        <span class="lang-dropdown__caret" aria-hidden="true">&#9662;</span>
+      </summary>
+      <ul class="lang-dropdown__menu">
+        <li>
+          <a class="lang-dropdown__item{% unless is_zh %} is-current{% endunless %}"
+             href="{% if is_zh %}{{ page.lang_alt | default: '/' | relative_url }}{% else %}{{ page.url | default: '/' | relative_url }}{% endif %}">English</a>
+        </li>
+        <li>
+          <a class="lang-dropdown__item{% if is_zh %} is-current{% endif %}"
+             href="{% if is_zh %}{{ page.url | default: '/zh/' | relative_url }}{% else %}{{ page.lang_alt | default: '/zh/' | relative_url }}{% endif %}">&#20013;&#25991;</a>
+        </li>
+      </ul>
+    </details>
   </div>
 </div>
 
@@ -193,26 +199,67 @@
     transform: translateX(26px); /* 移动小球 */
   }
 
-  /* 语言切换器：顶在顶栏最右，与暗色模式开关相邻 */
-  .lang-switch {
+  /* 语言切换下拉框：点击展开选择框，便于以后扩展多语言（如韩语），并让出右上角固定的暗色开关 */
+  .masthead,
+  .masthead__inner-wrap {
+    overflow: visible;
+  }
+  .lang-dropdown {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    margin-right: 4rem;
+  }
+  .lang-dropdown > summary {
+    list-style: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    flex-shrink: 0;
-    padding-right: 0.75rem;
+    gap: 0.3rem;
+    padding: 0.32rem 0.6rem;
     font-size: 0.8rem;
     font-weight: 600;
-    gap: 0.35rem;
-    letter-spacing: 0.02em;
+    color: #14161c;
+    background: transparent;
+    border: 1px solid #d7dbe0;
+    border-radius: 6px;
+    line-height: 1;
+    user-select: none;
   }
-  .lang-switch .lang-link {
-    color: #5b6472;
+  .lang-dropdown > summary::-webkit-details-marker { display: none; }
+  .lang-dropdown > summary:hover { border-color: #4f7cff; color: #4f7cff; }
+  .lang-dropdown__caret { font-size: 0.6rem; opacity: 0.7; }
+  .lang-dropdown__menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 116px;
+    margin: 0;
+    padding: 0.3rem 0;
+    list-style: none;
+    background: #fff;
+    border: 1px solid #e3e6ea;
+    border-radius: 8px;
+    box-shadow: 0 10px 28px rgba(20, 22, 28, 0.14);
+    z-index: 1200;
+    display: none;
+  }
+  .lang-dropdown[open] > .lang-dropdown__menu { display: block; }
+  .lang-dropdown__item {
+    display: block;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.82rem;
+    color: #2b2f36;
     text-decoration: none;
+    white-space: nowrap;
   }
-  .lang-switch .lang-link:hover { color: #4f7cff; }
-  .lang-switch .lang-current { color: #14161c; cursor: default; }
-  .lang-switch .lang-sep { color: #cccccc; }
-  body.dark .lang-switch .lang-link { color: #9aa3b2; }
-  body.dark .lang-switch .lang-link:hover { color: #7c9bff; }
-  body.dark .lang-switch .lang-current { color: #f2f3f5; }
-  body.dark .lang-switch .lang-sep { color: #444444; }
+  .lang-dropdown__item:hover { background: #f2f5ff; color: #4f7cff; }
+  .lang-dropdown__item.is-current { color: #4f7cff; font-weight: 700; background: #f2f5ff; }
+  /* 暗色模式 */
+  body.dark .lang-dropdown > summary { background: #1b1d21; border-color: #3a3f47; color: #e6e6e6; }
+  body.dark .lang-dropdown > summary:hover { border-color: #7c9bff; color: #7c9bff; }
+  body.dark .lang-dropdown__menu { background: #1b1d21; border-color: #3a3f47; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5); }
+  body.dark .lang-dropdown__item { color: #d0d3d8; }
+  body.dark .lang-dropdown__item:hover { background: #262a31; color: #7c9bff; }
+  body.dark .lang-dropdown__item.is-current { color: #7c9bff; background: #262a31; }
 </style>

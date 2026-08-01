@@ -237,12 +237,12 @@ layout: compress
     {% include scripts.html %}
 
     <script>
-      /* ===== 站点开屏动画（首页刷新播放 / 站内链接跳转不播）===== */
+      /* ===== 站点开屏动画（首页：刷新/首次访问播放，站内链接跳转不播）===== */
       (function () {
         var PRELOADER_TEXT = "Han (Rachel) Qiu";
         var CURTAIN_MS = 950, HARD_CAP_MS = 15000;
 
-        /* 点站内链接跳转时打标记：下一页据此跳过开屏；浏览器刷新不会打标记，照常播放 */
+        /* 站内链接点击标记（referrer 被浏览器剥离时的兜底；读取后立即清除，避免残留）*/
         document.addEventListener('click', function (e) {
           var t = e.target;
           var a = t && t.closest ? t.closest('a') : null;
@@ -259,15 +259,37 @@ layout: compress
         var preloader = document.getElementById('preloader');
         if (!preloader) return;
 
-        /* 仅首页、且非站内链接跳转时才播开屏；点 CV/About 等站内链接或访问子页不播 */
+        /* 仅首页才考虑开屏 */
         function isHome() {
           var p = location.pathname;
           return p === '/' || p === '' || p === '/index.html' || p.slice(-11) === '/index.html';
         }
+
+        /* 读取并立即清除站内跳转标记，防止残留 */
         var internalNav = false;
         try { internalNav = sessionStorage.getItem('hq-internal-nav') === '1'; } catch (e3) {}
-        if (internalNav) { try { sessionStorage.removeItem('hq-internal-nav'); } catch (e3) {} }
-        if (!isHome() || internalNav) {
+        try { sessionStorage.removeItem('hq-internal-nav'); } catch (e3) {}
+
+        /* 是否播放：
+           - 浏览器刷新(reload)                          → 播放
+           - 前进/后退(back_forward)                     → 不播放
+           - 站内链接跳转(navigate 且 referrer 同域 或 点击标记) → 不播放
+           - 首次访问(navigate 且 referrer 非同域/为空)  → 播放 */
+        function shouldPlay() {
+          var navType = '';
+          try {
+            var nt = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+            if (nt && nt.type) navType = nt.type;
+          } catch (e4) {}
+          if (navType === 'reload') return true;
+          if (navType === 'back_forward') return false;
+          var sameOriginRef = false;
+          try { sameOriginRef = !!document.referrer && document.referrer.indexOf(location.origin) === 0; } catch (e5) {}
+          if (sameOriginRef || internalNav) return false;
+          return true;
+        }
+
+        if (!isHome() || !shouldPlay()) {
           preloader.style.display = 'none';
           return;
         }
