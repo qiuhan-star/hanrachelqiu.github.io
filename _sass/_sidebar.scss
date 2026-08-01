@@ -241,14 +241,15 @@
 
   li {
     white-space: nowrap;
-  }
+    display: flex;
+    align-items: center;
 
-  /* 强制侧栏图标统一固定宽度并居中，确保文字左对齐（不依赖 fa-fw/ai-fw 是否生效） */
-  .fa,
-  .ai {
-    display: inline-block;
-    width: 1.4em;
-    text-align: center;
+    /* 图标区钉死固定宽度，文字必然从同一位置开始 */
+    > i {
+      flex-shrink: 0;
+      width: 1.6em;
+      margin-right: 0.5em;
+    }
   }
 
   a {
