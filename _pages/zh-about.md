@@ -39,9 +39,9 @@ lang_alt: /
 
 <span style="color: #888888;">**[2024年11月]**</span> 🎉 **学术成果：** *我的研究论文获得学院表彰！* >> [**了解更多**](https://mp.weixin.qq.com/s/2TYL9l8GGay93hLLRQBzYw)
 
-<span style="color: #888888;">**[2024年12月]**</span> 🎤 **学术参与：** *很高兴参加在香港中文大学举办的第二十届海峡两岸及港澳公共管理学术研讨会。* >> [**会议详情**](https://qiuhan-star.github.io/hanrachelqiu.github.io/talks/2024-05-09-just-transition)
+<span style="color: #888888;">**[2024年5月]**</span> 🎤 **学术参与：** *很高兴参加在香港中文大学举办的第二十届海峡两岸及港澳公共管理学术研讨会。* >> [**会议详情**](https://qiuhan-star.github.io/hanrachelqiu.github.io/talks/2024-05-09-just-transition)
 
-<span style="color: #888888;">**[2024年12月]**</span> 🎤 **学术参与：** *很高兴参加在北京清华大学举办的国际比较公共政策会议。* >> [**会议详情**](https://qiuhan-star.github.io/hanrachelqiu.github.io/talks/2024-04-19-just-transition)
+<span style="color: #888888;">**[2024年4月]**</span> 🎤 **学术参与：** *很高兴参加在北京清华大学举办的国际比较公共政策会议。* >> [**会议详情**](https://qiuhan-star.github.io/hanrachelqiu.github.io/talks/2024-04-19-just-transition)
 
 <span style="color: #888888;">**[2023年12月]**</span> 🚀 **学术里程碑：** *在香港科技大学国际学术会议首秀，并登上学院播报！* >> [**会议详情**](https://qiuhan-star.github.io/hanrachelqiu.github.io/talks/2023-12-01-agile-governance) >> [**了解更多**](https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg)
 
