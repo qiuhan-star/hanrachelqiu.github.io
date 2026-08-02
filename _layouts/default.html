@@ -416,7 +416,7 @@ layout: compress
       /* ===== 亮/暗切换：跟随系统 → 亮 → 暗 三态循环，icon 随状态变化 ===== */
       (function () {
         var SETTINGS = ['system', 'light', 'dark'];
-        // localStorage 容错：隐私模式 / 禁用时退回内存变量，按钮仍然可用
+        /* localStorage 容错：隐私模式 / 禁用时退回内存变量，按钮仍然可用 */
         var _memTheme = null;
         function readTheme() {
           try { return localStorage.getItem('theme'); } catch (e) { return _memTheme; }
@@ -435,7 +435,7 @@ layout: compress
           }
           return setting;
         }
-        // 关键：下一次点击一定切到「与当前外观相反」的状态，保证每次点击都有可见变化
+        /* 关键：下一次点击一定切到与当前外观相反的状态，保证每次点击都有可见变化 */
         function nextSetting(cur) {
           var i = SETTINGS.indexOf(cur);
           var curResolved = compute(cur);
@@ -463,7 +463,7 @@ layout: compress
             writeTheme(next);
             apply(next, true);
           });
-          // 处于「跟随系统」时，系统主题变了也实时跟随
+          /* 处于「跟随系统」时，系统主题变了也实时跟随 */
           window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
             if (getSetting() === 'system') apply('system', true);
           });

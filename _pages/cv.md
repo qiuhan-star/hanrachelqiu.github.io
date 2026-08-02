@@ -122,45 +122,33 @@ You can access Rachel's latest C.V. [here](https://raw.githubusercontent.com/qiu
 
 <button class="collapsible">Work experience</button>
 <div class="content">
-  <h2 class="company">Hangzhou Basic Interior Design & Construction Co., Ltd. (Zhejiang, China)</h2>
-  <h3 class="position">Head of Data Planning Department (Full-time)</h3>
-  <p class="duration">Duration: Jun. 2023 - Sep. 2023</p>
-  <ul>
-        <li>Spearheaded the collection and synthesis of data from internal databases and market research reports, utilizing statistical methods to ensure data accuracy and relevance.</li>
-        <li>Expertly managed and organized data using Excel, creating spreadsheets with formulas and pivot tables to streamline data analysis and improve data integrity.</li>
-        <li>Crafted comprehensive reports and infographics, and presented findings via PowerPoint to simplify complex data for team comprehension.</li>
-        <li>Delivered strategic data interpretations, leveraging statistical models to forecast trends and inform executive decision-making, resulting in more informed and data-driven strategic planning sessions.</li>
-  </ul>
-
-  <h3 class="position">Assistant to the Chief Financial Office (Full-time)</h3>
-  <p class="duration">Duration: Jun. 2022 - Aug. 2022</p>
-  <ul>
-        <li>Supported the CFO in managing the company’s financial operations, ensuring compliance with financial policies and procedures.</li>
-        <li>Analyzed financial data, identifying trends and quantifiable improvement areas within financial statements, budgets, and cash flow projections.</li>
-        <li>Contributed to monthly financial reporting, leveraging analytical skills to present clear, data-driven insights.</li>
-        <li>Assisted in the management of accounts payable and receivable, enhancing payment efficiency and cash flow through targeted quantitative strategies.</li>
-  </ul>
-
-  <h2 class="company">Zhejiang Yiming Food Co., Ltd (Zhejiang, China)</h2>
-  <h3 class="position">Executive Assistant to the COO and CFO (Full-time Intern)</h3>
-  <p class="duration">Duration: Dec. 2021 - Apr. 2022</p>
-  <ul>
-        <li>Optimized COO’s schedule by planning itineraries and coordinating meetings.</li>
-        <li>Assisted COO in strategic planning, leading to the development of public relations strategies.</li>
-        <li>Supported CFO in budgeting and cost control, analyzing financial data to inform strategic financial decisions and optimize resource allocation within the company.</li>
-        <li>Assisted the CFO in executing comprehensive market research and analysis, facilitating informed strategic financial planning and decision-making.</li>
-  </ul>
-
-  <h2 class="company">National Survey Research Center (NSRC) at Renmin University of China (Online)</h2>
-  <h3 class="position">Telephone Interviewer (Part-time Intern)</h3>
-  <p class="duration">Duration: Mar. 2021 - Dec. 2021</p>
-  <ul>
-        <li>Conducted telephone interviews for high-impact surveys, including a national study on the comprehensive effects of the COVID-19 pandemic and a nationwide employment survey of 2021 university graduates.</li>
-        <li>Maintained a 98% accuracy rate in collecting over 200 detailed survey samples, contributing to the reliability of research findings.</li>
-        <li>Effectively engaged with a diverse range of respondents, employing communication strategies to overcome objections and secure valuable insights for high-impact studies.</li>
-        <li>Utilized quantitative methods to ensure the representativeness and generalizability of the collected data.</li>
-  </ul>
+  <div id="weGate">
+    <p>🔒 This section is password-protected. Enter the password to view.</p>
+    <input type="password" id="wePass" placeholder="Password" style="padding:6px 8px;">
+    <button id="weUnlock" style="padding:6px 10px;cursor:pointer;">Unlock</button>
+    <span id="weMsg" style="color:#c0392b;margin-left:8px;"></span>
+  </div>
+  <div id="weData" style="display:none;"></div>
 </div>
+<script>
+(function(){
+  var C = "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";
+  function b64ToBytes(b){var s=atob(b);var u=new Uint8Array(s.length);for(var i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u;}
+  function unlock(){
+    var pwd=document.getElementById('wePass').value;
+    if(!pwd){document.getElementById('weMsg').textContent='Please enter password.';return;}
+    var bytes=b64ToBytes(C);
+    var salt=bytes.slice(0,16), iv=bytes.slice(16,28), ct=bytes.slice(28);
+    crypto.subtle.importKey('raw', new TextEncoder().encode(pwd), 'PBKDF2', false, ['deriveKey'])
+    .then(function(km){return crypto.subtle.deriveKey({name:'PBKDF2',salt:salt,iterations:100000,hash:'SHA-256'}, km, {name:'AES-GCM',length:256}, false, ['decrypt']);})
+    .then(function(key){return crypto.subtle.decrypt({name:'AES-GCM',iv:iv}, key, ct);})
+    .then(function(plain){document.getElementById('weData').innerHTML=new TextDecoder().decode(plain);document.getElementById('weData').style.display='block';document.getElementById('weGate').style.display='none';})
+    .catch(function(){document.getElementById('weMsg').textContent='Wrong password.';});
+  }
+  document.getElementById('weUnlock').addEventListener('click', unlock);
+  document.getElementById('wePass').addEventListener('keydown', function(e){if(e.key==='Enter')unlock();});
+})();
+</script>
 
 <script>
 var coll = document.getElementsByClassName("collapsible");

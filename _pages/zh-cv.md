@@ -123,45 +123,33 @@ redirect_from:
 
 <button class="collapsible">工作经历</button>
 <div class="content">
-  <h2 class="company">杭州基本室内设计营造有限公司（中国·浙江）</h2>
-  <h3 class="position">数据规划部负责人（全职）</h3>
-  <p class="duration">时间：2023年6月 - 2023年9月</p>
-  <ul>
-        <li>牵头从内部数据库与市场研究报告中收集并整合数据，运用统计方法确保数据的准确性与相关性。</li>
-        <li>熟练使用 Excel 管理与整理数据，创建带公式与数据透视表的工作表，以简化数据分析、提升数据完整性。</li>
-        <li>制作详尽的报告与信息图，并通过 PowerPoint 呈现研究发现，让团队更易理解复杂数据。</li>
-        <li>提供战略性数据解读，借助统计模型预测趋势、辅助高管决策，使战略规划会议更加数据驱动、有据可依。</li>
-  </ul>
-
-  <h3 class="position">首席财务官助理（全职）</h3>
-  <p class="duration">时间：2022年6月 - 2022年8月</p>
-  <ul>
-        <li>协助首席财务官管理公司财务运营，确保符合财务政策与流程。</li>
-        <li>分析财务数据，识别财务报表、预算与现金流预测中可量化的改进方向。</li>
-        <li>参与月度财务报告，运用分析能力呈现清晰、数据驱动的洞察。</li>
-        <li>协助管理应付账款与应收账款，通过有针对性的量化策略提升付款效率与现金流。</li>
-  </ul>
-
-  <h2 class="company">浙江一鸣食品股份有限公司（中国·浙江）</h2>
-  <h3 class="position">首席运营官与首席财务官行政助理（全职实习生）</h3>
-  <p class="duration">时间：2021年12月 - 2022年4月</p>
-  <ul>
-        <li>通过规划行程与协调会议，优化首席运营官的时间安排。</li>
-        <li>协助首席运营官进行战略规划，推动公关策略的制定。</li>
-        <li>支持首席财务官开展预算与成本控制，分析财务数据以辅助战略财务决策、优化公司资源配置。</li>
-        <li>协助首席财务官开展全面的市场调研与分析，支撑科学的战略财务规划与决策。</li>
-  </ul>
-
-  <h2 class="company">中国人民大学中国调查与数据中心（NSRC）（线上）</h2>
-  <h3 class="position">电话访问员（兼职实习生）</h3>
-  <p class="duration">时间：2021年3月 - 2021年12月</p>
-  <ul>
-        <li>为具有重大影响力的调查开展电话访谈，包括全国新冠疫情综合影响研究、以及2021届高校毕业生全国就业调查。</li>
-        <li>在采集的 200 余份详细调查样本中保持 98% 的准确率，提升研究结论的可靠性。</li>
-        <li>有效应对多元受访者，运用沟通策略化解异议、获取高价值洞察。</li>
-        <li>运用定量方法确保所采集数据的代表性与可推广性。</li>
-  </ul>
+  <div id="weGate">
+    <p>🔒 本栏目已加密，输入密码后查看。</p>
+    <input type="password" id="wePass" placeholder="密码" style="padding:6px 8px;">
+    <button id="weUnlock" style="padding:6px 10px;cursor:pointer;">Unlock</button>
+    <span id="weMsg" style="color:#c0392b;margin-left:8px;"></span>
+  </div>
+  <div id="weData" style="display:none;"></div>
 </div>
+<script>
+(function(){
+  var C = "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";
+  function b64ToBytes(b){var s=atob(b);var u=new Uint8Array(s.length);for(var i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u;}
+  function unlock(){
+    var pwd=document.getElementById('wePass').value;
+    if(!pwd){document.getElementById('weMsg').textContent='Please enter password.';return;}
+    var bytes=b64ToBytes(C);
+    var salt=bytes.slice(0,16), iv=bytes.slice(16,28), ct=bytes.slice(28);
+    crypto.subtle.importKey('raw', new TextEncoder().encode(pwd), 'PBKDF2', false, ['deriveKey'])
+    .then(function(km){return crypto.subtle.deriveKey({name:'PBKDF2',salt:salt,iterations:100000,hash:'SHA-256'}, km, {name:'AES-GCM',length:256}, false, ['decrypt']);})
+    .then(function(key){return crypto.subtle.decrypt({name:'AES-GCM',iv:iv}, key, ct);})
+    .then(function(plain){document.getElementById('weData').innerHTML=new TextDecoder().decode(plain);document.getElementById('weData').style.display='block';document.getElementById('weGate').style.display='none';})
+    .catch(function(){document.getElementById('weMsg').textContent='Wrong password.';});
+  }
+  document.getElementById('weUnlock').addEventListener('click', unlock);
+  document.getElementById('wePass').addEventListener('keydown', function(e){if(e.key==='Enter')unlock();});
+})();
+</script>
 
 <script>
 var coll = document.getElementsByClassName("collapsible");
