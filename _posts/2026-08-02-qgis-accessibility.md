@@ -1,5 +1,5 @@
 ---
-title: "Method Notes #2: Measuring Public Service Accessibility with QGIS ／ 方法笔记 #2：用 QGIS 做公共服务设施空间可达性分析"
+title: "Method Notes #2: Measuring Public Service Accessibility with QGIS"
 date: 2026-08-02
 tags:
   - 方法笔记
