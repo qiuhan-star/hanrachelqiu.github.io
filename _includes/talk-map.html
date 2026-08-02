@@ -1,0 +1,70 @@
+<!-- Self-contained Leaflet map of talk locations (HTTPS OSM tiles, no geocoding dependency) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  #talkMap { height: 520px; width: 100%; border-radius: 8px; margin: 0.5em 0 1.5em; z-index: 1; }
+  .talkmap-pop h4 { margin: 0 0 0.4em; font-size: 1.05em; }
+  .talkmap-pop ul { margin: 0.2em 0 0; padding-left: 1.15em; }
+  .talkmap-pop li { margin-bottom: 0.7em; }
+  .talkmap-pop .meta { color: #555; display: block; }
+  .talkmap-pop .badge { color: #2a7f3e; font-weight: 600; }
+  .talkmap-pop .award { color: #b8860b; font-weight: 600; }
+</style>
+
+{% if page.lang == 'zh-CN' %}
+<h2>🗺️ 讲座地点地图</h2>
+<p class="archive__item-excerpt">标记点显示我去过的城市/地区，点击可查看具体学校、会议与演讲标题。</p>
+{% else %}
+<h2>🗺️ Map of Talk Locations</h2>
+<p class="archive__item-excerpt">Markers show the cities/regions I have visited for talks. Click a marker for the venue, conference, and talk title.</p>
+{% endif %}
+
+<div id="talkMap"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* talk locations data: one entry per talk (coords hardcoded, no geocoding needed) */
+var talksData = [
+  { city: "Xi'an, China", lat: 34.3416, lng: 108.9398, title: "Single vs. Multiple Agents: Types of Mobilization Entities Impact on the Length of Citizen Volunteer Service Participation", title_zh: "单主体 vs. 多主体：动员主体类型对公民志愿服务参与时长的影响", venue: "Xi'an Jiaotong University", conf: "Chinese Sociological Association 2026 Annual Conference", date: "2026-07-10", lang: "中文" },
+  { city: "Xi'an, China", lat: 34.3416, lng: 108.9398, title: "Mobilized Giving and Voluntary Donation: Impact Mechanisms and the Moderating Role of Age", venue: "Xi'an Jiaotong University", conf: "Chinese Sociological Association 2026 Annual Conference", date: "2026-07-10", lang: "中文" },
+  { city: "Perth, Australia", lat: -31.9505, lng: 115.8605, title: "Scenarios, Phases, or Operators: What Kind of Initiatives Succeed (or Fail) to Activate Citizens' Willingness to Co-Produce?", venue: "Edith Cowan University", conf: "IRSPM 2026 Conference", date: "2026-04-08" },
+  { city: "Hong Kong, China", lat: 22.3193, lng: 114.1694, title: "Embracing Agile Governance: Cultivating Innovation and Addressing the Challenges of Generative Artificial Intelligence in Higher Education", venue: "HKUST", conf: "Journal of Asian Public Policy Special Issue Authors' Workshop", date: "2023-12-01" },
+  { city: "Hong Kong, China", lat: 22.3193, lng: 114.1694, title: "Surging currents: A systematic review of the literature on dynamic stakeholder engagements in higher education in the GAI era", venue: "HKUST", conf: "Journal of Asian Public Policy Special Issue Authors' Workshop", date: "2023-12-01" },
+  { city: "Shenyang, China", lat: 41.8057, lng: 123.4315, title: "Agile Governance for the Win: Adapting Higher Education to Generative Artificial Intelligence", venue: "Shenyang Normal University", conf: "Fucai Cup Digital Era Public Governance Innovation Academic Forum", date: "2023-12-03", award: "Outstanding Research Paper Award" },
+  { city: "Shenyang, China", lat: 41.8057, lng: 123.4315, title: "Surging Currents: A Systematic Review of the Literature on Dynamic Stakeholder Engagements in Higher Education in the GAI Era", venue: "Shenyang Normal University", conf: "Fucai Cup Digital Era Public Governance Innovation Academic Forum", date: "2023-12-03", award: "Outstanding Research Paper Award" },
+  { city: "Beijing, China", lat: 39.9042, lng: 116.4074, title: "Towards a Just Transition Future: A Quantitative Comparative Analysis of 30 Sub-national Governments in China (2010-2020)", venue: "Tsinghua University", conf: "International Conference on Comparative Public Policy", date: "2024-04-19" },
+  { city: "Hong Kong, China", lat: 22.3193, lng: 114.1694, title: "Pathways to a Just Transition: Evidence from 30 Sub-national Governments in China", venue: "Chinese University of Hong Kong", conf: "20th Cross-Strait and Hong Kong-Macao Public Administration Academic Seminar", date: "2024-05-09" },
+  { city: "Taiwan, China", lat: 25.0330, lng: 121.5654, title: "On-chain City Governance: How Can Blockchain in China Achieve Empowerment?", venue: "National Taiwan University", conf: "dg.o 2024 (Digital Government Research)", date: "2024-06-11" }
+];
+
+/* group talks by city so each city gets one marker */
+var byCity = {};
+for (var i = 0; i < talksData.length; i++) {
+  var t = talksData[i];
+  if (!byCity[t.city]) { byCity[t.city] = { lat: t.lat, lng: t.lng, items: [] }; }
+  byCity[t.city].items.push(t);
+}
+
+var map = L.map('talkMap').setView([20, 75], 2);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 18,
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+for (var city in byCity) {
+  var c = byCity[city];
+  var html = '<div class="talkmap-pop"><h4>' + city + '</h4><ul>';
+  for (var j = 0; j < c.items.length; j++) {
+    var it = c.items[j];
+    html += '<li><strong>' + it.title + '</strong>';
+    if (it.title_zh) { html += '<br>（' + it.title_zh + '）'; }
+    html += '<span class="meta">📍 ' + it.venue + '</span>';
+    html += '<span class="meta">🏛️ ' + it.conf + '</span>';
+    if (it.lang) { html += '<span class="badge">🗣️ ' + it.lang + '报告</span>'; }
+    if (it.award) { html += '<span class="award">🏆 ' + it.award + '</span>'; }
+    html += '<span class="meta">📅 ' + it.date + '</span>';
+    html += '</li>';
+  }
+  html += '</ul></div>';
+  L.marker([c.lat, c.lng]).addTo(map).bindPopup(html);
+}
+</script>

@@ -1,8 +1,8 @@
 ---
-title: "Method Notes #3: When ANOVA Is the Wrong Tool — From Variance Analysis to Mixed-Effects Models"
+title: "Methods #3: When ANOVA Is the Wrong Tool — From Variance Analysis to Mixed-Effects Models"
 date: 2026-08-02
 tags:
-  - 方法笔记
+  - 方法
   - ANOVA
   - 混合效应模型
   - Methods Notes
