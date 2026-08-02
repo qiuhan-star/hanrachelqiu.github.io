@@ -6,15 +6,13 @@ redirect_from:
   - /about/
   - /about.html
 ---
-
+<div data-lang="en" markdown="1">
 <style>
   /* 中文名拼音上标放大，便于阅读 */
   ruby rt { font-size: 0.8em; font-weight: 500; }
   /* 两个汉字之间的拼音间距：用 px 精确控制（已去掉字面空格，间距=此值） */
   ruby + ruby { margin-left: 2px; }
 </style>
-
-<div data-lang="en" markdown="1">
 
 ## Who Am I?
 Hello! I'm Han Qiu (<ruby>邱<rt>Qiū</rt></ruby><ruby>涵<rt>Hán</rt></ruby>), also known as Rachel.
@@ -52,7 +50,7 @@ As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal gam
 <details markdown="1">
 <summary>Show more</summary>
 
-<span style="color: #888888;">**[DEC. 2024]**</span> 📚 **Proud to be Invited to Review** AI & Public Affairs Education Article. Acknowledged as an 🌟 **"Excellent Reviewer"** 🌟. >> [**View Details**](https://www.webofscience.com/wos/author/record/LTM-0273-2024)
+<span style="color: #888888;">**[DEC. 2024]**</span> 📚 **Proud to be Invited to Review** AI & Public Affairs Education Article. Acknowledged as an 🌟 **“Excellent Reviewer”** 🌟. >> [**View Details**](https://www.webofscience.com/wos/author/record/LTM-0273-2024)
 
 <span style="color: #888888;">**[NOV. 2024]**</span> 🎉 **Academic Achievement:** *My Research Paper Earns College Acclaim!* >> [**Read More**](https://mp.weixin.qq.com/s/2TYL9l8GGay93hLLRQBzYw)
 
@@ -69,11 +67,9 @@ As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal gam
 [View all news →]({{ '/year-archive/' | absolute_url }})
 
 </details>
-
 </div>
 
 <div data-lang="zh" markdown="1">
-
 ## 我是谁？
 你好！我是邱涵（Han Qiu），英文名 Rachel。
 
@@ -103,14 +99,14 @@ As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal gam
 <!-- 在此处添加你 2025–2026 的新动态（复制下面格式，去掉注释符号即可）： -->
 <!-- <span style="color: #888888;">**[月. 年]**</span> 📌 **标题** >> [**查看**](链接) -->
 
-<span style="color: #888888;">**[2026年4月]**</span> 🎤 **学术参与：** *很高兴赴澳大利亚珀斯参加 IRSPM 2026 会议。* >> [**会议详情**]({{ '/talks/2026-04-08-irspm-coproduction' | absolute_url }})
+<span style="color: #888888;">**[2026年4月]**</span> 🎤 **学术参与：** *很高兴赴澳大利亚珀斯参加 IRSPM 2026 会议。* >> [**会议详情**]({{ '/zh/talks/2026-04-08-irspm-coproduction' | absolute_url }})
 
-<span style="color: #888888;">**[2026年7月]**</span> 🎤 **学术参与：** *在中国社会学会 2026 年会（西安交通大学）作两场报告：* >> [**单主体 vs. 多主体**]({{ '/talks/2026-07-10-mobilization-entities' | absolute_url }}) >> [**动员式捐赠与自愿捐赠**]({{ '/talks/2026-07-10-mobilized-giving' | absolute_url }})
+<span style="color: #888888;">**[2026年7月]**</span> 🎤 **学术参与：** *在中国社会学会 2026 年会（西安交通大学）作两场报告：* >> [**单主体 vs. 多主体**]({{ '/zh/talks/2026-07-10-mobilization-entities' | absolute_url }}) >> [**动员式捐赠与自愿捐赠**]({{ '/zh/talks/2026-07-10-mobilized-giving' | absolute_url }})
 
 <details markdown="1">
 <summary>显示更多</summary>
 
-<span style="color: #888888;">**[2024年12月]**</span> 📚 **受邀担任审稿人** AI 与公共事务教育类文章。获评 🌟 **"优秀审稿人"** 🌟。>> [**查看详情**](https://www.webofscience.com/wos/author/record/LTM-0273-2024)
+<span style="color: #888888;">**[2024年12月]**</span> 📚 **受邀担任审稿人** AI 与公共事务教育类文章。获评 🌟 **“优秀审稿人”** 🌟。>> [**查看详情**](https://www.webofscience.com/wos/author/record/LTM-0273-2024)
 
 <span style="color: #888888;">**[2024年11月]**</span> 🎉 **学术成果：** *我的研究论文获得学院表彰！* >> [**了解更多**](https://mp.weixin.qq.com/s/2TYL9l8GGay93hLLRQBzYw)
 
@@ -122,10 +118,9 @@ As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal gam
 
 <span style="color: #888888;">**[2023年12月]**</span> 🗨️ **学术沙龙：** *很高兴在学院社群内分享我的研究心得！* >> [**了解更多**](https://mp.weixin.qq.com/s/dn-2_kHyLDbNC0hQ042xEw)
 
-<span style="color: #888888;">**[2022年5月]**</span> 🎓 **我毕业啦！** *以最优等荣誉毕业，衷心感谢一路支持我的人！* 🌟👩‍🎓>> [**查看更多**]({{ '/news-2022.html' | absolute_url }})
+<span style="color: #888888;">**[2022年5月]**</span> 🎓 **我毕业啦！** *以最优等荣誉毕业，衷心感谢一路支持我的人！* 🌟👩‍🎓>> [**查看更多**]({{ '/zh/news-2022.html/' | absolute_url }})
 
 [查看全部动态 →]({{ '/year-archive/' | absolute_url }})
 
 </details>
-
 </div>
