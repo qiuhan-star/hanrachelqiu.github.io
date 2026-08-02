@@ -1,7 +1,7 @@
 ---
 title: "汹涌的浪潮：生成式人工智能时代高等教育中动态利益相关者参与的文献系统综述（GAI时代）"
 collection: talks
-type: "与杨佳熙共同参加《亚洲公共政策期刊》专刊作者工作坊"
+type: "与杨家西共同参加《亚洲公共政策期刊》专刊作者工作坊"
 permalink: /zh/talks/2023-12-01-stakeholder
 lang: zh-CN
 lang_alt: /talks/2023-12-01-stakeholder
