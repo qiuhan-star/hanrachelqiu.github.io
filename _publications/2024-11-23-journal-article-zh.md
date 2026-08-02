@@ -1,5 +1,5 @@
 ---
-title: "浪涌浪潮：生成式人工智能时代高等教育中动态利益相关者参与的文献系统综述"
+title: "汹涌的浪潮：生成式人工智能时代高等教育中动态利益相关者参与的系统文献综述"
 collection: publications
 category: journal articles
 permalink: /zh/publication/2024-11-23-journal-article
@@ -7,10 +7,10 @@ lang: zh-CN
 lang_alt: /publication/2024-11-23-journal-article
 excerpt: '人工智能正在如何重塑教育领域的角色与潜能？本文强调了教育者、学生、管理者、科技企业与政府的关键作用。'
 date: 2024-11-23
-venue: 'Journal of Asian Public Policy'
+venue: '亚洲公共政策期刊'
 viewpaperurl: 'https://doi.org/10.1080/17516234.2024.2429046'
 paperurl: "https://qiuhan-star.github.io/hanrachelqiu.github.io/files/paper1.pdf"
-citation: '杨佳熙, 邱涵*, 余文轩. 2024. 浪涌浪潮：生成式人工智能时代高等教育中动态利益相关者参与的文献系统综述. Journal of Asian Public Policy, 11月, 1–29. https://doi.org/10.1080/17516234.2024.2429046'
+citation: '杨佳熙, 邱涵*, 余文轩. 2024. 汹涌的浪潮：生成式人工智能时代高等教育中动态利益相关者参与的系统文献综述. 亚洲公共政策期刊, 11月, 1–29. https://doi.org/10.1080/17516234.2024.2429046'
 ---
 <div style="display: flex;">
   <div style="flex: 2; padding-right: 20px;">
