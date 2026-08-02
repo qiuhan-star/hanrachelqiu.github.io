@@ -41,6 +41,8 @@ lang_alt: /
 
 <span style="color: #888888;">**[2026年7月]**</span> 🎤 **学术参与：** *很高兴赴西安交通大学参加中国社会学会 2026 年会。* >> [**会议详情**]({{ '/zh/talks/2026-07-10-mobilization-entities' | absolute_url }})
 
+<span style="color: #888888;">**[2026年7月]**</span> 🎤 **学术参与：** *在同一会议上作《动员式捐赠与自愿捐赠》报告。* >> [**会议详情**]({{ '/zh/talks/2026-07-10-mobilized-giving' | absolute_url }})
+
 <details markdown="1">
 <summary>显示更多</summary>
 

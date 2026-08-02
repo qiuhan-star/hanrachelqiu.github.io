@@ -49,6 +49,8 @@ As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal gam
 
 <span style="color: #888888;">**[JUL. 2026]**</span> 🎤 **Academic Engagement:** *Delighted to present at the Chinese Sociological Association 2026 Annual Conference at Xi'an Jiaotong University.* >> [**Conference Details**]({{ '/talks/2026-07-10-mobilization-entities' | absolute_url }})
 
+<span style="color: #888888;">**[JUL. 2026]**</span> 🎤 **Academic Engagement:** *Presented "Mobilized Giving and Voluntary Donation" at the same conference.* >> [**Conference Details**]({{ '/talks/2026-07-10-mobilized-giving' | absolute_url }})
+
 <details markdown="1">
 <summary>Show more</summary>
 

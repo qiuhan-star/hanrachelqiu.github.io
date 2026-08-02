@@ -10,9 +10,12 @@
   }
 
   @include breakpoint($large) {
-    @include span(9 of 12 last);
-    @include prefix(0.5 of 12);
-    margin-right: 28px;
+    float: right;
+    // 与 .page 同步：恒定间距、永不重叠（见 _page.scss 注释）。
+    width: calc(100% - 294px);
+    margin-right: 0;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
   }
 
   a {
