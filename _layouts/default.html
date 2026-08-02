@@ -156,16 +156,8 @@ layout: compress
       /* 注：preloader 暗色样式已统一交给 --preloader-bg / --preloader-text / --preloader-muted token
          自动切换，不再需要 @media (prefers-color-scheme: dark) 或 body.dark .preloader 块。 */
 
-      /* 暗色模式开关：固定在顶栏右上方，始终位于开屏层之上 */
-      body > .theme-toggle {
-        position: fixed !important;
-        top: 16px;
-        right: 16px;
-        z-index: 2147483647;
-        margin: 0;
-        padding: 0;
-        pointer-events: auto !important;
-      }
+      /* 暗色模式开关：已移入顶栏 flex 行（见 _includes/masthead.html），随顶栏自动与语言下拉同高同右对齐，
+         不再固定钉在视口角落。外观 token 见下方 .theme-toggle 规则。 */
       /* 注：暗色 preloader 已统一交给 --preloader-bg / --preloader-text / --preloader-muted token 接管，
      此处不再写 body.dark .preloader 规则。 */
 
@@ -190,6 +182,10 @@ layout: compress
         padding: 4px 6px;
         border-radius: 8px;
         pointer-events: auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0.6rem;
         transition: transform 150ms ease, color 150ms ease;
       }
       .theme-toggle:active { transform: scale(0.86); }
