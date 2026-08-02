@@ -208,12 +208,13 @@ layout: compress
     </style>
 
     <script>
-      /* 首屏前计算主题，避免闪屏（system = 跟随系统） */
+      /* 首屏前计算主题，避免闪屏。默认暗色：首次访问（无 localStorage 偏好）直接开暗色，
+         切换按钮仍可切回 亮 / 跟随系统。 */
       (function () {
         var s = null;
         try { s = localStorage.getItem('theme'); } catch (e) { s = null; }
         var order = ['system', 'light', 'dark'];
-        if (order.indexOf(s) < 0) s = 'system';
+        if (order.indexOf(s) < 0) s = 'dark';
         var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         var theme = (s === 'system') ? (dark ? 'dark' : 'light') : s;
         document.documentElement.setAttribute('data-theme-setting', s);
