@@ -45,7 +45,9 @@ As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal gam
 
 <span style="color: #888888;">**[SEP. 2025]**</span> 🎓 **Started PhD at Zhejiang University** — Began doctoral studies in Public Administration.
 
-<span style="color: #888888;">**[JUL. 2026]**</span> 🎤 **Invited Talk:** *On Collective-Action Mobilization Entities.* >> [**Talk Details**]({{ '/talks/' | absolute_url }})
+<span style="color: #888888;">**[JUL. 2026]**</span> 🎤 **Academic Engagement:** *Delighted to visit Perth, Australia for academic exchange.* >> [**Conference Details**]({{ '/talks/' | absolute_url }})
+
+<span style="color: #888888;">**[JUL. 2026]**</span> 🎤 **Academic Engagement:** *Delighted to visit Xi'an Jiaotong University for academic exchange.* >> [**Visit Details**]({{ '/talks/' | absolute_url }})
 
 <details markdown="1">
 <summary>Show more</summary>
