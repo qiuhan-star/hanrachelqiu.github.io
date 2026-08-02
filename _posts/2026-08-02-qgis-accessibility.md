@@ -1,5 +1,6 @@
 ---
 title: "Method Notes #2: Measuring Public Service Accessibility with QGIS"
+excerpt: "A step-by-step walkthrough of measuring public-service accessibility with QGIS — a practical tool for public administration research."
 date: 2026-08-02 11:00:00
 tags:
   - Methods Notes

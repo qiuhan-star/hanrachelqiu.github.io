@@ -1,5 +1,6 @@
 ---
 title: "Method Notes #3: When ANOVA Is the Wrong Tool — From Variance Analysis to Mixed-Effects Models"
+excerpt: "When a plain ANOVA is the wrong choice, and how mixed-effects models fix it, with a public administration example."
 date: 2026-08-02 10:00:00
 tags:
   - Methods Notes
