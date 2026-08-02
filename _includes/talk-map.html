@@ -25,35 +25,20 @@
     background: #fff; font-size: 13px; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.25);
   }
   .talkmap-reset:hover { background: #f3f3f3; }
-  /* legend */
-  .talkmap-legend {
-    position: absolute; bottom: 10px; left: 10px; z-index: 1000;
-    background: rgba(255,255,255,0.92); border: 1px solid #ddd; border-radius: 6px;
-    padding: 6px 10px; font-size: 12px; line-height: 1.7;
-  }
-  .talkmap-legend .lg-dot {
-    display: inline-block; width: 10px; height: 10px; border-radius: 50%;
-    border: 2px solid #2a7f3e; background: #fff; margin-right: 5px; vertical-align: middle;
-  }
-  .talkmap-legend .lg-dot.award { border-color: #d4af37; background: #fff8e1; }
   @media (max-width: 600px) { #talkMap { height: 380px; } }
 </style>
 
 {% if page.lang == 'zh-CN' %}
 <h2>🗺️ 讲座地点地图</h2>
-<p class="archive__item-excerpt">标记点显示我去过的学校/地区，点击可查看具体学校、会议与演讲标题；金色标记为获奖演讲。</p>
+<p class="archive__item-excerpt">标记点显示我去过的学校/地区，点击可查看具体学校、会议与演讲标题。</p>
 {% else %}
 <h2>🗺️ Map of Talk Locations</h2>
-<p class="archive__item-excerpt">Markers show the schools/regions I have visited for talks. Click a marker for the venue, conference, and talk title; gold markers are award-winning talks.</p>
+<p class="archive__item-excerpt">Markers show the schools/regions I have visited for talks. Click a marker for the venue, conference, and talk title.</p>
 {% endif %}
 
 <div id="talkMapWrap">
   <div id="talkMap"></div>
   <button id="talkMapReset" class="talkmap-reset">{% if page.lang == 'zh-CN' %}⤢ 全览{% else %}⤢ Overview{% endif %}</button>
-  <div class="talkmap-legend">
-    <div><span class="lg-dot"></span>{% if page.lang == 'zh-CN' %}普通演讲{% else %}Regular talk{% endif %}</div>
-    <div><span class="lg-dot award"></span>{% if page.lang == 'zh-CN' %}获奖演讲{% else %}Award-winning{% endif %}</div>
-  </div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
