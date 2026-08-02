@@ -6,6 +6,7 @@ author_profile: true
 lang: zh-CN
 lang_alt: /portfolio/
 ---
+<div id="pf-content" style="display:none">
 <div class="announcement">
     📅 敬请期待
     <hr>
@@ -19,3 +20,6 @@ lang_alt: /portfolio/
 {% for post in portfolio_items %}
   {% include archive-single.html %}
 {% endfor %}
+</div>
+
+{% include portfolio-lock.html title="需要密码" desc="此作品集受密码保护。" btn="解锁" err="密码错误。" %}

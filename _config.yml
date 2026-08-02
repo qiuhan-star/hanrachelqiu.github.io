@@ -5,7 +5,7 @@ title_zh                 : "邱涵的个人主页"
 title_separator          : "-"
 name                     : &name "Rachel"
 description              : &description "PhD student in Public Administration at Zhejiang University, researching public & nonprofit management, government transparency and accountability, digital government, and collaborative governance."
-url                      : https://qiuhan-star.github.io/hanrachelqiu.github.io
+url: "https://qiuhan-star.github.io/hanrachelqiu.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "qiuhan-star/hanrachelqiu.github.io"
 

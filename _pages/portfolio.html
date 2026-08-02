@@ -5,6 +5,7 @@ permalink: /portfolio/
 lang_alt: /zh/portfolio/
 author_profile: true
 ---
+<div id="pf-content" style="display:none">
 <div class="announcement">
     📅 Coming Soon
     <hr>
@@ -18,3 +19,6 @@ author_profile: true
 {% for post in portfolio_items %}
   {% include archive-single.html %}
 {% endfor %}
+</div>
+
+{% include portfolio-lock.html title="Password Required" desc="This portfolio is password protected." btn="Unlock" err="Incorrect password." %}

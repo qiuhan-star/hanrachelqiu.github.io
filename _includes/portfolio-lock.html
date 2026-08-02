@@ -1,0 +1,43 @@
+<div id="pf-overlay" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--bg-base, #fafbfc);">
+  <div style="text-align:center;max-width:340px;padding:2.5em 2em;">
+    <div style="font-size:2.8em;line-height:1;margin-bottom:0.4em;">🔒</div>
+    <h2 style="margin:0 0 0.5em;font-size:1.4em;color:var(--text-base, #1a1d24);">{{ include.title | default: "Password Required" }}</h2>
+    <p style="margin:0 0 1.2em;color:var(--text-muted, #6b7280);">{{ include.desc | default: "This portfolio is password protected." }}</p>
+    <input id="pf-pwd" type="password" autocomplete="off" style="width:100%;box-sizing:border-box;padding:0.6em 0.8em;font-size:1em;border:1px solid var(--border-base, #d0d7de);border-radius:8px;background:var(--surface, #fff);color:var(--text-base, #1a1d24);margin-bottom:0.8em;" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" />
+    <button id="pf-go" style="width:100%;padding:0.6em 1em;font-size:1em;border:none;border-radius:8px;background:var(--accent, #5a7cd8);color:#fff;cursor:pointer;">{{ include.btn | default: "Unlock" }}</button>
+    <p id="pf-err" style="display:none;color:#c0392b;margin:0.8em 0 0;font-size:0.9em;">{{ include.err | default: "Incorrect password." }}</p>
+  </div>
+</div>
+<script>
+/* portfolio password gate: simple client-side lock, password hardcoded (static-site limitation) */
+(function(){
+  var KEY = "88888888";
+  var ov = document.getElementById("pf-overlay");
+  var ct = document.getElementById("pf-content");
+  var inp = document.getElementById("pf-pwd");
+  var btn = document.getElementById("pf-go");
+  var err = document.getElementById("pf-err");
+  function unlock(){
+    try{ sessionStorage.setItem("pf_unlocked", "1"); }catch(e){}
+    if(ov){ ov.style.display = "none"; }
+    if(ct){ ct.style.display = "block"; }
+  }
+  function check(){
+    if(inp && inp.value === KEY){
+      if(err){ err.style.display = "none"; }
+      unlock();
+    } else {
+      if(err){ err.style.display = "block"; }
+      if(inp){ inp.value = ""; inp.focus(); }
+    }
+  }
+  if(btn){ btn.addEventListener("click", check); }
+  if(inp){
+    inp.addEventListener("keydown", function(e){ if(e.key === "Enter"){ check(); } });
+    inp.focus();
+  }
+  try{
+    if(sessionStorage.getItem("pf_unlocked") === "1"){ unlock(); }
+  }catch(e){}
+})();
+</script>
