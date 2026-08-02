@@ -52,6 +52,8 @@ author:
   medium           :
   pinterest        : 
   soundcloud       : 
+  # 侧栏音乐控件（网易云外链，免费，无需账号）
+  netease_playlist_id: "3778678"   # 云音乐热歌榜；换成你自建歌单ID即可（见说明）
   steam            : 
   telegram         : 
   tumblr           : 
