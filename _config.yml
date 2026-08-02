@@ -1,6 +1,6 @@
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "Rachel's Personal Homepage"
+title                    : "邱涵的个人主页"
 title_separator          : "-"
 name                     : &name "Rachel"
 description              : &description "PhD student in Public Administration at Zhejiang University, researching public & nonprofit management, government transparency and accountability, digital government, and collaborative governance."

@@ -10,7 +10,7 @@ date: 2024-11-23
 venue: '亚洲公共政策期刊'
 viewpaperurl: 'https://doi.org/10.1080/17516234.2024.2429046'
 paperurl: "https://qiuhan-star.github.io/hanrachelqiu.github.io/files/paper1.pdf"
-citation: '杨佳熙, 邱涵*, 余文轩. 2024. 汹涌的浪潮：生成式人工智能时代高等教育中动态利益相关者参与的系统文献综述. 亚洲公共政策期刊, 11月, 1–29. https://doi.org/10.1080/17516234.2024.2429046'
+citation: 'Yang, Jiaxi, Han Qiu*, and Wenxuan Yu. 2024. Surging Currents: A Systematic Review of the Literature on Dynamic Stakeholder Engagements in Higher Education in the Generative Artificial Intelligence Era. *Journal of Asian Public Policy*, November, 1–29. https://doi.org/10.1080/17516234.2024.2429046'
 ---
 <div style="display: flex;">
   <div style="flex: 2; padding-right: 20px;">
