@@ -75,7 +75,10 @@
   body.dark a {
     color: #8ab4f8;
   }
-  body.dark .masthead,
+  body.dark .masthead {
+    background-color: #1d232e; /* 藏青蓝调导航条，暗色下更醒目 */
+    border-color: #3d5068;
+  }
   body.dark .sidebar,
   body.dark .page__footer {
     background-color: #1b1d21;
@@ -83,9 +86,14 @@
   }
   body.dark .author__name,
   body.dark .author__bio,
-  body.dark .page__footer,
-  body.dark .masthead__menu-item a {
+  body.dark .page__footer {
     color: #e6e6e6;
+  }
+  body.dark .masthead__menu-item a {
+    color: #e8ecf3;
+  }
+  body.dark .masthead__menu-item a:hover {
+    color: #7c9bff;
   }
   /* 暗色主题下页面正文与通用组件的配色 */
   body.dark .page__content,
@@ -118,7 +126,9 @@
     background-color: #23262b;
     color: #d0d3d8;
   }
-  body.dark .masthead,
+  body.dark .masthead {
+    border-bottom: 1px solid #3d5068;
+  }
   body.dark .page__footer {
     border-bottom: 1px solid #333;
   }
@@ -193,9 +203,9 @@
   .lang-dropdown__item:hover { background: #f2f5ff; color: #4f7cff; }
   .lang-dropdown__item.is-current { color: #4f7cff; font-weight: 700; background: #f2f5ff; }
   /* 暗色模式 */
-  body.dark .lang-dropdown > summary { background: #1b1d21; border-color: #3a3f47; color: #e6e6e6; }
+  body.dark .lang-dropdown > summary { background: #232a38; border-color: #3d5068; color: #e8ecf3; }
   body.dark .lang-dropdown > summary:hover { border-color: #7c9bff; color: #7c9bff; }
-  body.dark .lang-dropdown__menu { background: #1b1d21; border-color: #3a3f47; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5); }
+  body.dark .lang-dropdown__menu { background: #232a38; border-color: #3d5068; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5); }
   body.dark .lang-dropdown__item { color: #d0d3d8; }
   body.dark .lang-dropdown__item:hover { background: #262a31; color: #7c9bff; }
   body.dark .lang-dropdown__item.is-current { color: #7c9bff; background: #262a31; }
