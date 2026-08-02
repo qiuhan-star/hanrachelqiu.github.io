@@ -6,6 +6,11 @@ lang_alt: /zh/talks/
 author_profile: true
 ---
 
+<style>
+  .talks-summary { color: #5c6573; font-size: 0.95rem; margin: 0 0 1.2em; }
+  .talks-year-head { margin: 1.8em 0 0.7em; padding-bottom: 0.25em; border-bottom: 2px solid #e6e9ef; font-size: 1.25rem; }
+</style>
+
 {% if site.talkmap_link == true %}
 
 <p style="text-decoration:underline;"><a href="{{ '/talkmap.html' | absolute_url }}">See a map of all the places I've given a talk!</a></p>
@@ -13,8 +18,24 @@ author_profile: true
 {% endif %}
 
 {% assign talk_items = site.talks | where_exp: "item", "item.lang != 'zh-CN'" %}
-{% for post in talk_items reversed %}
+{% assign talk_years = talk_items | map: 'date' | sort %}
+{% assign min_y = talk_years.first | date: '%Y' %}
+{% assign max_y = talk_years.last | date: '%Y' %}
+
+<p class="talks-summary"><strong>{{ talk_items.size }}</strong> invited talks · {{ min_y }}–{{ max_y }}</p>
+
+{% assign sorted = talk_items | sort: 'date' | reverse %}
+{% assign current_year = '' %}
+{% for post in sorted %}
+  {% assign y = post.date | date: '%Y' %}
+  {% if y != current_year %}
+    {% unless forloop.first %}</div>{% endunless %}
+    <h2 class="talks-year-head">{{ y }}</h2>
+    <div class="talk-year-group">
+    {% assign current_year = y %}
+  {% endif %}
   {% include archive-single-talk.html %}
+  {% if forloop.last %}</div>{% endunless %}
 {% endfor %}
 
 {% include talk-map.html %}

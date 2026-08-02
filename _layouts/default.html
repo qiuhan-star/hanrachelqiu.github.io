@@ -403,6 +403,19 @@ layout: compress
 
       /* 顶栏背景强制走 token，覆盖编译主题写死的 background:white */
       .masthead { background-color: var(--masthead-bg) !important; }
+
+      /* 导航菜单容器(.greedy-nav)被主题写死 background:#fff，导致顶栏虽黑、
+         链接外仍套一层白框。透明化让它露出顶栏底色(暗=黑/亮=白)。 */
+      .greedy-nav { background: transparent !important; }
+      /* 溢出菜单(小屏/折叠)下拉也跟随 token，避免暗色下白底刺眼 */
+      .greedy-nav .hidden-links {
+        background: var(--bg-surface) !important;
+        border-color: var(--border-default) !important;
+      }
+      .greedy-nav .hidden-links a:hover {
+        color: var(--accent) !important;
+        background: var(--accent-soft) !important;
+      }
     </style>
   </head>
 
