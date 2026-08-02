@@ -43,104 +43,88 @@
 </div>
 
 <style>
-  /* 全局样式重置，确保所有元素的盒模型一致 */
-  * {
-    box-sizing: border-box;
+  /* 全局样式重置 */
+  * { box-sizing: border-box; }
+
+  /* ===== 主题色板由 token 集中管理（见 _layouts/default.html <head> 内 <style>） =====
+     这里只写 token 之外的结构/布局，亮暗配色由 var(--xxx) 自动适配。
+     因此：所有原本写在 body.dark 下的规则都已经不需要了——切换主题时，
+     变量值整体替换，下面的颜色自动跟着翻。 */
+
+  /* 正文链接：token 中定义，亮色深蓝 / 暗色链接蓝 */
+  body a { color: var(--link); }
+  body a:hover { color: var(--accent-hover); }
+
+  /* 顶栏：背景走 token，亮色白底 / 暗色纯黑自动切换 */
+  .masthead {
+    background: var(--masthead-bg);
+    border-bottom: 1px solid var(--masthead-border);
   }
 
-  /* 设置默认的背景颜色，以及背景颜色变化的过渡效果（字体沿用主题系统字体栈） */
-  body {
-    background-color: #fff;
-    transition: background-color 0.2s linear; /* 更改背景颜色时的过渡效果 */
+  /* 侧边栏：底色走 token；玻璃毛玻璃效果仅在暗色下生效（亮色用实色面板更稳重） */
+  .sidebar {
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--sidebar-border);
   }
-
-  /* 当启用暗色主题时的样式 */
-  body.dark {
-    background-color: #292c35; /* 暗色背景 */
-  }
-
-  /* 暗色主题下的h1/h2/h3和.support a链接的颜色 */
-  body.dark h1,
-  body.dark h2,
-  body.dark h3,
-  body.dark .support a {
-    color: #fff; /* 文字颜色变为白色 */
-  }
-
-  /* 暗色主题补充：正文、链接、导航、侧边栏与页脚 */
-  body.dark {
-    color: #d0d3d8;
-    color-scheme: dark;
-  }
-  body.dark a {
-    color: #8ab4f8;
-  }
-  /* 暗色顶栏：纯黑底，与白字形成高对比；实色黑无需毛玻璃 */
-  body.dark .masthead {
-    background: #000000;
-    border-bottom: 1px solid rgba(255,255,255,0.12);
-  }
-  /* 暗色侧边栏：改为与顶栏同材质的半透明深色面板 + 毛玻璃，去掉“实体墙”感
-     注意：宽屏下侧边栏是 position:fixed 的独立左栏，主内容在它右侧滚动、
-     不会从背后穿过，所以玻璃主要统一“面板材质语言”而非透出滚动内容 */
-  body.dark .sidebar {
-    background-color: rgba(27, 29, 33, 0.9);
+  :root[data-theme="dark"] .sidebar {
     backdrop-filter: blur(12px) saturate(1.3);
     -webkit-backdrop-filter: blur(12px) saturate(1.3);
-    border-right: 1px solid rgba(61,80,104,0.25);
-  }
-  body.dark .page__footer {
-    background-color: #1b1d21;
-    border-color: #333;
-  }
-  body.dark .author__name,
-  body.dark .author__bio,
-  body.dark .page__footer {
-    color: #e6e6e6;
-  }
-  body.dark .masthead__menu-item a {
-    color: #e8e8e8;   /* 暗色导航默认文字：近白（与参考站一致），清晰可读 */
-    font-weight: 600;
-  }
-  body.dark .masthead__menu-item a:hover {
-    color: #7c9bff;   /* 悬停变蓝，与早期版本一致 */
-  }
-  /* 暗色主题下页面正文与通用组件的配色 */
-  body.dark .page__content,
-  body.dark #main,
-  body.dark .page,
-  body.dark .archive,
-  body.dark .sidebar > * {
-    color: #d0d3d8;
-  }
-  body.dark .page__content h1,
-  body.dark .page__content h2,
-  body.dark .page__content h3,
-  body.dark .page__content h4 {
-    color: #ffffff;
-  }
-  body.dark hr,
-  body.dark .sidebar hr,
-  body.dark .page__content hr {
-    border-color: #333;
-  }
-  body.dark code,
-  body.dark pre {
-    background-color: #2b2e33;
-    color: #e6e6e6;
-  }
-  body.dark .notice,
-  body.dark .notice--info,
-  body.dark .notice--warning,
-  body.dark .notice--danger {
-    background-color: #23262b;
-    color: #d0d3d8;
-  }
-  body.dark .page__footer {
-    border-bottom: 1px solid #333;
   }
 
-  /* 把顶栏内包装改成 flex，让菜单占满中间、切换器顶在最右侧 */
+  /* 页脚 */
+  .page__footer {
+    background-color: var(--bg-base);
+    border-color: var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+  }
+
+  /* 作者名 / 简介 */
+  .author__name { color: var(--text-primary); }
+  .author__bio { color: var(--text-secondary); }
+
+  /* 导航菜单：默认走 token（亮色黑/暗色近白），悬停变主题强调色 */
+  .masthead__menu-item a {
+    color: var(--masthead-text);
+    font-weight: 600;
+  }
+  .masthead__menu-item a:hover {
+    color: var(--masthead-hover);
+  }
+
+  /* 正文与通用组件 */
+  .page__content,
+  #main,
+  .page,
+  .archive,
+  .sidebar > * {
+    color: var(--text-secondary);
+  }
+  .page__content h1,
+  .page__content h2,
+  .page__content h3,
+  .page__content h4 {
+    color: var(--text-primary);
+  }
+  hr,
+  .sidebar hr,
+  .page__content hr {
+    border-color: var(--border-subtle);
+  }
+  code,
+  pre {
+    background-color: var(--bg-code);
+    color: var(--text-primary);
+  }
+  .notice,
+  .notice--info,
+  .notice--warning,
+  .notice--danger {
+    background-color: var(--bg-raised);
+    color: var(--text-secondary);
+  }
+
+  /* ===== 布局：让菜单占满中间、切换器顶在最右侧 ===== */
   .masthead__inner-wrap {
     display: flex;
     justify-content: space-between;
@@ -152,7 +136,7 @@
     min-width: 0;
   }
 
-  /* 语言切换下拉框：点击展开选择框，便于以后扩展多语言（如韩语），并让出右上角固定的暗色开关 */
+  /* 语言切换下拉：让出右上角固定的暗色开关；面板配色全走 token，亮暗自动适配 */
   .masthead,
   .masthead__inner-wrap {
     overflow: visible;
@@ -173,15 +157,18 @@
     padding: 0.32rem 0.6rem;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #14161c;
-    background: transparent;
-    border: 1px solid #d7dbe0;
+    color: var(--masthead-text);
+    background: var(--masthead-bg);
+    border: 1px solid var(--masthead-border);
     border-radius: 6px;
     line-height: 1;
     user-select: none;
   }
   .lang-dropdown > summary::-webkit-details-marker { display: none; }
-  .lang-dropdown > summary:hover { border-color: #4f7cff; color: #4f7cff; }
+  .lang-dropdown > summary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
   .lang-dropdown__caret { font-size: 0.6rem; opacity: 0.7; }
   .lang-dropdown__menu {
     position: absolute;
@@ -191,10 +178,10 @@
     margin: 0;
     padding: 0.3rem 0;
     list-style: none;
-    background: #fff;
-    border: 1px solid #e3e6ea;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
     border-radius: 8px;
-    box-shadow: 0 10px 28px rgba(20, 22, 28, 0.14);
+    box-shadow: var(--shadow-md);
     z-index: 1200;
     display: none;
   }
@@ -203,25 +190,17 @@
     display: block;
     padding: 0.5rem 0.9rem;
     font-size: 0.82rem;
-    color: #2b2f36;
+    color: var(--text-primary);
     text-decoration: none;
     white-space: nowrap;
   }
-  .lang-dropdown__item:hover { background: #f2f5ff; color: #4f7cff; }
-  .lang-dropdown__item.is-current { color: #4f7cff; font-weight: 700; background: #f2f5ff; }
-  /* 暗色模式：语言切换器黑底白字，与顶栏纯黑底统一 */
-  body.dark .lang-dropdown > summary { 
-    background: #000000; 
-    border-color: rgba(255,255,255,0.18); 
-    color: #e8e8e8; 
+  .lang-dropdown__item:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
   }
-  body.dark .lang-dropdown > summary:hover { border-color: rgba(255,255,255,0.4); color: #ffffff; }
-  body.dark .lang-dropdown__menu { 
-    background: #000000;
-    border-color: rgba(255,255,255,0.18); 
-    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5); 
+  .lang-dropdown__item.is-current {
+    color: var(--accent);
+    font-weight: 700;
+    background: var(--accent-soft);
   }
-  body.dark .lang-dropdown__item { color: #e8e8e8; }
-  body.dark .lang-dropdown__item:hover { background: rgba(255,255,255,0.08); color: #ffffff; }
-  body.dark .lang-dropdown__item.is-current { color: #ffffff; background: rgba(255,255,255,0.08); }
 </style>
