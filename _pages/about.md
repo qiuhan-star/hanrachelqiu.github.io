@@ -43,8 +43,6 @@ As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal gam
 <!-- 在此处添加你 2025–2026 的新动态（复制下面格式，去掉注释符号即可）： -->
 <!-- <span style="color: #888888;">**[MON. YEAR]**</span> 📌 **标题** >> [**View**](链接) -->
 
-<span style="color: #888888;">**[SEP. 2025]**</span> 🎓 **Started PhD at Zhejiang University** — Began doctoral studies in Public Administration.
-
 <span style="color: #888888;">**[APR. 2026]**</span> 🎤 **Academic Engagement:** *Delighted to present at the IRSPM 2026 Conference in Perth, Australia.* >> [**Conference Details**]({{ '/talks/2026-04-08-irspm-coproduction' | absolute_url }})
 
 <span style="color: #888888;">**[JUL. 2026]**</span> 🎤 **Academic Engagement:** *Delighted to present at the Chinese Sociological Association 2026 Annual Conference at Xi'an Jiaotong University.* >> [**Conference Details**]({{ '/talks/2026-07-10-mobilization-entities' | absolute_url }})
