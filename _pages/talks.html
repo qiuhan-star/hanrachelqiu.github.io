@@ -24,13 +24,26 @@ author_profile: true
 
 <p class="talks-summary"><strong>{{ talk_items.size }}</strong> invited talks · {{ min_y }}–{{ max_y }}</p>
 
+<nav class="talks-yearnav" aria-label="Jump to year">
+  {% assign _years = talk_items | map: 'date' | sort | reverse %}
+  {% assign _seen = '' %}
+  {% for _d in _years %}
+    {% assign _y = _d | date: '%Y' %}
+    {% unless _seen contains _y %}
+      <a href="#year-{{ _y }}">{{ _y }}</a>
+      {% assign _seen = _seen | append: _y | append: '|' %}
+    {% endunless %}
+  {% endfor %}
+  <a href="#talkMap">🗺 Map</a>
+</nav>
+
 {% assign sorted = talk_items | sort: 'date' | reverse %}
 {% assign current_year = '' %}
 {% for post in sorted %}
   {% assign y = post.date | date: '%Y' %}
   {% if y != current_year %}
     {% if forloop.index0 > 0 %}</div>{% endif %}
-    <h2 class="talks-year-head">{{ y }}</h2>
+    <h2 class="talks-year-head" id="year-{{ y }}">{{ y }}</h2>
     <div class="talk-year-group">
     {% assign current_year = y %}
   {% endif %}

@@ -457,6 +457,47 @@ layout: compress
         color: var(--accent) !important;
         background: var(--accent-soft) !important;
       }
+
+      /* 演讲页：吸顶年份导航条（2026-08-02 新增，token 自动亮/暗） */
+      html { scroll-behavior: smooth; }
+      .talks-yearnav {
+        position: sticky;
+        top: 70px; /* 顶栏固定高度 70px，导航吸在其正下方 */
+        z-index: 15;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 12px 4px;
+        margin: 6px 0 18px;
+        background: var(--bg-base);
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .talks-yearnav a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--border-default);
+        background: var(--bg-surface);
+        color: var(--text-primary);
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all .18s ease;
+      }
+      .talks-yearnav a:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .talks-yearnav a.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      /* 年份锚点 / 地图：为固定顶栏(70) + 吸顶导航(~50) 预留滚动余量 */
+      .talks-year-head { scroll-margin-top: 130px; }
+      #talkMap { scroll-margin-top: 130px; }
     </style>
   </head>
 
@@ -681,6 +722,42 @@ layout: compress
             if (getSetting() === 'system') apply('system', true);
           });
         }
+      })();
+    </script>
+
+    <script>
+      /* 演讲页年份导航：滚动高亮当前年（scrollspy）。平滑滚动由全局 scroll-behavior 提供。
+         仅当页面存在 .talks-yearnav 时才生效，其它页面直接跳过。 */
+      (function () {
+        var nav = document.querySelector('.talks-yearnav');
+        if (!nav) return;
+        var links = Array.prototype.slice.call(nav.querySelectorAll('a'));
+        function setActive(id) {
+          links.forEach(function (a) {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+          });
+        }
+        if ('IntersectionObserver' in window) {
+          var obs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) setActive(e.target.id);
+            });
+          }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+          links.forEach(function (a) {
+            var href = a.getAttribute('href');
+            if (href && href.charAt(0) === '#') {
+              var sec = document.getElementById(href.slice(1));
+              if (sec) obs.observe(sec);
+            }
+          });
+        }
+        /* 点击立即高亮，避免平滑滚动期间的视觉延迟 */
+        links.forEach(function (a) {
+          a.addEventListener('click', function () {
+            var href = a.getAttribute('href');
+            if (href && href.charAt(0) === '#') setActive(href.slice(1));
+          });
+        });
       })();
     </script>
 

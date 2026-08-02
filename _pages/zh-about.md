@@ -15,7 +15,7 @@ lang_alt: /
 
 2022 年获[亚利桑那州立大学](https://www.asu.edu/)公共服务与公共政策理学学士与[海南大学](https://www.hainanu.edu.cn/)行政管理文学学士；海南大学期间师从[林海英教授](https://haitc.hainanu.edu.cn/cslm/jzyg/szdw/xzgl.htm)。
 
-我的研究兴趣包括公共与非营利组织管理、数字治理、政府透明度、共同生产以及环境治理。[**了解更多**](https://qiuhan-star.github.io/hanrachelqiu.github.io/portfolio/)
+我的研究兴趣包括公共与非营利组织管理、数字治理、政府透明度、共同生产以及环境治理。[**了解更多**]({{ '/portfolio/' | absolute_url }})
 
 欢迎对上述研究感兴趣，或希望开展学术交流、探讨合作可能的同仁与我联系（邮箱：rachel.hanqiu@gmail.com）。
 
