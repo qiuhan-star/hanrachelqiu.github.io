@@ -108,14 +108,14 @@
         <li>&nbsp;</li> <!-- 添加一个空的列表项来创建空格 -->
         <li>&nbsp;</li> <!-- 添加一个空的列表项来创建空格 -->
         <li>&nbsp;</li> <!-- 添加一个空的列表项来创建空格 -->
-        <li><a href="#weixin-qrcode" class="weixin-qrcode-link bold-text" onclick="document.getElementById('weixin-qrcode-modal').style.display='block'"><i class="fab fa-weixin"></i> WeChat</a></li>
+        <li><a href="#weixin-qrcode" class="weixin-qrcode-link bold-text" onclick="document.getElementById('weixin-qrcode-modal').style.display='block'"><i class="fab fa-weixin"></i> {% if page.lang == 'zh-CN' %}微信{% else %}WeChat{% endif %}</a></li>
       </ul>
     </div>
       <div id="weixin-qrcode-modal" class="modal">
         <div class="modal-content">
           <span class="close" onclick="document.getElementById('weixin-qrcode-modal').style.display='none'">&times;</span>
-          <p>Scan WeChat QR Code</p>
-          <img src="{{ '/images/wechat.PNG' | absolute_url }}" alt="WeChat: pyqh88888888" class="img-fluid">
+          <p>{% if page.lang == 'zh-CN' %}扫描微信二维码{% else %}Scan WeChat QR Code{% endif %}</p>
+          <img src="{{ '/images/wechat.PNG' | absolute_url }}" alt="{% if page.lang == 'zh-CN' %}微信：pyqh88888888{% else %}WeChat: pyqh88888888{% endif %}" class="img-fluid">
         </div>
       </div>
 
