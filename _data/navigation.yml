@@ -26,8 +26,8 @@ main:
   - title: "Blog Posts"
     url: /year-archive/
 
-  - title: "Methods"
-    url: /methods/
+  - title: "Method Notes"
+    url: /method-notes/
 
   - title: "PhD Simulator"
     url: /game-details.html
@@ -53,7 +53,7 @@ zh-CN:
     url: /zh/markdown/
   - title: "博客"
     url: /zh/year-archive/
-  - title: "方法"
-    url: /zh/methods/
+  - title: "方法笔记"
+    url: /zh/method-notes/
   - title: "PhD 模拟器"
     url: /zh/game-details.html/
