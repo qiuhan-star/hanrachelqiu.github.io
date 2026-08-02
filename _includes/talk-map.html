@@ -50,12 +50,17 @@ for (var i = 0; i < talksData.length; i++) {
   byVenue[t.venue].items.push(t);
 }
 
-var map = L.map('talkMap').setView([20, 75], 2);
+var map = L.map('talkMap').setView([30, 114], 4);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 18,
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
+/* collect marker positions. Frame the default view on the core East-Asia
+   cluster (China / Hong Kong / Taiwan) where most talks are, so Hong Kong's
+   two campuses clearly sit inside Hong Kong when the map opens. Perth is
+   still plotted and reachable by zooming out. */
+var coreLatLngs = [];
 for (var venue in byVenue) {
   var v = byVenue[venue];
   var html = '<div class="talkmap-pop"><h4>' + venue + '</h4><p class="meta">' + v.city + '</p><ul>';
@@ -71,5 +76,14 @@ for (var venue in byVenue) {
   }
   html += '</ul></div>';
   L.marker([v.lat, v.lng]).addTo(map).bindPopup(html);
+  if (v.city.indexOf('Perth') === -1) { coreLatLngs.push([v.lat, v.lng]); }
 }
+
+/* fit to the core cluster once layout is ready (size must be known) */
+setTimeout(function() {
+  map.invalidateSize();
+  if (coreLatLngs.length) {
+    map.fitBounds(coreLatLngs, { padding: [50, 50], maxZoom: 5 });
+  }
+}, 100);
 </script>
