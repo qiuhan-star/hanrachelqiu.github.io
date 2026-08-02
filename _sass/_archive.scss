@@ -12,6 +12,7 @@
   @include breakpoint($large) {
     @include span(9 of 12 last);
     @include prefix(0.5 of 12);
+    margin-right: 28px;
   }
 
   a {

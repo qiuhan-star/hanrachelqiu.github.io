@@ -27,7 +27,7 @@ lang_alt: /
 
 🌟 有趣的分享 🌟
 ======
-在考虑是否读博时，我偶然发现了一款很有意思的游戏——[**博士模拟器**](https://research.wmz.ninja/projects/phd/index.html)！我很想把它推荐给更多人。想了解背后的细节，欢迎[**阅读完整故事**](https://qiuhan-star.github.io/hanrachelqiu.github.io/game-details.html)。
+在考虑是否读博时，我偶然发现了一款很有意思的游戏——[**博士模拟器**](https://research.wmz.ninja/projects/phd/index.html)！我很想把它推荐给更多人。想了解背后的细节，欢迎[**阅读完整故事**]({{ '/game-details.html' | absolute_url }})。
 <br><br>
 
 🔥 最新动态
@@ -35,18 +35,27 @@ lang_alt: /
 <!-- 在此处添加你 2025–2026 的新动态（复制下面格式，去掉注释符号即可）： -->
 <!-- <span style="color: #888888;">**[月. 年]**</span> 📌 **标题** >> [**查看**](链接) -->
 
+<span style="color: #888888;">**[2025年9月]**</span> 🎓 **进入浙江大学攻读博士** —— 师从吴中盛教授，开启行政管理专业博士阶段的学习。
+
+<span style="color: #888888;">**[2026年7月]**</span> 🎤 **受邀讲座：** *关于集体行动动员主体。* >> [**讲座详情**]({{ '/talks/' | absolute_url }})
+
+<details markdown="1">
+<summary>显示更多</summary>
+
 <span style="color: #888888;">**[2024年12月]**</span> 📚 **受邀担任审稿人** AI 与公共事务教育类文章。获评 🌟 **“优秀审稿人”** 🌟。>> [**查看详情**](https://www.webofscience.com/wos/author/record/LTM-0273-2024)
 
 <span style="color: #888888;">**[2024年11月]**</span> 🎉 **学术成果：** *我的研究论文获得学院表彰！* >> [**了解更多**](https://mp.weixin.qq.com/s/2TYL9l8GGay93hLLRQBzYw)
 
-<span style="color: #888888;">**[2024年5月]**</span> 🎤 **学术参与：** *很高兴参加在香港中文大学举办的第二十届海峡两岸及港澳公共管理学术研讨会。* >> [**会议详情**](https://qiuhan-star.github.io/hanrachelqiu.github.io/talks/2024-05-09-just-transition)
+<span style="color: #888888;">**[2024年5月]**</span> 🎤 **学术参与：** *很高兴参加在香港中文大学举办的第二十届海峡两岸及港澳公共管理学术研讨会。* >> [**会议详情**]({{ '/talks/2024-05-09-just-transition' | absolute_url }})
 
-<span style="color: #888888;">**[2024年4月]**</span> 🎤 **学术参与：** *很高兴参加在北京清华大学举办的国际比较公共政策会议。* >> [**会议详情**](https://qiuhan-star.github.io/hanrachelqiu.github.io/talks/2024-04-19-just-transition)
+<span style="color: #888888;">**[2024年4月]**</span> 🎤 **学术参与：** *很高兴参加在北京清华大学举办的国际比较公共政策会议。* >> [**会议详情**]({{ '/talks/2024-04-19-just-transition' | absolute_url }})
 
-<span style="color: #888888;">**[2023年12月]**</span> 🚀 **学术里程碑：** *在香港科技大学国际学术会议首秀，并登上学院播报！* >> [**会议详情**](https://qiuhan-star.github.io/hanrachelqiu.github.io/talks/2023-12-01-agile-governance) >> [**了解更多**](https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg)
+<span style="color: #888888;">**[2023年12月]**</span> 🚀 **学术里程碑：** *在香港科技大学国际学术会议首秀，并登上学院播报！* >> [**会议详情**]({{ '/talks/2023-12-01-agile-governance' | absolute_url }}) >> [**了解更多**](https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg)
 
 <span style="color: #888888;">**[2023年12月]**</span> 🗨️ **学术沙龙：** *很高兴在学院社群内分享我的研究心得！* >> [**了解更多**](https://mp.weixin.qq.com/s/dn-2_kHyLDbNC0hQ042xEw)
 
 <span style="color: #888888;">**[2022年5月]**</span> 🎓 **我毕业啦！** *以最优等荣誉毕业，衷心感谢一路支持我的人！* 🌟👩‍🎓>> [**查看更多**]({{ '/zh/news-2022.html/' | absolute_url }})
 
-[显示更多 →](/year-archive/)
+[查看全部动态 →]({{ '/year-archive/' | absolute_url }})
+
+</details>
