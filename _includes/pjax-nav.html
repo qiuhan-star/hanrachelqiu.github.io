@@ -70,12 +70,15 @@
     var oldMain = document.querySelector(MAIN);
     if (!newMain || !oldMain) return false;
 
-    var liveSidebar = oldMain.querySelector(SIDEBAR); /* 关键：复用现存节点，iframe 继续播放 */
+    var liveSidebar = oldMain.querySelector(SIDEBAR); /* 关键：保留现存节点，iframe 全程不脱离文档，播放不中断 */
     var newSidebar = newMain.querySelector(SIDEBAR);
     if (newSidebar && newSidebar.parentNode) newSidebar.parentNode.removeChild(newSidebar);
 
-    while (oldMain.firstChild) oldMain.removeChild(oldMain.firstChild);
-    if (liveSidebar) oldMain.appendChild(liveSidebar);
+    /* 只移除正文子节点，绝不 detach 侧栏(含音乐 iframe)，避免 iframe 因脱离文档被某些浏览器重载 */
+    var kids = Array.prototype.slice.call(oldMain.childNodes);
+    kids.forEach(function (k) {
+      if (k !== liveSidebar && k.parentNode === oldMain) oldMain.removeChild(k);
+    });
     while (newMain.firstChild) oldMain.appendChild(newMain.firstChild);
 
     rerunScripts(oldMain);
