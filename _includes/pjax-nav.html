@@ -104,14 +104,11 @@
     if (!isPjaxable(a)) return;
     e.preventDefault();
     var url = a.href;
-    console.log('[pjax] click url=' + url);
     fetch(url, { credentials: 'same-origin' })
       .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.text(); })
       .then(function (html) {
         var doc = new DOMParser().parseFromString(html, 'text/html');
-        var ok = swapMain(doc, url);
-        console.log('[pjax] swap ok=' + ok + ' url=' + url);
-        if (!ok) window.location.href = url; /* 拿不到 #main → 整页兜底 */
+        if (!swapMain(doc, url)) window.location.href = url; /* 拿不到 #main → 整页兜底 */
       })
       .catch(function () { window.location.href = url; }); /* 失败 → 整页兜底 */
   });
