@@ -319,7 +319,8 @@ layout: compress
         var preloader = document.getElementById('preloader');
         if (!preloader) return;
 
-        /* 标记站内跳转：点击站内链接时写标记，用以在下一页跳过开屏动画。
+        /* 标记站内跳转：点击任意同域站内链接时写标记，用以在下一页跳过开屏动画。
+           这样「点标题回首页」与「点 Publications 等」行为一致——都不重播。
            刷新(F5/cmd+R)、首次访问、直输网址、站外进入都不会设置此标记，因此会正常播放。
            （刻意不用 referrer / Navigation Timing 判定——它们在本站点会误判刷新为"站内跳转"） */
         document.addEventListener('click', function (e) {
@@ -329,8 +330,12 @@ layout: compress
           if (href.charAt(0) === '#' || a.target === '_blank' || a.hasAttribute('download')) return;
           try {
             var url = new URL(a.href, location.href);
-            if (url.origin === location.origin && url.pathname !== location.pathname) {
+            if (url.origin === location.origin) {
               sessionStorage.setItem('hq-internal-nav', '1');
+              /* 若这次点击没有真正跨文档导航（同页锚点 / 被拦截），1s 后自动清除，避免污染后续刷新 */
+              setTimeout(function () {
+                try { sessionStorage.removeItem('hq-internal-nav'); } catch (err) {}
+              }, 1000);
             }
           } catch (err) {}
         });
