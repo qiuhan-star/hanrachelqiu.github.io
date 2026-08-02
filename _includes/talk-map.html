@@ -71,6 +71,16 @@ var shortNames = {
   "Chinese University of Hong Kong": { zh: "港中文", en: "CUHK" }
 };
 
+/* vertical offset (iconAnchor y) for venues that sit very close together, so
+   their permanent-name pins don't overlap at the zoomed-out default view that
+   also frames Perth/Australia. Only HKUST and CUHK need this: they are ~10km
+   apart in Hong Kong, invisible at world-zoom without an offset. The popup
+   still opens at the true latlng; the offset only moves the visible pin. */
+var pinOffset = {
+  "HKUST": [35, 40],
+  "Chinese University of Hong Kong": [35, -18]
+};
+
 /* page language flag injected from Liquid: true on Chinese pages, false on English */
 var isZh = {% if page.lang == 'zh-CN' %}true{% else %}false{% endif %};
 
@@ -120,11 +130,12 @@ for (var venue in byVenue) {
   }
   html += '<p class="talkmap-ov"><a href="#" onclick="talkMapOverview(); return false;">' + (isZh ? '⤢ 回到全览' : '⤢ Overview') + '</a></p>';
   html += '</ul></div>';
+  var anchor = pinOffset[venue] ? pinOffset[venue] : [35, 11];
   var icon = L.divIcon({
     className: 'talkmap-divicon',
     html: '<span class="talkmap-pin' + (v.award ? ' award' : '') + '">' + escapeHtml(short) + '</span>',
     iconSize: [70, 22],
-    iconAnchor: [35, 11]
+    iconAnchor: anchor
   });
   var marker = L.marker([v.lat, v.lng], { icon: icon }).addTo(map).bindPopup(html);
   /* clicking a marker smoothly flies to it for a closer look */
