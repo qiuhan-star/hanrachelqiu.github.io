@@ -72,7 +72,7 @@ redirect_from:
 <button class="collapsible">演讲报告</button>
 <div class="content">
   <!-- 演讲内容 -->
-  <ul>{% for post in site.talks reversed %}
+  <ul>{% assign cv_talks_zh = site.talks | where_exp: "post", "post.lang == 'zh-CN'" %}{% for post in cv_talks_zh reversed %}
     {% include archive-single-talk-cv.html  %}
   {% endfor %}</ul>
 </div>

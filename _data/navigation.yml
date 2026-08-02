@@ -30,8 +30,6 @@ main:
     url: /game-details.html
 
 zh-CN:
-  - title: "关于"
-    url: /zh/
   - title: "出版物"
     url: /zh/publications/
   - title: "演讲"
