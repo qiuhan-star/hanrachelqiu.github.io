@@ -6,8 +6,8 @@ permalink: /zh/protfolio/protfolio-3
 lang: zh-CN
 lang_alt: /protfolio/protfolio-3
 ---
-<img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/portfolio/Career Goals and Planning-1.jpg">
-<img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/portfolio/Career Goals and Planning-2.jpg">
+<img src="{{ site.url }}/images/portfolio/Career Goals and Planning-1.jpg">
+<img src="{{ site.url }}/images/portfolio/Career Goals and Planning-2.jpg">
 
 <br>
 <br>

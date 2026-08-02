@@ -49,16 +49,16 @@ location: "中国香港"
 定格精彩瞬间！📸
 <div id="homeCarousel">
   <div id="homeCarouselWrap">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-05-09-1.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-05-09-2.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-05-09-3.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-05-09-4.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-05-09-5.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-05-09-6.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-05-09-7.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-05-09-8.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-05-09-9.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-05-09-10.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-05-09-1.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-05-09-2.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-05-09-3.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-05-09-4.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-05-09-5.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-05-09-6.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-05-09-7.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-05-09-8.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-05-09-9.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-05-09-10.JPG">
   </div>
 </div>
 <div id="modal">

@@ -5,7 +5,7 @@ collection: portfolio
 permalink: /protfolio/protfolio-1
 lang_alt: /zh/protfolio/protfolio-1
 ---
-<img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/portfolio/My Research Interests.jpg">
+<img src="{{ site.url }}/images/portfolio/My Research Interests.jpg">
 
 <br>
 <br>

@@ -34,8 +34,7 @@ var talksData = [
   { city: "Shenyang, China", lat: 41.8057, lng: 123.4315, title: "Agile Governance for the Win: Adapting Higher Education to Generative Artificial Intelligence", venue: "Shenyang Normal University", conf: "Fucai Cup Digital Era Public Governance Innovation Academic Forum", date: "2023-12-03", award: "Outstanding Research Paper Award" },
   { city: "Shenyang, China", lat: 41.8057, lng: 123.4315, title: "Surging Currents: A Systematic Review of the Literature on Dynamic Stakeholder Engagements in Higher Education in the GAI Era", venue: "Shenyang Normal University", conf: "Fucai Cup Digital Era Public Governance Innovation Academic Forum", date: "2023-12-03", award: "Outstanding Research Paper Award" },
   { city: "Beijing, China", lat: 40.0007, lng: 116.3263, title: "Towards a Just Transition Future: A Quantitative Comparative Analysis of 30 Sub-national Governments in China (2010-2020)", venue: "Tsinghua University", conf: "International Conference on Comparative Public Policy", date: "2024-04-19" },
-  { city: "Hong Kong, China", lat: 22.4197, lng: 114.2070, title: "Pathways to a Just Transition: Evidence from 30 Sub-national Governments in China", venue: "Chinese University of Hong Kong", conf: "20th Cross-Strait and Hong Kong-Macao Public Administration Academic Seminar", date: "2024-05-09" },
-  { city: "Taiwan, China", lat: 25.0173, lng: 121.5400, title: "On-chain City Governance: How Can Blockchain in China Achieve Empowerment?", venue: "National Taiwan University", conf: "dg.o 2024 (Digital Government Research)", date: "2024-06-11" }
+  { city: "Hong Kong, China", lat: 22.4197, lng: 114.2070, title: "Pathways to a Just Transition: Evidence from 30 Sub-national Governments in China", venue: "Chinese University of Hong Kong", conf: "20th Cross-Strait and Hong Kong-Macao Public Administration Academic Seminar", date: "2024-05-09" }
 ];
 
 /* page language flag injected from Liquid: true on Chinese pages, false on English */
@@ -56,11 +55,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-/* collect marker positions. Frame the default view on the core East-Asia
-   cluster (China / Hong Kong / Taiwan) where most talks are, so Hong Kong's
-   two campuses clearly sit inside Hong Kong when the map opens. Perth is
-   still plotted and reachable by zooming out. */
-var coreLatLngs = [];
+/* collect marker positions for ALL venues (including Perth/Australia) so the
+   default view frames the entire span — China / Hong Kong and Australia — with
+   everything correctly placed. Hong Kong's two campuses sit inside Hong Kong. */
+var allLatLngs = [];
 for (var venue in byVenue) {
   var v = byVenue[venue];
   var html = '<div class="talkmap-pop"><h4>' + venue + '</h4><p class="meta">' + v.city + '</p><ul>';
@@ -76,14 +74,15 @@ for (var venue in byVenue) {
   }
   html += '</ul></div>';
   L.marker([v.lat, v.lng]).addTo(map).bindPopup(html);
-  if (v.city.indexOf('Perth') === -1) { coreLatLngs.push([v.lat, v.lng]); }
+  allLatLngs.push([v.lat, v.lng]);
 }
 
-/* fit to the core cluster once layout is ready (size must be known) */
+/* fit to ALL talk venues once layout is ready (size must be known), so the
+   default view frames the whole span (China/Hong Kong + Australia) */
 setTimeout(function() {
   map.invalidateSize();
-  if (coreLatLngs.length) {
-    map.fitBounds(coreLatLngs, { padding: [50, 50], maxZoom: 5 });
+  if (allLatLngs.length) {
+    map.fitBounds(allLatLngs, { padding: [50, 50], maxZoom: 5 });
   }
 }, 100);
 </script>

@@ -54,13 +54,13 @@ location: "中国北京"
 定格精彩瞬间！📸
 <div id="homeCarousel">
   <div id="homeCarouselWrap">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-04-19-1.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-04-19-2.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-04-19-3.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-04-19-4.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-04-19-5.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-04-19-6.JPG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-04-19-7.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-04-19-1.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-04-19-2.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-04-19-3.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-04-19-4.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-04-19-5.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-04-19-6.JPG">
+    <img src="{{ site.url }}/images/talks/Talk-2024-04-19-7.JPG">
   </div>
 </div>
 <div id="modal">
