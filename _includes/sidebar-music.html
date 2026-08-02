@@ -1,0 +1,36 @@
+{% comment %} 侧栏音乐控件：网易云外链播放器（免费·自带播放/暂停·不自动播放）{% endcomment %}
+<style>
+  .sidebar-music{margin-top:18px;padding-top:14px;border-top:1px dashed var(--border,#e3e6ea)}
+  .sidebar-music__title{margin:0 0 8px;font-size:13px;font-weight:600;color:var(--text-primary,#1a1d24);display:flex;align-items:center;gap:6px}
+  .sidebar-music__title span{color:var(--accent,#5a7cd8)}
+  .sidebar-music__player{border-radius:8px;display:block}
+  .sidebar-music__recs{margin-top:8px;font-size:12px;color:var(--text-muted,#6b7280)}
+  .sidebar-music__recs summary{cursor:pointer;color:var(--text-secondary,#3a3f4a);user-select:none}
+  .sidebar-music__recs ul{list-style:none;padding:6px 0 0;margin:0}
+  .sidebar-music__recs li{padding:3px 0}
+  .sidebar-music__recs a{color:var(--text-secondary,#3a3f4a);text-decoration:none}
+  .sidebar-music__recs a:hover{color:var(--accent,#5a7cd8)}
+</style>
+
+<div class="sidebar-music">
+  <h4 class="sidebar-music__title"><span aria-hidden="true">♪</span> 音乐 / Music</h4>
+  <iframe class="sidebar-music__player"
+    src="https://music.163.com/outchain/player?type=0&id={{ site.netease_playlist_id | default: '3778678' }}&auto=0&height=90"
+    frameborder="0" width="100%" height="90" loading="lazy"
+    title="NetEase music player"></iframe>
+  <details class="sidebar-music__recs">
+    <summary>💡 站长推荐 10 首</summary>
+    <ul>
+      <li><a href="https://music.163.com/#/search/m/?s={{ "晴天 周杰伦" | url_encode }}" target="_blank" rel="noopener">晴天 – 周杰伦</a></li>
+      <li><a href="https://music.163.com/#/search/m/?s={{ "稻香 周杰伦" | url_encode }}" target="_blank" rel="noopener">稻香 – 周杰伦</a></li>
+      <li><a href="https://music.163.com/#/search/m/?s={{ "夜空中最亮的星 逃跑计划" | url_encode }}" target="_blank" rel="noopener">夜空中最亮的星 – 逃跑计划</a></li>
+      <li><a href="https://music.163.com/#/search/m/?s={{ "平凡之路 朴树" | url_encode }}" target="_blank" rel="noopener">平凡之路 – 朴树</a></li>
+      <li><a href="https://music.163.com/#/search/m/?s={{ "River Flows in You Yiruma" | url_encode }}" target="_blank" rel="noopener">River Flows in You – Yiruma</a></li>
+      <li><a href="https://music.163.com/#/search/m/?s={{ "Comptine d'un autre été Yann Tiersen" | url_encode }}" target="_blank" rel="noopener">Comptine d'un autre été – Yann Tiersen</a></li>
+      <li><a href="https://music.163.com/#/search/m/?s={{ "起风了 买辣椒也用券" | url_encode }}" target="_blank" rel="noopener">起风了 – 买辣椒也用券</a></li>
+      <li><a href="https://music.163.com/#/search/m/?s={{ "海阔天空 Beyond" | url_encode }}" target="_blank" rel="noopener">海阔天空 – Beyond</a></li>
+      <li><a href="https://music.163.com/#/search/m/?s={{ "Weightless Marconi Union" | url_encode }}" target="_blank" rel="noopener">Weightless – Marconi Union</a></li>
+      <li><a href="https://music.163.com/#/search/m/?s={{ "成都 赵雷" | url_encode }}" target="_blank" rel="noopener">成都 – 赵雷</a></li>
+    </ul>
+  </details>
+</div>
