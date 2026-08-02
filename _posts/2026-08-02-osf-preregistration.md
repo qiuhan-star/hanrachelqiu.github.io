@@ -2,9 +2,6 @@
 title: "Method Notes #1: What I Actually Preregister on OSF"
 date: 2026-08-02 12:00:00
 tags:
-  - 方法笔记
-  - 开放科学
-  - 预注册
   - Methods Notes
   - Preregistration
 ---

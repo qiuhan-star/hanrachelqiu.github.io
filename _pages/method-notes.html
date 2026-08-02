@@ -11,7 +11,7 @@ redirect_from:
 A running series of practical, public-administration–anchored method notes — preregistration, spatial analysis, statistics, and whatever I am learning next. Each post is bilingual, line by line (English then 中文).
 
 {% include base_path %}
-{% assign method_posts = site.posts | where_exp: "p", "p.tags contains '方法笔记'" %}
+{% assign method_posts = site.posts | where_exp: "p", "p.tags contains 'Methods Notes'" %}
 {% for post in method_posts %}
   {% include archive-single.html %}
 {% endfor %}
