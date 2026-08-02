@@ -8,6 +8,6 @@ lang: zh-CN
 lang_alt: /talks/2023-12-24-agile-governance
 venue: "厦门大学公共事务学院/公共政策研究院，成智楼108"
 date: 2023-12-23
-location: "中国福建"
+location: "中国厦门"
 ---
 [学院新闻报道](https://mp.weixin.qq.com/s/dn-2_kHyLDbNC0hQ042xEw)

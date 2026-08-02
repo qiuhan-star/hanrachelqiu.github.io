@@ -7,6 +7,6 @@ permalink: /talks/2023-12-24-agile-governance
 lang_alt: /zh/talks/2023-12-24-agile-governance
 venue: "Chengzhi Building 108, School of Public Affairs/Institute of Public Policy, Xiamen University"
 date: 2023-12-23
-location: "Fujian, China"
+location: "Xiamen, China"
 ---
 [College News Report](https://mp.weixin.qq.com/s/dn-2_kHyLDbNC0hQ042xEw)
