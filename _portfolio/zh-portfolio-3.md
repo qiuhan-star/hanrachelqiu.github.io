@@ -1,9 +1,10 @@
 ---
-title: "My Career Aspirations"
-excerpt: "I'm passionate about making my mark in academia and the public sector. My dream? To be a top expert in my field, churning out research that guides policy and inspires the next wave of public service leaders. Here's a little more about my journey and where I hope to take it." #<br/> <img src='/images/500x300.png'>
+title: "我的职业抱负"
+excerpt: "我热忱于在学术界与公共部门留下自己的印记。我的梦想？成为所在领域的顶尖专家，持续产出能够指引政策、并激励下一代公共服务领导者的研究。下面，我想多分享一点自己的历程，以及我希望将之带向何方。"
 collection: portfolio
-permalink: /protfolio/protfolio-3
-lang_alt: /zh/protfolio/protfolio-3
+permalink: /zh/protfolio/protfolio-3
+lang: zh-CN
+lang_alt: /protfolio/protfolio-3
 ---
 <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/portfolio/Career Goals and Planning-1.jpg">
 <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/portfolio/Career Goals and Planning-2.jpg">
@@ -29,11 +30,11 @@ lang_alt: /zh/protfolio/protfolio-3
 
 <body>
 
-<button class="back-button" onclick="goBack()">Back to Portfolio</button>
+<button class="back-button" onclick="goBack()">返回作品集</button>
 
 <script>
 function goBack() {
-  window.location.href = '{{ '/portfolio/' | absolute_url }}';
+  window.location.href = '{{ '/zh/portfolio/' | absolute_url }}';
 }
 </script>
 
