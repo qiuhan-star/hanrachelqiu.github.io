@@ -244,6 +244,75 @@ layout: compress
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
+
+    <style>
+      /* ============================================================
+         明暗主题 token 体系（2026-08-02 重设计）
+         亮色 / 暗色 = 同一族色的两套明度，通过 [data-theme] 整体替换
+         ============================================================ */
+      :root {
+        /* ===== Light theme（默认） ===== */
+        --bg-base: #fafbfc;
+        --bg-surface: #ffffff;
+        --bg-raised: #f2f4f7;
+        --bg-code: #f5f7fa;
+        --text-primary: #1a1d24;
+        --text-secondary: #5a6270;
+        --text-muted: #889099;
+        --border-subtle: rgba(20,25,40,0.08);
+        --border-default: rgba(20,25,40,0.12);
+        --accent: #5a7cd8;
+        --accent-hover: #3d5fc0;
+        --accent-soft: rgba(90,124,216,0.10);
+        --link: #3d5fc0;
+        --masthead-bg: #ffffff;
+        --masthead-text: #1a1d24;
+        --masthead-text-muted: #5a6270;
+        --masthead-border: rgba(20,25,40,0.08);
+        --masthead-hover: #3d5fc0;
+        --shadow-sm: 0 1px 2px rgba(20,25,40,0.06);
+        --shadow-md: 0 4px 14px rgba(20,25,40,0.08);
+        --sidebar-bg: #ffffff;
+        --sidebar-border: rgba(20,25,40,0.08);
+        color-scheme: light;
+      }
+      :root[data-theme="dark"] {
+        /* ===== Dark theme ===== */
+        --bg-base: #1c1f26;
+        --bg-surface: #262a32;
+        --bg-raised: #2f343d;
+        --bg-code: #2b2e33;
+        --text-primary: #e8e8e8;
+        --text-secondary: #9aa1ab;
+        --text-muted: #6c7480;
+        --border-subtle: rgba(255,255,255,0.08);
+        --border-default: rgba(255,255,255,0.12);
+        --accent: #7c9bff;
+        --accent-hover: #aab8ff;
+        --accent-soft: rgba(124,155,255,0.14);
+        --link: #8ab4f8;
+        --masthead-bg: #000000;
+        --masthead-text: #e8e8e8;
+        --masthead-text-muted: #9aa1ab;
+        --masthead-border: rgba(255,255,255,0.12);
+        --masthead-hover: #7c9bff;
+        --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+        --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
+        --sidebar-bg: rgba(27,29,33,0.9);
+        --sidebar-border: rgba(61,80,104,0.25);
+        color-scheme: dark;
+      }
+
+      /* 主题切换时的全局缓动：让 background-color/color/border 柔和切换 */
+      body,
+      .masthead,
+      .page__footer,
+      .sidebar,
+      .author__name,
+      .author__bio {
+        transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+      }
+    </style>
   </head>
 
   <body>
