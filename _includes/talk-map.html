@@ -59,8 +59,22 @@
   /* text only */
   .talkmap-text .t-item { padding:11px 0; border-bottom:1px solid #eef1f6; }
   .talkmap-text .t-title { font-weight:600; font-size:0.98rem; line-height:1.5; }
-  .talkmap-text .t-meta { color:#5c6573; font-size:0.84rem; margin-top:4px; }
-  .talkmap-text .t-meta .loc { color:#1a1d24; font-weight:600; }
+  .talkmap-text .t-title a { color:#5a7cd8; text-decoration:none; }
+  .talkmap-text .t-title a:hover { text-decoration:underline; }
+  .talkmap-text .t-meta { color:#5c6573; font-size:0.84rem; margin-top:4px; display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
+  .talkmap-text .sep { color:#5c6573; opacity:.5; }
+  .talkmap-text .zh { color:#5a7cd8; font-weight:600; }
+  .talkmap-text .award { color:#92732a; font-weight:600; }
+  .talkmap-text .pill { display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.02em; padding:2px 9px; border-radius:6px; text-transform:uppercase; }
+  .talkmap-text .pill.conf { background:#eef2fb; color:#3d5a9e; }
+  .talkmap-text .pill.work { background:#e9f5ee; color:#2f7d4f; }
+  .talkmap-text .pill.sem  { background:#f1ecfa; color:#6f5bb0; }
+  .talkmap-text .pill.inv  { background:#faf3e2; color:#92732a; }
+  :root[data-theme="dark"] .talkmap-text .pill.conf { background:#222b3d; color:#9db4e8; }
+  :root[data-theme="dark"] .talkmap-text .pill.work { background:#1d3328; color:#8fd4a8; }
+  :root[data-theme="dark"] .talkmap-text .pill.sem  { background:#2a2540; color:#c3b3ec; }
+  :root[data-theme="dark"] .talkmap-text .pill.inv  { background:#322d1e; color:#e0c878; }
+  .talkmap-yh .cnt { font-size:.8rem; color:#8a93a2; font-weight:400; margin-left:8px; }
 
   /* list with inline location */
   .talkmap-ll .ll-card { background:#fff; border:1px solid #e6e9ef; border-radius:10px; padding:12px 16px; margin-bottom:10px; position:relative; }
@@ -110,10 +124,15 @@ var talksData = [
     "conf": {{ t.type | jsonify }},
     "date": "{{ t.date | date: '%Y-%m-%d' }}",
     "lang": {{ t.presented_in | jsonify }},
-    "award": {{ t.award | jsonify }}
+    "award": {{ t.award | jsonify }},
+    "kind": {{ t.kind | jsonify }},
+    "hide_on_map": {{ t.hide_on_map | jsonify }},
+    "permalink": {{ t.permalink | jsonify }}
   }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 ];
+/* geo views (map / wall / journey / map+wall / list+loc) exclude text-only entries */
+var geoTalks = talksData.filter(function(t){ return !t.hide_on_map; });
 
 var isZh = {% if page.lang == 'zh-CN' %}true{% else %}false{% endif %};
 
@@ -165,7 +184,7 @@ function langLabel(it){ if(!it.lang) return ''; if(it.lang === 'zh'){ return isZ
 
 /* group talks by venue (school) */
 var byVenue = {};
-talksData.forEach(function(t){
+geoTalks.forEach(function(t){
   if(!byVenue[t.venue]){ byVenue[t.venue] = { lat: coordOf(t.venue)[0], lng: coordOf(t.venue)[1], city: t.city, items: [], award:false }; }
   byVenue[t.venue].items.push(t);
   if(t.award){ byVenue[t.venue].award = true; }
@@ -204,7 +223,7 @@ function talkMapOverview(){
 /* ---- wall panel ---- */
 (function(){
   var cities = {};
-  talksData.forEach(function(t){
+  geoTalks.forEach(function(t){
     var c = t.city.split(',')[0].trim();
     if(!cities[c]){ cities[c] = { en: t.city, schools:{}, count:0 }; }
     if(!cities[c].schools[t.venue]){ cities[c].schools[t.venue] = { short: shortOf(t.venue), count:0, award:false }; }
@@ -214,7 +233,7 @@ function talkMapOverview(){
   });
   var cityNames = Object.keys(cities);
   var html = '<div class="talkmap-stat">'
-    + '<div class="box"><div class="n">' + talksData.length + '</div><div class="l">' + (isZh ? '场受邀演讲' : 'talks') + '</div></div>'
+    + '<div class="box"><div class="n">' + geoTalks.length + '</div><div class="l">' + (isZh ? '场受邀演讲' : 'talks') + '</div></div>'
     + '<div class="box"><div class="n">' + cityNames.length + '</div><div class="l">' + (isZh ? '座城市' : 'cities') + '</div></div>'
     + '<div class="box"><div class="n">' + Object.keys(byVenue).length + '</div><div class="l">' + (isZh ? '所学校' : 'schools') + '</div></div>'
     + '</div><div class="talkmap-grid">';
