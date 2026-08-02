@@ -9,6 +9,9 @@
   .talkmap-pop .meta { color: #555; display: block; }
   .talkmap-pop .badge { color: #2a7f3e; font-weight: 600; }
   .talkmap-pop .award { color: #b8860b; font-weight: 600; }
+  .talkmap-pop .talkmap-ov { margin: 0.6em 0 0; }
+  .talkmap-pop .talkmap-ov a { color: #2a7f3e; font-weight: 600; text-decoration: none; }
+  .talkmap-pop .talkmap-ov a:hover { text-decoration: underline; }
   /* permanent school-name pins (divIcon) */
   .leaflet-div-icon.talkmap-divicon { background: transparent; border: none; }
   .talkmap-pin {
@@ -104,21 +107,22 @@ var allLatLngs = [];
 for (var venue in byVenue) {
   var v = byVenue[venue];
   var short = (shortNames[venue] ? (isZh ? shortNames[venue].zh : shortNames[venue].en) : venue);
-  var html = '<div class="talkmap-pop"><h4>' + venue + '</h4><p class="meta">' + v.city + '</p><ul>';
+  var html = '<div class="talkmap-pop"><h4>' + escapeHtml(venue) + '</h4><p class="meta">' + escapeHtml(v.city) + '</p><ul>';
   for (var j = 0; j < v.items.length; j++) {
     var it = v.items[j];
-    html += '<li><strong>' + it.title + '</strong>';
-    if (it.title_zh) { html += '<br>（' + it.title_zh + '）'; }
-    html += '<span class="meta">🏛️ ' + it.conf + '</span>';
+    html += '<li><strong>' + escapeHtml(it.title) + '</strong>';
+    if (it.title_zh) { html += '<br>（' + escapeHtml(it.title_zh) + '）'; }
+    html += '<span class="meta">🏛️ ' + escapeHtml(it.conf) + '</span>';
     if (it.lang) { var langLabel = (it.lang === 'zh') ? (isZh ? '中文报告' : 'Presented in Chinese') : (isZh ? '英文报告' : 'Presented in English'); html += '<span class="badge">🗣️ ' + langLabel + '</span>'; }
-    if (it.award) { html += '<span class="award">🏆 ' + it.award + '</span>'; }
-    html += '<span class="meta">📅 ' + it.date + '</span>';
+    if (it.award) { html += '<span class="award">🏆 ' + escapeHtml(it.award) + '</span>'; }
+    html += '<span class="meta">📅 ' + escapeHtml(it.date) + '</span>';
     html += '</li>';
   }
+  html += '<p class="talkmap-ov"><a href="#" onclick="talkMapOverview(); return false;">' + (isZh ? '⤢ 回到全览' : '⤢ Overview') + '</a></p>';
   html += '</ul></div>';
   var icon = L.divIcon({
     className: 'talkmap-divicon',
-    html: '<span class="talkmap-pin' + (v.award ? ' award' : '') + '">' + short + '</span>',
+    html: '<span class="talkmap-pin' + (v.award ? ' award' : '') + '">' + escapeHtml(short) + '</span>',
     iconSize: [70, 22],
     iconAnchor: [35, 11]
   });
@@ -130,17 +134,24 @@ for (var venue in byVenue) {
   allLatLngs.push([v.lat, v.lng]);
 }
 
-/* fit to ALL talk venues once layout is ready (size must be known), so the
-   default view frames the whole span (China/Hong Kong + Australia) */
-setTimeout(function() {
-  map.invalidateSize();
+/* named overview function so the button and the in-popup link share it */
+function talkMapOverview() {
   if (allLatLngs.length) {
-    map.fitBounds(allLatLngs, { padding: [50, 50], maxZoom: 5 });
+    map.flyToBounds(allLatLngs, { padding: [50, 50], maxZoom: 5, duration: 0.8 });
   }
-}, 100);
+}
+
+/* fit to ALL talk venues once the map is actually laid out (size must be known).
+   whenReady + requestAnimationFrame is more robust than a fixed setTimeout. */
+map.whenReady(function() {
+  requestAnimationFrame(function() {
+    map.invalidateSize();
+    if (allLatLngs.length) {
+      map.fitBounds(allLatLngs, { padding: [50, 50], maxZoom: 5 });
+    }
+  });
+});
 
 /* reset / overview button returns to the full-span default view */
-document.getElementById('talkMapReset').addEventListener('click', function() {
-  map.flyToBounds(allLatLngs, { padding: [50, 50], maxZoom: 5, duration: 0.8 });
-});
+document.getElementById('talkMapReset').addEventListener('click', talkMapOverview);
 </script>
