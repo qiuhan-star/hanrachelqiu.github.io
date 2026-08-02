@@ -5,7 +5,7 @@ tags:
   - 方法
   - ANOVA
   - 混合效应模型
-  - Methods Notes
+  - Methods
   - Statistics
   - Mixed Models
 ---
