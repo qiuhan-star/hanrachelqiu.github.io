@@ -399,6 +399,9 @@ layout: compress
       .archive__item, .list__item, .grid__item { border-color: var(--border-subtle); }
       .archive__item-title a, .archive__item a { color: var(--text-primary); }
       .archive__item-excerpt { color: var(--text-secondary); }
+
+      /* 顶栏背景强制走 token，覆盖编译主题写死的 background:white */
+      .masthead { background-color: var(--masthead-bg) !important; }
     </style>
   </head>
 
