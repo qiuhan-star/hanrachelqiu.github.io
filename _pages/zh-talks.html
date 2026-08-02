@@ -2,40 +2,20 @@
 layout: archive
 title: "演讲"
 permalink: /zh/talks/
+author_profile: true
 lang: zh-CN
 lang_alt: /talks/
-author_profile: false
 ---
 
-<style>
-  .talks-layout { display: flex; gap: 26px; align-items: flex-start; max-width: 1100px; margin: 0 auto; }
-  .talks-list { flex: 1 1 56%; min-width: 0; }
-  .talks-map { flex: 0 0 40%; max-width: 440px; position: sticky; top: 18px; }
-  .author-strip { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #e6e9ef; border-radius: 10px; padding: 10px 14px; margin: 0 auto 22px; max-width: 1100px; }
-  .author-strip .av { width: 42px; height: 42px; border-radius: 50%; background: #7c9bff; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; flex: 0 0 auto; }
-  .author-strip .t { font-weight: 600; }
-  .author-strip .d { color: #5c6573; font-size: 0.85rem; }
-  @media (max-width: 820px) {
-    .talks-layout { flex-direction: column; }
-    .talks-map { flex: 1 1 auto; max-width: none; width: 100%; position: static; }
-  }
-</style>
+{% if site.talkmap_link == true %}
 
-<p class="archive__item-excerpt">我受邀所做的报告、工作坊与会议演讲记录。</p>
+<p style="text-decoration:underline;"><a href="{{ '/zh-talkmap.html' | absolute_url }}">查看我历次演讲地点的地图！</a></p>
 
-<div class="author-strip">
-  <div class="av">邱</div>
-  <div><div class="t">邱涵（Rachel）</div><div class="d">浙江大学公共管理学院 博士研究生</div></div>
-</div>
+{% endif %}
 
-<div class="talks-layout">
-  <div class="talks-list">
-    {% assign talk_items = site.talks | where_exp: "item", "item.lang == 'zh-CN'" %}
-    {% for post in talk_items reversed %}
-      {% include archive-single-talk.html %}
-    {% endfor %}
-  </div>
-  <div class="talks-map">
-    {% include talk-map.html %}
-  </div>
-</div>
+{% assign talk_items = site.talks | where_exp: "item", "item.lang == 'zh-CN'" %}
+{% for post in talk_items reversed %}
+  {% include archive-single-talk.html %}
+{% endfor %}
+
+{% include talk-map.html %}
