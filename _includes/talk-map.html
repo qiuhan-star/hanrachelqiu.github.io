@@ -38,7 +38,7 @@
 
 <div id="talkMapWrap">
   <div id="talkMap"></div>
-  <button id="talkMapReset" class="talkmap-reset">{% if page.lang == 'zh-CN' %}⤢ 全览{% else %}⤢ Overview{% endif %}</button>
+  <button id="talkMapReset" class="talkmap-reset" aria-label="{% if page.lang == 'zh-CN' %}返回全览{% else %}Reset to overview{% endif %}">{% if page.lang == 'zh-CN' %}⤢ 全览{% else %}⤢ Overview{% endif %}</button>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -70,6 +70,18 @@ var shortNames = {
 
 /* page language flag injected from Liquid: true on Chinese pages, false on English */
 var isZh = {% if page.lang == 'zh-CN' %}true{% else %}false{% endif %};
+
+/* escape user-facing strings before inserting into popup/label HTML. Data is
+   currently hardcoded so risk is low, but this keeps it safe if any field ever
+   becomes Liquid-injected or user-editable (defensive against XSS). */
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 /* group talks by venue (school/venue) so each school gets its own marker.
    Multiple talks at the same school share one marker; award flag bubbles up. */
