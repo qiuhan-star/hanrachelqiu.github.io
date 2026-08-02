@@ -12,21 +12,26 @@
   .talkmap-pop .talkmap-ov { margin: 0.6em 0 0; }
   .talkmap-pop .talkmap-ov a { color: #2a7f3e; font-weight: 600; text-decoration: none; }
   .talkmap-pop .talkmap-ov a:hover { text-decoration: underline; }
-  /* marker symbol (teardrop pin) + permanent name label */
-  .leaflet-div-icon.talkmap-divicon { background: transparent; border: none; }
+  /* marker symbol (teardrop pin) + permanent city label rendered INSIDE the
+     divIcon, so the whole pin+label is one hover target. (A separate Leaflet
+     tooltip sits outside the marker's hit area and does NOT fire the marker's
+     mouseover when you hover the label text — which is why hovering just the
+     city name failed to reveal its schools.) */
+  .leaflet-div-icon.talkmap-divicon { background: transparent; border: none; display: flex; align-items: center; }
   .talkmap-pin-symbol {
     width: 16px; height: 16px; border-radius: 50% 50% 50% 0;
     background: #7c9bff; transform: rotate(-45deg);
     border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.35);
+    flex: 0 0 auto;
   }
   .talkmap-pin-symbol.school { background: #2a7f3e; }
   .talkmap-pin-symbol.award { background: #d4af37; }
-  .leaflet-tooltip.talkmap-label {
+  .talkmap-city-label {
+    margin-left: 6px;
     background: #fff; border: 1px solid #ccc; color: #1a1a1a;
     font-size: 12px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.25);
     padding: 2px 7px; border-radius: 10px; white-space: nowrap;
   }
-  .leaflet-tooltip.talkmap-label::before { display: none; }
   /* hover tooltip: quick preview of talk titles / sub-venues */
   .talkmap-tip { font-size: 12px; line-height: 1.5; max-width: 250px; }
   .talkmap-tip .t-title { font-weight: 600; color: #33415c; }
@@ -212,13 +217,12 @@ for (var city in byCity) {
   var clng = c.lngSum / c.count;
   var regionIcon = L.divIcon({
     className: 'talkmap-divicon',
-    html: '<span class="talkmap-pin-symbol"></span>',
-    iconSize: [16, 16],
+    html: '<span class="talkmap-pin-symbol"></span><span class="talkmap-city-label">' + escapeHtml(city.split(',')[0]) + '</span>',
+    iconSize: [120, 20],
     iconAnchor: [8, 16]
   });
   var regionMarker = L.marker([clat, clng], { icon: regionIcon, interactive: true, zIndexOffset: 200 })
-    .addTo(map)
-    .bindTooltip(city.split(',')[0], { permanent: true, direction: 'right', className: 'talkmap-label', offset: [12, 0] });
+    .addTo(map);
   regionMarker.on('mouseover', (function(ci) {
     return function() { showSchools(ci); };
   })(city));
