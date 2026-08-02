@@ -1,5 +1,5 @@
 ---
-title: "Method Notes #1: What I Actually Preregister on OSF ／ 方法笔记 #1：我在 OSF 上做预注册，到底注册了些什么"
+title: "Method Notes #1: What I Actually Preregister on OSF"
 date: 2026-08-02
 tags:
   - 方法笔记
