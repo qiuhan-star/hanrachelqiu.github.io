@@ -75,13 +75,10 @@
   body.dark a {
     color: #8ab4f8;
   }
-  /* 暗色顶栏：毛玻璃质感 + 开屏暗色同色系渐变，浮于内容之上而非死黑的色块 */
+  /* 暗色顶栏：纯黑底，与白字形成高对比；实色黑无需毛玻璃 */
   body.dark .masthead {
-    background: linear-gradient(180deg, rgba(19,21,26,0.92), rgba(26,29,37,0.92));
-    backdrop-filter: blur(14px) saturate(1.4);
-    -webkit-backdrop-filter: blur(14px) saturate(1.4);
-    border-bottom: 1px solid rgba(61,80,104,0.25);
-    border-color: rgba(61,80,104,0.25);
+    background: #000000;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
   }
   /* 暗色侧边栏：改为与顶栏同材质的半透明深色面板 + 毛玻璃，去掉“实体墙”感
      注意：宽屏下侧边栏是 position:fixed 的独立左栏，主内容在它右侧滚动、
@@ -102,12 +99,14 @@
     color: #e6e6e6;
   }
   body.dark .masthead__menu-item a {
-    color: #7c9bff;   /* 暗色导航默认文字：蓝紫，清晰且醒目 */
+    color: #e8e8e8;   /* 暗色导航默认文字：近白（与参考站一致），清晰可读 */
     font-weight: 600;
   }
   body.dark .masthead__menu-item a:hover {
-    color: #aab8ff;   /* 悬停：同色系更亮一档 */
+    color: #e8e8e8;   /* 白字悬停：保持白，加下划线 + 轻微变暗作为反馈 */
     text-decoration: underline;
+    text-underline-offset: 4px;
+    opacity: .82;
   }
   /* 暗色主题下页面正文与通用组件的配色 */
   body.dark .page__content,
