@@ -3,6 +3,7 @@ title: "Surging currents: A systematic review of the literature on dynamic stake
 collection: talks
 type: "Participated with Jiaxi Yang in the Journal of Asian Public Policy Special Issue Authors' Workshop"
 permalink: /talks/2023-12-01-stakeholder
+lang_alt: /zh/talks/2023-12-01-stakeholder
 venue: "The Hong Kong University of Science and Technology (HKUST)"
 date: 2023-12-01
 location: "Hong Kong, China"

@@ -1,16 +1,17 @@
 ---
-title: "Embracing Agile Governance: Cultivating Innovation and Addressing the Challenges of Generative Artificial Intelligence in Higher Education"
+title: "迈向公正转型未来：对中国30个地方政府（2010–2020）的定性比较分析"
 collection: talks
-type: "Presenter at Journal of Asian Public Policy Special Issue Authors' Workshop"
-permalink: /talks/2023-12-01-agile-governance
-lang_alt: /zh/talks/2023-12-01-agile-governance
-venue: "The Hong Kong University of Science and Technology (HKUST)"
-date: 2023-12-01
-location: "Hong Kong, China"
+type: "在比较公共政策国际会议上做报告"
+permalink: /zh/talks/2024-04-19-just-transition
+lang: zh-CN
+lang_alt: /talks/2024-04-19-just-transition
+venue: "清华大学"
+date: 2024-04-19
+location: "中国北京"
 ---
-News
+关于会议
 -
-[>Read More](https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg)
+比较公共政策国际会议由清华大学公共管理学院、《比较政策分析期刊》（JCPA）与国际比较政策分析论坛（ICPA-Forum）联合举办。
 
 <style>
   /* 样式定义 */
@@ -20,14 +21,13 @@ News
     border-left: 3px solid #ccc;
     margin-left: 20px;
   }
-  
+
   /* 鼠标悬停在链接上时的样式 */
   a:hover {
     color: #007bff;
     text-decoration: underline;
   }
 </style>
-
 <script>
   function toggleReflections() {
     var content = document.getElementById('reflections-content');
@@ -38,37 +38,29 @@ News
     }
   }
 </script>
-
-<!-- 标题和折叠内容的链接 -->
-<h2>Personal Insights</h2>
-<a href="#" onclick="toggleReflections()">Expand for Insights</a>
-
-<!-- 折叠内容 -->
+<h2>个人感悟</h2>
+<a href="#" onclick="toggleReflections()">展开感悟</a>
 <div id="reflections-content" style="display:none;">
-    <p>🇭🇰 Academic Journey at HKUST ~</p>
-    <p>作为硕士生，第一次参加学术会议！
-    我和我的合作者很幸运地以全场唯一的学生身份入选并参会～
-    非常感谢评审专家对我们的研究给予的肯定和宝贵机会[Salute]。</p>
-    <p>这次会议汇聚了来自世界不同地区的顶尖专家和学者，
-    他们带来了他们的智慧和独特见解，让人受益匪浅！
-    另外还结识了许多志同道合的小伙伴们💕～</p>
-    <p>感谢主办方的热情招待，
-    每一个细节都透露着温馨和专业，让人难以忘怀。
-    第二天自己参观了一下港科大校园，
-    饱览了校内融合的山海美景[哇]～</p>
-    <p>It marks both an ending and a beginning!
-    Continue fighting![加油]💪💪</p>
+    <p>🇨🇳 清华之行～</p>
+    <p>清华参会，收获满满！🌟</p>
+    <p>🙌 衷心感谢讨论嘉宾的精彩点评和宝贵建议 - 令人深受启发！🤝🤝</p>
+    <p>👥 遇见了很多热情和有想法的小伙伴们，东道主的热情款待令人倍感温馨。</p>
+    <p>🍰 还品尝到了美味的茶歇小食～</p>
+    <p>带着热情与知识满载而归，准备继续奋斗！💪✨</p>
 </div>
 
-Photos
+照片
 -
-Captured in the moment! 📸
+定格精彩瞬间！📸
 <div id="homeCarousel">
   <div id="homeCarouselWrap">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2023-12-01-1.PNG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2023-12-01-2.PNG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2023-12-01-3.PNG">
-    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2023-12-01-4.PNG">
+    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-04-19-1.JPG">
+    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-04-19-2.JPG">
+    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-04-19-3.JPG">
+    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-04-19-4.JPG">
+    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-04-19-5.JPG">
+    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-04-19-6.JPG">
+    <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2024-04-19-7.JPG">
   </div>
 </div>
 <div id="modal">
@@ -78,7 +70,7 @@ Captured in the moment! 📸
 <style>
     #homeCarousel {
         width: 100%;
-        height: 1000px; /* 添加单位px */
+        height: 800px; /* 添加单位px */
         overflow: hidden;
         border: solid rgba(0, 0, 0, 0.1);
         position: relative;
@@ -88,7 +80,7 @@ Captured in the moment! 📸
         display: flex;
         width: 75%; /* 确保宽度与父容器相同 */
         position: absolute;
-        animation: move 10s linear infinite;
+        animation: move 20s linear infinite;
     }
     #homeCarouselWrap img {
         flex-shrink: 0; /* 防止图片缩小 */
@@ -103,7 +95,7 @@ Captured in the moment! 📸
             transform: translateX(0);
         }
         100% {
-            transform: translateX(-300%); /* 调整为两张图片的总宽度 */
+            transform: translateX(-700%); /* 调整为两张图片的总宽度 */
         }
     }
     #homeCarouselWrap:hover {
@@ -127,7 +119,7 @@ Captured in the moment! 📸
         max-height: 80%;
         display: block;
         margin: 0 auto;
-        object-fit: contain; /* 保持图片比例，完整显示在模态框内 */
+        object-fit: contain; /* 保持图片比例，完整显示在容器内 */
     }
     #closeBtn {
         position: absolute;
@@ -161,5 +153,3 @@ Captured in the moment! 📸
     });
 </script>
 #Talk #AcademicLife
-
-

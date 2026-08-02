@@ -1,16 +1,17 @@
 ---
-title: "Embracing Agile Governance: Cultivating Innovation and Addressing the Challenges of Generative Artificial Intelligence in Higher Education"
+title: "拥抱敏捷治理：培育创新并应对生成式人工智能在高等教育中的挑战"
 collection: talks
-type: "Presenter at Journal of Asian Public Policy Special Issue Authors' Workshop"
-permalink: /talks/2023-12-01-agile-governance
-lang_alt: /zh/talks/2023-12-01-agile-governance
-venue: "The Hong Kong University of Science and Technology (HKUST)"
+type: "在《亚洲公共政策期刊》专刊作者工作坊上做报告"
+permalink: /zh/talks/2023-12-01-agile-governance
+lang: zh-CN
+lang_alt: /talks/2023-12-01-agile-governance
+venue: "香港科技大学（HKUST）"
 date: 2023-12-01
-location: "Hong Kong, China"
+location: "中国香港"
 ---
-News
+动态
 -
-[>Read More](https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg)
+[>阅读更多](https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg)
 
 <style>
   /* 样式定义 */
@@ -20,7 +21,7 @@ News
     border-left: 3px solid #ccc;
     margin-left: 20px;
   }
-  
+
   /* 鼠标悬停在链接上时的样式 */
   a:hover {
     color: #007bff;
@@ -40,12 +41,12 @@ News
 </script>
 
 <!-- 标题和折叠内容的链接 -->
-<h2>Personal Insights</h2>
-<a href="#" onclick="toggleReflections()">Expand for Insights</a>
+<h2>个人感悟</h2>
+<a href="#" onclick="toggleReflections()">展开感悟</a>
 
 <!-- 折叠内容 -->
 <div id="reflections-content" style="display:none;">
-    <p>🇭🇰 Academic Journey at HKUST ~</p>
+    <p>🇭🇰 港科大之行～</p>
     <p>作为硕士生，第一次参加学术会议！
     我和我的合作者很幸运地以全场唯一的学生身份入选并参会～
     非常感谢评审专家对我们的研究给予的肯定和宝贵机会[Salute]。</p>
@@ -56,13 +57,13 @@ News
     每一个细节都透露着温馨和专业，让人难以忘怀。
     第二天自己参观了一下港科大校园，
     饱览了校内融合的山海美景[哇]～</p>
-    <p>It marks both an ending and a beginning!
-    Continue fighting![加油]💪💪</p>
+    <p>这既是一个结束，也是一个开始！
+    继续加油！💪💪</p>
 </div>
 
-Photos
+照片
 -
-Captured in the moment! 📸
+定格精彩瞬间！📸
 <div id="homeCarousel">
   <div id="homeCarouselWrap">
     <img src="https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/images/talks/Talk-2023-12-01-1.PNG">
@@ -127,7 +128,7 @@ Captured in the moment! 📸
         max-height: 80%;
         display: block;
         margin: 0 auto;
-        object-fit: contain; /* 保持图片比例，完整显示在模态框内 */
+        object-fit: contain; /* 保持图片比例，完整显示在容器内 */
     }
     #closeBtn {
         position: absolute;
@@ -161,5 +162,3 @@ Captured in the moment! 📸
     });
 </script>
 #Talk #AcademicLife
-
-
