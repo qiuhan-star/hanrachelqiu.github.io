@@ -161,11 +161,12 @@ for (var venue in byVenue) {
   }
   html += '<p class="talkmap-ov"><a href="#" onclick="talkMapOverview(); return false;">' + (isZh ? '⤢ 回到全览' : '⤢ Overview') + '</a></p>';
   html += '</ul></div>';
+  var short = (shortNames[venue] ? (isZh ? shortNames[venue].zh : shortNames[venue].en) : venue);
   var anchor = pinOffset[venue] ? pinOffset[venue] : [8, 16];
   var venueIcon = L.divIcon({
     className: 'talkmap-divicon',
-    html: '<span class="talkmap-pin-symbol' + (v.award ? ' award' : ' school') + '"></span>',
-    iconSize: [16, 16],
+    html: '<span class="talkmap-pin-symbol' + (v.award ? ' award' : ' school') + '"></span><span class="talkmap-city-label">' + escapeHtml(short) + '</span>',
+    iconSize: [110, 20],
     iconAnchor: anchor
   });
   var vMarker = L.marker([v.lat, v.lng], { icon: venueIcon, interactive: true, zIndexOffset: 300 });
