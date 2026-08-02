@@ -220,7 +220,7 @@ function talkMapOverview(){
     + '</div><div class="talkmap-grid">';
   cityNames.forEach(function(cn){
     var c = cities[cn];
-    html += '<div class="talkmap-city"><span class="count">' + c.count + (isZh ? ' 场' : '') + '</span><div><span class="cn">' + escapeHtml(cn) + '</span><span class="en">' + escapeHtml(c.en) + '</span></div><ul>';
+    html += '<div class="talkmap-city"><span class="count">' + c.count + (isZh ? ' 场' : '') + '</span><div><span class="cn">' + escapeHtml(cn) + '</span><span class="en">' + escapeHtml(c.en.split(',').slice(1).join(',').trim()) + '</span></div><ul>';
     Object.keys(c.schools).forEach(function(v){
       var s = c.schools[v];
       html += '<li><span class="talkmap-dot ' + (s.award ? 'award' : 'school') + '"></span>' + escapeHtml(s.short) + (s.award ? '<span class="talkmap-aw">🏆</span>' : '') + '<span class="n2">' + s.count + '</span></li>';
