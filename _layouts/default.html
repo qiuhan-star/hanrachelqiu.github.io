@@ -219,10 +219,11 @@ layout: compress
     </script>
 
     <script>
-      /* 同页多语：首屏前确定语言，避免闪烁。默认英文；localStorage 记忆上次选择。 */
+      /* 同页多语：首屏前确定语言，避免闪烁。默认英文；localStorage(v2) 记忆上次选择。
+         v2 覆盖旧 site-lang 键，清掉此前测试残留的 'zh'，使默认回到英文。 */
       (function () {
         var l = null;
-        try { l = localStorage.getItem('site-lang'); } catch (e) {}
+        try { l = localStorage.getItem('site-lang-v2'); } catch (e) {}
         if (l !== 'zh' && l !== 'en' && l !== 'ko') l = 'en';
         document.documentElement.setAttribute('data-lang', l);
         document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : l);

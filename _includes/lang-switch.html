@@ -74,7 +74,8 @@
 
 <script>
 /* 同页多语言切换：下拉框选择后仅切换显隐，不跳转 URL。
-   规则：html[data-lang] 记录当前语言；所有 [data-lang] 元素按当前语言显隐；
+   规则：html[data-lang] 记录当前语言；正文/导航里所有 [data-lang] 元素按当前语言显隐；
+   下拉菜单项用 data-lang-opt（不进全局 [data-lang] 选择器，故菜单永远显示全部语言）；
    한국어 暂无译文，回落英文。window.__applyLang 暴露给密码锁页，解锁注入内容后复用。 */
 (function () {
   var DD = document.getElementById('langDD');
@@ -94,6 +95,7 @@
   window.__applyLang = function () {
     var l = currentLang();
     var show = (l === 'ko') ? 'en' : l; /* 한국어暂回落英文 */
+    /* 只切换正文/导航的 [data-lang]；下拉项用 data-lang-opt，不会被隐藏 */
     var nodes = document.querySelectorAll('[data-lang]');
     for (var i = 0; i < nodes.length; i++) {
       var el = nodes[i];
@@ -101,7 +103,7 @@
     }
     if (label) label.textContent = LABELS[l] || LABELS.en;
     opts.forEach(function (o) {
-      o.classList.toggle('is-active', o.getAttribute('data-lang') === l);
+      o.classList.toggle('is-active', o.getAttribute('data-lang-opt') === l);
     });
   };
 
@@ -109,7 +111,7 @@
     if (VALID.indexOf(l) < 0) return;
     document.documentElement.setAttribute('data-lang', l);
     document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : l);
-    try { localStorage.setItem('site-lang', l); } catch (e) {}
+    try { localStorage.setItem('site-lang-v2', l); } catch (e) {}
     window.__applyLang();
     closeMenu();
   }
@@ -125,7 +127,7 @@
   opts.forEach(function (o) {
     o.addEventListener('click', function (e) {
       e.stopPropagation();
-      setLang(o.getAttribute('data-lang'));
+      setLang(o.getAttribute('data-lang-opt'));
     });
   });
   document.addEventListener('click', function (e) {
