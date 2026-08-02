@@ -1,30 +1,66 @@
 <!-- Self-contained Leaflet map of talk locations (HTTPS OSM tiles, no geocoding dependency) -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
-  #talkMap { height: 520px; width: 100%; border-radius: 8px; margin: 0.5em 0 1.5em; z-index: 1; }
+  #talkMapWrap { position: relative; margin: 0.5em 0 1.5em; }
+  #talkMap { height: 520px; width: 100%; border-radius: 8px; z-index: 1; }
   .talkmap-pop h4 { margin: 0 0 0.4em; font-size: 1.05em; }
   .talkmap-pop ul { margin: 0.2em 0 0; padding-left: 1.15em; }
   .talkmap-pop li { margin-bottom: 0.7em; }
   .talkmap-pop .meta { color: #555; display: block; }
   .talkmap-pop .badge { color: #2a7f3e; font-weight: 600; }
   .talkmap-pop .award { color: #b8860b; font-weight: 600; }
+  /* permanent school-name pins (divIcon) */
+  .leaflet-div-icon.talkmap-divicon { background: transparent; border: none; }
+  .talkmap-pin {
+    display: inline-block; padding: 2px 8px; border-radius: 12px;
+    background: #fff; border: 2px solid #2a7f3e; color: #1a1a1a;
+    font-size: 12px; font-weight: 600; white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+  .talkmap-pin.award { border-color: #d4af37; background: #fff8e1; color: #8a6d00; }
+  /* reset / overview button */
+  .talkmap-reset {
+    position: absolute; top: 10px; right: 10px; z-index: 1000;
+    padding: 5px 12px; border-radius: 6px; border: 1px solid #ccc;
+    background: #fff; font-size: 13px; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  }
+  .talkmap-reset:hover { background: #f3f3f3; }
+  /* legend */
+  .talkmap-legend {
+    position: absolute; bottom: 10px; left: 10px; z-index: 1000;
+    background: rgba(255,255,255,0.92); border: 1px solid #ddd; border-radius: 6px;
+    padding: 6px 10px; font-size: 12px; line-height: 1.7;
+  }
+  .talkmap-legend .lg-dot {
+    display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+    border: 2px solid #2a7f3e; background: #fff; margin-right: 5px; vertical-align: middle;
+  }
+  .talkmap-legend .lg-dot.award { border-color: #d4af37; background: #fff8e1; }
+  @media (max-width: 600px) { #talkMap { height: 380px; } }
 </style>
 
 {% if page.lang == 'zh-CN' %}
 <h2>🗺️ 讲座地点地图</h2>
-<p class="archive__item-excerpt">标记点显示我去过的城市/地区，点击可查看具体学校、会议与演讲标题。</p>
+<p class="archive__item-excerpt">标记点显示我去过的学校/地区，点击可查看具体学校、会议与演讲标题；金色标记为获奖演讲。</p>
 {% else %}
 <h2>🗺️ Map of Talk Locations</h2>
-<p class="archive__item-excerpt">Markers show the cities/regions I have visited for talks. Click a marker for the venue, conference, and talk title.</p>
+<p class="archive__item-excerpt">Markers show the schools/regions I have visited for talks. Click a marker for the venue, conference, and talk title; gold markers are award-winning talks.</p>
 {% endif %}
 
-<div id="talkMap"></div>
+<div id="talkMapWrap">
+  <div id="talkMap"></div>
+  <button id="talkMapReset" class="talkmap-reset">{% if page.lang == 'zh-CN' %}⤢ 全览{% else %}⤢ Overview{% endif %}</button>
+  <div class="talkmap-legend">
+    <div><span class="lg-dot"></span>{% if page.lang == 'zh-CN' %}普通演讲{% else %}Regular talk{% endif %}</div>
+    <div><span class="lg-dot award"></span>{% if page.lang == 'zh-CN' %}获奖演讲{% else %}Award-winning{% endif %}</div>
+  </div>
+</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-/* talk locations data: one entry per talk. Talks are grouped by venue (school)
-   below, so different schools in the same city — e.g. HKUST vs CUHK in Hong Kong —
-   each get their own separate marker. Coords are hardcoded per venue, no geocoding. */
+/* talk locations data: one entry per talk. Grouped by venue (school) below so
+   different schools in the same city (e.g. HKUST vs CUHK in Hong Kong) get their
+   own marker. Coords hardcoded per venue, no geocoding needed. */
 var talksData = [
   { city: "Xi'an, China", lat: 34.3416, lng: 108.9398, title: "Single vs. Multiple Agents: Types of Mobilization Entities Impact on the Length of Citizen Volunteer Service Participation", title_zh: "单主体 vs. 多主体：动员主体类型对公民志愿服务参与时长的影响", venue: "Xi'an Jiaotong University", conf: "Chinese Sociological Association 2026 Annual Conference", date: "2026-07-10", lang: "zh" },
   { city: "Xi'an, China", lat: 34.3416, lng: 108.9398, title: "Mobilized Giving and Voluntary Donation: Impact Mechanisms and the Moderating Role of Age", venue: "Xi'an Jiaotong University", conf: "Chinese Sociological Association 2026 Annual Conference", date: "2026-07-10", lang: "zh" },
@@ -37,16 +73,27 @@ var talksData = [
   { city: "Hong Kong, China", lat: 22.4197, lng: 114.2070, title: "Pathways to a Just Transition: Evidence from 30 Sub-national Governments in China", venue: "Chinese University of Hong Kong", conf: "20th Cross-Strait and Hong Kong-Macao Public Administration Academic Seminar", date: "2024-05-09" }
 ];
 
+/* short labels per venue, language-aware (zh / en) */
+var shortNames = {
+  "Xi'an Jiaotong University": { zh: "西安交大", en: "XJTU" },
+  "Edith Cowan University": { zh: "埃迪斯科文", en: "ECU" },
+  "HKUST": { zh: "港科大", en: "HKUST" },
+  "Shenyang Normal University": { zh: "沈师", en: "SYNU" },
+  "Tsinghua University": { zh: "清华", en: "THU" },
+  "Chinese University of Hong Kong": { zh: "港中文", en: "CUHK" }
+};
+
 /* page language flag injected from Liquid: true on Chinese pages, false on English */
 var isZh = {% if page.lang == 'zh-CN' %}true{% else %}false{% endif %};
 
 /* group talks by venue (school/venue) so each school gets its own marker.
-   Multiple talks at the same school share one marker. */
+   Multiple talks at the same school share one marker; award flag bubbles up. */
 var byVenue = {};
 for (var i = 0; i < talksData.length; i++) {
   var t = talksData[i];
-  if (!byVenue[t.venue]) { byVenue[t.venue] = { lat: t.lat, lng: t.lng, city: t.city, items: [] }; }
+  if (!byVenue[t.venue]) { byVenue[t.venue] = { lat: t.lat, lng: t.lng, city: t.city, items: [], award: false }; }
   byVenue[t.venue].items.push(t);
+  if (t.award) { byVenue[t.venue].award = true; }
 }
 
 var map = L.map('talkMap').setView([30, 114], 4);
@@ -55,12 +102,11 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-/* collect marker positions for ALL venues (including Perth/Australia) so the
-   default view frames the entire span — China / Hong Kong and Australia — with
-   everything correctly placed. Hong Kong's two campuses sit inside Hong Kong. */
+/* collect marker positions for ALL venues (incl. Perth/Australia) */
 var allLatLngs = [];
 for (var venue in byVenue) {
   var v = byVenue[venue];
+  var short = (shortNames[venue] ? (isZh ? shortNames[venue].zh : shortNames[venue].en) : venue);
   var html = '<div class="talkmap-pop"><h4>' + venue + '</h4><p class="meta">' + v.city + '</p><ul>';
   for (var j = 0; j < v.items.length; j++) {
     var it = v.items[j];
@@ -73,7 +119,17 @@ for (var venue in byVenue) {
     html += '</li>';
   }
   html += '</ul></div>';
-  L.marker([v.lat, v.lng]).addTo(map).bindPopup(html);
+  var icon = L.divIcon({
+    className: 'talkmap-divicon',
+    html: '<span class="talkmap-pin' + (v.award ? ' award' : '') + '">' + short + '</span>',
+    iconSize: [70, 22],
+    iconAnchor: [35, 11]
+  });
+  var marker = L.marker([v.lat, v.lng], { icon: icon }).addTo(map).bindPopup(html);
+  /* clicking a marker smoothly flies to it for a closer look */
+  marker.on('click', (function(lat, lng) {
+    return function() { map.flyTo([lat, lng], 6, { duration: 0.8 }); };
+  })(v.lat, v.lng));
   allLatLngs.push([v.lat, v.lng]);
 }
 
@@ -85,4 +141,9 @@ setTimeout(function() {
     map.fitBounds(allLatLngs, { padding: [50, 50], maxZoom: 5 });
   }
 }, 100);
+
+/* reset / overview button returns to the full-span default view */
+document.getElementById('talkMapReset').addEventListener('click', function() {
+  map.flyToBounds(allLatLngs, { padding: [50, 50], maxZoom: 5, duration: 0.8 });
+});
 </script>
