@@ -17,14 +17,14 @@ main:
   - title: "CV"
     url: /cv/
 
+  - title: "Blog"
+    url: /method-notes/
+
   - title: "Portfolio"
     url: /portfolio/
 
   - title: "Guide"
     url: /markdown/
-
-  - title: "Blog"
-    url: /method-notes/
 
   - title: "PhD Simulator"
     url: /game-details.html
@@ -44,11 +44,11 @@ zh-CN:
     url: /zh/services/
   - title: "简历"
     url: /zh/cv/
+  - title: "博客"
+    url: /method-notes/
   - title: "作品集"
     url: /zh/portfolio/
   - title: "指南"
     url: /zh/markdown/
-  - title: "博客"
-    url: /method-notes/
   - title: "PhD 模拟器"
     url: /zh/game-details.html/
