@@ -17,8 +17,11 @@ author:
   name             : "Han (Rachel) Qiu"
   pronouns         : # "she/her"  
   bio              : "Dare to Dream, Fearless in Adversity, Embrace Passion"
+  bio_zh           : "敢于梦想，无惧逆境，拥抱热爱"
   location         : "Zhejiang, China"
+  location_zh      : "中国浙江"
   employer         : "Zhejiang University"
+  employer_zh      : "浙江大学"
   uri              : # URL
   email            : "rachel.hanqiu@gmail.com"
 
