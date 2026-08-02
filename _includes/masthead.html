@@ -6,30 +6,16 @@
       <nav id="site-nav" class="greedy-nav">
         <button><div class="navicon"></div></button>
         <ul class="visible-links">
-          {% assign home_url = '/' %}{% if page.lang == "zh-CN" %}{% assign home_url = '/zh/' %}{% endif %}
-          <li class="masthead__menu-item masthead__menu-item--lg"><a href="{{ home_url | absolute_url }}">{% if page.lang == 'zh-CN' and site.title_zh %}{{ site.title_zh }}{% else %}{{ site.title }}{% endif %}</a></li>
-          {% assign nav_locale = page.lang | default: "main" %}
-          {% for link in site.data.navigation[nav_locale] %}
-            {% if link.url contains 'http' %}
-              {% assign domain = '' %}
-              {% else %}
-              {% assign domain = base_path %}
-            {% endif %}
-            <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}">{{ link.title }}</a></li>
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="{{ '/' | absolute_url }}"><span data-lang="en">{{ site.title }}</span><span data-lang="zh">{{ site.title_zh }}</span></a></li>
+          {% for link in site.data.navigation.main %}
+            {% if link.url contains 'http' %}{% assign domain = '' %}{% else %}{% assign domain = base_path %}{% endif %}
+            <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}"><span data-lang="en">{{ link.title }}</span><span data-lang="zh">{{ link.title_zh }}</span></a></li>
           {% endfor %}
         </ul>
         <ul class="hidden-links hidden"></ul>
       </nav>
     </div>
-    {% comment %} 语言切换：EN / 中文 直接并列，点中文一步直达对应语言页 {% endcomment %}
-    {% assign is_zh = false %}{% if page.lang == "zh-CN" %}{% assign is_zh = true %}{% endif %}
-    <span class="lang-switch">
-      <a class="lang-switch__item{% unless is_zh %} is-current{% endunless %}"
-         href="{% if is_zh %}{{ page.lang_alt | default: '/' | absolute_url }}{% else %}{{ page.url | default: '/' | absolute_url }}{% endif %}">EN</a>
-      <span class="lang-switch__sep" aria-hidden="true">|</span>
-      <a class="lang-switch__item{% if is_zh %} is-current{% endif %}"
-         href="{% if is_zh %}{{ page.url | default: '/zh/' | absolute_url }}{% else %}{{ page.lang_alt | default: '/zh/' | absolute_url }}{% endif %}">&#20013;&#25991;</a>
-    </span>
+    {% include lang-switch.html %}
       <button id="light-toggle" class="theme-toggle" title="Change theme" aria-label="Change theme">
         <svg id="light-toggle-system" aria-hidden="true" width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -169,36 +155,9 @@
     min-width: 0;
   }
 
-  /* 语言切换：EN / 中文 直接并列，配色全走 token，亮暗自动适配 */
+  /* 顶栏允许下拉菜单溢出（下拉框展开时使用） */
   .masthead,
   .masthead__inner-wrap {
     overflow: visible;
-  }
-  .lang-switch {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex-shrink: 0;
-    margin-left: 2rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    line-height: 1;
-  }
-  .lang-switch__item {
-    color: var(--masthead-text);
-    text-decoration: none;
-    padding: 0.2rem 0.05rem;
-    user-select: none;
-  }
-  .lang-switch__item:hover {
-    color: var(--accent);
-  }
-  .lang-switch__item.is-current {
-    color: var(--accent);
-    font-weight: 700;
-  }
-  .lang-switch__sep {
-    color: var(--masthead-border);
-    opacity: 0.55;
   }
 </style>

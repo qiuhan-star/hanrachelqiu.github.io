@@ -1,18 +1,28 @@
 <div id="pf-overlay" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--bg-base, #fafbfc);">
   <div style="text-align:center;max-width:340px;padding:2.5em 2em;">
     <div style="font-size:2.8em;line-height:1;margin-bottom:0.4em;">🔒</div>
-    <h2 style="margin:0 0 0.5em;font-size:1.4em;color:var(--text-base, #1a1d24);">{{ include.title | default: "Password Required" }}</h2>
-    <p style="margin:0 0 1.2em;color:var(--text-muted, #6b7280);">{{ include.desc | default: "This portfolio is password protected." }}</p>
+    <h2 style="margin:0 0 0.5em;font-size:1.4em;color:var(--text-base, #1a1d24);">
+      <span data-lang="en">{{ include.title | default: "Password Required" }}</span>{% if include.title_zh %}<span data-lang="zh">{{ include.title_zh }}</span>{% endif %}
+    </h2>
+    <p style="margin:0 0 1.2em;color:var(--text-muted, #6b7280);">
+      <span data-lang="en">{{ include.desc | default: "This portfolio is password protected." }}</span>{% if include.desc_zh %}<span data-lang="zh">{{ include.desc_zh }}</span>{% endif %}
+    </p>
     <input id="pf-pwd" type="password" autocomplete="off" style="width:100%;box-sizing:border-box;padding:0.6em 0.8em;font-size:1em;border:1px solid var(--border-base, #d0d7de);border-radius:8px;background:var(--surface, #fff);color:var(--text-base, #1a1d24);margin-bottom:0.8em;" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" />
-    <button id="pf-go" style="width:100%;padding:0.6em 1em;font-size:1em;border:none;border-radius:8px;background:var(--accent, #5a7cd8);color:#fff;cursor:pointer;">{{ include.btn | default: "Unlock" }}</button>
-    <p id="pf-err" style="display:none;color:#c0392b;margin:0.8em 0 0;font-size:0.9em;">{{ include.err | default: "Incorrect password." }}</p>
+    <button id="pf-go" style="width:100%;padding:0.6em 1em;font-size:1em;border:none;border-radius:8px;background:var(--accent, #5a7cd8);color:#fff;cursor:pointer;">
+      <span data-lang="en">{{ include.btn | default: "Unlock" }}</span>{% if include.btn_zh %}<span data-lang="zh">{{ include.btn_zh }}</span>{% endif %}
+    </button>
+    <p id="pf-err" style="display:none;color:#c0392b;margin:0.8em 0 0;font-size:0.9em;">
+      <span data-lang="en">{{ include.err | default: "Incorrect password." }}</span>{% if include.err_zh %}<span data-lang="zh">{{ include.err_zh }}</span>{% endif %}
+    </p>
   </div>
 </div>
 <div id="pf-content" style="display:none"></div>
 <script>
-/* portfolio AES-GCM gate: the ciphertext lives in window.PF_CIPHER (set by the
-   portfolio-cipher-*.html include). We derive the key from the typed passphrase
-   with PBKDF2 and decrypt in the browser via Web Crypto. No plaintext ever ships. */
+/* portfolio / services AES-GCM gate: the ciphertext lives in window.PF_CIPHER
+   (set by the *-cipher-*.html include). We derive the key from the typed
+   passphrase with PBKDF2 and decrypt in the browser via Web Crypto. No plaintext
+   ever ships. For bilingual pages the decrypted HTML carries [data-lang] blocks;
+   after injecting we re-run window.__applyLang() so the right language shows. */
 (function () {
   var B64 = window.PF_CIPHER || "";
   var ov = document.getElementById("pf-overlay");
@@ -61,6 +71,8 @@
       if (!html) { err.style.display = "block"; inp.value = ""; inp.focus(); return; }
       err.style.display = "none";
       ct.innerHTML = html;
+      /* 双语页：注入的内容含 [data-lang] 块，按当前语言显隐 */
+      if (window.__applyLang) window.__applyLang();
       ct.style.display = "block";
       ov.style.display = "none";
       try { sessionStorage.setItem("pf_unlocked", "1"); } catch (e) {}

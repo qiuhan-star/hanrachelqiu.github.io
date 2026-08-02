@@ -1,0 +1,136 @@
+{% comment %} 同页多语下拉框：中文 / English / 한국어。选择后仅切换语言，不跳转 URL；
+ 当前语言存 localStorage，默认中文。한국어 暂留作第三选项（无译文时回落英文）。{% endcomment %}
+<div class="lang-dd" id="langDD">
+  <button type="button" class="lang-dd__btn" id="langBtn" aria-haspopup="listbox" aria-expanded="false">
+    <span id="langBtnLabel">中文</span>
+    <span class="lang-dd__caret" aria-hidden="true">&#9662;</span>
+  </button>
+  <ul class="lang-dd__menu" id="langMenu" role="listbox">
+    <li class="lang-dd__opt" data-lang="zh" role="option">中文</li>
+    <li class="lang-dd__opt" data-lang="en" role="option">English</li>
+    <li class="lang-dd__opt" data-lang="ko" role="option">&#54620;&#44397;&#50612;</li>
+  </ul>
+</div>
+
+<style>
+  /* 同页多语下拉框：配色全走 token，亮/暗自动适配，与主题切换按钮同高同右对齐 */
+  .lang-dd {
+    position: relative;
+    flex-shrink: 0;
+    margin-left: 1.5rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1;
+    user-select: none;
+  }
+  .lang-dd__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: transparent;
+    border: 1px solid var(--masthead-border, rgba(20,25,40,0.12));
+    color: var(--masthead-text, #1a1d24);
+    border-radius: 8px;
+    padding: 0.34rem 0.7rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .lang-dd__btn:hover { border-color: var(--accent, #5a7cd8); color: var(--accent, #5a7cd8); }
+  .lang-dd__caret { font-size: 0.7em; opacity: 0.7; }
+  .lang-dd__menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 124px;
+    margin: 0;
+    padding: 0.3rem;
+    list-style: none;
+    background: var(--bg-surface, #fff);
+    border: 1px solid var(--border-default, rgba(20,25,40,0.12));
+    border-radius: 10px;
+    box-shadow: var(--shadow-md, 0 4px 14px rgba(0,0,0,0.08));
+    z-index: 1000;
+    display: none;
+  }
+  .lang-dd.open .lang-dd__menu { display: block; }
+  .lang-dd__opt {
+    padding: 0.5rem 0.7rem;
+    border-radius: 7px;
+    color: var(--text-primary, #1a1d24);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .lang-dd__opt:hover { background: var(--accent-soft, rgba(90,124,216,0.10)); color: var(--accent, #5a7cd8); }
+  .lang-dd__opt.is-active { color: var(--accent, #5a7cd8); font-weight: 700; }
+  .lang-dd__opt.is-active::after { content: " \2713"; }
+</style>
+
+<script>
+/* 同页多语言切换：下拉框选择后仅切换显隐，不跳转 URL。
+   规则：html[data-lang] 记录当前语言；所有 [data-lang] 元素按当前语言显隐；
+   한국어 暂无译文，回落英文。window.__applyLang 暴露给密码锁页，解锁注入内容后复用。 */
+(function () {
+  var DD = document.getElementById('langDD');
+  if (!DD) return;
+  var btn = document.getElementById('langBtn');
+  var label = document.getElementById('langBtnLabel');
+  var menu = document.getElementById('langMenu');
+  var opts = menu ? Array.prototype.slice.call(menu.querySelectorAll('.lang-dd__opt')) : [];
+  var LABELS = { zh: '中文', en: 'English', ko: '한국어' };
+  var VALID = ['zh', 'en', 'ko'];
+
+  function currentLang() {
+    var l = document.documentElement.getAttribute('data-lang');
+    return VALID.indexOf(l) >= 0 ? l : 'zh';
+  }
+
+  window.__applyLang = function () {
+    var l = currentLang();
+    var show = (l === 'ko') ? 'en' : l; /* 한국어暂回落英文 */
+    var nodes = document.querySelectorAll('[data-lang]');
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      el.classList.toggle('lang-hidden', el.getAttribute('data-lang') !== show);
+    }
+    if (label) label.textContent = LABELS[l] || LABELS.zh;
+    opts.forEach(function (o) {
+      o.classList.toggle('is-active', o.getAttribute('data-lang') === l);
+    });
+  };
+
+  function setLang(l) {
+    if (VALID.indexOf(l) < 0) return;
+    document.documentElement.setAttribute('data-lang', l);
+    document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : l);
+    try { localStorage.setItem('site-lang', l); } catch (e) {}
+    window.__applyLang();
+    closeMenu();
+  }
+  function openMenu() { DD.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+  function closeMenu() { DD.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+
+  if (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      DD.classList.contains('open') ? closeMenu() : openMenu();
+    });
+  }
+  opts.forEach(function (o) {
+    o.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setLang(o.getAttribute('data-lang'));
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (DD && !DD.contains(e.target)) closeMenu();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  /* 首屏应用：依据 localStorage（默认中文）显隐，并标记 JS 就绪（解除初始隐藏） */
+  window.__applyLang();
+  document.documentElement.classList.add('lang-ready');
+})();
+</script>

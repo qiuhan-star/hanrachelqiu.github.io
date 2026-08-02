@@ -1,9 +1,9 @@
 /* encrypt-services.js
- * Mirror of encrypt-portfolio.js, but the Service page source is written in
- * Markdown (not raw HTML), so we convert it to HTML before encrypting.
- * Reads the (gitignored) plaintext _services/*.md and emits AES-GCM ciphertext
- * into _includes/services-cipher-*.html. The public repo only ever contains the
- * ciphertext; the plaintext never ships.
+ * Mirror of encrypt-portfolio.js, but the output is ONE bilingual ciphertext.
+ * The decrypted HTML carries both <div data-lang="en"> and <div data-lang="zh">
+ * blocks; after unlock, the page's global __applyLang() shows the matching one
+ * in-place (no URL jump). Plaintext source (_services/*.md) stays gitignored;
+ * only the ciphertext ever ships in the public repo.
  *
  * Usage:  node encrypt-services.js <passphrase>
  * Requires Node 20+ (global Web Crypto).
@@ -16,6 +16,7 @@ const { webcrypto } = nodeCrypto;
 const SRC_EN = '_services/services-en.md';
 const SRC_ZH = '_services/services-zh.md';
 const OUT = '_includes';
+const OUT_FILE = 'services-cipher.html';
 const PBKDF2_ITER = 150000;
 const SALT_LEN = 16;
 const IV_LEN = 12;
@@ -87,25 +88,22 @@ async function encryptText(plain) {
 }
 
 async function main() {
-  const enMd = fs.readFileSync(SRC_EN, 'utf8');
-  const zhMd = fs.readFileSync(SRC_ZH, 'utf8');
+  const enHtml = mdToHtml(fs.readFileSync(SRC_EN, 'utf8'));
+  const zhHtml = mdToHtml(fs.readFileSync(SRC_ZH, 'utf8'));
 
-  const enHtml = mdToHtml(enMd);
-  const zhHtml = mdToHtml(zhMd);
+  /* 单一密文同时携带两种语言；解锁后由 __applyLang() 显隐 */
+  const combined =
+    '<div data-lang="en">\n' + enHtml + '\n</div>\n' +
+    '<div data-lang="zh">\n' + zhHtml + '\n</div>';
 
-  const enCipher = await encryptText(enHtml);
-  const zhCipher = await encryptText(zhHtml);
+  const cipher = await encryptText(combined);
 
   fs.writeFileSync(
-    path.join(OUT, 'services-cipher-en.html'),
-    '<script>window.PF_CIPHER = ' + JSON.stringify(enCipher) + ';</script>\n'
-  );
-  fs.writeFileSync(
-    path.join(OUT, 'services-cipher-zh.html'),
-    '<script>window.PF_CIPHER = ' + JSON.stringify(zhCipher) + ';</script>\n'
+    path.join(OUT, OUT_FILE),
+    '<script>window.PF_CIPHER = ' + JSON.stringify(cipher) + ';</script>\n'
   );
 
-  console.log('OK. EN cipher length:', enCipher.length, 'ZH cipher length:', zhCipher.length);
+  console.log('OK. combined cipher length:', cipher.length);
   console.log('EN plaintext length was:', enHtml.length, 'ZH plaintext length was:', zhHtml.length);
 }
 

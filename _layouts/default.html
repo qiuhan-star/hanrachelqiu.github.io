@@ -5,7 +5,7 @@ layout: compress
 {% include base_path %}
 
 <!doctype html>
-<html lang="{{ page.lang | default: site.locale | slice: 0,2 }}" class="no-js">
+<html lang="{{ page.lang | default: 'zh-CN' }}" class="no-js">
   <head>
     {% include head.html %}
     {% include head/custom.html %}
@@ -218,7 +218,23 @@ layout: compress
       })();
     </script>
 
+    <script>
+      /* 同页多语：首屏前确定语言，避免闪烁。默认中文；localStorage 记忆上次选择。 */
+      (function () {
+        var l = null;
+        try { l = localStorage.getItem('site-lang'); } catch (e) {}
+        if (l !== 'zh' && l !== 'en' && l !== 'ko') l = 'zh';
+        document.documentElement.setAttribute('data-lang', l);
+        document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : l);
+      })();
+    </script>
+
     <style>
+      /* ===== 同页多语：JS 就绪前先隐藏所有 [data-lang]，避免开屏闪错语言；
+         就绪后由 .lang-hidden 类显隐（한국어 暂无译文时回落英文）===== */
+      html:not(.lang-ready) [data-lang] { display: none !important; }
+      [data-lang].lang-hidden { display: none !important; }
+
       /* ============================================================
          明暗主题 token 体系（2026-08-02 重设计）
          亮色 / 暗色 = 同一族色的两套明度，通过 [data-theme] 整体替换

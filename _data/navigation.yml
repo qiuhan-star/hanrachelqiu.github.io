@@ -1,32 +1,42 @@
 main:
   - title: "Publications"
+    title_zh: "出版物"
     url: /publications/
 
   - title: "Talks"
-    url: /talks/   
+    title_zh: "演讲"
+    url: /talks/
 
   - title: "Experience"
-    url: /experience/    
+    title_zh: "经历"
+    url: /experience/
 
   - title: "Awards"
-    url: /awards/   
+    title_zh: "获奖"
+    url: /awards/
 
   - title: "Services"
-    url: /services/  
+    title_zh: "服务"
+    url: /services/
 
   - title: "CV"
+    title_zh: "简历"
     url: /cv/
 
   - title: "Blog"
+    title_zh: "博客"
     url: /method-notes/
 
   - title: "Portfolio"
+    title_zh: "作品集"
     url: /portfolio/
 
   - title: "Guide"
+    title_zh: "指南"
     url: /markdown/
 
   - title: "PhD Simulator"
+    title_zh: "PhD 模拟器"
     url: /game-details.html
 
 zh-CN:
