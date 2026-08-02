@@ -162,13 +162,6 @@ for (var venue in byVenue) {
   });
   var vMarker = L.marker([v.lat, v.lng], { icon: venueIcon, interactive: true, zIndexOffset: 300 });
   vMarker.bindPopup(html);
-  /* hover a school: show the talk-title preview (and keep it visible) */
-  var tipTitles = [];
-  for (var k = 0; k < v.items.length; k++) {
-    var ti = v.items[k];
-    tipTitles.push('• ' + escapeHtml(isZh && ti.title_zh ? ti.title_zh : ti.title));
-  }
-  vMarker.bindTooltip('<div class="talkmap-tip">' + tipTitles.join('<br>') + '</div>', { direction: 'top', opacity: 0.96, className: 'talkmap-tooltip' });
   /* clicking a school flies in for a closer look and opens the detail box */
   vMarker.on('click', (function(lat, lng) {
     return function() { map.flyTo([lat, lng], 6, { duration: 0.8 }); };
