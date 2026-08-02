@@ -71,7 +71,7 @@ redirect_from:
 <button class="collapsible">Talks</button>
 <div class="content">
   <!-- Talks content here -->
-  <ul>{% for post in site.talks reversed %}
+  <ul>{% assign cv_talks = site.talks | where_exp: "post", "post.lang != 'zh-CN'" %}{% for post in cv_talks reversed %}
     {% include archive-single-talk-cv.html  %}
   {% endfor %}</ul>
 </div>

@@ -99,9 +99,12 @@ function escapeHtml(s) {
 
 /* group talks by venue (school/venue) so each school gets its own marker.
    Multiple talks at the same school share one marker; award flag bubbles up. */
+/* on the English map, hide talks presented in Chinese (lang: "zh") so Chinese-only
+   talks don't appear on the English interface; the Chinese map keeps them all */
+var visibleTalks = talksData.filter(function(t){ return isZh ? true : (t.lang !== 'zh'); });
 var byVenue = {};
-for (var i = 0; i < talksData.length; i++) {
-  var t = talksData[i];
+for (var i = 0; i < visibleTalks.length; i++) {
+  var t = visibleTalks[i];
   if (!byVenue[t.venue]) { byVenue[t.venue] = { lat: t.lat, lng: t.lng, city: t.city, items: [], award: false }; }
   byVenue[t.venue].items.push(t);
   if (t.award) { byVenue[t.venue].award = true; }
