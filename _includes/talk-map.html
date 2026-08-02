@@ -1,8 +1,5 @@
-<!-- Multi-mode talks viewer: 6 switchable modes, all generated from the
-     talks collection (single source of truth). Leaflet is vendored locally
-     (no external CDN) so it loads in mainland China; the map uses NO tile
-     layer (solid ocean background) so it never goes gray. -->
-<link rel="stylesheet" href="{{ '/assets/leaflet/leaflet.css' | absolute_url }}" />
+<!-- Multi-mode talks viewer: 3 switchable modes (City wall / Journey / Text),
+     all generated from the talks collection (single source of truth). -->
 <style>
   #talkMapWrap { position: relative; }
   .talkmap-summary { color:#5c6573; font-size:0.95rem; margin:0 0 1em; }
@@ -12,22 +9,7 @@
   .talkmap-panel { display:none; }
   .talkmap-panel.active { display:block; }
 
-  /* map */
-  .talkMap { height:520px; width:100%; border-radius:12px; border:1px solid #e6e9ef; background:#eaf0f4; z-index:1; }
-  .leaflet-div-icon.talkmap-divicon { background:transparent; border:none; display:flex; align-items:center; }
-  .talkmap-pin-symbol { width:16px; height:16px; border-radius:50% 50% 50% 0; background:#7c9bff; transform:rotate(-45deg); border:2px solid #fff; box-shadow:0 1px 3px rgba(0,0,0,.35); flex:0 0 auto; }
-  .talkmap-pin-symbol.school { background:#2a7f3e; }
-  .talkmap-pin-symbol.award { background:#d4af37; }
-  .talkmap-venue-label { margin-left:6px; background:#fff; border:1px solid #ccc; color:#1a1a1a; font-size:12px; font-weight:600; box-shadow:0 1px 3px rgba(0,0,0,.25); padding:2px 7px; border-radius:10px; white-space:nowrap; }
-  .talkmap-pop h4 { margin:0 0 .4em; font-size:1.05em; }
-  .talkmap-pop ul { margin:.2em 0 0; padding-left:1.15em; }
-  .talkmap-pop li { margin-bottom:.6em; }
-  .talkmap-pop .meta { color:#555; display:block; }
-  .talkmap-pop .badge { color:#2a7f3e; font-weight:600; }
-  .talkmap-pop .award { color:#b8860b; font-weight:600; }
-  .talkmap-pop .talkmap-ov { margin:.6em 0 0; }
-  .talkmap-pop .talkmap-ov a { color:#2a7f3e; font-weight:600; text-decoration:none; }
-  .talkmap-pop .talkmap-ov a:hover { text-decoration:underline; }
+  /* (map / map+wall / list-with-location modes removed per request) */
 
   /* wall */
   .talkmap-stat { display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap; }
@@ -83,6 +65,10 @@
   :root[data-theme="dark"] .talkmap-jaxis .dot { background:#7c9bff; border-color:#1c1f26; }
   :root[data-theme="dark"] .talkmap-jaxis .date { color:#7c9bff; }
   :root[data-theme="dark"] .talkmap-jaxis .loc { color:#9aa3b2; }
+  .talkmap-jcard .venue { color:#5c6573; font-size:.8rem; margin-top:6px; opacity:.9; }
+  :root[data-theme="dark"] .talkmap-jcard .venue { color:#9aa3b2; }
+  .cc { display:inline-block; font-size:.66rem; font-weight:700; letter-spacing:.04em; padding:1px 6px; border-radius:5px; background:#eef2fb; color:#3d5a9e; vertical-align:middle; margin-left:4px; }
+  :root[data-theme="dark"] .cc { background:#222b3d; color:#9db4e8; }
   .talkmap-yh { font-size:1.05rem; font-weight:700; color:#5a7cd8; margin:22px 0 10px; border-left:4px solid #5a7cd8; padding-left:10px; }
   .talkmap-talk { background:#fff; border:1px solid #e6e9ef; border-radius:10px; padding:11px 15px; margin-bottom:9px; }
   .talkmap-talk .t { font-weight:600; }
@@ -109,13 +95,7 @@
   :root[data-theme="dark"] .talkmap-text .pill.inv  { background:#322d1e; color:#e0c878; }
   .talkmap-yh .cnt { font-size:.8rem; color:#8a93a2; font-weight:400; margin-left:8px; }
 
-  /* list with inline location */
-  .talkmap-ll .ll-card { background:#fff; border:1px solid #e6e9ef; border-radius:10px; padding:12px 16px; margin-bottom:10px; position:relative; }
-  .talkmap-ll .ll-card .t { font-weight:600; font-size:0.95rem; padding-right:130px; }
-  .talkmap-ll .ll-loc { position:absolute; top:12px; right:16px; display:flex; align-items:center; gap:6px; font-size:0.82rem; color:#5c6573; }
-  .talkmap-ll .ll-loc .talkmap-dot { width:9px; height:9px; }
-  .talkmap-ll .ll-loc .award { color:#b8860b; font-weight:600; }
-  @media (max-width:600px){ .talkMap { height:380px; } }
+  /* (list-with-location styles removed per request) */
 </style>
 
 <div id="talkMapWrap">
@@ -128,23 +108,16 @@
   <p class="talkmap-summary"><strong>{{ talk_items.size }}</strong> {% if page.lang == 'zh-CN' %}场受邀演讲{% else %}invited talks{% endif %} · {{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }}</p>
 
   <div class="talkmap-seg" id="talkMapSeg">
-    <button data-mode="map">{% if page.lang == 'zh-CN' %}地图（无瓦片）{% else %}Map (no tiles){% endif %}</button>
     <button data-mode="wall">{% if page.lang == 'zh-CN' %}城市墙{% else %}City wall{% endif %}</button>
     <button data-mode="journey">{% if page.lang == 'zh-CN' %}足迹{% else %}Journey{% endif %}</button>
     <button data-mode="text">{% if page.lang == 'zh-CN' %}纯文字版{% else %}Text only{% endif %}</button>
-    <button data-mode="mapwall">{% if page.lang == 'zh-CN' %}地图+城市墙{% else %}Map + wall{% endif %}</button>
-    <button data-mode="listloc">{% if page.lang == 'zh-CN' %}列表内嵌定位{% else %}List + location{% endif %}</button>
   </div>
 
-  <div class="talkmap-panel" id="panel-map"><div id="talkMap" class="talkMap"></div></div>
   <div class="talkmap-panel" id="panel-wall"></div>
   <div class="talkmap-panel" id="panel-journey"></div>
   <div class="talkmap-panel talkmap-text" id="panel-text"></div>
-  <div class="talkmap-panel" id="panel-mapwall"><div id="talkMap2" class="talkMap"></div><div id="mapwallWall" style="margin-top:16px;"></div></div>
-  <div class="talkmap-panel talkmap-ll" id="panel-listloc"></div>
 </div>
 
-<script src="{{ '/assets/leaflet/leaflet.js' | absolute_url }}"></script>
 <script>
 /* single source of truth: talks from the Jekyll collection (Liquid -> JSON) */
 var talksData = [
@@ -190,6 +163,32 @@ var shortNames = {
   "Edith Cowan University": { zh:"埃迪斯科文", en:"ECU" },
   "Xi'an Jiaotong University": { zh:"西安交大", en:"XJTU" }
 };
+/* venue -> ISO country/region code. Only Edith Cowan University (Australia) is
+   outside China; Hong Kong / Macau / Taiwan are all tagged CN. */
+var venueCountry = {
+  "The Hong Kong University of Science and Technology (HKUST)": "CN",
+  "Shenyang Normal University": "CN",
+  "Chengzhi Building 108, School of Public Affairs/Institute of Public Policy, Xiamen University": "CN",
+  "Tsinghua University": "CN",
+  "Chinese University of Hong Kong": "CN",
+  "National Taiwan University": "CN",
+  "Edith Cowan University": "AU",
+  "Xi'an Jiaotong University": "CN"
+};
+function countryFromVenue(v){ return venueCountry[canonVenue(v)] || 'CN'; }
+function countryFromLoc(loc){
+  if(!loc) return 'CN';
+  if(isZh) return loc.indexOf('澳大利亚') === 0 ? 'AU' : 'CN';
+  return loc.split(',').pop().trim() === 'Australia' ? 'AU' : 'CN';
+}
+function countryOf(t){ return countryFromVenue(t.venue); }
+/* venue display name: ZH page shows the full Chinese name; EN page uses the
+   short code (XJTU, XMU, ...) to avoid over-long English school names. */
+function fullVenue(t){
+  if(isZh) return t.venue;
+  var s = shortNames[canonVenue(t.venue)];
+  return s ? s.en : t.venue.split('(')[0].trim();
+}
 var pinOffset = {
   "The Hong Kong University of Science and Technology (HKUST)": [8, 40],
   "Chinese University of Hong Kong": [8, -8]
@@ -223,35 +222,7 @@ geoTalks.forEach(function(t){
   if(t.award){ byVenue[t.venue].award = true; }
 });
 
-/* ---- build the no-tile Leaflet maps ---- */
-function buildMap(id, key){
-  var map = L.map(id, { zoomControl:true }).setView([30, 114], 4);
-  var all = [];
-  for(var venue in byVenue){
-    var v = byVenue[venue];
-    var html = '<div class="talkmap-pop"><h4>' + escapeHtml(venue) + '</h4><p class="meta">' + escapeHtml(v.city) + '</p><ul>';
-    v.items.forEach(function(it){
-      html += '<li><strong>' + escapeHtml(dispTitle(it)) + '</strong>';
-      html += '<span class="meta">🏛️ ' + escapeHtml(it.conf) + '</span>';
-      var ll = langLabel(it); if(ll){ html += '<span class="badge">🗣️ ' + ll + '</span>'; }
-      if(it.award){ html += '<span class="award">🏆 ' + escapeHtml(it.award) + '</span>'; }
-      html += '<span class="meta">📅 ' + escapeHtml(it.date) + '</span></li>';
-    });
-    html += '<p class="talkmap-ov"><a href="#" onclick="talkMapOverview(); return false;">' + (isZh ? '⤢ 回到全览' : '⤢ Overview') + '</a></p></ul></div>';
-    var anchor = pinOffset[canonVenue(venue)] ? pinOffset[canonVenue(venue)] : [8, 16];
-    var ic = L.divIcon({ className:'talkmap-divicon', html:'<span class="talkmap-pin-symbol' + (v.award ? ' award' : ' school') + '"></span><span class="talkmap-venue-label">' + escapeHtml(shortOf(venue)) + '</span>', iconSize:[120,20], iconAnchor:anchor });
-    L.marker([v.lat, v.lng], { icon:ic, interactive:true, zIndexOffset:300 }).addTo(map).bindPopup(html);
-    all.push([v.lat, v.lng]);
-  }
-  map.whenReady(function(){ requestAnimationFrame(function(){ map.invalidateSize(); if(all.length){ map.fitBounds(all, { padding:[50,50], maxZoom:5 }); } window[key] = { map:map, all:all }; }); });
-}
-buildMap('talkMap', '__m1');
-buildMap('talkMap2', '__m2');
-
-function talkMapOverview(){
-  if(activeMode === 'map' && window.__m1){ window.__m1.map.flyToBounds(window.__m1.all, { padding:[50,50], maxZoom:5, duration:0.6 }); }
-  if(activeMode === 'mapwall' && window.__m2){ window.__m2.map.flyToBounds(window.__m2.all, { padding:[50,50], maxZoom:5, duration:0.6 }); }
-}
+  /* (Leaflet map builders removed; remaining modes: City wall / Journey / Text) */
 
 /* ---- wall panel ---- */
 (function(){
@@ -272,16 +243,16 @@ function talkMapOverview(){
     + '</div><div class="talkmap-grid">';
   cityNames.forEach(function(cn){
     var c = cities[cn];
-    html += '<div class="talkmap-city"><span class="count">' + c.count + (isZh ? ' 场' : '') + '</span><div><span class="cn">' + escapeHtml(cn) + '</span><span class="en">' + escapeHtml(c.en.split(',').slice(1).join(',').trim()) + '</span></div><ul>';
+    var cc = countryFromLoc(c.en);
+    html += '<div class="talkmap-city"><span class="count">' + c.count + (isZh ? ' 场' : '') + '</span><div><span class="cn">' + escapeHtml(cn) + '</span><span class="cc">' + cc + '</span></div><ul>';
     Object.keys(c.schools).forEach(function(v){
       var s = c.schools[v];
-      html += '<li><span class="talkmap-dot ' + (s.award ? 'award' : 'school') + '"></span>' + escapeHtml(s.short) + (s.award ? '<span class="talkmap-aw">🏆</span>' : '') + '<span class="n2">' + s.count + '</span></li>';
+      html += '<li><span class="talkmap-dot ' + (s.award ? 'award' : 'school') + '"></span>' + escapeHtml(fullVenue({ venue:v })) + (s.award ? '<span class="talkmap-aw">🏆</span>' : '') + '<span class="n2">' + s.count + '</span></li>';
     });
     html += '</ul></div>';
   });
   html += '</div>';
   document.getElementById('panel-wall').innerHTML = html;
-  document.getElementById('mapwallWall').innerHTML = html;
 })();
 
 /* ---- journey panel: vertical timeline, spine on the right, bottom→top ---- */
@@ -299,15 +270,15 @@ function talkMapOverview(){
     if(t.permalink){ titleHtml = '<a href="' + escapeHtml(t.permalink) + '">' + titleHtml + '</a>'; }
     var meta = kindPill(t)
       + ' <span class="sep">·</span> ' + escapeHtml(t.conf)
-      + ' <span class="sep">·</span> ' + escapeHtml(t.city.split(',')[0].trim())
       + (t.lang ? ' <span class="sep">·</span> <span class="zh">' + escapeHtml(langLabel(t)) + '</span>' : '')
       + (t.award ? ' <span class="sep">·</span> <span class="award">🏆 ' + escapeHtml(t.award) + '</span>' : '');
-    var loc = escapeHtml(t.city.split(',')[0].trim() + ' · ' + shortOf(t.venue));
+    var cityLoc = escapeHtml(t.city.split(',')[0].trim()) + ' <span class="cc">' + countryOf(t) + '</span>';
     html += '<div class="talkmap-jnode"><div class="talkmap-jcard"><div class="t">' + titleHtml + '</div>'
-      + '<div class="m">' + meta + '</div></div>'
+      + '<div class="m">' + meta + '</div>'
+      + '<div class="venue">' + escapeHtml(fullVenue(t)) + '</div></div>'
       + '<div class="talkmap-jaxis' + (t.award ? ' award' : '') + '"><span class="dot"></span>'
       + '<div class="date">' + escapeHtml(t.date.slice(0,7)) + '</div>'
-      + '<div class="loc">' + loc + '</div></div></div>';
+      + '<div class="loc">' + cityLoc + '</div></div></div>';
   });
   html += '</div>';
   document.getElementById('panel-journey').innerHTML = html;
@@ -322,8 +293,8 @@ function talkMapOverview(){
     var cls = (k === 'workshop') ? 'work' : (k === 'seminar') ? 'sem' : (k === 'invited') ? 'inv' : 'conf';
     var out = '<span class="pill ' + cls + '">' + kl + '</span>'
       + ' <span class="sep">·</span> ' + escapeHtml(t.conf)
-      + ' <span class="sep">·</span> ' + escapeHtml(t.venue)
-      + ' <span class="sep">·</span> ' + escapeHtml(t.city)
+      + ' <span class="sep">·</span> ' + escapeHtml(fullVenue(t))
+      + ' <span class="sep">·</span> ' + escapeHtml(t.city.split(',')[0].trim()) + ' <span class="cc">' + countryOf(t) + '</span>'
       + ' <span class="sep">·</span> ' + escapeHtml(t.date);
     if(t.lang){ out += ' <span class="sep">·</span> <span class="zh">' + escapeHtml(langLabel(t)) + '</span>'; }
     if(t.award){ out += ' <span class="sep">·</span> <span class="award">🏆 ' + escapeHtml(t.award) + '</span>'; }
@@ -345,23 +316,7 @@ function talkMapOverview(){
   document.getElementById('panel-text').innerHTML = html;
 })();
 
-/* ---- list with inline location panel ---- */
-(function(){
-  var years = {};
-  geoTalks.forEach(function(t){ var y = t.date.slice(0,4); (years[y] = years[y] || []).push(t); });
-  var ys = Object.keys(years).sort().reverse();
-  var html = '';
-  ys.forEach(function(y){
-    html += '<div class="talkmap-yh">' + y + '</div>';
-    years[y].forEach(function(t){
-      var cls = t.award ? 'award' : 'school';
-      html += '<div class="ll-card"><div class="t">' + escapeHtml(dispTitle(t)) + '</div>'
-        + '<div class="ll-loc"><span class="talkmap-dot ' + cls + '"></span>' + escapeHtml(t.city.split(',')[0].trim()) + ' · ' + escapeHtml(shortOf(t.venue))
-        + (t.award ? ' <span class="' + cls + '">🏆</span>' : '') + '</div></div>';
-    });
-  });
-  document.getElementById('panel-listloc').innerHTML = html;
-})();
+  /* (list-with-location panel removed per request) */
 
 /* ---- switcher + persistence ---- */
 var activeMode = 'text';
@@ -370,8 +325,6 @@ function activate(mode){
   activeMode = mode;
   seg.querySelectorAll('button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-mode') === mode); });
   document.querySelectorAll('.talkmap-panel').forEach(function(p){ p.classList.toggle('active', p.id === 'panel-' + mode); });
-  if(mode === 'map' && window.__m1){ window.__m1.map.invalidateSize(); window.__m1.map.fitBounds(window.__m1.all, { padding:[50,50], maxZoom:5 }); }
-  if(mode === 'mapwall' && window.__m2){ window.__m2.map.invalidateSize(); window.__m2.map.fitBounds(window.__m2.all, { padding:[50,50], maxZoom:5 }); }
   try { localStorage.setItem('hq-talks-mode', mode); } catch(e){}
 }
 seg.addEventListener('click', function(e){
