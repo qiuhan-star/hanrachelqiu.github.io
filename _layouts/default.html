@@ -5,7 +5,7 @@ layout: compress
 {% include base_path %}
 
 <!doctype html>
-<html lang="{{ page.lang | default: 'zh-CN' }}" class="no-js">
+<html lang="{{ page.lang | default: 'en' }}" class="no-js">
   <head>
     {% include head.html %}
     {% include head/custom.html %}
@@ -219,11 +219,11 @@ layout: compress
     </script>
 
     <script>
-      /* 同页多语：首屏前确定语言，避免闪烁。默认中文；localStorage 记忆上次选择。 */
+      /* 同页多语：首屏前确定语言，避免闪烁。默认英文；localStorage 记忆上次选择。 */
       (function () {
         var l = null;
         try { l = localStorage.getItem('site-lang'); } catch (e) {}
-        if (l !== 'zh' && l !== 'en' && l !== 'ko') l = 'zh';
+        if (l !== 'zh' && l !== 'en' && l !== 'ko') l = 'en';
         document.documentElement.setAttribute('data-lang', l);
         document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : l);
       })();

@@ -1,13 +1,13 @@
 {% comment %} 同页多语下拉框：中文 / English / 한국어。选择后仅切换语言，不跳转 URL；
- 当前语言存 localStorage，默认中文。한국어 暂留作第三选项（无译文时回落英文）。{% endcomment %}
+ 当前语言存 localStorage，默认英文。한국어 暂留作第三选项（无译文时回落英文）。{% endcomment %}
 <div class="lang-dd" id="langDD">
   <button type="button" class="lang-dd__btn" id="langBtn" aria-haspopup="listbox" aria-expanded="false">
-    <span id="langBtnLabel">中文</span>
+    <span id="langBtnLabel">English</span>
     <span class="lang-dd__caret" aria-hidden="true">&#9662;</span>
   </button>
   <ul class="lang-dd__menu" id="langMenu" role="listbox">
-    <li class="lang-dd__opt" data-lang="zh" role="option">中文</li>
     <li class="lang-dd__opt" data-lang="en" role="option">English</li>
+    <li class="lang-dd__opt" data-lang="zh" role="option">中文</li>
     <li class="lang-dd__opt" data-lang="ko" role="option">&#54620;&#44397;&#50612;</li>
   </ul>
 </div>
@@ -82,7 +82,7 @@
 
   function currentLang() {
     var l = document.documentElement.getAttribute('data-lang');
-    return VALID.indexOf(l) >= 0 ? l : 'zh';
+    return VALID.indexOf(l) >= 0 ? l : 'en';
   }
 
   window.__applyLang = function () {
@@ -93,7 +93,7 @@
       var el = nodes[i];
       el.classList.toggle('lang-hidden', el.getAttribute('data-lang') !== show);
     }
-    if (label) label.textContent = LABELS[l] || LABELS.zh;
+    if (label) label.textContent = LABELS[l] || LABELS.en;
     opts.forEach(function (o) {
       o.classList.toggle('is-active', o.getAttribute('data-lang') === l);
     });
@@ -129,7 +129,7 @@
     if (e.key === 'Escape') closeMenu();
   });
 
-  /* 首屏应用：依据 localStorage（默认中文）显隐，并标记 JS 就绪（解除初始隐藏） */
+  /* 首屏应用：依据 localStorage（默认英文）显隐，并标记 JS 就绪（解除初始隐藏） */
   window.__applyLang();
   document.documentElement.classList.add('lang-ready');
 })();
