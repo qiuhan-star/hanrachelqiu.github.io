@@ -99,12 +99,11 @@ function escapeHtml(s) {
 
 /* group talks by venue (school/venue) so each school gets its own marker.
    Multiple talks at the same school share one marker; award flag bubbles up. */
-/* on the English map, hide talks presented in Chinese (lang: "zh") so Chinese-only
-   talks don't appear on the English interface; the Chinese map keeps them all */
-var visibleTalks = talksData.filter(function(t){ return isZh ? true : (t.lang !== 'zh'); });
+/* show the talk title in the page language: Chinese title on the Chinese map,
+   English title on the English map. No entry is hidden by language. */
 var byVenue = {};
-for (var i = 0; i < visibleTalks.length; i++) {
-  var t = visibleTalks[i];
+for (var i = 0; i < talksData.length; i++) {
+  var t = talksData[i];
   if (!byVenue[t.venue]) { byVenue[t.venue] = { lat: t.lat, lng: t.lng, city: t.city, items: [], award: false }; }
   byVenue[t.venue].items.push(t);
   if (t.award) { byVenue[t.venue].award = true; }
@@ -125,8 +124,8 @@ for (var venue in byVenue) {
   var html = '<div class="talkmap-pop"><h4>' + escapeHtml(venue) + '</h4><p class="meta">' + escapeHtml(v.city) + '</p><ul>';
   for (var j = 0; j < v.items.length; j++) {
     var it = v.items[j];
-    html += '<li><strong>' + escapeHtml(it.title) + '</strong>';
-    if (it.title_zh) { html += '<br>（' + escapeHtml(it.title_zh) + '）'; }
+    var dispTitle = (isZh && it.title_zh) ? it.title_zh : it.title;
+    html += '<li><strong>' + escapeHtml(dispTitle) + '</strong>';
     html += '<span class="meta">🏛️ ' + escapeHtml(it.conf) + '</span>';
     if (it.lang) { var langLabel = (it.lang === 'zh') ? (isZh ? '中文报告' : 'Presented in Chinese') : (isZh ? '英文报告' : 'Presented in English'); html += '<span class="badge">🗣️ ' + langLabel + '</span>'; }
     if (it.award) { html += '<span class="award">🏆 ' + escapeHtml(it.award) + '</span>'; }
