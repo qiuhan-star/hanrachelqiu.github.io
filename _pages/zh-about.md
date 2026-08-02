@@ -37,9 +37,9 @@ lang_alt: /
 
 <span style="color: #888888;">**[2025年9月]**</span> 🎓 **进入浙江大学攻读博士** —— 开启行政管理专业博士阶段的学习。
 
-<span style="color: #888888;">**[2026年7月]**</span> 🎤 **学术参与：** *很高兴赴澳大利亚珀斯进行学术交流。* >> [**会议详情**]({{ '/talks/' | absolute_url }})
+<span style="color: #888888;">**[2026年4月]**</span> 🎤 **学术参与：** *很高兴赴澳大利亚珀斯参加 IRSPM 2026 会议。* >> [**会议详情**]({{ '/zh/talks/2026-04-08-irspm-coproduction' | absolute_url }})
 
-<span style="color: #888888;">**[2026年7月]**</span> 🎤 **学术参与：** *很高兴赴西安交通大学进行学术交流。* >> [**访问详情**]({{ '/talks/' | absolute_url }})
+<span style="color: #888888;">**[2026年7月]**</span> 🎤 **学术参与：** *很高兴赴西安交通大学参加中国社会学会 2026 年会。* >> [**会议详情**]({{ '/zh/talks/2026-07-10-mobilization-entities' | absolute_url }})
 
 <details markdown="1">
 <summary>显示更多</summary>
