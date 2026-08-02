@@ -29,13 +29,13 @@ author_profile: true
 {% for post in sorted %}
   {% assign y = post.date | date: '%Y' %}
   {% if y != current_year %}
-    {% unless forloop.first %}</div>{% endunless %}
+    {% if forloop.index0 > 0 %}</div>{% endif %}
     <h2 class="talks-year-head">{{ y }}</h2>
     <div class="talk-year-group">
     {% assign current_year = y %}
   {% endif %}
   {% include archive-single-talk.html %}
-  {% if forloop.last %}</div>{% endunless %}
+  {% if forloop.last %}</div>{% endif %}
 {% endfor %}
 
 {% include talk-map.html %}
