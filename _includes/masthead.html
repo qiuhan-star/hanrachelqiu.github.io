@@ -21,24 +21,15 @@
         <ul class="hidden-links hidden"></ul>
       </nav>
     </div>
-    {% comment %} 语言切换：点击展开下拉选择框，便于以后扩展更多语言（如韩语） {% endcomment %}
+    {% comment %} 语言切换：EN / 中文 直接并列，点中文一步直达对应语言页 {% endcomment %}
     {% assign is_zh = false %}{% if page.lang == "zh-CN" %}{% assign is_zh = true %}{% endif %}
-    <details class="lang-dropdown">
-      <summary class="lang-dropdown__toggle" aria-label="选择语言 / Select language">
-        <span class="lang-dropdown__current">{% if is_zh %}中文{% else %}EN{% endif %}</span>
-        <span class="lang-dropdown__caret" aria-hidden="true">&#9662;</span>
-      </summary>
-      <ul class="lang-dropdown__menu">
-        <li>
-          <a class="lang-dropdown__item{% unless is_zh %} is-current{% endunless %}"
-             href="{% if is_zh %}{{ page.lang_alt | default: '/' | absolute_url }}{% else %}{{ page.url | default: '/' | absolute_url }}{% endif %}">English</a>
-        </li>
-        <li>
-          <a class="lang-dropdown__item{% if is_zh %} is-current{% endif %}"
-             href="{% if is_zh %}{{ page.url | default: '/zh/' | absolute_url }}{% else %}{{ page.lang_alt | default: '/zh/' | absolute_url }}{% endif %}">&#20013;&#25991;</a>
-        </li>
-      </ul>
-    </details>
+    <span class="lang-switch">
+      <a class="lang-switch__item{% unless is_zh %} is-current{% endunless %}"
+         href="{% if is_zh %}{{ page.lang_alt | default: '/' | absolute_url }}{% else %}{{ page.url | default: '/' | absolute_url }}{% endif %}">EN</a>
+      <span class="lang-switch__sep" aria-hidden="true">|</span>
+      <a class="lang-switch__item{% if is_zh %} is-current{% endif %}"
+         href="{% if is_zh %}{{ page.url | default: '/zh/' | absolute_url }}{% else %}{{ page.lang_alt | default: '/zh/' | absolute_url }}{% endif %}">&#20013;&#25991;</a>
+    </span>
       <button id="light-toggle" class="theme-toggle" title="Change theme" aria-label="Change theme">
         <svg id="light-toggle-system" aria-hidden="true" width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -178,70 +169,36 @@
     min-width: 0;
   }
 
-  /* 语言切换下拉：让出右上角固定的暗色开关；面板配色全走 token，亮暗自动适配 */
+  /* 语言切换：EN / 中文 直接并列，配色全走 token，亮暗自动适配 */
   .masthead,
   .masthead__inner-wrap {
     overflow: visible;
   }
-  .lang-dropdown {
-    position: relative;
-    display: inline-block;
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     flex-shrink: 0;
     margin-left: 2rem;
-  }
-  .lang-dropdown > summary {
-    list-style: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    padding: 0.32rem 0.6rem;
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     font-weight: 600;
-    color: var(--masthead-text);
-    background: var(--masthead-bg);
-    border: 1px solid var(--masthead-border);
-    border-radius: 6px;
     line-height: 1;
+  }
+  .lang-switch__item {
+    color: var(--masthead-text);
+    text-decoration: none;
+    padding: 0.2rem 0.05rem;
     user-select: none;
   }
-  .lang-dropdown > summary::-webkit-details-marker { display: none; }
-  .lang-dropdown > summary:hover {
-    border-color: var(--accent);
+  .lang-switch__item:hover {
     color: var(--accent);
   }
-  .lang-dropdown__caret { font-size: 0.6rem; opacity: 0.7; }
-  .lang-dropdown__menu {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    min-width: 116px;
-    margin: 0;
-    padding: 0.3rem 0;
-    list-style: none;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-default);
-    border-radius: 8px;
-    box-shadow: var(--shadow-md);
-    z-index: 1200;
-    display: none;
-  }
-  .lang-dropdown[open] > .lang-dropdown__menu { display: block; }
-  .lang-dropdown__item {
-    display: block;
-    padding: 0.5rem 0.9rem;
-    font-size: 0.82rem;
-    color: var(--text-primary);
-    text-decoration: none;
-    white-space: nowrap;
-  }
-  .lang-dropdown__item:hover {
-    background: var(--accent-soft);
-    color: var(--accent);
-  }
-  .lang-dropdown__item.is-current {
+  .lang-switch__item.is-current {
     color: var(--accent);
     font-weight: 700;
-    background: var(--accent-soft);
+  }
+  .lang-switch__sep {
+    color: var(--masthead-border);
+    opacity: 0.55;
   }
 </style>
