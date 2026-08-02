@@ -172,12 +172,13 @@ layout: compress
 
       /* 暗色模式开关：固定在顶栏右上方，始终位于开屏层之上 */
       body > .theme-toggle {
-        position: fixed;
+        position: fixed !important;
         top: 16px;
         right: 16px;
-        z-index: 10000;
+        z-index: 2147483647;
         margin: 0;
         padding: 0;
+        pointer-events: auto !important;
       }
       /* 手动切换暗色时，开屏页也跟随变暗 */
       body.dark .preloader {
