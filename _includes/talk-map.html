@@ -1,5 +1,7 @@
-<!-- Self-contained Leaflet map of talk locations (HTTPS OSM tiles, no geocoding dependency) -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<!-- Self-contained Leaflet map of talk locations. Leaflet is vendored locally
+     under assets/leaflet/ (no external CDN) so it loads reliably in mainland
+     China; tiles use CARTO basemaps (also China-accessible). No geocoding. -->
+<link rel="stylesheet" href="{{ '/assets/leaflet/leaflet.css' | absolute_url }}" />
 <style>
   #talkMapWrap { position: relative; margin: 0.5em 0 1.5em; }
   #talkMap { height: 520px; width: 100%; border-radius: 8px; z-index: 1; }
@@ -59,7 +61,7 @@
   <button id="talkMapReset" class="talkmap-reset" aria-label="{% if page.lang == 'zh-CN' %}返回全览{% else %}Reset to overview{% endif %}">{% if page.lang == 'zh-CN' %}⤢ 全览{% else %}⤢ Overview{% endif %}</button>
 </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{{ '/assets/leaflet/leaflet.js' | absolute_url }}"></script>
 <script>
 /* talk locations data: one entry per talk. Grouped by venue (school) below so
    different schools in the same city (e.g. HKUST vs CUHK in Hong Kong) get their
@@ -135,9 +137,10 @@ for (var venue in byVenue) {
 }
 
 var map = L.map('talkMap').setView([30, 114], 4);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 18,
-  attribution: '&copy; OpenStreetMap contributors'
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  subdomains: 'abcd',
+  maxZoom: 19,
+  attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
 }).addTo(map);
 
 /* build one marker per venue (school). Schools are hidden by default and only
