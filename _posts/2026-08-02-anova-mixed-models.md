@@ -10,7 +10,7 @@ tags:
   - Mixed Models
 ---
 
-## The ANOVA reflex, and where it breaks ／ ANOVA 反射，以及它哪里会断
+## The ANOVA reflex, and where it breaks
 
 ANOVA is usually the first "real" statistical method researchers learn, and it shows: people reach for it by reflex.
 ANOVA 通常是研究者学会的第一个"正经"统计方法，毛病也出在这：大家会条件反射般地用它。
@@ -45,7 +45,7 @@ ANOVA's elegance assumes otherwise.
 Repeated-measures ANOVA patches this but is brittle: it demands complete cases and struggles with time-varying covariates and attrition.
 重复测量 ANOVA 打补丁，但很脆弱：它要求完整个案，且难以处理时变协变量和样本流失。
 
-## What mixed-effects models buy you ／ 混合效应模型能给你什么
+## What mixed-effects models buy you
 
 **Random effects model the clustering explicitly.** A random intercept for "district" lets each district have its own baseline while you still estimate the overall effect.
 **用随机效应把聚类显式建模出来。** 给"区县"设一个随机截距，让每个区县有自己的基线，同时你仍能估计总体效应。
@@ -59,7 +59,7 @@ Repeated-measures ANOVA patches this but is brittle: it demands complete cases a
 **Crossed random effects.** E.g., variation due to *individual* and variation due to *item/survey-wave* can both be modeled at once.
 **交叉随机效应。** 比如由个体带来的变异和由题目/调查波次带来的变异，可以一次都建进去。
 
-## A public administration example ／ 一个公共管理例子
+## A public administration example
 
 Suppose you study whether a training program raises civil servants' performance, and your data are clustered in bureaus and measured at three time points.
 假设你研究某个培训项目是否提升了公务员绩效，数据按部门聚类、在三个时间点测量。
@@ -79,7 +79,7 @@ A mixed model handles both:
 — a fixed effect for the treatment–time interaction, a random intercept (and slope) for bureau, and a random intercept for the individual.
 —— 固定效应是"处理×时间"交互，随机部分是部门的随机截距（及斜率）加上个体的随机截距。
 
-## How to actually run it ／ 到底怎么跑
+## How to actually run it
 
 **R (`lme4`):** `lmer(performance ~ treatment * time + (1 + time | bureau) + (1 | employee), data = d)`.
 **R（`lme4`）：** `lmer(performance ~ treatment * time + (1 + time | bureau) + (1 | employee), data = d)`。
@@ -99,7 +99,7 @@ A significant fixed effect with a near-zero ICC is a different story than one wi
 **Watch for convergence failures and singular fits** — they usually signal you specified more random structure than the data support.
 **盯住收敛失败与奇异拟合**——它们通常说明你设定的随机结构超出了数据能支撑的范围。
 
-## Pitfalls I hit ／ 我踩过的坑
+## Pitfalls I hit
 
 **Treating a "significant ANOVA" as causal.** Mixed models fix the *variance structure*, not the *identification*.
 **把"显著的 ANOVA"当因果。** 混合模型修正的是方差结构，不是识别。
@@ -119,7 +119,7 @@ Simplify, don't hide.
 **Misreading random effects** as if they were fixed estimates of each group.
 **把随机效应当成每个组的固定估计来读。**
 
-## What I take away ／ 它真正改变了什么
+## What I take away
 
 ANOVA is a fine teaching instrument and acceptable for clean, balanced, genuinely independent experiments.
 ANOVA 是个不错的教学工具，对整洁、平衡、真正独立的实验也说得过去。

@@ -9,7 +9,7 @@ tags:
   - Preregistration
 ---
 
-## What preregistration actually is ／ 预注册到底是什么
+## What preregistration actually is
 
 In one sentence: before you collect data or start analysis, write down your research design, hypotheses, and analysis plan, then store it publicly with a timestamp.
 一句话：在收集数据或开始分析之前，把你的研究设计、假设和分析计划写下来，公开存证并打上时间戳。
@@ -20,7 +20,7 @@ Its purpose is not to "swear you'll never make a mistake," but to separate two t
 This directly counters two common research problems: p-hacking (fishing for significance by trying model after model) and HARKing (Hypothesizing After Results are Known).
 这直接对冲两种常见的科研漏洞：p-hacking（为了显著反复试模型）和 HARKing（有了结果再倒编假设）。
 
-## Why public administration research especially should do it ／ 为什么公管研究尤其该做
+## Why public administration research especially should do it
 
 Empirical work in public administration rarely "runs one model and calls it a day": survey experiments, quasi-experiments, and secondary administrative data all leave plenty of analytic choices.
 公管的实证很少"只跑一个模型就完事"：调查实验、准实验、二手行政数据，每一样都有大量分析选择空间。
@@ -37,7 +37,7 @@ Preregistration locks those choices in advance, telling reviewers up front: "thi
 For boosting research credibility, the return on investment is very high.
 这对提升研究可信度，性价比极高。
 
-## How to do it on OSF (hands-on) ／ 在 OSF 上怎么操作（实操版）
+## How to do it on OSF (hands-on)
 
 **Step 1 — Create a project.** Sign up for an OSF account and create a Project (free, open source).
 **第 1 步——建项目。** 注册 OSF 账号，新建一个 Project（免费、开源）。
@@ -75,7 +75,7 @@ For your first time, the former forces you to be clear.
 Put it in the methods section of your paper and attach it when you submit.
 写进论文方法部分，投稿时一并附上。
 
-## Pitfalls I hit ／ 我踩过的坑
+## Pitfalls I hit
 
 **Analysis plan too vague.** "Will use regression analysis" is as good as writing nothing.
 **分析计划写得太空。** "将使用回归分析"等于没写。
