@@ -83,22 +83,20 @@
   .author__name { color: var(--text-primary); }
   .author__bio { color: var(--text-secondary); }
 
-  /* 侧栏社交图标：恢复各平台品牌色（ORCID 绿 / LinkedIn 蓝 / 等），
-     不再把所有图标压成灰；标签文字保持侧栏次要灰，使"灰文字 + 彩色 logo"有层次。
-     暗色模式下，黑色系图标(Email/ResearchGate/Google Scholar/Web of Science/Github)
-     及地址图标提亮为浅色，避免暗底看不见。 */
+  /* 侧栏社交图标：
+     - 有官方品牌色的(ORCID绿 / LinkedIn蓝 / Github黑)保留品牌色；
+     - 无官方品牌色的(Email / ResearchGate / Google Scholar / Web of Science)用站点强调色，
+       避免和文字一样灰蒙蒙；
+     - 标签文字保持侧栏次要灰，形成"灰文字 + 彩色 logo"层次；
+     - 暗色下 Github 近黑提亮为浅色，避免暗底看不见；地址图标保持中性灰。 */
   .social-icons a,
   .sidebar .social-icons a { color: var(--text-secondary) !important; text-decoration: none; }
   .social-icons a:hover { color: var(--accent) !important; }
-  :root[data-theme="dark"] .social-icons .fa-envelope,
-  :root[data-theme="dark"] .social-icons .fa-researchgate,
-  :root[data-theme="dark"] .social-icons .ai-google-scholar,
-  :root[data-theme="dark"] .social-icons .ai-clarivate,
-  :root[data-theme="dark"] .social-icons .fa-github,
-  :root[data-theme="dark"] .social-icons .fa-location-dot,
-  :root[data-theme="dark"] .social-icons .fa-building-columns {
-    color: var(--text-primary) !important;
-  }
+  .social-icons .fa-envelope,
+  .social-icons .fa-researchgate,
+  .social-icons .ai-google-scholar,
+  .social-icons .ai-clarivate { color: var(--accent) !important; }
+  :root[data-theme="dark"] .social-icons .fa-github { color: var(--text-primary) !important; }
 
   /* 导航菜单：默认走 token（亮色黑/暗色近白），悬停变主题强调色 */
   .masthead__menu-item a {
