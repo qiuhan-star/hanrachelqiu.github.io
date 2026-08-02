@@ -27,6 +27,7 @@ lang_alt: /publications/
       {% when 'case report' %}{% assign zh_title = '案例报告' %}
     {% endcase %}
     {% for post in site.publications reversed %}
+      {% if post.lang != 'zh-CN' %}{% continue %}{% endif %}
       {% if post.category != category[0] %}
         {% continue %}
       {% endif %}
@@ -39,6 +40,7 @@ lang_alt: /publications/
   {% endfor %}
 {% else %}
   {% for post in site.publications reversed %}
+      {% if post.lang != 'zh-CN' %}{% continue %}{% endif %}
     {% include archive-single.html %}
   {% endfor %}
 {% endif %}

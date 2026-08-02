@@ -53,7 +53,7 @@
     {% endif %}
     
     {% if post.citation %}
-      <p>Recommended citation: {{ post.citation }}</p>
+      <p>{{ site.data.ui-text[page.lang].recommended_citation_label | default: site.data.ui-text[site.locale].recommended_citation_label | default: "Recommended citation:" }} {{ post.citation }}</p>
     {% endif %}
 
   </article>
