@@ -41,6 +41,9 @@ en: &DEFAULT_EN
   loading_label              : "Loading..."
   published_in_label         : "Published in"
   recommended_citation_label : "Recommended citation:"
+  view_paper_label           : "View Paper"
+  download_paper_label       : "Download Paper"
+  download_slides_label      : "Download Slides"
 en-US:
   <<: *DEFAULT_EN
 en-CA:
@@ -309,6 +312,9 @@ zh: &DEFAULT_ZH
   loading_label              : "加载中..."
   published_in_label         : "发表于"
   recommended_citation_label : "推荐引用："
+  view_paper_label           : "查看论文"
+  download_paper_label       : "下载论文"
+  download_slides_label      : "下载幻灯片"
 zh-CN:
   <<: *DEFAULT_ZH
 

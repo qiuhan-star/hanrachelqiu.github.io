@@ -38,7 +38,7 @@ layout: default
         {% if page.collection == 'teaching' %}
           <p> {{ page.type }}, <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.venue and page.date %}
-          <p>Published in <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
+          <p>{{ site.data.ui-text[ui_locale].published_in_label | default: site.data.ui-text[site.locale].published_in_label | default: "Published in" }} <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.date %}
           <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[ui_locale].date_label | default: "Published:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
         {% endif %}    
@@ -49,10 +49,10 @@ layout: default
         {{ content }}
 
         {% if page.citation %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br />
-          {% if page.viewpaperurl %}<a href="{{ page.viewpaperurl }}" target="_blank">View Paper</a>{% if page.paperurl or page.slidesurl %} | {% endif %}{% endif %}{% if page.paperurl %}<a href="{{ page.paperurl }}" download>Download Paper</a>{% if page.slidesurl %} | {% endif %}{% endif %}{% if page.slidesurl %}<a href="{{ page.slidesurl }}" download>Download Slides</a>{% endif %}</p>
+          <p style="font-size: smaller">{{ site.data.ui-text[ui_locale].recommended_citation_label | default: site.data.ui-text[site.locale].recommended_citation_label | default: "Recommended citation:" }} {{ page.citation }}<br />
+          {% if page.viewpaperurl %}<a href="{{ page.viewpaperurl }}" target="_blank">{{ site.data.ui-text[ui_locale].view_paper_label | default: "View Paper" }}</a>{% if page.paperurl or page.slidesurl %} | {% endif %}{% endif %}{% if page.paperurl %}<a href="{{ page.paperurl }}" download>{{ site.data.ui-text[ui_locale].download_paper_label | default: "Download Paper" }}</a>{% if page.slidesurl %} | {% endif %}{% endif %}{% if page.slidesurl %}<a href="{{ page.slidesurl }}" download>{{ site.data.ui-text[ui_locale].download_slides_label | default: "Download Slides" }}</a>{% endif %}</p>
         {% elsif page.viewpaperurl or page.paperurl or page.slidesurl %}
-          <p style="font-size: smaller">{% if page.viewpaperurl %}<a href="{{ page.viewpaperurl }}" target="_blank">View Paper</a>{% if page.paperurl or page.slidesurl %} | {% endif %}{% endif %}{% if page.paperurl %}<a href="{{ page.paperurl }}" download>Download Paper</a>{% if page.slidesurl %} | {% endif %}{% endif %}{% if page.slidesurl %}<a href="{{ page.slidesurl }}" download>Download Slides</a>{% endif %}</p>
+          <p style="font-size: smaller">{% if page.viewpaperurl %}<a href="{{ page.viewpaperurl }}" target="_blank">{{ site.data.ui-text[ui_locale].view_paper_label | default: "View Paper" }}</a>{% if page.paperurl or page.slidesurl %} | {% endif %}{% endif %}{% if page.paperurl %}<a href="{{ page.paperurl }}" download>{{ site.data.ui-text[ui_locale].download_paper_label | default: "Download Paper" }}</a>{% if page.slidesurl %} | {% endif %}{% endif %}{% if page.slidesurl %}<a href="{{ page.slidesurl }}" download>{{ site.data.ui-text[ui_locale].download_slides_label | default: "Download Slides" }}</a>{% endif %}</p>
         {% endif %}
 
         {% if page.link %}<div><a href="{{ page.link }}" class="btn">{{ site.data.ui-text[ui_locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
