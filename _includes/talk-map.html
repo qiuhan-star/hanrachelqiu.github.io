@@ -135,9 +135,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-/* build venue (school) markers but do NOT add them to the map yet; they are
-   revealed as children when their region (city) marker is clicked. */
-var venueMarkers = {};
+/* collect marker positions for ALL venues (incl. Perth/Australia) */
+var allLatLngs = [];
 for (var venue in byVenue) {
   var v = byVenue[venue];
   var short = (shortNames[venue] ? (isZh ? shortNames[venue].zh : shortNames[venue].en) : venue);
@@ -161,7 +160,7 @@ for (var venue in byVenue) {
     iconSize: [70, 22],
     iconAnchor: anchor
   });
-  var marker = L.marker([v.lat, v.lng], { icon: icon }).bindPopup(html);
+  var marker = L.marker([v.lat, v.lng], { icon: icon }).addTo(map).bindPopup(html);
   /* hover hint: quick preview of the talk title(s) at this venue */
   var tipTitles = [];
   for (var k = 0; k < v.items.length; k++) {
@@ -169,24 +168,20 @@ for (var venue in byVenue) {
     tipTitles.push('• ' + escapeHtml(isZh && ti.title_zh ? ti.title_zh : ti.title));
   }
   marker.bindTooltip('<div class="talkmap-tip">' + tipTitles.join('<br>') + '</div>', { direction: 'top', opacity: 0.96, className: 'talkmap-tooltip' });
-  /* clicking a revealed venue marker smoothly flies to it for a closer look */
+  /* clicking a marker smoothly flies to it for a closer look */
   marker.on('click', (function(lat, lng) {
     return function() { map.flyTo([lat, lng], 6, { duration: 0.8 }); };
   })(v.lat, v.lng));
-  venueMarkers[venue] = marker;
+  allLatLngs.push([v.lat, v.lng]);
 }
 
-/* REGION (city) markers: one per city, always shown first. Clicking a region
-   hides the region and reveals its school (venue) markers (drill-down). */
-var allLatLngs = [];   /* region centroids, used for the default full view */
-var childMarkers = {}; /* city -> array of its venue markers (lazy-added) */
-var regionObjs = {};   /* city -> its region marker */
+/* region markers for cities with more than one venue: hovering shows the list
+   of sub-venues (the two-location hint), e.g. Hong Kong -> 港科大 · 港中文 */
 for (var city in byCity) {
   var c = byCity[city];
+  if (c.count < 2) { continue; }
   var clat = c.latSum / c.count;
   var clng = c.lngSum / c.count;
-  var talkCount = 0;
-  for (var ci = 0; ci < c.venues.length; ci++) { talkCount += byVenue[c.venues[ci]].items.length; }
   var schools = [];
   for (var s = 0; s < c.venues.length; s++) {
     var vn = c.venues[s];
@@ -195,39 +190,17 @@ for (var city in byCity) {
   var regionTip = '<div class="talkmap-tip"><span class="t-title">' + (isZh ? '本城演讲地点：' : 'Talk venues here:') + '</span><br>' + escapeHtml(schools.join(' · ')) + '</div>';
   var regionIcon = L.divIcon({
     className: 'talkmap-divicon',
-    html: '<span class="talkmap-region">' + escapeHtml(city.split(',')[0]) + ' (' + talkCount + ')</span>',
-    iconSize: [96, 22],
-    iconAnchor: [48, 11]
+    html: '<span class="talkmap-region">' + escapeHtml(city.split(',')[0]) + '</span>',
+    iconSize: [80, 20],
+    iconAnchor: [40, 10]
   });
-  var rmarker = L.marker([clat, clng], { icon: regionIcon, interactive: true }).addTo(map);
-  rmarker.bindTooltip(regionTip, { direction: 'top', opacity: 0.96, className: 'talkmap-tooltip' });
-  /* store children (added to the map only when the region is clicked) */
-  var kids = [];
-  for (var s2 = 0; s2 < c.venues.length; s2++) { kids.push(venueMarkers[c.venues[s2]]); }
-  childMarkers[city] = kids;
-  regionObjs[city] = rmarker;
-  /* clicking a region hides it and reveals its schools, then flies to them */
-  rmarker.on('click', (function(kids, city, venues) {
-    return function() {
-      if (map.hasLayer(regionObjs[city])) { map.removeLayer(regionObjs[city]); }
-      for (var i = 0; i < kids.length; i++) { if (!map.hasLayer(kids[i])) { map.addLayer(kids[i]); } }
-      var ll = [];
-      for (var i = 0; i < venues.length; i++) { ll.push([byVenue[venues[i]].lat, byVenue[venues[i]].lng]); }
-      map.flyToBounds(ll, { padding: [60, 60], maxZoom: 6, duration: 0.8 });
-    };
-  })(kids, city, c.venues));
-  allLatLngs.push([clat, clng]);
+  L.marker([clat, clng], { icon: regionIcon, interactive: true, zIndexOffset: -100 })
+    .addTo(map)
+    .bindTooltip(regionTip, { direction: 'top', opacity: 0.96, className: 'talkmap-tooltip' });
 }
 
-/* named overview function: collapse all schools, restore all region markers,
-   and return to the full-span default view */
+/* named overview function so the button and the in-popup link share it */
 function talkMapOverview() {
-  for (var city in childMarkers) {
-    for (var i = 0; i < childMarkers[city].length; i++) {
-      if (map.hasLayer(childMarkers[city][i])) { map.removeLayer(childMarkers[city][i]); }
-    }
-    if (!map.hasLayer(regionObjs[city])) { map.addLayer(regionObjs[city]); }
-  }
   if (allLatLngs.length) {
     map.flyToBounds(allLatLngs, { padding: [50, 50], maxZoom: 5, duration: 0.8 });
   }
