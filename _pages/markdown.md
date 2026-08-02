@@ -11,7 +11,7 @@ redirect_from:
 **Welcome to My Personal Homepage!** Thank you for visiting.
 
 ## 1. About Me
-- **Introduction**: Hello, I'm Han (Rachel) Qiu, a passionate master's student at Zhejiang University.
+- **Introduction**: Hello, I'm Han (Rachel) Qiu, a passionate PhD student at Zhejiang University.
 - **News**: This section will feature some of the latest updates.
 
 ## 2. Site Navigation

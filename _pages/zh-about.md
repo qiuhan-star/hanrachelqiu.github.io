@@ -47,6 +47,6 @@ lang_alt: /
 
 <span style="color: #888888;">**[2023年12月]**</span> 🗨️ **学术沙龙：** *很高兴在学院社群内分享我的研究心得！* >> [**了解更多**](https://mp.weixin.qq.com/s/dn-2_kHyLDbNC0hQ042xEw)
 
-<span style="color: #888888;">**[2022年5月]**</span> 🎓 **我毕业啦！** *以最优等荣誉毕业，衷心感谢一路支持我的人！* 🌟👩‍🎓>> [**查看更多**](https://qiuhan-star.github.io/hanrachelqiu.github.io/news-2022.html)
+<span style="color: #888888;">**[2022年5月]**</span> 🎓 **我毕业啦！** *以最优等荣誉毕业，衷心感谢一路支持我的人！* 🌟👩‍🎓>> [**查看更多**]({{ '/zh/news-2022.html/' | absolute_url }})
 
 [显示更多 →](/year-archive/)
