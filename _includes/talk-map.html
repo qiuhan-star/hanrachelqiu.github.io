@@ -22,29 +22,32 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-/* talk locations data: one entry per talk (coords hardcoded, no geocoding needed) */
+/* talk locations data: one entry per talk. Talks are grouped by venue (school)
+   below, so different schools in the same city — e.g. HKUST vs CUHK in Hong Kong —
+   each get their own separate marker. Coords are hardcoded per venue, no geocoding. */
 var talksData = [
-  { city: "Xi'an, China", lat: 34.3416, lng: 108.9398, title: "Single vs. Multiple Agents: Types of Mobilization Entities Impact on the Length of Citizen Volunteer Service Participation", title_zh: "单主体 vs. 多主体：动员主体类型对公民志愿服务参与时长的影响", venue: "Xi'an Jiaotong University", conf: "Chinese Sociological Association 2026 Annual Conference", date: "2026-07-10", lang: "中文" },
-  { city: "Xi'an, China", lat: 34.3416, lng: 108.9398, title: "Mobilized Giving and Voluntary Donation: Impact Mechanisms and the Moderating Role of Age", venue: "Xi'an Jiaotong University", conf: "Chinese Sociological Association 2026 Annual Conference", date: "2026-07-10", lang: "中文" },
-  { city: "Perth, Australia", lat: -31.9505, lng: 115.8605, title: "Scenarios, Phases, or Operators: What Kind of Initiatives Succeed (or Fail) to Activate Citizens' Willingness to Co-Produce?", venue: "Edith Cowan University", conf: "IRSPM 2026 Conference", date: "2026-04-08" },
-  { city: "Hong Kong, China", lat: 22.3193, lng: 114.1694, title: "Embracing Agile Governance: Cultivating Innovation and Addressing the Challenges of Generative Artificial Intelligence in Higher Education", venue: "HKUST", conf: "Journal of Asian Public Policy Special Issue Authors' Workshop", date: "2023-12-01" },
-  { city: "Hong Kong, China", lat: 22.3193, lng: 114.1694, title: "Surging currents: A systematic review of the literature on dynamic stakeholder engagements in higher education in the GAI era", venue: "HKUST", conf: "Journal of Asian Public Policy Special Issue Authors' Workshop", date: "2023-12-01" },
+  { city: "Xi'an, China", lat: 34.3416, lng: 108.9398, title: "Single vs. Multiple Agents: Types of Mobilization Entities Impact on the Length of Citizen Volunteer Service Participation", title_zh: "单主体 vs. 多主体：动员主体类型对公民志愿服务参与时长的影响", venue: "Xi'an Jiaotong University", conf: "Chinese Sociological Association 2026 Annual Conference", date: "2026-07-10", lang: "zh" },
+  { city: "Xi'an, China", lat: 34.3416, lng: 108.9398, title: "Mobilized Giving and Voluntary Donation: Impact Mechanisms and the Moderating Role of Age", venue: "Xi'an Jiaotong University", conf: "Chinese Sociological Association 2026 Annual Conference", date: "2026-07-10", lang: "zh" },
+  { city: "Perth, Australia", lat: -31.7455, lng: 115.7760, title: "Scenarios, Phases, or Operators: What Kind of Initiatives Succeed (or Fail) to Activate Citizens' Willingness to Co-Produce?", venue: "Edith Cowan University", conf: "IRSPM 2026 Conference", date: "2026-04-08" },
+  { city: "Hong Kong, China", lat: 22.3366, lng: 114.2655, title: "Embracing Agile Governance: Cultivating Innovation and Addressing the Challenges of Generative Artificial Intelligence in Higher Education", venue: "HKUST", conf: "Journal of Asian Public Policy Special Issue Authors' Workshop", date: "2023-12-01" },
+  { city: "Hong Kong, China", lat: 22.3366, lng: 114.2655, title: "Surging currents: A systematic review of the literature on dynamic stakeholder engagements in higher education in the GAI era", venue: "HKUST", conf: "Journal of Asian Public Policy Special Issue Authors' Workshop", date: "2023-12-01" },
   { city: "Shenyang, China", lat: 41.8057, lng: 123.4315, title: "Agile Governance for the Win: Adapting Higher Education to Generative Artificial Intelligence", venue: "Shenyang Normal University", conf: "Fucai Cup Digital Era Public Governance Innovation Academic Forum", date: "2023-12-03", award: "Outstanding Research Paper Award" },
   { city: "Shenyang, China", lat: 41.8057, lng: 123.4315, title: "Surging Currents: A Systematic Review of the Literature on Dynamic Stakeholder Engagements in Higher Education in the GAI Era", venue: "Shenyang Normal University", conf: "Fucai Cup Digital Era Public Governance Innovation Academic Forum", date: "2023-12-03", award: "Outstanding Research Paper Award" },
-  { city: "Beijing, China", lat: 39.9042, lng: 116.4074, title: "Towards a Just Transition Future: A Quantitative Comparative Analysis of 30 Sub-national Governments in China (2010-2020)", venue: "Tsinghua University", conf: "International Conference on Comparative Public Policy", date: "2024-04-19" },
-  { city: "Hong Kong, China", lat: 22.3193, lng: 114.1694, title: "Pathways to a Just Transition: Evidence from 30 Sub-national Governments in China", venue: "Chinese University of Hong Kong", conf: "20th Cross-Strait and Hong Kong-Macao Public Administration Academic Seminar", date: "2024-05-09" },
-  { city: "Taiwan, China", lat: 25.0330, lng: 121.5654, title: "On-chain City Governance: How Can Blockchain in China Achieve Empowerment?", venue: "National Taiwan University", conf: "dg.o 2024 (Digital Government Research)", date: "2024-06-11" }
+  { city: "Beijing, China", lat: 40.0007, lng: 116.3263, title: "Towards a Just Transition Future: A Quantitative Comparative Analysis of 30 Sub-national Governments in China (2010-2020)", venue: "Tsinghua University", conf: "International Conference on Comparative Public Policy", date: "2024-04-19" },
+  { city: "Hong Kong, China", lat: 22.4197, lng: 114.2070, title: "Pathways to a Just Transition: Evidence from 30 Sub-national Governments in China", venue: "Chinese University of Hong Kong", conf: "20th Cross-Strait and Hong Kong-Macao Public Administration Academic Seminar", date: "2024-05-09" },
+  { city: "Taiwan, China", lat: 25.0173, lng: 121.5400, title: "On-chain City Governance: How Can Blockchain in China Achieve Empowerment?", venue: "National Taiwan University", conf: "dg.o 2024 (Digital Government Research)", date: "2024-06-11" }
 ];
 
 /* page language flag injected from Liquid: true on Chinese pages, false on English */
 var isZh = {% if page.lang == 'zh-CN' %}true{% else %}false{% endif %};
 
-/* group talks by city so each city gets one marker */
-var byCity = {};
+/* group talks by venue (school/venue) so each school gets its own marker.
+   Multiple talks at the same school share one marker. */
+var byVenue = {};
 for (var i = 0; i < talksData.length; i++) {
   var t = talksData[i];
-  if (!byCity[t.city]) { byCity[t.city] = { lat: t.lat, lng: t.lng, items: [] }; }
-  byCity[t.city].items.push(t);
+  if (!byVenue[t.venue]) { byVenue[t.venue] = { lat: t.lat, lng: t.lng, city: t.city, items: [] }; }
+  byVenue[t.venue].items.push(t);
 }
 
 var map = L.map('talkMap').setView([20, 75], 2);
@@ -53,14 +56,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-for (var city in byCity) {
-  var c = byCity[city];
-  var html = '<div class="talkmap-pop"><h4>' + city + '</h4><ul>';
-  for (var j = 0; j < c.items.length; j++) {
-    var it = c.items[j];
+for (var venue in byVenue) {
+  var v = byVenue[venue];
+  var html = '<div class="talkmap-pop"><h4>' + venue + '</h4><p class="meta">' + v.city + '</p><ul>';
+  for (var j = 0; j < v.items.length; j++) {
+    var it = v.items[j];
     html += '<li><strong>' + it.title + '</strong>';
     if (it.title_zh) { html += '<br>（' + it.title_zh + '）'; }
-    html += '<span class="meta">📍 ' + it.venue + '</span>';
     html += '<span class="meta">🏛️ ' + it.conf + '</span>';
     if (it.lang) { var langLabel = (it.lang === 'zh') ? (isZh ? '中文报告' : 'Presented in Chinese') : (isZh ? '英文报告' : 'Presented in English'); html += '<span class="badge">🗣️ ' + langLabel + '</span>'; }
     if (it.award) { html += '<span class="award">🏆 ' + it.award + '</span>'; }
@@ -68,6 +70,6 @@ for (var city in byCity) {
     html += '</li>';
   }
   html += '</ul></div>';
-  L.marker([c.lat, c.lng]).addTo(map).bindPopup(html);
+  L.marker([v.lat, v.lng]).addTo(map).bindPopup(html);
 }
 </script>
