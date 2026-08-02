@@ -2,13 +2,18 @@
  当前语言存 localStorage，默认英文。한국어 暂留作第三选项（无译文时回落英文）。{% endcomment %}
 <div class="lang-dd" id="langDD">
   <button type="button" class="lang-dd__btn" id="langBtn" aria-haspopup="listbox" aria-expanded="false">
+    <svg class="lang-dd__globe" aria-hidden="true" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9"></circle>
+      <path d="M3 12h18"></path>
+      <path d="M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9S9.5 5.5 12 3z"></path>
+    </svg>
     <span id="langBtnLabel">English</span>
     <span class="lang-dd__caret" aria-hidden="true">&#9662;</span>
   </button>
   <ul class="lang-dd__menu" id="langMenu" role="listbox">
-    <li class="lang-dd__opt" data-lang="en" role="option">English</li>
-    <li class="lang-dd__opt" data-lang="zh" role="option">中文</li>
-    <li class="lang-dd__opt" data-lang="ko" role="option">&#54620;&#44397;&#50612;</li>
+    <li class="lang-dd__opt" data-lang-opt="en" role="option">English</li>
+    <li class="lang-dd__opt" data-lang-opt="zh" role="option">中文</li>
+    <li class="lang-dd__opt" data-lang-opt="ko" role="option">&#54620;&#44397;&#50612;</li>
   </ul>
 </div>
 
@@ -38,6 +43,7 @@
   }
   .lang-dd__btn:hover { border-color: var(--accent, #5a7cd8); color: var(--accent, #5a7cd8); }
   .lang-dd__caret { font-size: 0.7em; opacity: 0.7; }
+  .lang-dd__globe { flex-shrink: 0; opacity: 0.8; }
   .lang-dd__menu {
     position: absolute;
     top: calc(100% + 8px);
