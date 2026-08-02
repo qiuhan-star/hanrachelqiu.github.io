@@ -171,5 +171,19 @@ for (i = 0; i < coll.length; i++) {
 }
 </script>
 
+<script>
+(function(){
+  var KEY = "hanrachelqiu-cv-downloads";
+  var API = "https://api.countapi.xyz";
+  var el = document.getElementById("cv-downloads");
+  var link = document.getElementById("pdf-cv-link");
+  function render(txt){ if(el){ el.textContent = txt; } }
+  /* read current count on load */
+  fetch(API + "/get/" + KEY).then(function(r){return r.json();}).then(function(d){ if(d && typeof d.value !== "undefined"){ render("下载量 " + d.value); } }).catch(function(){ render("下载量 0"); });
+  /* increment on click (fire-and-forget) */
+  if(link){ link.addEventListener("click", function(){ fetch(API + "/hit/" + KEY).then(function(r){return r.json();}).then(function(d){ if(d && typeof d.value !== "undefined"){ render("下载量 " + d.value); } }).catch(function(){}); }); }
+})();
+</script>
+
 </body>
 </html>
