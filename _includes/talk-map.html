@@ -36,6 +36,9 @@ var talksData = [
   { city: "Taiwan, China", lat: 25.0330, lng: 121.5654, title: "On-chain City Governance: How Can Blockchain in China Achieve Empowerment?", venue: "National Taiwan University", conf: "dg.o 2024 (Digital Government Research)", date: "2024-06-11" }
 ];
 
+/* page language flag injected from Liquid: true on Chinese pages, false on English */
+var isZh = {% if page.lang == 'zh-CN' %}true{% else %}false{% endif %};
+
 /* group talks by city so each city gets one marker */
 var byCity = {};
 for (var i = 0; i < talksData.length; i++) {
@@ -59,7 +62,7 @@ for (var city in byCity) {
     if (it.title_zh) { html += '<br>（' + it.title_zh + '）'; }
     html += '<span class="meta">📍 ' + it.venue + '</span>';
     html += '<span class="meta">🏛️ ' + it.conf + '</span>';
-    if (it.lang) { html += '<span class="badge">🗣️ ' + it.lang + '报告</span>'; }
+    if (it.lang) { var langLabel = (it.lang === 'zh') ? (isZh ? '中文报告' : 'Presented in Chinese') : (isZh ? '英文报告' : 'Presented in English'); html += '<span class="badge">🗣️ ' + langLabel + '</span>'; }
     if (it.award) { html += '<span class="award">🏆 ' + it.award + '</span>'; }
     html += '<span class="meta">📅 ' + it.date + '</span>';
     html += '</li>';
