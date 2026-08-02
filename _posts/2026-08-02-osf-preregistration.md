@@ -95,7 +95,7 @@ Otherwise "registered the design but haven't received the data yet" breaks the t
 Reviewers actually trust you more, because you've separated confirmation from exploration.
 评审反而更信任你——因为你区分了验证与探索。
 
-## What it really changed ／ 它真正改变了什么
+## What it really changed
 
 After my first preregistration, the biggest change wasn't that the paper got more rigorous.
 做完第一次预注册，最大的变化不是文章变严谨了。

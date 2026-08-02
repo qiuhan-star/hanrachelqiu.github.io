@@ -10,7 +10,7 @@ tags:
   - Spatial Analysis
 ---
 
-## Why accessibility belongs in a PA toolkit ／ 为什么可达性该进公管工具箱
+## Why accessibility belongs in a PA toolkit
 
 Spatial equity is one of the oldest and most pressing concerns in public administration: are public services — schools, clinics, transit stops, libraries — actually reachable for the people who need them, or only for those who happen to live nearby?
 空间公平是公共管理中历史最久、也最紧迫的议题之一：学校、诊所、公交站、图书馆等公共服务，究竟是真正可达于需要它们的人，还是只便宜了恰好住在附近的居民？
@@ -30,7 +30,7 @@ Accessibility analysis makes that gap visible — and once a gap is visible on a
 For anyone studying service delivery, facility siting, or urban equity, this is bread-and-butter method, not a nicety.
 对任何研究服务供给、设施选址或城市公平的人，这是基本功，不是点缀。
 
-## The workflow at a glance ／ 流程总览
+## The workflow at a glance
 
 **Step 1 — Assemble the layers.** Administrative boundaries and the facilities (points) you care about; optionally a population layer.
 **第 1 步——准备图层。** 行政区划边界，以及你关心的设施（点）；可选再加一个人口图层。
@@ -44,7 +44,7 @@ For anyone studying service delivery, facility siting, or urban equity, this is 
 **Step 4 — Map and interpret** — carefully.
 **第 4 步——制图与解读**——要谨慎。
 
-## Step-by-step in QGIS ／ QGIS 分步
+## Step-by-step in QGIS
 
 **Data.** For facilities and roads, the *QuickOSM* plugin pulls OpenStreetMap features directly (e.g., `amenity=clinic`, `highway=*`).
 **数据。** 设施与道路可用 *QuickOSM* 插件直接拉取 OpenStreetMap 要素（如 `amenity=clinic`、`highway=*`）。
@@ -94,7 +94,7 @@ Resist the rainbow; it implies false order.
 Always include a scale bar, north arrow, and a legend that states the CRS and the metric definition.
 务必带比例尺、指北针，以及注明 CRS 和指标定义的图例。
 
-## Pitfalls I hit ／ 我踩过的坑
+## Pitfalls I hit
 
 **Mixing CRSs** silently produces distances off by orders of magnitude.
 **混用 CRS** 会静默地让距离差出好几个数量级。
@@ -117,7 +117,7 @@ Use 2SFCA or at least cross with population.
 Report sensitivity, don't hide it.
 报告敏感性，别藏着。
 
-## What I take away ／ 它真正改变了什么
+## What I take away
 
 A map is an argument.
 一张地图就是一个论证。
