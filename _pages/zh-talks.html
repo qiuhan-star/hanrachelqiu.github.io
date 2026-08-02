@@ -13,6 +13,7 @@ lang_alt: /talks/
 
 {% endif %}
 
-{% for post in site.talks reversed %}
+{% assign talk_items = site.talks | where_exp: "item", "item.lang == 'zh-CN'" %}
+{% for post in talk_items reversed %}
   {% include archive-single-talk.html %}
 {% endfor %}
