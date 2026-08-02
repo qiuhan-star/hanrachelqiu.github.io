@@ -40,7 +40,7 @@
     {% if post.read_time %} <!-- 如果文章设置了阅读时间 -->
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p> <!-- 显示阅读时间 -->
     {% endif %}
-    {% if post.date %}<p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ post.date | date: '%B %d, %Y' }}</p>{% endif %} <!-- 显示文章日期 -->
+    {% if post.date %}<p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% if page.lang == 'zh-CN' %}{{ post.date | date: '%Y年%-m月%-d日' }}{% else %}{{ post.date | date: '%B %d, %Y' }}{% endif %}</p>{% endif %} <!-- 显示文章日期 -->
     {% if post.venue %}<p class="archive__item-excerpt" itemprop="description">{{post.type}}, {{ post.venue }},  {{post.location}}</p>{% endif %} <!-- 显示文章类型、地点和位置 -->
     {% if post.award %}<p class="archive__item-excerpt" style="color:#b8860b;"><i class="fas fa-award" aria-hidden="true"></i> {{ post.award }}</p>{% endif %}
     <!--
