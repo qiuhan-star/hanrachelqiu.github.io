@@ -271,7 +271,7 @@ function talkMapOverview(){
   });
   svg += '</svg></div>';
   var years = {};
-  talksData.forEach(function(t){ var y = t.date.slice(0,4); (years[y] = years[y] || []).push(t); });
+  geoTalks.forEach(function(t){ var y = t.date.slice(0,4); (years[y] = years[y] || []).push(t); });
   var ys = Object.keys(years).sort().reverse();
   ys.forEach(function(y){
     svg += '<div class="talkmap-yh">' + y + '</div>';
@@ -282,18 +282,33 @@ function talkMapOverview(){
   document.getElementById('panel-journey').innerHTML = svg;
 })();
 
-/* ---- text-only panel ---- */
+/* ---- text-only panel (unified year-descending list with kind pills) ---- */
 (function(){
+  function buildMeta(t){
+    var map = { conference:'Conference', workshop:'Workshop', seminar:'Seminar', invited:'Invited' };
+    var k = (t.kind || 'conference');
+    var kl = map[k] || 'Conference';
+    var cls = (k === 'workshop') ? 'work' : (k === 'seminar') ? 'sem' : (k === 'invited') ? 'inv' : 'conf';
+    var out = '<span class="pill ' + cls + '">' + kl + '</span>'
+      + ' <span class="sep">·</span> ' + escapeHtml(t.conf)
+      + ' <span class="sep">·</span> ' + escapeHtml(t.venue)
+      + ' <span class="sep">·</span> ' + escapeHtml(t.city)
+      + ' <span class="sep">·</span> ' + escapeHtml(t.date);
+    if(t.lang){ out += ' <span class="sep">·</span> <span class="zh">' + escapeHtml(langLabel(t)) + '</span>'; }
+    if(t.award){ out += ' <span class="sep">·</span> <span class="award">🏆 ' + escapeHtml(t.award) + '</span>'; }
+    return out;
+  }
   var years = {};
   talksData.forEach(function(t){ var y = t.date.slice(0,4); (years[y] = years[y] || []).push(t); });
   var ys = Object.keys(years).sort().reverse();
   var html = '';
   ys.forEach(function(y){
-    html += '<div class="talkmap-yh">' + y + '</div>';
+    html += '<div class="talkmap-yh">' + y + ' <span class="cnt">(' + years[y].length + ')</span></div>';
     years[y].forEach(function(t){
-      html += '<div class="t-item"><div class="t-title">' + escapeHtml(dispTitle(t)) + '</div>'
-        + '<div class="t-meta"><span class="loc">' + escapeHtml(shortOf(t.venue)) + ' · ' + escapeHtml(t.city) + '</span> · ' + escapeHtml(t.conf) + ' · ' + escapeHtml(t.date)
-        + (t.lang ? ' · ' + escapeHtml(langLabel(t)) : '') + (t.award ? ' · 🏆 ' + escapeHtml(t.award) : '') + '</div></div>';
+      var titleHtml = escapeHtml(dispTitle(t));
+      if(t.permalink){ titleHtml = '<a href="' + escapeHtml(t.permalink) + '">' + titleHtml + '</a>'; }
+      html += '<div class="t-item"><div class="t-title">' + titleHtml + '</div>'
+        + '<div class="t-meta">' + buildMeta(t) + '</div></div>';
     });
   });
   document.getElementById('panel-text').innerHTML = html;
@@ -302,7 +317,7 @@ function talkMapOverview(){
 /* ---- list with inline location panel ---- */
 (function(){
   var years = {};
-  talksData.forEach(function(t){ var y = t.date.slice(0,4); (years[y] = years[y] || []).push(t); });
+  geoTalks.forEach(function(t){ var y = t.date.slice(0,4); (years[y] = years[y] || []).push(t); });
   var ys = Object.keys(years).sort().reverse();
   var html = '';
   ys.forEach(function(y){
