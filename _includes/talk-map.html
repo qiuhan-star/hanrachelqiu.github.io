@@ -44,10 +44,10 @@
 
 {% if page.lang == 'zh-CN' %}
 <h2>🗺️ 讲座地点地图</h2>
-<p class="archive__item-excerpt">标记点显示我去过的学校/地区，点击可查看具体学校、会议与演讲标题。</p>
+<p class="archive__item-excerpt">标记点显示我去过的学校/地区；<strong>光标悬停</strong>可快速预览演讲，<strong>点击</strong>查看完整学校、会议与标题。</p>
 {% else %}
 <h2>🗺️ Map of Talk Locations</h2>
-<p class="archive__item-excerpt">Markers show the schools/regions I have visited for talks. Click a marker for the venue, conference, and talk title.</p>
+<p class="archive__item-excerpt">Markers show the schools/regions I have visited for talks. <strong>Hover</strong> a marker for a quick preview; <strong>click</strong> for the venue, conference, and talk title.</p>
 {% endif %}
 
 <div id="talkMapWrap">
@@ -117,6 +117,18 @@ for (var i = 0; i < talksData.length; i++) {
   if (t.award) { byVenue[t.venue].award = true; }
 }
 
+/* group venues by city so a city with multiple venues gets a region marker
+   whose hover hint lists its sub-venues (e.g. Hong Kong -> HKUST, CUHK) */
+var byCity = {};
+for (var venue in byVenue) {
+  var c = byVenue[venue].city;
+  if (!byCity[c]) { byCity[c] = { latSum: 0, lngSum: 0, count: 0, venues: [] }; }
+  byCity[c].latSum += byVenue[venue].lat;
+  byCity[c].lngSum += byVenue[venue].lng;
+  byCity[c].count += 1;
+  byCity[c].venues.push(venue);
+}
+
 var map = L.map('talkMap').setView([30, 114], 4);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 18,
@@ -149,11 +161,42 @@ for (var venue in byVenue) {
     iconAnchor: anchor
   });
   var marker = L.marker([v.lat, v.lng], { icon: icon }).addTo(map).bindPopup(html);
+  /* hover hint: quick preview of the talk title(s) at this venue */
+  var tipTitles = [];
+  for (var k = 0; k < v.items.length; k++) {
+    var ti = v.items[k];
+    tipTitles.push('• ' + escapeHtml(isZh && ti.title_zh ? ti.title_zh : ti.title));
+  }
+  marker.bindTooltip('<div class="talkmap-tip">' + tipTitles.join('<br>') + '</div>', { direction: 'top', opacity: 0.96, className: 'talkmap-tooltip' });
   /* clicking a marker smoothly flies to it for a closer look */
   marker.on('click', (function(lat, lng) {
     return function() { map.flyTo([lat, lng], 6, { duration: 0.8 }); };
   })(v.lat, v.lng));
   allLatLngs.push([v.lat, v.lng]);
+}
+
+/* region markers for cities with more than one venue: hovering shows the list
+   of sub-venues (the two-location hint), e.g. Hong Kong -> 港科大 · 港中文 */
+for (var city in byCity) {
+  var c = byCity[city];
+  if (c.count < 2) { continue; }
+  var clat = c.latSum / c.count;
+  var clng = c.lngSum / c.count;
+  var schools = [];
+  for (var s = 0; s < c.venues.length; s++) {
+    var vn = c.venues[s];
+    schools.push(shortNames[vn] ? (isZh ? shortNames[vn].zh : shortNames[vn].en) : vn);
+  }
+  var regionTip = '<div class="talkmap-tip"><span class="t-title">' + (isZh ? '本城演讲地点：' : 'Talk venues here:') + '</span><br>' + escapeHtml(schools.join(' · ')) + '</div>';
+  var regionIcon = L.divIcon({
+    className: 'talkmap-divicon',
+    html: '<span class="talkmap-region">' + escapeHtml(city.split(',')[0]) + '</span>',
+    iconSize: [80, 20],
+    iconAnchor: [40, 10]
+  });
+  L.marker([clat, clng], { icon: regionIcon, interactive: true, zIndexOffset: -100 })
+    .addTo(map)
+    .bindTooltip(regionTip, { direction: 'top', opacity: 0.96, className: 'talkmap-tooltip' });
 }
 
 /* named overview function so the button and the in-popup link share it */
