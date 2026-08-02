@@ -433,6 +433,14 @@ layout: compress
       .pub-btn:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
       .pub-btn.primary { color: #fff; background: var(--accent); border-color: var(--accent); }
       .pub-btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
+      .pub-note {
+        margin-top: 1.5rem; padding: .9rem 1rem;
+        border-left: 3px solid var(--accent);
+        background: var(--bg-raised);
+        border-radius: 0 8px 8px 0;
+        font-size: .9rem; color: var(--text-secondary);
+      }
+      .pub-note strong { color: var(--text-primary); }
 
       /* 顶栏背景强制走 token，覆盖编译主题写死的 background:white */
       .masthead { background-color: var(--masthead-bg) !important; }
