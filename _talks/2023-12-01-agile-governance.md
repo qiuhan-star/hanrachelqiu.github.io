@@ -2,6 +2,7 @@
 title: "Embracing Agile Governance: Cultivating Innovation and Addressing the Challenges of Generative Artificial Intelligence in Higher Education"
 collection: talks
 type: "Presenter at Journal of Asian Public Policy Special Issue Authors' Workshop"
+kind: workshop
 permalink: /talks/2023-12-01-agile-governance
 lang_alt: /zh/talks/2023-12-01-agile-governance
 venue: "The Hong Kong University of Science and Technology (HKUST)"

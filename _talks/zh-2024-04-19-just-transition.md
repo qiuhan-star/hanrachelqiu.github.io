@@ -2,6 +2,7 @@
 title: "迈向公正转型未来：对中国30个地方政府（2010–2020）的定性比较分析"
 collection: talks
 type: "在比较公共政策国际会议上做报告"
+kind: conference
 permalink: /zh/talks/2024-04-19-just-transition
 lang: zh-CN
 lang_alt: /talks/2024-04-19-just-transition

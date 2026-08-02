@@ -2,6 +2,7 @@
 title: "Towards a Just Transition Future: A Quantitative Comparative Analysis of 30 Sub-national Governments in China (2010-2020)"
 collection: talks
 type: "Presenter at the International Conference on Comparative Public Policy" #演讲类型
+kind: conference
 permalink: /talks/2024-04-19-just-transition
 lang_alt: /zh/talks/2024-04-19-just-transition
 venue: "Tsinghua University" #演讲地点

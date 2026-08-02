@@ -2,6 +2,7 @@
 title: "Pathways to a Just Transition: Evidence from 30 Sub-national Governments in China"
 collection: talks
 type: "Presenter at the 20th Cross-Strait and Hong Kong-Macao Public Administration Academic Seminar"
+kind: conference
 permalink: /talks/2024-05-09-just-transition
 lang_alt: /zh/talks/2024-05-09-just-transition
 venue: "Chinese University of Hong Kong"

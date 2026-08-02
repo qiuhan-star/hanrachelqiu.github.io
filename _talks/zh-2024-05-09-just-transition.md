@@ -2,6 +2,7 @@
 title: "迈向公正转型的路径：来自中国30个地方政府的证据"
 collection: talks
 type: "在第20届海峡两岸暨港澳地区公共管理学术研讨会上做报告"
+kind: conference
 permalink: /zh/talks/2024-05-09-just-transition
 lang: zh-CN
 lang_alt: /talks/2024-05-09-just-transition

@@ -18,3 +18,6 @@ vendor/
 # Portfolio plaintext source + images: encrypted at build time, never committed in cleartext
 _portfolio/
 images/portfolio/
+
+# Services plaintext source: encrypted at build time, never committed in cleartext
+_services/

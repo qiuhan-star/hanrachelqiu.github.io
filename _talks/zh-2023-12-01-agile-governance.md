@@ -2,6 +2,7 @@
 title: "拥抱敏捷治理：培育创新并应对生成式人工智能在高等教育中的挑战"
 collection: talks
 type: "在《亚洲公共政策期刊》专刊作者工作坊上做报告"
+kind: workshop
 permalink: /zh/talks/2023-12-01-agile-governance
 lang: zh-CN
 lang_alt: /talks/2023-12-01-agile-governance

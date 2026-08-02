@@ -1,7 +1,8 @@
 ---
-title: "Surging currents: A systematic review of the literature on dynamic stakeholder engagements in higher education in the GAI era"
+title: "Surging Currents: A systematic review of the literature on dynamic stakeholder engagements in higher education in the GAI era"
 collection: talks
-type: "Participated with Jiaxi Yang in the Journal of Asian Public Policy Special Issue Authors' Workshop"
+type: "Presenter (with Jiaxi Yang) at the Journal of Asian Public Policy Special Issue Authors' Workshop"
+kind: workshop
 permalink: /talks/2023-12-01-stakeholder
 lang_alt: /zh/talks/2023-12-01-stakeholder
 venue: "The Hong Kong University of Science and Technology (HKUST)"
