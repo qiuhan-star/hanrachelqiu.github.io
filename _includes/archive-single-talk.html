@@ -35,11 +35,13 @@
         <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a> <!-- 否则，只显示永久链接 -->
       {% endif %}
     </h2>
+    {% if post.title_zh %}<p class="archive__item-excerpt" style="font-style:italic;color:#666;margin-top:-0.5em;">{{ post.title_zh }}</p>{% endif %}
     {% if post.read_time %} <!-- 如果文章设置了阅读时间 -->
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p> <!-- 显示阅读时间 -->
     {% endif %}
     {% if post.date %}<p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ post.date | date: '%B %d, %Y' }}</p>{% endif %} <!-- 显示文章日期 -->
     {% if post.venue %}<p class="archive__item-excerpt" itemprop="description">{{post.type}}, {{ post.venue }},  {{post.location}}</p>{% endif %} <!-- 显示文章类型、地点和位置 -->
+    {% if post.award %}<p class="archive__item-excerpt" style="color:#b8860b;"><i class="fas fa-award" aria-hidden="true"></i> {{ post.award }}</p>{% endif %}
     <!--
     {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify }}</p>{% endif %}
     显示文章摘要 -->

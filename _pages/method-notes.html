@@ -1,0 +1,16 @@
+---
+layout: archive
+permalink: /method-notes/
+title: "Methods Notes"
+author_profile: true
+lang_alt: /zh/method-notes/
+redirect_from:
+  - /methodnotes/
+---
+A running series of practical, public-administration–anchored method notes — preregistration, spatial analysis, statistics, and whatever I am learning next. Each post is bilingual (English up top, 中文对照 below).
+
+{% include base_path %}
+{% assign method_posts = site.posts | where_exp: "p", "p.tags contains '方法笔记'" %}
+{% for post in method_posts %}
+  {% include archive-single.html %}
+{% endfor %}
