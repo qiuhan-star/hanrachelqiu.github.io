@@ -401,6 +401,39 @@ layout: compress
       .archive__item-title a, .archive__item a { color: var(--text-primary); }
       .archive__item-excerpt { color: var(--text-secondary); }
 
+      /* 出版物列表卡片（2026-08-02 改版） */
+      .pub-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        padding: 1.2rem 1.25rem;
+        box-shadow: var(--shadow-sm);
+        margin-bottom: 1.25rem;
+        transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+      }
+      .pub-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
+      .pub-title { font-size: 1.12rem; line-height: 1.35; margin: 0 0 .35rem; font-weight: 650; }
+      .pub-title a { color: var(--text-primary); }
+      .pub-byline { margin: .1rem 0 .6rem; font-size: .86rem; color: var(--text-muted); }
+      .pub-meta { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: .7rem; }
+      .pub-chip {
+        display: inline-flex; align-items: center; gap: .35rem;
+        font-size: .78rem; font-weight: 600; color: var(--accent);
+        background: var(--accent-soft); border: 1px solid var(--border-subtle);
+        padding: .22rem .6rem; border-radius: 999px;
+      }
+      .pub-abstract { margin: .2rem 0 .9rem; color: var(--text-secondary); font-size: .95rem; }
+      .pub-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+      .pub-btn {
+        display: inline-flex; align-items: center; gap: .35rem;
+        font-size: .82rem; font-weight: 600; color: var(--text-primary);
+        background: var(--bg-base); border: 1px solid var(--border-default);
+        padding: .34rem .7rem; border-radius: 8px; text-decoration: none;
+      }
+      .pub-btn:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+      .pub-btn.primary { color: #fff; background: var(--accent); border-color: var(--accent); }
+      .pub-btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
+
       /* 顶栏背景强制走 token，覆盖编译主题写死的 background:white */
       .masthead { background-color: var(--masthead-bg) !important; }
 

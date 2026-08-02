@@ -45,6 +45,9 @@ en: &DEFAULT_EN
   view_paper_label           : "View Paper"
   download_paper_label       : "Download Paper"
   download_slides_label      : "Download Slides"
+  pub_details_label          : "View Paper"
+  pub_pdf_label              : "PDF"
+  pub_doi_label              : "DOI"
 en-US:
   <<: *DEFAULT_EN
 en-CA:
@@ -317,6 +320,9 @@ zh: &DEFAULT_ZH
   view_paper_label           : "查看论文"
   download_paper_label       : "下载论文"
   download_slides_label      : "下载幻灯片"
+  pub_details_label          : "查看论文"
+  pub_pdf_label              : "PDF"
+  pub_doi_label              : "DOI"
 zh-CN:
   <<: *DEFAULT_ZH
 

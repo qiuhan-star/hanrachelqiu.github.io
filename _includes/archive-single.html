@@ -12,8 +12,11 @@
   {% assign title = post.title %}
 {% endif %}
 
+{% assign is_pub = false %}
+{% if post.collection == 'publications' %}{% assign is_pub = true %}{% endif %}
+
 <div class="{{ include.type | default: "list" }}__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+  <article class="archive__item{% if is_pub %} pub-card{% endif %}" itemscope itemtype="http://schema.org/CreativeWork">
     {% if include.type == "grid" and teaser %}
       <div class="archive__item-teaser">
         <img src=
@@ -26,7 +29,7 @@
       </div>
     {% endif %}
 
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title{% if is_pub %} pub-title{% endif %}" itemprop="headline">
       {% if post.link %}
         <a href="{{ post.link }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
       {% else %}
@@ -37,19 +40,35 @@
         {% if post.collection == 'teaching' %}
           <p> {{ post.type }}, <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif post.collection == 'publications' %}
-          <p>{{ site.data.ui-text[page.lang].published_in_label | default: site.data.ui-text[site.locale].published_in_label | default: "Published in" }} <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
+          {% if post.author %}<p class="pub-byline">{{ post.author }}</p>{% endif %}
+          <div class="pub-meta">
+            <span class="pub-chip"><i class="fas fa-book" aria-hidden="true"></i> {{ post.venue }}</span>
+            <span class="pub-chip"><i class="fas fa-calendar" aria-hidden="true"></i> {{ post.date | default: "1900-01-01" | date: "%Y" }}</span>
+          </div>
         {% elsif post.date %}
          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[page.lang].date_label | default: site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ post.date | default: "1900-01-01" | date_to_xmlschema }}">{{ post.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
         {% endif %}
 
-    {% if post.excerpt and site.read_more != 'enabled' %}
+    {% if is_pub %}
+      {% if post.excerpt %}<p class="archive__item-excerpt pub-abstract" itemprop="description">{{ post.excerpt | markdownify }}</p>{% endif %}
+    {% elsif post.excerpt and site.read_more != 'enabled' %}
     <p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify }}</p>
     {% elsif post.excerpt and site.read_more == 'enabled' %}
     <p class="archive__item-excerpt" itemprop="description"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> {{ site.data.ui-text[page.lang].more_label | default: site.data.ui-text[site.locale].more_label | default: "Read more" }}</a></strong></p></p>
     {% endif %}
     
-    {% if post.citation %}
-      <p>{{ site.data.ui-text[page.lang].recommended_citation_label | default: site.data.ui-text[site.locale].recommended_citation_label | default: "Recommended citation:" }} {{ post.citation }}</p>
+    {% unless is_pub %}
+      {% if post.citation %}
+        <p>{{ site.data.ui-text[page.lang].recommended_citation_label | default: site.data.ui-text[site.locale].recommended_citation_label | default: "Recommended citation:" }} {{ post.citation }}</p>
+      {% endif %}
+    {% endunless %}
+
+    {% if is_pub %}
+    <div class="pub-actions">
+      <a class="pub-btn primary" href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fas fa-external-link-alt" aria-hidden="true"></i> {{ site.data.ui-text[page.lang].pub_details_label | default: site.data.ui-text[site.locale].pub_details_label | default: "View Paper" }}</a>
+      {% if post.paperurl %}<a class="pub-btn" href="{{ post.paperurl }}" download><i class="fas fa-file-pdf" aria-hidden="true"></i> {{ site.data.ui-text[page.lang].pub_pdf_label | default: site.data.ui-text[site.locale].pub_pdf_label | default: "PDF" }}</a>{% endif %}
+      {% if post.viewpaperurl %}<a class="pub-btn" href="{{ post.viewpaperurl }}"><i class="fas fa-link" aria-hidden="true"></i> {{ site.data.ui-text[page.lang].pub_doi_label | default: site.data.ui-text[site.locale].pub_doi_label | default: "DOI" }}</a>{% endif %}
+    </div>
     {% endif %}
 
   </article>
