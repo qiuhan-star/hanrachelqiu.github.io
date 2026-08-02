@@ -12,6 +12,7 @@ en: &DEFAULT_EN
   ext_link_label             : "Direct Link"
   less_than                  : "less than"
   minute_read                : "minute read"
+  views_label                : "views"
   share_on_label             : "Share on"
   meta_label                 :
   tags_label                 : "Tags:"
@@ -283,6 +284,7 @@ zh: &DEFAULT_ZH
   ext_link_label             : "直接链接"
   less_than                  : "少于"
   minute_read                : "分钟阅读时长"
+  views_label                : "浏览量"
   share_on_label             : "分享到"
   meta_label                 :
   tags_label                 : "标签："
