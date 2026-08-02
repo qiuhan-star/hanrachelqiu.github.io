@@ -399,3 +399,32 @@
   font-size: $type-size-6;
   text-transform: uppercase;
 }
+
+/* framed cards for "You May Also Enjoy" related posts */
+.page__related .grid__item {
+  padding: 1rem 1.1rem;
+  border: 1px solid #e3e3e3;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    border-color: #c9ccd1;
+    transform: translateY(-2px);
+  }
+
+  .archive__item-title {
+    margin-top: 0;
+    font-size: 0.95em;
+    line-height: 1.35;
+  }
+
+  .archive__item-excerpt {
+    margin-top: 0.5em;
+    font-size: 0.72em;
+    line-height: 1.5;
+    color: #5a5a5a;
+  }
+}
