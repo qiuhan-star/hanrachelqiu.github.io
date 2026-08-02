@@ -36,7 +36,7 @@
       {% endif %}
     </h2>
     {% if post.title_zh %}<p class="archive__item-excerpt" style="font-style:italic;color:#666;margin-top:-0.5em;">（{{ post.title_zh }}）</p>{% endif %}
-    {% if post.presented_in %}<p class="archive__item-excerpt" style="color:#2a7f3e;"><i class="fas fa-language" aria-hidden="true"></i> {{ post.presented_in }}{% if page.lang == 'zh-CN' %}报告{% endif %}</p>{% endif %}
+    {% if post.presented_in %}<p class="archive__item-excerpt" style="color:#2a7f3e;"><i class="fas fa-language" aria-hidden="true"></i> {% if page.lang == 'zh-CN' %}{% if post.presented_in == 'zh' %}中文{% elsif post.presented_in == 'en' %}英文{% endif %}报告{% else %}Presented in {% if post.presented_in == 'zh' %}Chinese{% elsif post.presented_in == 'en' %}English{% endif %}{% endif %}</p>{% endif %}
     {% if post.read_time %} <!-- 如果文章设置了阅读时间 -->
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p> <!-- 显示阅读时间 -->
     {% endif %}
