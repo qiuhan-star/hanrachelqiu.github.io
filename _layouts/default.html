@@ -315,7 +315,9 @@ layout: compress
         var preloader = document.getElementById('preloader');
         if (!preloader) return;
 
-        /* 标记站内跳转：点击站内链接时写标记，供下一页判断是否需要跳过开屏动画（即使 referrer 被剥离也能兜底） */
+        /* 标记站内跳转：点击站内链接时写标记，用以在下一页跳过开屏动画。
+           刷新(F5/cmd+R)、首次访问、直输网址、站外进入都不会设置此标记，因此会正常播放。
+           （刻意不用 referrer / Navigation Timing 判定——它们在本站点会误判刷新为"站内跳转"） */
         document.addEventListener('click', function (e) {
           var a = e.target && e.target.closest ? e.target.closest('a') : null;
           if (!a) return;
@@ -329,28 +331,17 @@ layout: compress
           } catch (err) {}
         });
 
-        /* 是否播放开屏动画：刷新(F5/cmd+R) → 播放；前进后退 → 不播放；站内链接跳转 → 不播放；首次访问/直输网址/站外进入 → 播放 */
-        function shouldPlay() {
-          try {
-            var navEntries = performance.getEntriesByType && performance.getEntriesByType('navigation');
-            var navType = navEntries && navEntries[0] && navEntries[0].type;
-            if (navType === 'reload') return true;        // 手动刷新 → 播放
-            if (navType === 'back_forward') return false; // 前进/后退 → 不播放
-            // navigate：首次访问 / 点链接 / 输网址
-            var internalFlag = sessionStorage.getItem('hq-internal-nav');
-            if (internalFlag) { sessionStorage.removeItem('hq-internal-nav'); return false; } // 站内点击 → 不播放
-            var ref = document.referrer || '';
-            if (ref === '') return true;                  // 空 referrer（新标签/直输网址）→ 播放
-            try {
-              if (new URL(ref).host === location.host) return false; // 同域 referrer → 站内跳转 → 不播放
-            } catch (e) {}
-            return true; // 站外进入 → 播放
-          } catch (e) {
-            return true; // 任何异常兜底播放，避免永久隐藏
+        /* 是否跳过开屏动画：仅当本次加载是由「点击站内链接跳转」触发（上一页已写标记）时才跳过；
+           其余情况（刷新/首次访问/直输网址/站外进入）一律播放。 */
+        var skip = false;
+        try {
+          if (sessionStorage.getItem('hq-internal-nav') === '1') {
+            sessionStorage.removeItem('hq-internal-nav');
+            skip = true;
           }
-        }
+        } catch (e) {}
 
-        if (!shouldPlay()) {
+        if (skip) {
           preloader.style.display = 'none';
           return;
         }
