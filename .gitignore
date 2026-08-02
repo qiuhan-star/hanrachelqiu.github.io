@@ -14,3 +14,7 @@ package-lock.json
 # Local bundler install (do not commit)
 vendor/
 .bundle/
+
+# Portfolio plaintext source + images: encrypted at build time, never committed in cleartext
+_portfolio/
+images/portfolio/

@@ -5,20 +5,5 @@ permalink: /portfolio/
 lang_alt: /zh/portfolio/
 author_profile: true
 ---
-<div id="pf-content" style="display:none">
-<div class="announcement">
-    📅 Coming Soon
-    <hr>
-    <div class="date"></div>
-    The narrative continues. ✨🌟 Your patience is greatly appreciated!
-</div>
-
-{% include base_path %}
-
-{% assign portfolio_items = site.portfolio | where_exp: "item", "item.lang != 'zh-CN'" %}
-{% for post in portfolio_items %}
-  {% include archive-single.html %}
-{% endfor %}
-</div>
-
-{% include portfolio-lock.html title="Password Required" desc="This portfolio is password protected." btn="Unlock" err="Incorrect password." %}
+{% include portfolio-cipher-en.html %}
+{% include portfolio-decrypt.html title="Password Required" desc="This portfolio is password protected." btn="Unlock" err="Incorrect password." %}
