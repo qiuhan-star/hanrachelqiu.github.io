@@ -31,9 +31,9 @@
     <div class="wrapper">
       <h1 class="page__title" itemprop="headline">
         {% if paginator %}
-          {{ site.title }}{% unless paginator.page == 1 %} {{ site.data.ui-text[page.lang].page | default: site.data.ui-text[site.locale].page | default: "Page" }} {{ paginator.page }}{% endunless %}
+          {% if page.lang == 'zh-CN' and site.title_zh %}{{ site.title_zh }}{% else %}{{ site.title }}{% endif %}{% unless paginator.page == 1 %} {{ site.data.ui-text[page.lang].page | default: site.data.ui-text[site.locale].page | default: "Page" }} {{ paginator.page }}{% endunless %}
         {% else %}
-          {{ page.title | default: site.title | markdownify | remove: "<p>" | remove: "</p>" }}
+          {% assign _fallback_title = site.title %}{% if page.lang == 'zh-CN' and site.title_zh %}{% assign _fallback_title = site.title_zh %}{% endif %}{{ page.title | default: _fallback_title | markdownify | remove: "<p>" | remove: "</p>" }}
         {% endif %}
       </h1>
       {% if page.excerpt %}
