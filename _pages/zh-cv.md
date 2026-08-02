@@ -8,8 +8,6 @@ lang_alt: /cv/
 redirect_from:
   - /zh/Resume_Han_(Rachel)_QIU.pdf
 ---
-你可以[在此](https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/assets/Resume_Han_(Rachel)_QIU.pdf)访问 Rachel 最新的简历（C.V.）。
-
 {% include base_path %}
 
 <html lang="zh-CN">

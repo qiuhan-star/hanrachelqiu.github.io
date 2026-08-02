@@ -7,8 +7,6 @@ lang_alt: /zh/cv/
 redirect_from:
   - /Resume_Han_(Rachel)_QIU.pdf
 ---
-You can access Rachel's latest C.V. [here](https://raw.githubusercontent.com/qiuhan-star/hanrachelqiu.github.io/master/assets/Resume_Han_(Rachel)_QIU.pdf). 
-
 {% include base_path %}
 
 <html lang="en">
