@@ -2,6 +2,7 @@
 title: "Method Notes #1: What I Actually Preregister on OSF"
 excerpt: "What I actually preregister on the Open Science Framework, why it matters for public administration research, and what it changed in how I work."
 date: 2026-08-02 12:00:00
+show_page_views: true
 tags:
   - Methods Notes
   - Preregistration

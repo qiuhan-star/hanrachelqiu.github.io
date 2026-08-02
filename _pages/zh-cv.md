@@ -41,6 +41,11 @@ redirect_from:
 </head>
 <body>
 
+<p style="margin: 0 0 1.5em 0;">
+  <a id="pdf-cv-link" href="{{ '/files/CV_HanQiu.pdf' | absolute_url }}" target="_blank" rel="noopener" style="display:inline-block;background:#777;color:#fff;padding:8px 14px;border-radius:4px;text-decoration:none;cursor:pointer;font-size:15px;">📄 PDF 简历</a>
+  <span id="cv-downloads" style="margin-left:12px;font-size:0.9em;color:#555;">下载量 0</span>
+</p>
+
 <button class="collapsible">教育背景</button>
 <div class="content">
   <p>* 公共管理博士，浙江大学，2025年9月 - 至今</p>

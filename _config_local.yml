@@ -1,0 +1,3 @@
+# 仅用于本地预览截图：把绝对 URL 改成根相对，便于 localhost 加载 main.css
+url: ""
+baseurl: ""
