@@ -44,7 +44,7 @@ layout: default
             <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i>{% if page.lang == 'zh-CN' %}日期：{% else %}Date:{% endif %}</strong> <time datetime="{{ page.modified | date: '%Y-%m-%d' }}">{% if page.lang == 'zh-CN' %}{{ page.modified | date: '%Y年%-m月%-d日' }}{% else %}{{ page.modified | date: "%B %d, %Y" }}{% endif %}</time></p>
             <!-- 显示修改日期 -->
           {% elsif page.date %}
-            <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i>Date:</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time></p>
+            <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i>{% if page.lang == 'zh-CN' %}日期：{% else %}Date:{% endif %}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{% if page.lang == 'zh-CN' %}{{ page.date | date: '%Y年%-m月%-d日' }}{% else %}{{ page.date | date: "%B %d, %Y" }}{% endif %}</time></p>
             <!-- 显示发布日期 -->
           {% endif %}
 
