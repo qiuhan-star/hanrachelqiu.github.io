@@ -3,8 +3,10 @@
      China; tiles use CARTO basemaps (also China-accessible). No geocoding. -->
 <link rel="stylesheet" href="{{ '/assets/leaflet/leaflet.css' | absolute_url }}" />
 <style>
-  #talkMapWrap { position: relative; margin: 0.5em 0 1.5em; }
-  #talkMap { height: 520px; width: 100%; border-radius: 8px; z-index: 1; }
+  #talkMapWrap { position: relative; }
+  #talkMap { height: 620px; width: 100%; border-radius: 10px; border: 1px solid #e6e9ef; background: #eef1f6; z-index: 1; }
+  .talkmap-cap { font-size: 0.9rem; color: #5c6573; margin: 0 0 8px; font-weight: 600; }
+  /* popup box — LOCKED structure (user: "我喜欢点CUHK显示的那个框，请你记住") */
   .talkmap-pop h4 { margin: 0 0 0.4em; font-size: 1.05em; }
   .talkmap-pop ul { margin: 0.2em 0 0; padding-left: 1.15em; }
   .talkmap-pop li { margin-bottom: 0.7em; }
@@ -14,11 +16,8 @@
   .talkmap-pop .talkmap-ov { margin: 0.6em 0 0; }
   .talkmap-pop .talkmap-ov a { color: #2a7f3e; font-weight: 600; text-decoration: none; }
   .talkmap-pop .talkmap-ov a:hover { text-decoration: underline; }
-  /* marker symbol (teardrop pin) + permanent city label rendered INSIDE the
-     divIcon, so the whole pin+label is one hover target. (A separate Leaflet
-     tooltip sits outside the marker's hit area and does NOT fire the marker's
-     mouseover when you hover the label text — which is why hovering just the
-     city name failed to reveal its schools.) */
+  /* marker: teardrop pin + permanent venue label (rendered INSIDE the divIcon so
+     the whole pin+label is one hover/click target) */
   .leaflet-div-icon.talkmap-divicon { background: transparent; border: none; display: flex; align-items: center; }
   .talkmap-pin-symbol {
     width: 16px; height: 16px; border-radius: 50% 50% 50% 0;
@@ -28,44 +27,33 @@
   }
   .talkmap-pin-symbol.school { background: #2a7f3e; }
   .talkmap-pin-symbol.award { background: #d4af37; }
-  .talkmap-city-label {
+  .talkmap-venue-label {
     margin-left: 6px;
     background: #fff; border: 1px solid #ccc; color: #1a1a1a;
     font-size: 12px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.25);
     padding: 2px 7px; border-radius: 10px; white-space: nowrap;
   }
-  /* hover tooltip: quick preview of talk titles / sub-venues */
-  .talkmap-tip { font-size: 12px; line-height: 1.5; max-width: 250px; }
-  .talkmap-tip .t-title { font-weight: 600; color: #33415c; }
-  .leaflet-tooltip.talkmap-tooltip { background: #fff; border: 1px solid #ccc; box-shadow: 0 1px 4px rgba(0,0,0,0.25); }
   /* reset / overview button */
   .talkmap-reset {
-    position: absolute; top: 10px; right: 10px; z-index: 1000;
+    position: absolute; top: 38px; right: 10px; z-index: 1000;
     padding: 5px 12px; border-radius: 6px; border: 1px solid #ccc;
     background: #fff; font-size: 13px; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.25);
   }
   .talkmap-reset:hover { background: #f3f3f3; }
-  @media (max-width: 600px) { #talkMap { height: 380px; } }
+  @media (max-width: 600px) { #talkMap { height: 400px; } }
 </style>
 
-{% if page.lang == 'zh-CN' %}
-<h2>🗺️ 讲座地点地图</h2>
-<p class="archive__item-excerpt">标记点显示我去过的<strong>城市</strong>；<strong>悬停城市</strong>可展开其学校/演讲地点，<strong>点击学校</strong>查看具体学校、会议与演讲标题。</p>
-{% else %}
-<h2>🗺️ Map of Talk Locations</h2>
-<p class="archive__item-excerpt">Markers show the <strong>cities</strong> I have visited for talks. <strong>Hover</strong> a city to reveal its schools/venues; <strong>click</strong> a school for the venue, conference, and talk title.</p>
-{% endif %}
-
 <div id="talkMapWrap">
+  <p class="talkmap-cap">{% if page.lang == 'zh-CN' %}🗺️ 我演讲过的地方{% else %}🗺️ Where I've given talks{% endif %}</p>
   <div id="talkMap"></div>
   <button id="talkMapReset" class="talkmap-reset" aria-label="{% if page.lang == 'zh-CN' %}返回全览{% else %}Reset to overview{% endif %}">{% if page.lang == 'zh-CN' %}⤢ 全览{% else %}⤢ Overview{% endif %}</button>
 </div>
 
 <script src="{{ '/assets/leaflet/leaflet.js' | absolute_url }}"></script>
 <script>
-/* talk locations data: one entry per talk. Grouped by venue (school) below so
-   different schools in the same city (e.g. HKUST vs CUHK in Hong Kong) get their
-   own marker. Coords hardcoded per venue, no geocoding needed. */
+/* talk locations data: one entry per talk, grouped by venue (school) below so
+   different schools in the same city get their own marker. Coords hardcoded, no
+   geocoding. Every venue marker is shown permanently (labeled); click for detail. */
 var talksData = [
   { city: "Xi'an, China", lat: 34.3416, lng: 108.9398, title: "Single vs. Multiple Agents: Types of Mobilization Entities Impact on the Length of Citizen Volunteer Service Participation", title_zh: "单主体 vs. 多主体：动员主体类型对公民志愿服务参与时长的影响", venue: "Xi'an Jiaotong University", conf: "Chinese Sociological Association 2026 Annual Conference", date: "2026-07-10", lang: "zh" },
   { city: "Xi'an, China", lat: 34.3416, lng: 108.9398, title: "Mobilized Giving and Voluntary Donation: Impact Mechanisms and the Moderating Role of Age", venue: "Xi'an Jiaotong University", conf: "Chinese Sociological Association 2026 Annual Conference", date: "2026-07-10", lang: "zh" },
@@ -88,23 +76,18 @@ var shortNames = {
   "Chinese University of Hong Kong": { zh: "港中文", en: "CUHK" }
 };
 
-/* vertical offset (iconAnchor y) for venues that sit very close together, so
-   their teardrop pins don't overlap when revealed at the zoomed-out default
-   view that also frames Perth/Australia. Only HKUST and CUHK need this: they
-   are ~10km apart in Hong Kong, near-indistinguishable at world-zoom without an
-   offset. The popup still opens at the true latlng; the offset only moves the
-   visible pin. */
+/* vertical offset (iconAnchor y) for the two Hong Kong schools so their pins
+   don't overlap at the zoomed-out default view. The popup opens at the true
+   latlng; the offset only moves the visible pin. */
 var pinOffset = {
   "HKUST": [8, 40],
   "Chinese University of Hong Kong": [8, -8]
 };
 
-/* page language flag injected from Liquid: true on Chinese pages, false on English */
+/* page language flag injected from Liquid */
 var isZh = {% if page.lang == 'zh-CN' %}true{% else %}false{% endif %};
 
-/* escape user-facing strings before inserting into popup/label HTML. Data is
-   currently hardcoded so risk is low, but this keeps it safe if any field ever
-   becomes Liquid-injected or user-editable (defensive against XSS). */
+/* escape user-facing strings before inserting into popup/label HTML (defensive XSS) */
 function escapeHtml(s) {
   return String(s)
     .replace(/&/g, '&amp;')
@@ -124,18 +107,6 @@ for (var i = 0; i < talksData.length; i++) {
   if (t.award) { byVenue[t.venue].award = true; }
 }
 
-/* group venues by city so a city with multiple venues gets a region marker
-   whose hover hint lists its sub-venues (e.g. Hong Kong -> HKUST, CUHK) */
-var byCity = {};
-for (var venue in byVenue) {
-  var c = byVenue[venue].city;
-  if (!byCity[c]) { byCity[c] = { latSum: 0, lngSum: 0, count: 0, venues: [] }; }
-  byCity[c].latSum += byVenue[venue].lat;
-  byCity[c].lngSum += byVenue[venue].lng;
-  byCity[c].count += 1;
-  byCity[c].venues.push(venue);
-}
-
 var map = L.map('talkMap').setView([30, 114], 4);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   subdomains: 'abcd',
@@ -143,8 +114,8 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
 }).addTo(map);
 
-/* build one marker per venue (school). Schools are hidden by default and only
-   revealed on hover of their city's region marker (see below). */
+/* one permanently-visible, labeled marker per venue (school). Click opens the
+   detail box. No hover show/hide — everything is visible at a glance. */
 var allLatLngs = [];
 for (var venue in byVenue) {
   var v = byVenue[venue];
@@ -165,74 +136,12 @@ for (var venue in byVenue) {
   var anchor = pinOffset[venue] ? pinOffset[venue] : [8, 16];
   var venueIcon = L.divIcon({
     className: 'talkmap-divicon',
-    html: '<span class="talkmap-pin-symbol' + (v.award ? ' award' : ' school') + '"></span><span class="talkmap-city-label">' + escapeHtml(short) + '</span>',
-    iconSize: [110, 20],
+    html: '<span class="talkmap-pin-symbol' + (v.award ? ' award' : ' school') + '"></span><span class="talkmap-venue-label">' + escapeHtml(short) + '</span>',
+    iconSize: [120, 20],
     iconAnchor: anchor
   });
-  var vMarker = L.marker([v.lat, v.lng], { icon: venueIcon, interactive: true, zIndexOffset: 300 });
-  vMarker.bindPopup(html);
-  /* clicking a school flies in for a closer look and opens the detail box */
-  vMarker.on('click', (function(lat, lng) {
-    return function() { map.flyTo([lat, lng], 6, { duration: 0.8 }); };
-  })(v.lat, v.lng));
-  /* hovering a school keeps it (and its siblings) shown; leaving starts the hide timer */
-  vMarker.on('mouseover', (function(city) {
-    return function() { showSchools(city); };
-  })(v.city));
-  vMarker.on('mouseout', (function(city) {
-    return function() { hideSchools(city); };
-  })(v.city));
-  /* keep the school on the map while its popup is open; hide it once closed */
-  vMarker.on('popupclose', (function(city) {
-    return function() { hideSchools(city); };
-  })(v.city));
-  v.marker = vMarker;
+  L.marker([v.lat, v.lng], { icon: venueIcon, interactive: true, zIndexOffset: 300 }).addTo(map).bindPopup(html);
   allLatLngs.push([v.lat, v.lng]);
-}
-
-/* reveal/hide helpers for the hover-to-show-schools behaviour. A short timer on
-   mouseout lets the cursor travel from the region into a school without the
-   school vanishing mid-way (classic hover-bridge pattern). */
-var hideTimers = {};
-function showSchools(city) {
-  if (hideTimers[city]) { clearTimeout(hideTimers[city]); hideTimers[city] = null; }
-  var c = byCity[city];
-  if (!c || !c.schoolMarkers) { return; }
-  c.schoolMarkers.forEach(function(m) { if (!map.hasLayer(m)) { m.addTo(map); } });
-}
-function hideSchools(city) {
-  if (hideTimers[city]) { clearTimeout(hideTimers[city]); }
-  hideTimers[city] = setTimeout(function() {
-    var c = byCity[city];
-    if (!c || !c.schoolMarkers) { return; }
-    c.schoolMarkers.forEach(function(m) { if (map.hasLayer(m) && !m.isPopupOpen()) { map.removeLayer(m); } });
-  }, 200);
-}
-
-/* region markers: one per city, always visible — a teardrop logo plus a
-   permanent city label. Hovering reveals that city's school markers. */
-for (var city in byCity) {
-  var c = byCity[city];
-  c.schoolMarkers = [];
-  for (var s = 0; s < c.venues.length; s++) {
-    c.schoolMarkers.push(byVenue[c.venues[s]].marker);
-  }
-  var clat = c.latSum / c.count;
-  var clng = c.lngSum / c.count;
-  var regionIcon = L.divIcon({
-    className: 'talkmap-divicon',
-    html: '<span class="talkmap-pin-symbol"></span><span class="talkmap-city-label">' + escapeHtml(city.split(',')[0]) + '</span>',
-    iconSize: [120, 20],
-    iconAnchor: [8, 16]
-  });
-  var regionMarker = L.marker([clat, clng], { icon: regionIcon, interactive: true, zIndexOffset: 200 })
-    .addTo(map);
-  regionMarker.on('mouseover', (function(ci) {
-    return function() { showSchools(ci); };
-  })(city));
-  regionMarker.on('mouseout', (function(ci) {
-    return function() { hideSchools(ci); };
-  })(city));
 }
 
 /* named overview function so the button and the in-popup link share it */
