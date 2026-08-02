@@ -1,6 +1,7 @@
 ---
 permalink: /experience/
 title: "Experience"
+lang_alt: /zh/experience/
 author_profile: true
 ---
 ## Research Experience

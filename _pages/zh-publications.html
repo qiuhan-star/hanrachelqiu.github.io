@@ -1,0 +1,46 @@
+---
+layout: archive
+title: "出版物"
+permalink: /zh/publications/
+author_profile: True
+lang: zh-CN
+lang_alt: /publications/
+---
+
+{% if site.author.googlescholar %}
+  <div class="wordwrap">您也可以在我的 <a href="{{site.author.googlescholar}}">Google Scholar 主页</a> 上找到我的文章。</div>
+{% endif %}
+
+{% include base_path %}
+
+<!-- New style rendering if publication categories are defined -->
+{% if site.publication_category %}
+  {% for category in site.publication_category  %}
+    {% assign title_shown = false %}
+    {% assign zh_title = category[1].title %}
+    {% case category[0] %}
+      {% when 'books' %}{% assign zh_title = '专著' %}
+      {% when 'journal articles' %}{% assign zh_title = '期刊论文' %}
+      {% when 'conferences' %}{% assign zh_title = '会议论文' %}
+      {% when 'paper under review' %}{% assign zh_title = '审稿中论文' %}
+      {% when 'working paper' %}{% assign zh_title = '工作论文' %}
+      {% when 'case report' %}{% assign zh_title = '案例报告' %}
+    {% endcase %}
+    {% for post in site.publications reversed %}
+      {% if post.category != category[0] %}
+        {% continue %}
+      {% endif %}
+      {% unless title_shown %}
+        <h2>{{ zh_title }}</h2><hr />
+        {% assign title_shown = true %}
+      {% endunless %}
+      {% include archive-single.html %}
+    {% endfor %}
+  {% endfor %}
+{% else %}
+  {% for post in site.publications reversed %}
+    {% include archive-single.html %}
+  {% endfor %}
+{% endif %}
+
+<p class="page__meta" style="margin-top:2em;"><em>除上述成果外，我还有若干关于共同生产、数字政府与环境治理的工作论文及在研项目（共计约 6 项，详情可索取）。</em></p>

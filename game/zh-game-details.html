@@ -1,0 +1,92 @@
+---
+permalink: /zh/game-details.html/
+lang_alt: /game-details.html/
+---
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博士模拟器游戏</title>
+    <style>
+        #audioControls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="page-title">博士模拟器游戏</h1>
+        <h2>跃入学术冒险，来体验博士模拟器吧！</h2>
+    </header>
+
+    <!-- Audio Controls -->
+    <div id="audioControls">
+        <button id="playPauseBtn">播放音乐</button>
+        <audio id="audioPlayer" preload="auto">
+            <source src="assets/Unstoppable-Sia.320.mp3" type="audio/mpeg">
+            您的浏览器不支持音频播放。
+        </audio>
+    </div>
+
+    <div class="container">
+        <section>
+            <h2>关于游戏</h2>
+            <p>博士模拟器是由一位华盛顿大学的博士毕业生（现就职于 Google）精心打造的独特游戏。该游戏为庆祝作者顺利毕业而开发，其玩法映射了读博之路上的诸多挑战。</p>
+        </section>
+
+        <section>
+            <h2>玩法</h2>
+            <p>游戏玩法简单直观，包含反映学术经历的情景与抉择。随着你做出选择，屏幕左上角的“希望值”计量条会随之变化。</p>
+        </section>
+
+        <section>
+            <h2>我的体验：从游戏中获得的收获</h2>
+            <p>我发现这款游戏真实还原了读博的历程。它让我体会到劳逸结合、保持专注、设定清晰目标并及时行动的重要性。</p>
+            <p>🔵 <strong>工作与生活的平衡：</strong> 适时休息对持续的研究产出至关重要。🛌 放松是平衡且高效生活方式的关键！</p>
+            <p>🌟 <strong>高度专注：</strong> 保持专注是成功的关键。🤓 保持专注，命中目标！</p>
+            <p>📚 <strong>目标导向思维：</strong> 设定明确目标，避免迷失方向。🏆 清晰的目标为前路指明方向！</p>
+            <p>💡 <strong>将想法付诸行动：</strong> 对你的想法要当机立断；犹豫可能错失良机。优质的研究选题稀缺，想到一个，别人很可能也想到了。⏩ 把灵感立刻变成行动！</p>
+        </section>
+
+        <section>
+            <h2>适合谁来玩</h2>
+            <p><strong>对于考虑读博的人</strong>，多次游玩该游戏能帮助你洞察其中的挑战。<strong>方向尚不清晰的在读博士</strong>，可以从中获得如期毕业的宝贵指引。<strong>教授</strong>若希望让学生真实了解读博历程，不妨考虑将这款游戏纳入课程。</p>
+        </section>
+
+        <section>
+            <h2>开始游戏</h2>
+            <p>准备好跃入这场学术冒险了吗？你有两种方式来玩博士模拟器：</p>
+            <ul>
+                <li><strong>你可以新开窗口游玩：</strong> <a href="https://research.wmz.ninja/projects/phd/index.html" target="_blank">点击此处</a> 在新浏览器窗口中打开游戏。</li>
+                <li><strong>或者你也可以直接在此游玩：</strong> 使用下方游戏，无需离开页面即可开启旅程。</li>
+            </ul>
+            <iframe src="https://research.wmz.ninja/projects/phd/index.html" width="100%" height="600px" frameborder="0" style="display:block;"></iframe>
+        </section>
+    </div>
+
+    <script>
+        var audio = document.getElementById('audioPlayer');
+        var playPauseBtn = document.getElementById('playPauseBtn');
+
+        // 尝试在页面加载时播放音乐，但大多数现代浏览器会阻止自动播放
+        // 因此，最好是在用户点击按钮时播放音乐
+        playPauseBtn.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play().catch(function(error) {
+                    console.error("Error trying to play audio:", error);
+                });
+                playPauseBtn.textContent = '暂停音乐';
+            } else {
+                audio.pause();
+                playPauseBtn.textContent = '播放音乐';
+            }
+        });
+    </script>
+</body>
+</html>

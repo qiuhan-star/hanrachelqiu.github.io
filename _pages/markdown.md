@@ -1,6 +1,7 @@
 ---
 permalink: /markdown/
 title: "Rachel's Personal Homepage Guide"
+lang_alt: /zh/markdown/
 author_profile: true
 redirect_from: 
   - /md/

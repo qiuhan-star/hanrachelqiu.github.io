@@ -211,7 +211,10 @@ layout: compress
         line-height: 1;
         padding: 4px 6px;
         border-radius: 8px;
+        pointer-events: auto;
+        transition: transform 150ms ease, color 150ms ease;
       }
+      .theme-toggle:active { transform: scale(0.86); }
       .theme-toggle:hover { color: #000; }
       body.dark .theme-toggle { color: #cfcfcf; }
       body.dark .theme-toggle:hover { color: #fff; }
@@ -231,7 +234,8 @@ layout: compress
     <script>
       /* 首屏前计算主题，避免闪屏（system = 跟随系统） */
       (function () {
-        var s = localStorage.getItem('theme');
+        var s = null;
+        try { s = localStorage.getItem('theme'); } catch (e) { s = null; }
         var order = ['system', 'light', 'dark'];
         if (order.indexOf(s) < 0) s = 'system';
         var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -406,8 +410,17 @@ layout: compress
       /* ===== 亮/暗切换：跟随系统 → 亮 → 暗 三态循环，icon 随状态变化 ===== */
       (function () {
         var SETTINGS = ['system', 'light', 'dark'];
+        // localStorage 容错：隐私模式 / 禁用时退回内存变量，按钮仍然可用
+        var _memTheme = null;
+        function readTheme() {
+          try { return localStorage.getItem('theme'); } catch (e) { return _memTheme; }
+        }
+        function writeTheme(v) {
+          _memTheme = v;
+          try { localStorage.setItem('theme', v); } catch (e) {}
+        }
         function getSetting() {
-          var t = localStorage.getItem('theme');
+          var t = readTheme();
           return SETTINGS.indexOf(t) >= 0 ? t : 'system';
         }
         function compute(setting) {
@@ -415,6 +428,16 @@ layout: compress
             return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
           }
           return setting;
+        }
+        // 关键：下一次点击一定切到「与当前外观相反」的状态，保证每次点击都有可见变化
+        function nextSetting(cur) {
+          var i = SETTINGS.indexOf(cur);
+          var curResolved = compute(cur);
+          for (var k = 1; k < SETTINGS.length; k++) {
+            var cand = SETTINGS[(i + k) % SETTINGS.length];
+            if (compute(cand) !== curResolved) return cand;
+          }
+          return SETTINGS[(i + 1) % SETTINGS.length];
         }
         function apply(setting, withTransition) {
           var theme = compute(setting);
@@ -430,9 +453,8 @@ layout: compress
         var btn = document.getElementById('light-toggle');
         if (btn) {
           btn.addEventListener('click', function () {
-            var cur = getSetting();
-            var next = SETTINGS[(SETTINGS.indexOf(cur) + 1) % SETTINGS.length];
-            localStorage.setItem('theme', next);
+            var next = nextSetting(getSetting());
+            writeTheme(next);
             apply(next, true);
           });
           // 处于「跟随系统」时，系统主题变了也实时跟随

@@ -1,6 +1,7 @@
 ---
 permalink: /services/
 title: "Services"
+lang_alt: /zh/services/
 author_profile: true
 ---
 ## Journal Services

@@ -1,6 +1,7 @@
 ---
 permalink: /awards/
 title: "Honors and Awards"
+lang_alt: /zh/awards/
 author_profile: true
 ---
 
