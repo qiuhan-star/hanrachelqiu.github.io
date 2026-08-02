@@ -1,0 +1,127 @@
+{% comment %} PJAX 站内翻页：只换 #main 正文、保留 .sidebar(含音乐 iframe)，使音乐翻页不断。本文件只用 /* */ 注释，避免 compress 布局压缩时 // 与下一行合并出错。 {% endcomment %}
+<script>
+(function () {
+  /* 仅对支持 history API 与 DOMParser 的浏览器启用；不支持则退回普通翻页 */
+  if (!window.history || !window.history.pushState || !window.DOMParser) return;
+
+  var MAIN = '#main';
+  var SIDEBAR = '.sidebar';
+  var loadedScripts = {};
+
+  /* 判断链接是否可走 pjax（同域、非新窗口、非锚点、非下载、非查询分页） */
+  function isPjaxable(a) {
+    if (!a) return false;
+    var href = a.getAttribute('href') || '';
+    if (!href || href.charAt(0) === '#') return false;
+    if (a.target && a.target !== '_self') return false;
+    if (a.hasAttribute('download')) return false;
+    if (a.hasAttribute('data-no-pjax')) return false;
+    try {
+      var url = new URL(a.href, location.href);
+      if (url.origin !== location.origin) return false;
+      if (url.search) return false;
+      if (url.hash && url.pathname === location.pathname) return false;
+      return true;
+    } catch (e) { return false; }
+  }
+
+  /* 顺序加载外部脚本（Leaflet 等），已加载过则跳过；加载完再执行内联脚本 */
+  function loadExternal(src) {
+    if (loadedScripts[src]) return Promise.resolve();
+    loadedScripts[src] = true;
+    return new Promise(function (resolve) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.async = false;
+      s.onload = function () { resolve(); };
+      s.onerror = function () { resolve(); };
+      document.body.appendChild(s);
+    });
+  }
+
+  function rerunScripts(container) {
+    var scripts = Array.prototype.slice.call(container.querySelectorAll('script'));
+    var chain = Promise.resolve();
+    scripts.forEach(function (old) {
+      if (old.src) { chain = chain.then(function () { return loadExternal(old.src); }); }
+    });
+    chain.then(function () {
+      scripts.forEach(function (old) {
+        if (old.src) return;
+        try {
+          var s = document.createElement('script');
+          s.textContent = old.textContent;
+          document.body.appendChild(s);
+          if (s.parentNode) s.parentNode.removeChild(s);
+        } catch (e) {}
+      });
+      /* 公式页(MathJax)换内容后重新排版 */
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        try { window.MathJax.typesetPromise(); } catch (e) {}
+      } else if (window.MathJax && window.MathJax.Hub) {
+        try { window.MathJax.Hub.Queue(['Typeset', window.MathJax.Hub]); } catch (e) {}
+      }
+    });
+  }
+
+  /* 把新文档的 #main 换入：保留现有 .sidebar(含音乐 iframe，不重建)，只替换其余正文 */
+  function swapMain(newDoc, url) {
+    var newMain = newDoc.querySelector(MAIN);
+    var oldMain = document.querySelector(MAIN);
+    if (!newMain || !oldMain) return false;
+
+    var liveSidebar = oldMain.querySelector(SIDEBAR); /* 关键：复用现存节点，iframe 继续播放 */
+    var newSidebar = newMain.querySelector(SIDEBAR);
+    if (newSidebar && newSidebar.parentNode) newSidebar.parentNode.removeChild(newSidebar);
+
+    while (oldMain.firstChild) oldMain.removeChild(oldMain.firstChild);
+    if (liveSidebar) oldMain.appendChild(liveSidebar);
+    while (newMain.firstChild) oldMain.appendChild(newMain.firstChild);
+
+    rerunScripts(oldMain);
+
+    var newTitle = newDoc.querySelector('title');
+    if (newTitle) document.title = newTitle.textContent;
+
+    if (url) {
+      history.pushState({ pjax: true }, '', url);
+      var hashPos = url.indexOf('#');
+      var hash = hashPos >= 0 ? url.slice(hashPos) : '';
+      if (hash.length > 1) {
+        var el = document.getElementById(hash.slice(1));
+        if (el) el.scrollIntoView(); else window.scrollTo(0, 0);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }
+    return true;
+  }
+
+  /* 拦截同域左键点击 */
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = (e.target && e.target.closest) ? e.target.closest('a') : null;
+    if (!isPjaxable(a)) return;
+    e.preventDefault();
+    var url = a.href;
+    fetch(url, { credentials: 'same-origin' })
+      .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.text(); })
+      .then(function (html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        if (!swapMain(doc, url)) window.location.href = url; /* 拿不到 #main → 整页兜底 */
+      })
+      .catch(function () { window.location.href = url; }); /* 失败 → 整页兜底 */
+  });
+
+  /* 前进/后退：同样只换内容，保持音乐 */
+  window.addEventListener('popstate', function () {
+    fetch(location.href, { credentials: 'same-origin' })
+      .then(function (r) { if (!r.ok) throw new Error('http'); return r.text(); })
+      .then(function (html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        if (!swapMain(doc, null)) window.location.reload();
+      })
+      .catch(function () { window.location.reload(); });
+  });
+})();
+</script>
