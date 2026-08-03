@@ -136,8 +136,7 @@
   .tm-row1 { margin-top:0; }
   .tm-dot { color:var(--text-secondary); opacity:.5; }
   /* floating type badge — split "Conference Presentation" into two lines at the space */
-  .talkmap-acc-main > .badge-cluster .pill,
-  .talkmap-jcard > .badge-cluster .pill { white-space:normal; max-width:100px; text-align:center; line-height:1.14; padding:5px 8px; }
+  .talkmap-jcard .t-row .badge-cluster .pill { white-space:normal; max-width:100px; text-align:center; line-height:1.14; padding:5px 8px; }
   /* award: de-emphasized, sits at the end of the card (not a bold gold pill) */
   .tm-award { display:block; font-size:.8rem; font-weight:500; color:#92732a; margin:9px 0 0; opacity:.9; }
   :root[data-theme="dark"] .tm-award { background:transparent; border:none; color:#d8c074; }
@@ -469,8 +468,9 @@ function renderJourney(){
     detail += resRow(t);
     html += '<div class="talkmap-jnode"><div class="talkmap-jcard talkmap-acc">'
       + '<div class="talkmap-acc-head" onclick="hqToggleAcc(this)">'
-      + '<div class="t">' + titleHtml + '</div>'
+      + '<div class="t-row"><div class="t">' + titleHtml + '</div>'
       + typeBadge
+      + '</div>'
       + '<div class="m">' + meta + '</div>'
       + '<div class="venue">' + escapeHtml(fullVenue(t)) + (t.city ? ', ' + escapeHtml(t.city) : '') + '</div>'
       + awardTag
