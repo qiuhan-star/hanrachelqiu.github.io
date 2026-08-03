@@ -7,32 +7,12 @@ lang_alt: /zh/game-details.html/
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhD Simulator Game</title>
-    <style>
-        #audioControls {
-            text-align: center;
-            margin: 20px 0;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
     <header>
         <h1 class="page-title">PhD Simulator Game</h1>
         <h2>Take a leap into the academic adventure with the PhD Simulator!</h2>
     </header>
-
-    <!-- Audio Controls -->
-    <div id="audioControls">
-        <button id="playPauseBtn">Play Music</button>
-        <audio id="audioPlayer" preload="auto">
-            <source src="assets/Unstoppable-Sia.320.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-    </div>
 
     <div class="container">
         <section>
@@ -70,23 +50,5 @@ lang_alt: /zh/game-details.html/
         </section>
     </div>
 
-    <script>
-        var audio = document.getElementById('audioPlayer');
-        var playPauseBtn = document.getElementById('playPauseBtn');
-
-        // 尝试在页面加载时播放音乐，但大多数现代浏览器会阻止自动播放
-        // 因此，最好是在用户点击按钮时播放音乐
-        playPauseBtn.addEventListener('click', function() {
-            if (audio.paused) {
-                audio.play().catch(function(error) {
-                    console.error("Error trying to play audio:", error);
-                });
-                playPauseBtn.textContent = 'Pause Music';
-            } else {
-                audio.pause();
-                playPauseBtn.textContent = 'Play Music';
-            }
-        });
-    </script>
 </body>
 </html>
