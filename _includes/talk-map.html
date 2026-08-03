@@ -334,7 +334,6 @@ function coordOf(venue){ return venueCoords[canonVenue(venue)] || [30, 114]; }
 
 function escapeHtml(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 function dispTitle(it){ return (isZh && it.title_zh) ? it.title_zh : it.title; }
-function langLabel(it){ if(!it.lang) return ''; if(it.lang === 'zh'){ return isZh ? '中文报告' : 'Presented in Chinese'; } return isZh ? '英文报告' : 'Presented in English'; }
 /* bold ONLY the literal word "Presenter"; "(with X)" and " at ..." stay normal */
 function metaConf(t){
   var c = (t.conf || '').trim();
