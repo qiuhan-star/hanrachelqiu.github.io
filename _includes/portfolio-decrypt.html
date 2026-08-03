@@ -24,7 +24,10 @@
    ever ships. For bilingual pages the decrypted HTML carries [data-lang] blocks;
    after injecting we re-run window.__applyLang() so the right language shows. */
 (function () {
-  var B64 = window.PF_CIPHER || "";
+  function currentCipher() {
+    var lang = document.documentElement.getAttribute("data-lang") || "en";
+    return (lang === "zh" && window.PF_CIPHER_ZH) ? window.PF_CIPHER_ZH : window.PF_CIPHER;
+  }
   var ov = document.getElementById("pf-overlay");
   var ct = document.getElementById("pf-content");
   var inp = document.getElementById("pf-pwd");
@@ -40,7 +43,7 @@
   }
 
   function decrypt(pass) {
-    var bytes = toBuf(B64);
+    var bytes = toBuf(currentCipher());
     var salt = bytes.slice(0, SALT_LEN);
     var iv = bytes.slice(SALT_LEN, SALT_LEN + IV_LEN);
     var data = bytes.slice(SALT_LEN + IV_LEN);
