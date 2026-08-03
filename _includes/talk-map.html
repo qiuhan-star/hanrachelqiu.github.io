@@ -62,11 +62,11 @@
   .talkmap-jcard .zh { color:var(--text-secondary); font-weight:600; }
   .talkmap-jcard .award { color:#92732a; font-weight:600; }
   .talkmap-jcard .award-line { margin-top:7px; }
-  .talkmap-jcard .pill { display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.02em; padding:2px 9px; border-radius:6px; text-transform:uppercase; }
-  .talkmap-jcard .pill.conf { background:#e0f3f1; color:#0e8f86; }
-  .talkmap-jcard .pill.work { background:#e7f5ec; color:#2f7d4f; }
-  .talkmap-jcard .pill.sem  { background:#f1ecfa; color:#6f5bb0; }
-  .talkmap-jcard .pill.inv  { background:#faf3e2; color:#92732a; }
+  .talkmap-jcard .pill { display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.01em; padding:2px 9px; border-radius:6px; }
+  .talkmap-jcard .pill.conf { background:#dce9fc; color:#1f63c8; }
+  .talkmap-jcard .pill.work { background:#dcf3e4; color:#1d8a4e; }
+  .talkmap-jcard .pill.sem  { background:#efe8fb; color:#6f4fc0; }
+  .talkmap-jcard .pill.inv  { background:#fbf0d8; color:#9a6a14; }
   .talkmap-jaxis { width:120px; position:relative; text-align:right; padding-right:6px; }
   .talkmap-jaxis .dot { position:absolute; left:-9px; top:8px; width:18px; height:18px; border-radius:50%; background:var(--accent); border:3px solid var(--bg-base); z-index:1; }
   .talkmap-jaxis.award .dot { background:#d4af37; }
@@ -151,7 +151,7 @@
     {% assign talk_items = site.talks | where_exp: "t", "t.lang != 'zh-CN'" %}
   {% endif %}
   {% assign _yrs = talk_items | map: 'date' | sort %}
-  <p class="talkmap-summary"><strong>{{ talk_items.size }}</strong> {% if page.lang == 'zh-CN' %}场受邀演讲（{{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }}）{% else %}invited talks ({{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }}){% endif %}</p>
+  <p class="talkmap-summary"><strong>{{ talk_items.size }}</strong> {% if page.lang == 'zh-CN' %}场演讲与报告（{{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }}）{% else %}Talks &amp; Presentations ({{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }}){% endif %}</p>
 
   <div class="talkmap-toolbar">
     <div class="talkmap-seg" id="talkMapSeg">
