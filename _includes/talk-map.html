@@ -108,8 +108,10 @@
   .talkmap-acc { background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:10px; margin-bottom:9px; box-shadow:0 1px 3px rgba(20,30,50,.06); transition:transform .18s ease, box-shadow .18s ease; }
   .talkmap-acc:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); }
   .talkmap-acc-head { display:flex; align-items:flex-start; gap:12px; padding:12px 15px; cursor:pointer; }
-  .talkmap-acc-main { flex:1; min-width:0; }
-  .talkmap-acc .t-title { font-weight:600; font-size:.98rem; line-height:1.5; color:var(--text-primary); }
+  .talkmap-acc-main { flex:1; min-width:0; position:relative; }
+  .talkmap-acc .t-title { font-weight:600; font-size:.98rem; line-height:1.5; color:var(--text-primary); padding-right:160px; }
+  /* floating pill — top-right anchor of the accordion head */
+  .talkmap-acc-main > .pill { position:absolute; top:2px; right:0; }
   .talkmap-acc .t-meta { color:var(--text-secondary); font-size:.84rem; margin-top:6px; display:block; }
   /* structured multi-row meta: each field on its own wrapping row */
   .tm-row { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:5px; }
