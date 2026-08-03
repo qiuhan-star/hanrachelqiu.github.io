@@ -165,7 +165,9 @@ updateUptime();
 </script>
 
 <!-- 不蒜子：真实访客数(UV)与浏览量(PV)，零后端，由 busuanzi 公共服务统计 -->
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- 若公共服务不可用，自动隐藏计数面板，避免长期显示占位符 "-" -->
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+        onerror="var el=document.querySelector('.footer-right.runtime'); if(el){el.style.display='none';}"></script>
 
 <script>
 /* 微信二维码弹窗：无障碍增强（ESC 关闭 / 焦点管理 / 按钮关闭） */

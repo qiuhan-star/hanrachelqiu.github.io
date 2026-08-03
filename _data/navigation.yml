@@ -33,6 +33,6 @@ main:
       - title: "Guide"
         title_zh: "指南"
         url: /markdown/
-      - title: "PhD Simulator"
-        title_zh: "PhD 模拟器"
-        url: /game-details.html
+  - title: "PhD Simulator"
+    title_zh: "PhD 模拟器"
+    url: /game-details.html/

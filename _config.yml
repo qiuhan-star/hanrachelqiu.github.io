@@ -5,6 +5,7 @@ title_zh                 : "邱涵的个人主页"
 title_separator          : "-"
 name                     : &name "Rachel"
 description              : &description "PhD student in Public Administration at Zhejiang University, researching public & nonprofit management, government transparency and accountability, digital government, and collaborative governance."
+description_zh           : "浙江大学公共管理专业博士研究生，研究方向为公共与非营利组织管理、政府透明与问责、数字政府与治理科技、协同治理与合作治理。"
 url: "https://qiuhan-star.github.io/hanrachelqiu.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "qiuhan-star/hanrachelqiu.github.io"
@@ -92,15 +93,12 @@ publication_category:
 teaser                   : # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)//false就是没有超链接？？
 words_per_minute         : 160
-future                   : true
 read_more                : "enabled" # if enabled, adds "Read more" links to excerpts// disabled 在文章那里就会没有
 talkmap_link             : false #change to true to add link to talkmap on talks page// 演讲地图
 comments:
   provider               : # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "custom"
   disqus:
     shortname            :
-  discourse:
-    server               : https://qiuhan-star.github.io/hanrachelqiu.github.io
   facebook:
     appid                :
     num_posts            : # 5 (default)
@@ -135,7 +133,7 @@ yandex_site_verification :
 
 # Social Sharing
 twitter:
-  username               : &twitter
+  username               :
 facebook:
   username               :
   app_id                 :
