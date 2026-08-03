@@ -72,6 +72,10 @@
   .talkmap-jaxis.award .dot { background:#d4af37; }
   .talkmap-jaxis .date { font-weight:700; font-size:.9rem; color:var(--text-primary); }
   .talkmap-jaxis .loc { font-size:.8rem; color:var(--text-secondary); margin-top:2px; display:flex; justify-content:flex-end; align-items:center; gap:5px; }
+  /* journey axis: force city + country onto two lines (right-aligned) */
+  .talkmap-jaxis .loc .loc-full { display:block; text-align:right; line-height:1.25; }
+  .talkmap-jaxis .loc .loc-city { display:inline; }
+  .talkmap-jaxis .loc .loc-country { display:block; font-weight:500; opacity:.82; font-size:.92em; margin-top:1px; }
   .talkmap-jcard .venue { color:var(--accent); font-weight:600; font-size:.82rem; margin-top:6px; }
   .cc { display:inline-block; font-size:.66rem; font-weight:700; letter-spacing:.04em; padding:1px 6px; border-radius:5px; background:var(--bg-raised); color:var(--accent); vertical-align:middle; margin-left:4px; }
   .city { color:var(--accent); font-weight:700; }
@@ -403,7 +407,12 @@ function renderJourney(){
       + ' <span class="sep">·</span> ' + metaConf(t)
       + (t.lang ? ' <span class="sep">·</span> <span class="zh">' + escapeHtml(langLabel(t)) + '</span>' : '');
     var awardHtml = t.award ? '<div class="award-line"><span class="award-tag">🏆 ' + escapeHtml(t.award) + '</span></div>' : '';
-    var cityLoc = '<span class="loc-full">' + escapeHtml(t.city) + '</span>';
+    var cityParts = (t.city || '').split(',');
+    var cityName = cityParts[0].trim();
+    var countryName = cityParts.length > 1 ? cityParts.slice(1).join(',').trim() : '';
+    var cityLoc = '<span class="loc-full"><span class="loc-city">' + escapeHtml(cityName) + '</span>'
+      + (countryName ? '<span class="loc-country">' + escapeHtml(countryName) + '</span>' : '')
+      + '</span>';
     html += '<div class="talkmap-jnode"><div class="talkmap-jcard"><div class="t">' + titleHtml + '</div>'
       + '<div class="m">' + meta + '</div>'
       + '<div class="venue">' + escapeHtml(fullVenue(t)) + '</div>'
