@@ -69,7 +69,8 @@
   .talkmap-jnode:last-child { border-bottom:none; }
   .talkmap-jcard { flex:1; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:10px; padding:11px 15px; margin-right:22px; position:relative; transition:transform .18s ease, box-shadow .18s ease; }
   .talkmap-jcard:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); }
-  .talkmap-jcard .t { font-weight:600; font-size:.97rem; line-height:1.45; padding-right:160px; }
+  .talkmap-jcard .t-row { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; }
+  .talkmap-jcard .t { font-weight:600; font-size:.97rem; line-height:1.45; padding-right:0; max-width:74%; margin-right:14px; }
   .talkmap-jcard .t a { color:var(--text-primary); text-decoration:none; }
   .talkmap-jcard .t a:hover { color:var(--accent); text-decoration:underline; }
   .talkmap-jcard .m { color:var(--text-secondary); font-size:.83rem; margin-top:2px; display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
@@ -85,6 +86,7 @@
   .badge-cluster { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-start; align-items:center; }
   .award-pill { display:inline-block; font-size:.7rem; font-weight:700; padding:2px 9px; border-radius:6px; background:#fff7e0; color:#92732a; border:1px solid #f0e0b0; }
   .talkmap-jcard .badge-cluster { position:absolute; top:11px; right:15px; margin:0; }
+  .talkmap-jcard .t-row .badge-cluster { position:static; top:auto; right:auto; margin:2px 0 0; flex:0 0 auto; }
   .talkmap-jaxis { width:120px; position:relative; text-align:right; padding-right:6px; }
   .talkmap-jaxis .dot { position:absolute; left:-9px; top:8px; width:18px; height:18px; border-radius:50%; background:var(--accent); border:3px solid var(--bg-base); z-index:1; }
   .talkmap-jaxis.important .dot { background:#d6453d; }
