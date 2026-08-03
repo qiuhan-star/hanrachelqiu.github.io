@@ -45,6 +45,9 @@
   .talkmap-stat .n { font-size:1.5rem; font-weight:700; color:var(--text-primary); }
   .talkmap-stat .l { font-size:.8rem; color:var(--text-secondary); }
   .talkmap-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; align-items:stretch; }
+  /* empty state — shown when a search/filter yields no talks */
+  .talkmap-empty { text-align:center; color:var(--text-muted); font-size:.92rem; padding:48px 16px; line-height:1.6; }
+  :root[data-theme="dark"] .talkmap-empty { color:#8b94a0; }
   .talkmap-city { background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:14px; padding:14px 16px; transition:transform .18s ease, box-shadow .18s ease; display:flex; flex-direction:column; }
   .talkmap-city:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); }
   .talkmap-city .cn { font-size:1.1rem; font-weight:700; color:var(--accent); }
@@ -373,7 +376,7 @@ function matches(t){
   }
   if(state.query){
     var q=state.query.toLowerCase();
-    var hay=(t.title+' '+(t.venue||'')+' '+(t.conf||'')+' '+(t.abstract||'')).toLowerCase();
+    var hay=(t.title+' '+(t.city||'')+' '+(t.venue||'')+' '+(t.conf||'')+' '+(t.abstract||'')).toLowerCase();
     if(hay.indexOf(q)===-1) return false;
   }
   return true;
@@ -398,8 +401,15 @@ function detailHtml(t){
 }
 
 /* ---- wall panel ---- */
+/* lightweight empty-state when a filter/search yields no talks */
+function talkmapEmptyState(){
+  return '<div class="talkmap-empty"><span data-lang="en">No presentations found. Try clearing your filters.</span>'
+       + '<span data-lang="zh">未找到匹配的演讲，请尝试清除筛选条件。</span></div>';
+}
+
 function renderWall(){
   var filtered = geoTalks.filter(matches);
+  if(filtered.length === 0){ document.getElementById('panel-wall').innerHTML = talkmapEmptyState(); return; }
   var cities = {};
   filtered.forEach(function(t){
     var c = t.city.split(',')[0].trim();
@@ -470,6 +480,7 @@ function renderJourney(){
     return '<span class="pill ' + cls + '">' + (map[k] || 'Conference Presentation') + '</span>';
   }
   var items = geoTalks.filter(matches).slice().sort(function(a,b){ return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
+  if(items.length === 0){ document.getElementById('panel-journey').innerHTML = talkmapEmptyState(); return; }
   var html = '<div class="talkmap-jtrack">';
   items.forEach(function(t){
     var titleHtml = escapeHtml(dispTitle(t));
