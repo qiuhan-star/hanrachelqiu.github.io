@@ -69,7 +69,7 @@
   /* badge cluster — type + award, top-right anchor (out of title/meta flow) */
   .badge-cluster { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-start; align-items:center; }
   .award-pill { display:inline-block; font-size:.7rem; font-weight:700; padding:2px 9px; border-radius:6px; background:#fff7e0; color:#92732a; border:1px solid #f0e0b0; }
-  .talkmap-jcard .badge-cluster { margin:0 0 7px; }
+  .talkmap-jcard .badge-cluster { position:absolute; top:11px; right:15px; margin:0; }
   .talkmap-jaxis { width:120px; position:relative; text-align:right; padding-right:6px; }
   .talkmap-jaxis .dot { position:absolute; left:-9px; top:8px; width:18px; height:18px; border-radius:50%; background:var(--accent); border:3px solid var(--bg-base); z-index:1; }
   .talkmap-jaxis.award .dot { background:#d4af37; }
@@ -110,13 +110,18 @@
   .talkmap-acc:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); }
   .talkmap-acc-head { display:flex; align-items:flex-start; gap:12px; padding:12px 15px; cursor:pointer; }
   .talkmap-acc-main { flex:1; min-width:0; position:relative; }
-  .talkmap-acc .t-title { font-weight:600; font-size:.98rem; line-height:1.5; color:var(--text-primary); }
-  .talkmap-acc-main .badge-cluster { margin:7px 0 0; }
+  .talkmap-acc .t-title { font-weight:600; font-size:.98rem; line-height:1.5; color:var(--text-primary); padding-right:120px; }
+  .talkmap-acc-main .badge-cluster { position:absolute; top:10px; right:14px; margin:0; }
   .talkmap-acc .t-meta { color:var(--text-secondary); font-size:.84rem; margin-top:6px; display:block; }
   /* structured multi-row meta: each field on its own wrapping row */
   .tm-row { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:5px; }
   .tm-row1 { margin-top:0; }
   .tm-dot { color:var(--text-secondary); opacity:.5; }
+  /* floating type badge — split "Conference Presentation" into two lines at the space */
+  .talkmap-acc-main > .badge-cluster .pill,
+  .talkmap-jcard > .badge-cluster .pill { white-space:normal; max-width:100px; text-align:center; line-height:1.14; padding:5px 8px; }
+  .tm-award { display:inline-block; font-size:.72rem; font-weight:700; padding:2px 9px; border-radius:6px; background:#fff7e0; color:#92732a; border:1px solid #f0e0b0; margin:0 0 8px; }
+  :root[data-theme="dark"] .tm-award { background:#2f2a1c; color:#d8c074; border-color:#4a3f1f; }
   .loc-full { color:var(--accent); font-weight:600; }
   /* award now rendered inside .badge-cluster as .award-pill */
   .talkmap-chev { color:var(--text-muted); transition:transform .2s ease; font-size:.8rem; padding-top:3px; }
@@ -126,7 +131,8 @@
   .talkmap-acc-inner { padding:0 15px 14px; border-top:1px dashed var(--border-subtle); margin-top:-1px; }
   .talkmap-acc-abs { color:var(--text-secondary); font-size:.9rem; margin:12px 0 10px; }
   .talkmap-res-row { display:flex; flex-wrap:wrap; gap:0; margin:8px 0; }
-  .talkmap-res { display:inline-flex; align-items:center; gap:5px; text-decoration:none; font-size:.78rem; font-weight:600; border:1px solid var(--accent); color:var(--accent); background:var(--accent-soft); padding:6px 11px; border-radius:8px; margin:0 6px 6px 0; }
+  .talkmap-res { display:inline-flex; align-items:center; gap:5px; text-decoration:none; font-size:.78rem; font-weight:600; border:1px solid var(--border-subtle); color:var(--accent); background:transparent; padding:6px 11px; border-radius:8px; margin:0 6px 6px 0; }
+  .talkmap-res.btn-primary { background:var(--accent); color:#fff; border-color:var(--accent); }
   .talkmap-res:hover { background:var(--accent); color:#fff; }
   .talkmap-muted { color:var(--text-muted); font-size:.82rem; }
 
@@ -297,9 +303,16 @@ function dispTitle(it){ return (isZh && it.title_zh) ? it.title_zh : it.title; }
 function langLabel(it){ if(!it.lang) return ''; if(it.lang === 'zh'){ return isZh ? '中文报告' : 'Presented in Chinese'; } return isZh ? '英文报告' : 'Presented in English'; }
 /* bold ONLY the literal word "Presenter"; "(with X)" and " at ..." stay normal */
 function metaConf(t){
-  var c = t.conf || '';
-  var m = c.match(/^(Presenter)([\s\S]*)$/);
-  if(m){ return '<span class="conf"><strong class="pres">'+escapeHtml(m[1])+'</strong>'+escapeHtml(m[2])+'</span>'; }
+  var c = (t.conf || '').trim();
+  var m = c.match(/^(Presenter(?:\s*\([^)]*\))?)\s*(?:at\s+)?(.*)$/);
+  if(m){
+    var role = m[1];
+    var rest = m[2].replace(/^\s*the\s+/i, '');
+    var html = '<span class="conf"><strong class="pres">'+escapeHtml(role)+'</strong>';
+    if(rest){ html += ' <span class="tm-dot">·</span> ' + escapeHtml(rest); }
+    html += '</span>';
+    return html;
+  }
   return '<span class="conf">'+escapeHtml(c)+'</span>';
 }
 
@@ -339,16 +352,16 @@ function facetValues(facet){
   else if(facet==='type'){ talksData.forEach(function(t){ if(vals.indexOf(t.kind)<0) vals.push(t.kind); }); }
   return vals;
 }
-function resBtn(label,url){ return '<a class="talkmap-res" href="'+escapeHtml(url)+'" target="_blank" rel="noopener">'+label+'</a>'; }
+function resBtn(label,url,cls){ return '<a class="talkmap-res'+(cls?' '+cls:'')+'" href="'+escapeHtml(url)+'" target="_blank" rel="noopener">'+label+'</a>'; }
 function resRow(t){
   var res='';
-  if(t.slides_url) res+=resBtn('📄 Slides', t.slides_url);
-  if(t.video_url) res+=resBtn('▶ Video', t.video_url);
-  if(t.poster_url) res+=resBtn('🖼 Poster', t.poster_url);
-  if(t.doi) res+=resBtn('🔗 DOI', 'https://doi.org/'+t.doi);
-  if(t.conf_url) res+=resBtn('🌐 Conference', t.conf_url);
-  if(t.wechat_url) res+=resBtn('🔗 WeChat', t.wechat_url);
-  if(t.permalink) res+=resBtn('🔗 Open talk page', t.permalink);
+  if(t.slides_url) res+=resBtn('📄 Slides', t.slides_url, 'btn-secondary');
+  if(t.video_url) res+=resBtn('▶ Video', t.video_url, 'btn-secondary');
+  if(t.poster_url) res+=resBtn('🖼 Poster', t.poster_url, 'btn-secondary');
+  if(t.doi) res+=resBtn('🔗 DOI', 'https://doi.org/'+t.doi, 'btn-secondary');
+  if(t.conf_url) res+=resBtn('🌐 Conference', t.conf_url, 'btn-secondary');
+  if(t.wechat_url) res+=resBtn('🔗 WeChat', t.wechat_url, 'btn-secondary');
+  if(t.permalink) res+=resBtn('🔗 Open talk page', t.permalink, 'btn-primary');
   return res ? '<div class="talkmap-res-row">'+res+'</div>' : '';
 }
 function detailHtml(t){
@@ -421,8 +434,8 @@ function renderJourney(){
     if(t.permalink){ titleHtml = '<a href="' + escapeHtml(t.permalink) + '">' + titleHtml + '</a>'; }
     var meta = ' <span class="sep">·</span> ' + metaConf(t)
       + (t.lang ? ' <span class="sep">·</span> <span class="zh">' + escapeHtml(langLabel(t)) + '</span>' : '');
-    var awardPill = t.award ? '<span class="award-pill">🏆 ' + escapeHtml(t.award) + '</span>' : '';
-    var badgeCluster = '<div class="badge-cluster">' + kindPill(t) + awardPill + '</div>';
+    var awardTag = t.award ? '<div class="tm-award">🏆 ' + escapeHtml(t.award) + '</div>' : '';
+    var typeBadge = '<div class="badge-cluster">' + kindPill(t) + '</div>';
     var cityParts = (t.city || '').split(',');
     var cityName = cityParts[0].trim();
     var countryName = cityParts.length > 1 ? cityParts.slice(1).join(',').trim() : '';
@@ -431,7 +444,8 @@ function renderJourney(){
       + '</span>';
     html += '<div class="talkmap-jnode"><div class="talkmap-jcard">'
       + '<div class="t">' + titleHtml + '</div>'
-      + badgeCluster
+      + awardTag
+      + typeBadge
       + '<div class="m">' + meta + '</div>'
       + '<div class="venue">' + escapeHtml(fullVenue(t)) + '</div>'
       + resRow(t)
@@ -452,30 +466,15 @@ function renderText(){
     var cls = (k === 'workshop') ? 'work' : (k === 'seminar') ? 'sem' : (k === 'invited') ? 'inv' : 'conf';
     return '<span class="pill ' + cls + '">' + (map[k] || 'Conference Presentation') + '</span>';
   }
-  function badgeCluster(t){
-    var awardPill = t.award ? '<span class="award-pill">🏆 ' + escapeHtml(t.award) + '</span>' : '';
-    return '<div class="badge-cluster">' + pillOf(t) + awardPill + '</div>';
-  }
+  function badgeCluster(t){ return '<div class="badge-cluster">' + pillOf(t) + '</div>'; }
   function buildMeta(t){
-    var map = { conference:'Conference Presentation', workshop:'Workshop', seminar:'Seminar', invited:'Invited Talk' };
-    var k = (t.kind || 'conference');
-    var kl = map[k] || 'Conference';
-    var cls = (k === 'workshop') ? 'work' : (k === 'seminar') ? 'sem' : (k === 'invited') ? 'inv' : 'conf';
-    var role = metaConf(t);              /* Presenter (bold) / with X */
-    var inst = '<span class="venue-em">' + escapeHtml(fullVenue(t)) + '</span>';
-    var loc  = '<span class="loc-full">' + escapeHtml(t.city) + '</span>';  /* full "City, Country" */
-    var date = escapeHtml(t.date);
+    var lp = (t.city || '').split(',');
+    var country = lp.length > 1 ? lp.slice(1).join(',').trim() : '';
+    var venueFull = escapeHtml(fullVenue(t)) + (country ? ', ' + escapeHtml(country) : '');
     var lang = t.lang ? '<span class="zh">' + escapeHtml(langLabel(t)) + '</span>' : '';
-    var h = '';
-    /* row 1: role (Presenter / with collaborators) — the type pill now floats top-right of the card */
-    h += '<div class="tm-row tm-row1"><span class="conf-sep">' + role + '</span></div>';
-    /* row 2: host institution (full name) */
-    h += '<div class="tm-row">' + inst + '</div>';
-    /* row 3: location · date · language */
-    h += '<div class="tm-row">' + loc + ' <span class="tm-dot">·</span> ' + date;
-    if(lang){ h += ' <span class="tm-dot">·</span> ' + lang; }
-    h += '</div>';
-    return h;
+    var parts = [ metaConf(t), '<span class="venue-em">' + venueFull + '</span>' ];
+    if(lang){ parts.push(lang); }
+    return parts.join(' <span class="tm-dot">·</span> ');
   }
   var filtered = talksData.filter(matches);
   var years = {};
@@ -491,6 +490,7 @@ function renderText(){
       html += '<div class="talkmap-acc"><div class="talkmap-acc-head" onclick="hqToggleAcc(this)">'
         + '<div class="talkmap-acc-main">'
         + '<div class="t-title">' + titleHtml + '</div>'
+        + (t.award ? '<div class="tm-award">🏆 ' + escapeHtml(t.award) + '</div>' : '')
         + badgeCluster(t)
         + '<div class="t-meta">' + buildMeta(t) + '</div>' + resRow(t) + '</div>'
         + '<div class="talkmap-chev">▾</div></div>'
