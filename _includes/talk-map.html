@@ -82,6 +82,8 @@
   .talkmap-jcard .m { color:var(--text-secondary); font-size:.83rem; margin-top:2px; display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
   .talkmap-jcard .sep { color:var(--text-secondary); opacity:.5; }
   .talkmap-jcard .zh { color:var(--text-secondary); font-weight:600; }
+  .talkmap-jcard .lang-tag { display:inline-block; font-size:.75rem; font-weight:600; color:#64748b; background:#f1f5f9; padding:2px 6px; border-radius:4px; }
+  :root[data-theme="dark"] .talkmap-jcard .lang-tag { color:#9aa6b6; background:#2a313c; }
   /* award now rendered inside .badge-cluster as .award-pill */
   .talkmap-jcard .pill { display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.01em; padding:2px 9px; border-radius:6px; }
   .talkmap-jcard .pill.conf { background:#dce9fc; color:#1f63c8; }
@@ -94,10 +96,9 @@
   .talkmap-jcard .badge-cluster { position:absolute; top:11px; right:15px; margin:0; }
   .talkmap-jcard .t-row .badge-cluster { position:static; top:auto; right:auto; margin:2px 0 0; flex:0 0 auto; }
   .talkmap-jaxis { width:120px; position:relative; text-align:right; padding-right:6px; }
-  .talkmap-jaxis .dot { position:absolute; left:-9px; top:8px; width:18px; height:18px; border-radius:50%; background:var(--accent); border:3px solid var(--bg-base); z-index:1; }
-  .talkmap-jaxis.important .dot { background:#d6453d; }
-  /* award nodes no longer specially highlighted (kept neutral like others) */
-  .talkmap-jaxis .date { font-weight:700; font-size:.9rem; color:var(--text-primary); }
+  .talkmap-jaxis .dot { position:absolute; left:-9px; top:13px; width:18px; height:18px; border-radius:50%; background:var(--accent); border:3px solid var(--bg-base); z-index:1; }
+  /* axis node (dot + date) top-aligned to card's first title line; dot color unified to --accent */
+  .talkmap-jaxis .date { font-weight:700; font-size:.9rem; color:var(--text-primary); margin-top:13px; }
   .talkmap-jaxis .loc { font-size:.8rem; color:var(--text-secondary); margin-top:2px; display:flex; justify-content:flex-end; align-items:center; gap:5px; }
   /* journey axis: force city + country onto two lines (right-aligned) */
   .talkmap-jaxis .loc .loc-full { display:block; text-align:right; line-height:1.25; }
@@ -148,8 +149,7 @@
   :root[data-theme="dark"] .tm-award { background:transparent; border:none; color:#d8c074; }
   .loc-full { color:var(--accent); font-weight:600; }
   /* award now rendered inside .badge-cluster as .award-pill */
-  .talkmap-chev { color:var(--text-muted); transition:transform .2s ease; font-size:.8rem; padding-top:3px; }
-  .talkmap-acc.open .talkmap-chev { transform:rotate(180deg); }
+  .talkmap-chev { display:inline-block; margin-top:10px; color:var(--accent); font-size:.8rem; font-weight:600; background:var(--accent-soft); border:1px solid var(--accent); padding:5px 12px; border-radius:8px; cursor:pointer; }
   .talkmap-acc-body { max-height:0; overflow:hidden; transition:max-height .28s ease; }
   .talkmap-acc.open .talkmap-acc-body { max-height:2000px; }
   .talkmap-acc-inner { padding:0 15px 14px; border-top:1px dashed var(--border-subtle); margin-top:-1px; }
@@ -163,7 +163,6 @@
   /* timeline cards are now collapsible (merged with List's accordion behavior) */
   .talkmap-jcard.talkmap-acc { margin-bottom:0; }
   .talkmap-jcard .talkmap-acc-head { display:block; padding:0; }
-  .talkmap-jcard .talkmap-chev { position:absolute; bottom:10px; right:14px; }
   .talkmap-jcard .talkmap-acc-inner { padding:0 15px 14px; border-top:1px dashed var(--border-subtle); margin:10px -15px -11px; }
 
   /* shadows (local, since --shadow is not a site token) */
@@ -472,8 +471,9 @@ function renderJourney(){
   items.forEach(function(t){
     var titleHtml = escapeHtml(dispTitle(t));
     if(t.permalink){ titleHtml = '<a href="' + escapeHtml(t.permalink) + '">' + titleHtml + '</a>'; }
-    var meta = ' <span class="sep">·</span> ' + metaConf(t)
-      + (t.lang ? ' <span class="sep">·</span> <span class="zh">' + escapeHtml(langLabel(t)) + '</span>' : '');
+    var langTag = (t.lang === 'zh') ? (isZh ? '中文' : 'Chinese') : '';
+    var meta = metaConf(t)
+      + (langTag ? ' <span class="lang-tag">' + escapeHtml(langTag) + '</span>' : '');
     var awardTag = t.award ? '<div class="tm-award">🏆 ' + escapeHtml(t.award) + '</div>' : '';
     var typeBadge = '<div class="badge-cluster">' + kindPill(t) + '</div>';
     var cityParts = (t.city || '').split(',');
@@ -494,7 +494,7 @@ function renderJourney(){
       + '<div class="m">' + meta + '</div>'
       + '<div class="venue">' + escapeHtml(fullVenue(t)) + (t.city ? ', ' + escapeHtml(t.city) : '') + '</div>'
       + awardTag
-      + '<div class="talkmap-chev">▾</div>'
+      + '<div class="talkmap-chev">▼ <span class="chev-label">'+(isZh?'展开摘要':'Show Abstract')+'</span></div>'
       + '</div>'
       + '<div class="talkmap-acc-body"><div class="talkmap-acc-inner">' + detail + '</div></div>'
       + '</div>'
@@ -508,7 +508,17 @@ function renderJourney(){
 /* ---- text / List panel removed: UI exposes only Timeline + By City ---- */
 
 function renderAll(){ renderWall(); renderJourney(); }
-function hqToggleAcc(el){ var acc = el.closest('.talkmap-acc'); if(acc) acc.classList.toggle('open'); }
+function hqToggleAcc(el){
+  var acc = el.closest('.talkmap-acc');
+  if(!acc) return;
+  var open = acc.classList.toggle('open');
+  var chev = acc.querySelector('.talkmap-chev');
+  if(chev){
+    var lab = chev.querySelector('.chev-label');
+    if(lab){ lab.textContent = isZh ? (open ? '收起摘要' : '展开摘要') : (open ? 'Hide Abstract' : 'Show Abstract'); }
+    if(chev.firstChild && chev.firstChild.nodeType === 3){ chev.firstChild.nodeValue = open ? '▲ ' : '▼ '; }
+  }
+}
 
 /* active filter chip (single, removable) */
 function renderDyn(){
