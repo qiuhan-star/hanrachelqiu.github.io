@@ -45,7 +45,7 @@
   .talkmap-dot.school { background:#2a7f3e; }
   .talkmap-dot.award { background:#d4af37; }
   .talkmap-city li .n2 { color:var(--text-secondary); font-size:.8rem; }
-  .talkmap-city li .badge-cluster { position:absolute; top:5px; right:2px; }
+  .talkmap-city li .badge-cluster { display:inline-flex; flex-wrap:wrap; gap:5px; align-items:center; margin-left:8px; }
 
   /* journey — vertical timeline, spine on right, bottom→top, separators between nodes */
   .talkmap-jtrack { position:relative; display:flex; flex-direction:column-reverse; padding:6px 0 2px; }
@@ -67,9 +67,9 @@
   .talkmap-jcard .pill.sem  { background:#efe8fb; color:#6f4fc0; }
   .talkmap-jcard .pill.inv  { background:#fbf0d8; color:#9a6a14; }
   /* badge cluster — type + award, top-right anchor (out of title/meta flow) */
-  .badge-cluster { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; max-width:160px; }
+  .badge-cluster { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-start; align-items:center; }
   .award-pill { display:inline-block; font-size:.7rem; font-weight:700; padding:2px 9px; border-radius:6px; background:#fff7e0; color:#92732a; border:1px solid #f0e0b0; }
-  .talkmap-jcard .badge-cluster { position:absolute; top:11px; right:15px; }
+  .talkmap-jcard .badge-cluster { margin:0 0 7px; }
   .talkmap-jaxis { width:120px; position:relative; text-align:right; padding-right:6px; }
   .talkmap-jaxis .dot { position:absolute; left:-9px; top:8px; width:18px; height:18px; border-radius:50%; background:var(--accent); border:3px solid var(--bg-base); z-index:1; }
   .talkmap-jaxis.award .dot { background:#d4af37; }
@@ -110,8 +110,8 @@
   .talkmap-acc:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); }
   .talkmap-acc-head { display:flex; align-items:flex-start; gap:12px; padding:12px 15px; cursor:pointer; }
   .talkmap-acc-main { flex:1; min-width:0; position:relative; }
-  .talkmap-acc .t-title { font-weight:600; font-size:.98rem; line-height:1.5; color:var(--text-primary); padding-right:160px; }
-  .talkmap-acc-main .badge-cluster { position:absolute; top:2px; right:0; }
+  .talkmap-acc .t-title { font-weight:600; font-size:.98rem; line-height:1.5; color:var(--text-primary); }
+  .talkmap-acc-main .badge-cluster { margin:7px 0 0; }
   .talkmap-acc .t-meta { color:var(--text-secondary); font-size:.84rem; margin-top:6px; display:block; }
   /* structured multi-row meta: each field on its own wrapping row */
   .tm-row { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:5px; }
@@ -394,9 +394,9 @@ function renderWall(){
       } else if(s.award){
         liBadge = '<div class="badge-cluster"><span class="award-pill">🏆</span></div>';
       }
-      html += '<li>' + liBadge
+      html += '<li>'
         + '<span class="talkmap-dot ' + (s.award ? 'award' : 'school') + '"></span>'
-        + escapeHtml(fullVenue({ venue:v }))
+        + escapeHtml(fullVenue({ venue:v })) + liBadge
         + ' <span class="n2">' + s.count + '</span>'
         + liRes + '</li>';
     });
@@ -429,8 +429,9 @@ function renderJourney(){
     var cityLoc = '<span class="loc-full"><span class="loc-city">' + escapeHtml(cityName) + '</span>'
       + (countryName ? '<span class="loc-country">' + escapeHtml(countryName) + '</span>' : '')
       + '</span>';
-    html += '<div class="talkmap-jnode"><div class="talkmap-jcard">' + badgeCluster
+    html += '<div class="talkmap-jnode"><div class="talkmap-jcard">'
       + '<div class="t">' + titleHtml + '</div>'
+      + badgeCluster
       + '<div class="m">' + meta + '</div>'
       + '<div class="venue">' + escapeHtml(fullVenue(t)) + '</div>'
       + resRow(t)
@@ -488,8 +489,9 @@ function renderText(){
     years[y].forEach(function(t){
       var titleHtml = escapeHtml(dispTitle(t));
       html += '<div class="talkmap-acc"><div class="talkmap-acc-head" onclick="hqToggleAcc(this)">'
-        + '<div class="talkmap-acc-main">' + badgeCluster(t)
+        + '<div class="talkmap-acc-main">'
         + '<div class="t-title">' + titleHtml + '</div>'
+        + badgeCluster(t)
         + '<div class="t-meta">' + buildMeta(t) + '</div>' + resRow(t) + '</div>'
         + '<div class="talkmap-chev">▾</div></div>'
         + '<div class="talkmap-acc-body"><div class="talkmap-acc-inner">' + detailHtml(t) + '</div></div></div>';
