@@ -105,6 +105,8 @@
   .talkmap-jaxis .dot { position:absolute; left:-9px; top:13px; width:18px; height:18px; border-radius:50%; background:var(--accent); border:3px solid var(--bg-base); z-index:1; }
   /* axis node (dot + date) top-aligned to card's first title line; dot color unified to --accent */
   .talkmap-jaxis .date { font-weight:700; font-size:.9rem; color:var(--text-primary); margin-top:13px; }
+  /* de-duplicated month: reserve identical space but hide the repeated number */
+  .talkmap-jaxis .date.date--ghost { visibility:hidden; }
   .talkmap-jaxis .loc { font-size:.8rem; color:var(--text-secondary); margin-top:2px; display:flex; justify-content:flex-end; align-items:center; gap:5px; }
   /* journey axis: force city + country onto two lines (right-aligned) */
   .talkmap-jaxis .loc .loc-full { display:block; text-align:right; line-height:1.25; }
@@ -482,12 +484,15 @@ function renderJourney(){
   var items = geoTalks.filter(matches).slice().sort(function(a,b){ return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
   if(items.length === 0){ document.getElementById('panel-journey').innerHTML = talkmapEmptyState(); return; }
   var html = '<div class="talkmap-jtrack">';
+  var prevMonth = null;
   items.forEach(function(t){
+    var month = t.date.slice(0,7);
+    var showDate = (month !== prevMonth);
+    prevMonth = month;
     var titleHtml = escapeHtml(dispTitle(t));
     if(t.permalink){ titleHtml = '<a href="' + escapeHtml(t.permalink) + '">' + titleHtml + '</a>'; }
     var langTag = (t.lang === 'zh') ? (isZh ? '中文' : 'Chinese') : '';
-    var meta = metaConf(t)
-      + (langTag ? ' <span class="lang-tag">' + escapeHtml(langTag) + '</span>' : '');
+    var meta = metaConf(t);
     var awardTag = t.award ? '<div class="tm-award">🏆 ' + escapeHtml(t.award) + '</div>' : '';
     var typeBadge = '<div class="badge-cluster">' + kindPill(t) + '</div>';
     var cityParts = (t.city || '').split(',');
@@ -505,15 +510,15 @@ function renderJourney(){
       + '<div class="t-row"><div class="t">' + titleHtml + '</div>'
       + typeBadge
       + '</div>'
-      + '<div class="m">' + meta + '</div>'
-      + '<div class="venue">' + escapeHtml(fullVenue(t)) + (t.city ? ', ' + escapeHtml(t.city) : '') + '</div>'
+      + (meta.replace(/<[^>]*>/g,'').trim() ? '<div class="m">' + meta + '</div>' : '')
+      + '<div class="venue">' + escapeHtml(fullVenue(t)) + (t.city ? ', ' + escapeHtml(t.city) : '') + (langTag ? ' <span class="lang-tag">' + escapeHtml(langTag) + '</span>' : '') + '</div>'
       + awardTag
       + '<div class="talkmap-chev">▼ <span class="chev-label">'+(isZh?'展开摘要':'Show Abstract')+'</span></div>'
       + '</div>'
       + '<div class="talkmap-acc-body"><div class="talkmap-acc-inner">' + detail + '</div></div>'
       + '</div>'
       + '<div class="talkmap-jaxis"><span class="dot"></span>'
-      + '<div class="date">' + escapeHtml(t.date.slice(0,7)) + '</div></div></div>';
+      + '<div class="date' + (showDate ? '' : ' date--ghost') + '">' + escapeHtml(t.date.slice(0,7)) + '</div></div></div>';
   });
   html += '</div>';
   document.getElementById('panel-journey').innerHTML = html;
