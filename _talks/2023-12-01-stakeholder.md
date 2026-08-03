@@ -1,5 +1,5 @@
 ---
-title: "Surging Currents: A systematic review of the literature on dynamic stakeholder engagements in higher education in the GAI era"
+title: "Surging Currents: A Systematic Review of the Literature on Dynamic Stakeholder Engagements in Higher Education in the GAI Era"
 collection: talks
 type: "Presenter (with Jiaxi Yang) at the Journal of Asian Public Policy Special Issue Authors' Workshop"
 kind: workshop
