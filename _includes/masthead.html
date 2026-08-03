@@ -210,12 +210,15 @@
     .masthead__menu {
       margin-left: 294px;
     }
-    /* 防止品牌文字被压缩换行；同时锁定 brand 不参与挤压 */
+    /* 品牌字号与右侧留白在 1280 容器下需要收紧，否则 307px 的品牌加上
+       5 个导航项会超出可用空间导致 CV/More 重叠。 */
+    .masthead__menu-item--lg {
+      font-size: 15px;
+      padding-right: 0.5em;
+      flex-shrink: 0;
+    }
     .masthead__menu-item--lg > a {
       white-space: nowrap;
-    }
-    .masthead__menu-item--lg {
-      flex-shrink: 0;
     }
   }
   .masthead__menu {
