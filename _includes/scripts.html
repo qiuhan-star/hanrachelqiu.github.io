@@ -20,7 +20,7 @@
   var vlinks = nav.querySelector('.visible-links');
   var hlinks = nav.querySelector('.hidden-links');
   var btn = nav.querySelector('button');
-  /* < 768px => mobile: restore Minimal Mistakes native hamburger menu.
+  /* < 768px => mobile: restore a native hamburger menu.
      >= 768px => desktop/tablet: locked 方案 A full horizontal nav, no hamburger. */
   var MOBILE_MAX = 767;
 
@@ -35,6 +35,7 @@
   function applyDesktop() {
     /* Move every nav item back into .visible-links in the locked original order,
        and suppress the greedy hamburger. (方案 A — desktop/tablet, unchanged.) */
+    nav.classList.remove('is-open');
     var item;
     if (hlinks) { while ((item = hlinks.querySelector('li'))) vlinks.appendChild(item); }
     sortedItems().forEach(function (li) { vlinks.appendChild(li); });
@@ -43,9 +44,9 @@
   }
 
   function applyMobile() {
-    /* Hand the menu to the native hamburger: every nav item (incl. brand) lives
-       in .hidden-links, which MM's own button handler toggles open on tap.
-       Keep .hidden-links collapsed (do NOT remove its 'hidden' class here). */
+    /* Hand the menu to the hamburger: every nav item (incl. brand) lives in
+       .hidden-links, collapsed by default; our own button handler reveals it. */
+    nav.classList.remove('is-open');
     if (!vlinks || !hlinks) return;
     var kids = Array.prototype.slice.call(vlinks.children);
     kids.forEach(function (li) { hlinks.appendChild(li); });
@@ -59,6 +60,26 @@
 
   applyMode();
   window.addEventListener('resize', applyMode);
+
+  /* Mobile hamburger toggle — our own handler, independent of MM's greedy
+     logic (which does not reliably collapse .hidden-links in this build).
+     The dropdown open/close is driven solely by the `is-open` class on <nav>. */
+  if (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      nav.classList.toggle('is-open');
+    });
+    document.addEventListener('click', function (e) {
+      if (nav.classList.contains('is-open') && !nav.contains(e.target)) {
+        nav.classList.remove('is-open');
+      }
+    });
+    if (hlinks) {
+      hlinks.addEventListener('click', function (e) {
+        if (e.target.closest('a')) nav.classList.remove('is-open');
+      });
+    }
+  }
 })();
 </script>
 <style>
@@ -83,6 +104,12 @@
   align-items: center;
   min-width: 0;
 }
+/* The greedy dropdown (.hidden-links) is always collapsed by default.
+   It only appears when the mobile hamburger adds .is-open (see media query
+   below). This prevents the MM bug where the dropdown expands in normal flow. */
+.greedy-nav .hidden-links {
+  display: none !important;
+}
 /* Narrow-desktop / tablet-landscape (1024-1199px): relax the left margin and
    tighten nav typography so the 4 core items + brand + More all fit on one
    row without overlapping. This is a responsive exception only for this width
@@ -104,6 +131,48 @@
     font-size: 14px !important;
     padding-left: 0.45em !important;
     padding-right: 0.45em !important;
+  }
+}
+/* Mobile (< 768px): native hamburger dropdown. Anchored to .masthead so it
+   overlays content instead of pushing the top bar taller. */
+@media (max-width: 767px) {
+  .masthead {
+    position: relative;
+  }
+  .greedy-nav .hidden-links {
+    position: absolute !important;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--masthead-bg);
+    border: 1px solid var(--masthead-border);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 12px 30px rgba(20, 30, 50, 0.18);
+    padding: 6px 0;
+    z-index: 60;
+  }
+  .greedy-nav.is-open .hidden-links {
+    display: flex !important;
+  }
+  .greedy-nav .hidden-links li {
+    width: 100%;
+    border-top: 1px solid var(--masthead-border);
+  }
+  .greedy-nav .hidden-links li:first-child {
+    border-top: none;
+  }
+  .greedy-nav .hidden-links a {
+    display: block;
+    padding: 12px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--masthead-text);
+  }
+  .greedy-nav .hidden-links a:hover {
+    color: var(--masthead-hover);
   }
 }
 </style>
