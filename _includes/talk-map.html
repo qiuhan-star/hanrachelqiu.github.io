@@ -1,13 +1,30 @@
-<!-- Multi-mode talks viewer: 3 switchable modes (City wall / Journey / Text),
-     all generated from the talks collection (single source of truth). -->
+<!-- Multi-mode talks viewer: 3 switchable modes (By City / Timeline / List),
+     all generated from the talks collection (single source of truth).
+     UX: collapsible accordion (List), filter tabs + dynamic chips + live search,
+     Export PDF. -->
 <style>
   #talkMapWrap { position: relative; max-width:880px; }
   .talkmap-summary { color:var(--text-secondary); font-size:0.95rem; margin:0 0 1em; }
   .talkmap-seg { display:flex; flex-wrap:wrap; gap:4px; background:var(--bg-raised); border-radius:10px; padding:4px; margin:0 0 20px; }
-  .talkmap-seg button { border:none; background:transparent; color:var(--text-secondary); font-size:0.9rem; padding:8px 14px; border-radius:8px; cursor:pointer; font-family:inherit; }
+  .talkmap-seg button { border:none; background:transparent; color:var(--text-secondary); font-size:0.9rem; padding:8px 14px; border-radius:8px; cursor:pointer; font-family:inherit; line-height:1.2; }
+  .talkmap-seg button .sub { display:block; font-size:.68rem; color:var(--text-muted); margin-top:2px; opacity:.85; }
   .talkmap-seg button.active { background:var(--bg-surface); color:var(--text-primary); font-weight:600; box-shadow:0 1px 2px rgba(0,0,0,.08); }
+  .talkmap-seg button.active .sub { color:var(--accent); opacity:1; }
   .talkmap-panel { display:none; }
   .talkmap-panel.active { display:block; }
+
+  /* toolbar / filters / search */
+  .talkmap-toolbar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin:0 0 12px; }
+  .talkmap-tools { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .talkmap-filters { display:flex; flex-wrap:wrap; gap:4px; }
+  .talkmap-filters button { border:1px solid var(--border-subtle); background:var(--bg-raised); color:var(--text-secondary); padding:6px 11px; border-radius:8px; cursor:pointer; font-size:.8rem; font-family:inherit; }
+  .talkmap-filters button.active { background:var(--accent-soft); color:var(--accent); border-color:var(--accent); font-weight:600; }
+  #talkMapSearch { border:1px solid var(--border-subtle); background:var(--bg-base); color:var(--text-primary); border-radius:8px; padding:7px 12px; font-size:.82rem; min-width:170px; font-family:inherit; }
+  #talkMapExport { border:1px solid var(--accent); background:var(--accent); color:#fff; padding:7px 13px; border-radius:8px; cursor:pointer; font-size:.82rem; font-family:inherit; }
+  #talkMapZip { border:1px dashed var(--border-subtle); background:transparent; color:var(--text-muted); padding:7px 13px; border-radius:8px; cursor:not-allowed; font-size:.82rem; font-family:inherit; }
+  .talkmap-dynfilter { display:flex; flex-wrap:wrap; gap:6px; margin:2px 0 16px; }
+  .talkmap-dynfilter button { border:1px solid var(--border-subtle); background:var(--bg-raised); color:var(--text-secondary); padding:5px 11px; border-radius:999px; cursor:pointer; font-size:.78rem; font-family:inherit; }
+  .talkmap-dynfilter button.active { background:var(--accent); color:#fff; border-color:var(--accent); }
 
   /* wall */
   .talkmap-stat { display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap; }
@@ -15,7 +32,8 @@
   .talkmap-stat .n { font-size:1.5rem; font-weight:700; color:var(--text-primary); }
   .talkmap-stat .l { font-size:.8rem; color:var(--text-secondary); }
   .talkmap-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
-  .talkmap-city { background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:14px; padding:14px 16px; }
+  .talkmap-city { background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:14px; padding:14px 16px; transition:transform .18s ease, box-shadow .18s ease; }
+  .talkmap-city:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); }
   .talkmap-city .cn { font-size:1.1rem; font-weight:700; color:var(--accent); }
   .talkmap-city .cityrow { display:flex; align-items:center; gap:6px; }
   .talkmap-city .en { font-size:.78rem; color:var(--text-secondary); margin-left:6px; }
@@ -34,7 +52,8 @@
   .talkmap-jtrack::after { content:''; position:absolute; top:14px; bottom:14px; right:120px; width:2px; background:var(--border-subtle); z-index:0; }
   .talkmap-jnode { position:relative; display:flex; align-items:flex-start; margin:0; padding:11px 0; border-bottom:1px dashed var(--border-subtle); }
   .talkmap-jnode:last-child { border-bottom:none; }
-  .talkmap-jcard { flex:1; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:10px; padding:11px 15px; margin-right:22px; }
+  .talkmap-jcard { flex:1; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:10px; padding:11px 15px; margin-right:22px; transition:transform .18s ease, box-shadow .18s ease; }
+  .talkmap-jcard:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); }
   .talkmap-jcard .t { font-weight:600; font-size:.97rem; line-height:1.45; }
   .talkmap-jcard .t a { color:var(--text-primary); text-decoration:none; }
   .talkmap-jcard .t a:hover { color:var(--accent); text-decoration:underline; }
@@ -61,7 +80,7 @@
   .talkmap-talk .m { color:var(--text-secondary); font-size:.84rem; margin-top:4px; }
   .talkmap-talk .aw { color:#b8860b; font-weight:600; margin-left:8px; }
 
-  /* text only */
+  /* text only / List (accordion) */
   .talkmap-text .t-item { padding:11px 0; border-bottom:1px solid var(--border-subtle); }
   .talkmap-text .t-title { font-weight:600; font-size:0.98rem; line-height:1.5; }
   .talkmap-text .t-title a { color:var(--text-primary); text-decoration:none; }
@@ -78,6 +97,29 @@
   .talkmap-text .venue-em { color:var(--accent); font-weight:600; }
   .talkmap-yh .cnt { font-size:.8rem; color:var(--text-secondary); font-weight:400; margin-left:8px; }
 
+  /* accordion (List view) */
+  .talkmap-acc { background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:10px; margin-bottom:9px; box-shadow:0 1px 3px rgba(20,30,50,.06); transition:transform .18s ease, box-shadow .18s ease; }
+  .talkmap-acc:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); }
+  .talkmap-acc-head { display:flex; align-items:flex-start; gap:12px; padding:12px 15px; cursor:pointer; }
+  .talkmap-acc-main { flex:1; min-width:0; }
+  .talkmap-acc .t-title { font-weight:600; font-size:.98rem; line-height:1.5; color:var(--text-primary); }
+  .talkmap-acc .t-meta { color:var(--text-secondary); font-size:.84rem; margin-top:4px; }
+  .talkmap-chev { color:var(--text-muted); transition:transform .2s ease; font-size:.8rem; padding-top:3px; }
+  .talkmap-acc.open .talkmap-chev { transform:rotate(180deg); }
+  .talkmap-acc-body { max-height:0; overflow:hidden; transition:max-height .28s ease; }
+  .talkmap-acc.open .talkmap-acc-body { max-height:1400px; }
+  .talkmap-acc-inner { padding:0 15px 14px; border-top:1px dashed var(--border-subtle); margin-top:-1px; }
+  .talkmap-acc-abs { color:var(--text-secondary); font-size:.9rem; margin:12px 0 10px; }
+  .talkmap-res-row { display:flex; flex-wrap:wrap; gap:0; margin:8px 0; }
+  .talkmap-res { display:inline-flex; align-items:center; gap:5px; text-decoration:none; font-size:.78rem; font-weight:600; border:1px solid var(--accent); color:var(--accent); background:var(--accent-soft); padding:6px 11px; border-radius:8px; margin:0 6px 6px 0; }
+  .talkmap-res:hover { background:var(--accent); color:#fff; }
+  .talkmap-muted { color:var(--text-muted); font-size:.82rem; }
+
+  /* shadows (local, since --shadow is not a site token) */
+  :root { --shadow-hover:0 6px 18px rgba(40,60,100,.14); }
+  :root[data-theme="dark"] { --shadow-hover:0 6px 18px rgba(0,0,0,.5); }
+  html { scroll-behavior:smooth; }
+
   /* 4-color pills — dark theme overrides */
   :root[data-theme="dark"] .talkmap-jcard .pill.conf, :root[data-theme="dark"] .talkmap-text .pill.conf { background:#16302e; color:#5fc7bd; }
   :root[data-theme="dark"] .talkmap-jcard .pill.work, :root[data-theme="dark"] .talkmap-text .pill.work { background:#16301f; color:#7fc79a; }
@@ -85,6 +127,13 @@
   :root[data-theme="dark"] .talkmap-jcard .pill.inv,  :root[data-theme="dark"] .talkmap-text .pill.inv  { background:#2f2a1c; color:#d8c074; }
   strong.pres { font-weight:700; color:var(--text-primary); }
   .talkmap-jcard .conf, .talkmap-text .conf { min-width:0; }
+
+  /* print: hide chrome, expand all accordions */
+  @media print {
+    .talkmap-toolbar, .talkmap-dynfilter, .talkmap-seg, #talkMapExport, #talkMapZip, #talkMapSearch, .talkmap-filters { display:none !important; }
+    .talkmap-acc-body { max-height:none !important; }
+    .talkmap-acc { box-shadow:none !important; break-inside:avoid; }
+  }
 </style>
 
 <div id="talkMapWrap">
@@ -96,11 +145,26 @@
   {% assign _yrs = talk_items | map: 'date' | sort %}
   <p class="talkmap-summary"><strong>{{ talk_items.size }}</strong> {% if page.lang == 'zh-CN' %}场受邀演讲（{{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }}）{% else %}invited talks ({{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }}){% endif %}</p>
 
-  <div class="talkmap-seg" id="talkMapSeg">
-    <button data-mode="wall">{% if page.lang == 'zh-CN' %}城市墙{% else %}City wall{% endif %}</button>
-    <button data-mode="journey">{% if page.lang == 'zh-CN' %}足迹{% else %}Journey{% endif %}</button>
-    <button data-mode="text">{% if page.lang == 'zh-CN' %}纯文字版{% else %}Text only{% endif %}</button>
+  <div class="talkmap-toolbar">
+    <div class="talkmap-seg" id="talkMapSeg">
+      <button data-mode="wall">{% if page.lang == 'zh-CN' %}按城市<span class="sub">按地点分组</span>{% else %}By City<span class="sub">group by place</span>{% endif %}</button>
+      <button data-mode="journey">{% if page.lang == 'zh-CN' %}时间轴<span class="sub">学术轨迹</span>{% else %}Timeline<span class="sub">career track</span>{% endif %}</button>
+      <button data-mode="text">{% if page.lang == 'zh-CN' %}列表<span class="sub">可折叠</span>{% else %}List<span class="sub">collapsible</span>{% endif %}</button>
+    </div>
+    <div class="talkmap-tools">
+      <div class="talkmap-filters" id="talkMapFilters">
+        <button data-facet="all" class="active">{% if page.lang == 'zh-CN' %}全部{% else %}All{% endif %}</button>
+        <button data-facet="year">{% if page.lang == 'zh-CN' %}年份{% else %}Year{% endif %}</button>
+        <button data-facet="location">{% if page.lang == 'zh-CN' %}地点{% else %}Location{% endif %}</button>
+        <button data-facet="type">{% if page.lang == 'zh-CN' %}类型{% else %}Type{% endif %}</button>
+      </div>
+      <input id="talkMapSearch" placeholder="{% if page.lang == 'zh-CN' %}搜索演讲…{% else %}Search talks…{% endif %}" />
+      <button id="talkMapExport">{% if page.lang == 'zh-CN' %}导出 PDF{% else %}Export PDF{% endif %}</button>
+      <button id="talkMapZip" disabled title="Enable after hosting slide files">{% if page.lang == 'zh-CN' %}下载全部{% else %}Download All{% endif %}</button>
+    </div>
   </div>
+
+  <div class="talkmap-dynfilter" id="talkMapDyn"></div>
 
   <div class="talkmap-panel" id="panel-wall"></div>
   <div class="talkmap-panel" id="panel-journey"></div>
@@ -122,7 +186,13 @@ var talksData = [
     "award": {{ t.award | jsonify }},
     "kind": {{ t.kind | jsonify }},
     "hide_on_map": {{ t.hide_on_map | jsonify }},
-    "permalink": {{ t.permalink | jsonify }}
+    "permalink": {{ t.permalink | jsonify }},
+    "abstract": {{ t.abstract | jsonify }},
+    "slides_url": {{ t.slides_url | jsonify }},
+    "video_url": {{ t.video_url | jsonify }},
+    "poster_url": {{ t.poster_url | jsonify }},
+    "doi": {{ t.doi | jsonify }},
+    "conf_url": {{ t.conf_url | jsonify }}
   }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 ];
@@ -220,20 +290,63 @@ function metaConf(t){
   return '<span class="conf">'+escapeHtml(c)+'</span>';
 }
 
-/* group talks by venue (school) */
+/* group talks by venue (school) — used by the wall stat (schools count) */
 var byVenue = {};
 geoTalks.forEach(function(t){
   if(!byVenue[t.venue]){ byVenue[t.venue] = { lat: coordOf(t.venue)[0], lng: coordOf(t.venue)[1], city: t.city, items: [], award:false }; }
   byVenue[t.venue].items.push(t);
   if(t.award){ byVenue[t.venue].award = true; }
 });
+/* distinct cities (global, for the wall stat) */
+var byCityGlobal = {};
+geoTalks.forEach(function(t){ byCityGlobal[t.city.split(',')[0].trim()] = 1; });
 
-  /* (Leaflet map builders removed; remaining modes: City wall / Journey / Text) */
+/* (Leaflet map builders removed; remaining modes: By City / Timeline / List) */
+
+/* ===== filter / search state ===== */
+var state = { facet:'all', facetValue:null, query:'' };
+function kindLabel(k){ var m={conference:'Conference',workshop:'Workshop',seminar:'Seminar',invited:'Invited'}; return m[k]||'Conference'; }
+function matches(t){
+  if(state.facet!=='all' && state.facetValue){
+    if(state.facet==='year' && t.date.slice(0,4)!==state.facetValue) return false;
+    if(state.facet==='location' && t.city!==state.facetValue) return false;
+    if(state.facet==='type' && t.kind!==state.facetValue) return false;
+  }
+  if(state.query){
+    var q=state.query.toLowerCase();
+    var hay=(t.title+' '+(t.venue||'')+' '+(t.conf||'')+' '+(t.abstract||'')).toLowerCase();
+    if(hay.indexOf(q)===-1) return false;
+  }
+  return true;
+}
+function facetValues(facet){
+  var vals=[];
+  if(facet==='year'){ talksData.forEach(function(t){ var y=t.date.slice(0,4); if(vals.indexOf(y)<0) vals.push(y); }); vals.sort(); }
+  else if(facet==='location'){ talksData.forEach(function(t){ if(vals.indexOf(t.city)<0) vals.push(t.city); }); vals.sort(); }
+  else if(facet==='type'){ talksData.forEach(function(t){ if(vals.indexOf(t.kind)<0) vals.push(t.kind); }); }
+  return vals;
+}
+function resBtn(label,url){ return '<a class="talkmap-res" href="'+escapeHtml(url)+'" target="_blank" rel="noopener">'+label+'</a>'; }
+function detailHtml(t){
+  var h='';
+  if(t.abstract){ h+='<p class="talkmap-acc-abs">'+escapeHtml(t.abstract)+'</p>'; }
+  else { h+='<p class="talkmap-acc-abs talkmap-muted">Abstract to be added.</p>'; }
+  var res='';
+  if(t.slides_url) res+=resBtn('📄 Slides', t.slides_url);
+  if(t.video_url) res+=resBtn('▶ Video', t.video_url);
+  if(t.poster_url) res+=resBtn('🖼 Poster', t.poster_url);
+  if(t.doi) res+=resBtn('🔗 DOI', 'https://doi.org/'+t.doi);
+  if(t.conf_url) res+=resBtn('🌐 Conference', t.conf_url);
+  if(t.permalink) res+=resBtn('🔗 Open talk page', t.permalink);
+  h+= res ? '<div class="talkmap-res-row">'+res+'</div>' : '<div class="talkmap-res-row talkmap-muted">No resource links yet.</div>';
+  return h;
+}
 
 /* ---- wall panel ---- */
-(function(){
+function renderWall(){
+  var filtered = geoTalks.filter(matches);
   var cities = {};
-  geoTalks.forEach(function(t){
+  filtered.forEach(function(t){
     var c = t.city.split(',')[0].trim();
     if(!cities[c]){ cities[c] = { en: t.city, schools:{}, count:0 }; }
     if(!cities[c].schools[t.venue]){ cities[c].schools[t.venue] = { short: shortOf(t.venue), count:0, award:false }; }
@@ -244,7 +357,7 @@ geoTalks.forEach(function(t){
   var cityNames = Object.keys(cities);
   var html = '<div class="talkmap-stat">'
     + '<div class="box"><div class="n">' + talksData.length + '</div><div class="l">' + (isZh ? '场受邀演讲' : 'talks') + '</div></div>'
-    + '<div class="box"><div class="n">' + cityNames.length + '</div><div class="l">' + (isZh ? '座城市' : 'cities') + '</div></div>'
+    + '<div class="box"><div class="n">' + Object.keys(byCityGlobal).length + '</div><div class="l">' + (isZh ? '座城市' : 'cities') + '</div></div>'
     + '<div class="box"><div class="n">' + Object.keys(byVenue).length + '</div><div class="l">' + (isZh ? '所学校' : 'schools') + '</div></div>'
     + '</div><div class="talkmap-grid">';
   cityNames.forEach(function(cn){
@@ -259,17 +372,17 @@ geoTalks.forEach(function(t){
   });
   html += '</div>';
   document.getElementById('panel-wall').innerHTML = html;
-})();
+}
 
 /* ---- journey panel: vertical timeline, spine on the right, bottom→top ---- */
-(function(){
+function renderJourney(){
   function kindPill(t){
     var map = { conference:'Conference', workshop:'Workshop', seminar:'Seminar', invited:'Invited' };
     var k = (t.kind || 'conference');
     var cls = (k === 'workshop') ? 'work' : (k === 'seminar') ? 'sem' : (k === 'invited') ? 'inv' : 'conf';
     return '<span class="pill ' + cls + '">' + (map[k] || 'Conference') + '</span>';
   }
-  var items = geoTalks.slice().sort(function(a,b){ return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
+  var items = geoTalks.filter(matches).slice().sort(function(a,b){ return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
   var html = '<div class="talkmap-jtrack">';
   items.forEach(function(t){
     var titleHtml = escapeHtml(dispTitle(t));
@@ -288,10 +401,10 @@ geoTalks.forEach(function(t){
   });
   html += '</div>';
   document.getElementById('panel-journey').innerHTML = html;
-})();
+}
 
-/* ---- text-only panel (unified year-descending list with kind pills) ---- */
-(function(){
+/* ---- text / List panel (collapsible accordion) ---- */
+function renderText(){
   function buildMeta(t){
     var map = { conference:'Conference', workshop:'Workshop', seminar:'Seminar', invited:'Invited' };
     var k = (t.kind || 'conference');
@@ -306,23 +419,44 @@ geoTalks.forEach(function(t){
     if(t.award){ out += ' <span class="sep">·</span> <span class="award">🏆 ' + escapeHtml(t.award) + '</span>'; }
     return out;
   }
+  var filtered = talksData.filter(matches);
   var years = {};
-  talksData.forEach(function(t){ var y = t.date.slice(0,4); (years[y] = years[y] || []).push(t); });
+  filtered.forEach(function(t){ var y = t.date.slice(0,4); (years[y] = years[y] || []).push(t); });
   var ys = Object.keys(years).sort().reverse();
   var html = '';
+  if(!ys.length){ html = '<div class="talkmap-muted" style="padding:22px 4px">No talks match.</div>'; }
   ys.forEach(function(y){
     html += '<div class="talkmap-yh">' + y + ' <span class="cnt">(' + years[y].length + ')</span></div>';
     years[y].forEach(function(t){
       var titleHtml = escapeHtml(dispTitle(t));
-      if(t.permalink){ titleHtml = '<a href="' + escapeHtml(t.permalink) + '">' + titleHtml + '</a>'; }
-      html += '<div class="t-item"><div class="t-title">' + titleHtml + '</div>'
-        + '<div class="t-meta">' + buildMeta(t) + '</div></div>';
+      html += '<div class="talkmap-acc"><div class="talkmap-acc-head" onclick="hqToggleAcc(this)">'
+        + '<div class="talkmap-acc-main"><div class="t-title">' + titleHtml + '</div>'
+        + '<div class="t-meta">' + buildMeta(t) + '</div></div>'
+        + '<div class="talkmap-chev">▾</div></div>'
+        + '<div class="talkmap-acc-body"><div class="talkmap-acc-inner">' + detailHtml(t) + '</div></div></div>';
     });
   });
   document.getElementById('panel-text').innerHTML = html;
-})();
+}
 
-  /* (list-with-location panel removed per request) */
+function renderAll(){ renderWall(); renderJourney(); renderText(); }
+function hqToggleAcc(el){ var acc = el.closest('.talkmap-acc'); if(acc) acc.classList.toggle('open'); }
+
+/* dynamic filter chips */
+function renderDyn(){
+  var box = document.getElementById('talkMapDyn');
+  if(state.facet==='all'){ box.innerHTML=''; return; }
+  var vals = facetValues(state.facet);
+  var h = '<button data-v="__all" class="'+(!state.facetValue?'active':'')+'">'+(isZh?'全部':'All')+'</button>';
+  vals.forEach(function(v){
+    var lab = (state.facet==='type') ? kindLabel(v) : v;
+    h += '<button data-v="'+escapeHtml(v)+'" class="'+(state.facetValue===v?'active':'')+'">'+escapeHtml(lab)+'</button>';
+  });
+  box.innerHTML = h;
+  Array.prototype.forEach.call(box.querySelectorAll('button'), function(b){
+    b.onclick = function(){ state.facetValue = (b.getAttribute('data-v')==='__all') ? null : b.getAttribute('data-v'); renderDyn(); renderAll(); };
+  });
+}
 
 /* ---- switcher + persistence ---- */
 var activeMode = 'text';
@@ -337,9 +471,20 @@ seg.addEventListener('click', function(e){
   var btn = e.target.closest('button'); if(!btn) return;
   activate(btn.getAttribute('data-mode'));
 });
+document.getElementById('talkMapFilters').addEventListener('click', function(e){
+  var b = e.target.closest('button'); if(!b) return;
+  state.facet = b.getAttribute('data-facet'); state.facetValue = null;
+  Array.prototype.forEach.call(this.querySelectorAll('button'), function(x){ x.classList.remove('active'); });
+  b.classList.add('active'); renderDyn(); renderAll();
+});
+document.getElementById('talkMapSearch').addEventListener('input', function(e){ state.query = e.target.value.trim(); renderAll(); });
+document.getElementById('talkMapExport').addEventListener('click', function(){ window.print(); });
+
 (function(){
   var saved = null;
   try { saved = localStorage.getItem('hq-talks-mode'); } catch(e){}
+  renderAll();
+  renderDyn();
   if(saved && seg.querySelector('button[data-mode="' + saved + '"]')){ activate(saved); }
   else { activate('text'); }
 })();

@@ -56,6 +56,12 @@
     .footer-right {
       text-align: right;
     }
+    .footer-src {
+      color: var(--text-secondary);
+      opacity: .72;
+      font-size: .7rem;
+      margin-top: 5px;
+    }
     .social-icons li {
       display: inline;
     }
@@ -86,6 +92,11 @@
         float: right;
         font-size: 28px;
         font-weight: bold;
+        background: transparent;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+        line-height: 1;
     }
       .close:hover,
       .close:focus {
@@ -103,25 +114,26 @@
         <li>&nbsp;</li> <!-- 添加一个空的列表项来创建空格 -->
         <li>&nbsp;</li> <!-- 添加一个空的列表项来创建空格 -->
         <li>&nbsp;</li> <!-- 添加一个空的列表项来创建空格 -->
-        <li><a href="#weixin-qrcode" class="weixin-qrcode-link bold-text" onclick="document.getElementById('weixin-qrcode-modal').style.display='block'"><i class="fab fa-weixin"></i> {% if page.lang == 'zh-CN' %}微信{% else %}WeChat{% endif %}</a></li>
+        <li><a href="#weixin-qrcode-modal" class="weixin-qrcode-link bold-text" title="WeChat: pyqh88888888" aria-haspopup="dialog" aria-controls="weixin-qrcode-modal" onclick="openWeixinModal()"><i class="fab fa-weixin" aria-hidden="true"></i> {% if page.lang == 'zh-CN' %}微信{% else %}WeChat{% endif %}</a></li>
       </ul>
     </div>
-      <div id="weixin-qrcode-modal" class="modal">
+      <div id="weixin-qrcode-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="weixin-modal-title" aria-hidden="true">
         <div class="modal-content">
-          <span class="close" onclick="document.getElementById('weixin-qrcode-modal').style.display='none'">&times;</span>
-          <p>{% if page.lang == 'zh-CN' %}扫描微信二维码{% else %}Scan WeChat QR Code{% endif %}</p>
-          <img src="{{ '/images/wechat.PNG' | absolute_url }}" alt="{% if page.lang == 'zh-CN' %}微信：pyqh88888888{% else %}WeChat: pyqh88888888{% endif %}" class="img-fluid">
+          <button type="button" class="close" aria-label="{% if page.lang == 'zh-CN' %}关闭二维码弹窗{% else %}Close QR code dialog{% endif %}" onclick="closeWeixinModal()">&times;</button>
+          <p id="weixin-modal-title">{% if page.lang == 'zh-CN' %}扫描微信二维码{% else %}Scan WeChat QR Code{% endif %}</p>
+          <img src="{{ '/images/wechat.PNG' | absolute_url }}" alt="{% if page.lang == 'zh-CN' %}微信：pyqh88888888{% else %}WeChat: pyqh88888888{% endif %}" class="img-fluid" role="img">
         </div>
       </div>
 
     <div class="footer-center page__footer-copyright">
       <div>© {{ site.time | date: "%Y" }} <span class="heart"> </span> Han (Rachel) Qiu.</div>
       Last updated {{ site.time | date: "%Y-%m-%d" }}. <br>
-      Blog up for &nbsp;<span id="days">0</span>&nbsp;Days, <span id="hours">0</span>&nbsp;Hrs, <span id="minutes">0</span>&nbsp;Min, <span id="seconds">0</span>&nbsp;Sec
+      Site online for &nbsp;<span id="days">0</span>&nbsp;Days, <span id="hours">0</span>&nbsp;Hrs, <span id="minutes">0</span>&nbsp;Min, <span id="seconds">0</span>&nbsp;Sec
     </div>
     <div class="footer-right runtime">
       VISITOR COUNT <span id="busuanzi_value_site_uv">-</span><br>
       TOTAL PAGE VIEWS <span id="busuanzi_value_site_pv">-</span>
+      <div class="footer-src">Visitor &amp; page-view counts via busuanzi</div>
     </div>
   </div>
 </footer>
@@ -156,13 +168,35 @@ updateUptime();
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <script>
-/* 获取模态框 */
-var modal = document.getElementById('weixin-qrcode-modal');
-
-/* 当用户点击任何地方时，关闭模态框 */
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
+/* 微信二维码弹窗：无障碍增强（ESC 关闭 / 焦点管理 / 按钮关闭） */
+function openWeixinModal() {
+  var m = document.getElementById('weixin-qrcode-modal');
+  if (!m) return;
+  m.style.display = 'block';
+  m.setAttribute('aria-hidden', 'false');
+  var c = m.querySelector('.close');
+  if (c) c.focus();
 }
+function closeWeixinModal() {
+  var m = document.getElementById('weixin-qrcode-modal');
+  if (!m) return;
+  m.style.display = 'none';
+  m.setAttribute('aria-hidden', 'true');
+  var t = document.querySelector('.weixin-qrcode-link');
+  if (t) t.focus();
+}
+/* 点击弹窗外部区域关闭 */
+window.addEventListener('click', function (event) {
+  var m = document.getElementById('weixin-qrcode-modal');
+  if (m && m.style.display === 'block' && event.target === m) {
+    closeWeixinModal();
+  }
+});
+/* ESC 关闭 */
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape' || event.keyCode === 27) {
+    var m = document.getElementById('weixin-qrcode-modal');
+    if (m && m.style.display === 'block') closeWeixinModal();
+  }
+});
 </script>
