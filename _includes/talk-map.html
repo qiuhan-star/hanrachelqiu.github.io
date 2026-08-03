@@ -136,6 +136,12 @@
   .talkmap-res:hover { background:var(--accent); color:#fff; }
   .talkmap-muted { color:var(--text-muted); font-size:.82rem; }
 
+  /* timeline cards are now collapsible (merged with List's accordion behavior) */
+  .talkmap-jcard.talkmap-acc { margin-bottom:0; }
+  .talkmap-jcard .talkmap-acc-head { display:block; padding:0; }
+  .talkmap-jcard .talkmap-chev { position:absolute; bottom:10px; right:14px; }
+  .talkmap-jcard .talkmap-acc-inner { padding:0 15px 14px; border-top:1px dashed var(--border-subtle); margin:10px -15px -11px; }
+
   /* shadows (local, since --shadow is not a site token) */
   :root { --shadow-hover:0 6px 18px rgba(40,60,100,.14); }
   :root[data-theme="dark"] { --shadow-hover:0 6px 18px rgba(0,0,0,.5); }
@@ -166,8 +172,7 @@
   <div class="talkmap-toolbar">
     <div class="talkmap-seg" id="talkMapSeg">
       <button data-mode="wall"><span data-lang="en">By City<span class="sub">group by place</span></span><span data-lang="zh">按城市<span class="sub">按地点分组</span></span></button>
-      <button data-mode="journey"><span data-lang="en">Timeline<span class="sub">career track</span></span><span data-lang="zh">时间轴<span class="sub">学术轨迹</span></span></button>
-      <button data-mode="text"><span data-lang="en">List<span class="sub">collapsible</span></span><span data-lang="zh">列表<span class="sub">可折叠</span></span></button>
+      <button data-mode="journey"><span data-lang="en">Timeline<span class="sub">collapsible</span></span><span data-lang="zh">时间轴<span class="sub">可折叠</span></span></button>
     </div>
     <div class="talkmap-tools">
       <div class="talkmap-filters" id="talkMapFilters">
@@ -186,7 +191,6 @@
 
   <div class="talkmap-panel" id="panel-wall"></div>
   <div class="talkmap-panel" id="panel-journey"></div>
-  <div class="talkmap-panel talkmap-text" id="panel-text"></div>
 </div>
 
 <script>
@@ -420,12 +424,13 @@ function renderWall(){
 }
 
 /* ---- journey panel: vertical timeline, spine on the right, bottom→top ---- */
+/* ---- journey / Timeline panel: vertical timeline, collapsible accordion ---- */
 function renderJourney(){
   function kindPill(t){
     var map = { conference:'Conference Presentation', workshop:'Workshop', seminar:'Seminar', invited:'Invited Talk' };
     var k = (t.kind || 'conference');
     var cls = (k === 'workshop') ? 'work' : (k === 'seminar') ? 'sem' : (k === 'invited') ? 'inv' : 'conf';
-    return '<span class="pill ' + cls + '">' + (map[k] || 'Conference') + '</span>';
+    return '<span class="pill ' + cls + '">' + (map[k] || 'Conference Presentation') + '</span>';
   }
   var items = geoTalks.filter(matches).slice().sort(function(a,b){ return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
   var html = '<div class="talkmap-jtrack">';
@@ -442,13 +447,20 @@ function renderJourney(){
     var cityLoc = '<span class="loc-full"><span class="loc-city">' + escapeHtml(cityName) + '</span>'
       + (countryName ? '<span class="loc-country">' + escapeHtml(countryName) + '</span>' : '')
       + '</span>';
-    html += '<div class="talkmap-jnode"><div class="talkmap-jcard">'
+    /* collapsed header: title · type badge · meta · venue; links hidden until expand */
+    var detail = '';
+    if(t.abstract){ detail += '<p class="talkmap-acc-abs">' + escapeHtml(t.abstract) + '</p>'; }
+    detail += resRow(t);
+    html += '<div class="talkmap-jnode"><div class="talkmap-jcard talkmap-acc">'
+      + '<div class="talkmap-acc-head" onclick="hqToggleAcc(this)">'
       + '<div class="t">' + titleHtml + '</div>'
       + awardTag
       + typeBadge
       + '<div class="m">' + meta + '</div>'
       + '<div class="venue">' + escapeHtml(fullVenue(t)) + '</div>'
-      + resRow(t)
+      + '<div class="talkmap-chev">▾</div>'
+      + '</div>'
+      + '<div class="talkmap-acc-body"><div class="talkmap-acc-inner">' + detail + '</div></div>'
       + '</div>'
       + '<div class="talkmap-jaxis' + (t.award ? ' award' : '') + '"><span class="dot"></span>'
       + '<div class="date">' + escapeHtml(t.date.slice(0,7)) + '</div>'
