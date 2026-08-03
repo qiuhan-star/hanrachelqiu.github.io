@@ -59,9 +59,25 @@
     if (btn) btn.classList.remove('hidden');
   }
 
+  function updateMastheadOffset() {
+    var mh = document.querySelector('.masthead');
+    if (!mh) return;
+    var bottom = Math.round(mh.getBoundingClientRect().bottom);
+    document.documentElement.style.setProperty('--masthead-bottom', bottom + 'px');
+    /* Inline top/position forces a layout recalc in headless Chrome, ensuring
+       the fixed dropdown is actually painted below the masthead on phones. */
+    if (hlinks && window.innerWidth <= MOBILE_MAX) {
+      hlinks.style.position = 'fixed';
+      hlinks.style.top = bottom + 'px';
+      hlinks.style.left = '0';
+      hlinks.style.right = '0';
+    }
+  }
+
   function applyMode() {
     if (window.innerWidth <= MOBILE_MAX) applyMobile();
     else applyDesktop();
+    updateMastheadOffset();
   }
 
   applyMode();
@@ -74,6 +90,7 @@
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
       nav.classList.toggle('is-open');
+      if (window.innerWidth <= MOBILE_MAX) updateMastheadOffset();
     });
     document.addEventListener('click', function (e) {
       if (nav.classList.contains('is-open') && !nav.contains(e.target)) {
@@ -143,12 +160,13 @@
    overlays content instead of pushing the top bar taller. */
 @media (max-width: 767px) {
   .masthead {
-    position: relative;
     z-index: 100;
   }
+  /* Let the dropdown position itself against .masthead (full-width) instead of
+     the narrow .greedy-nav flex box, so the menu spans the whole viewport. */
   .greedy-nav .hidden-links {
-    position: absolute !important;
-    top: 100%;
+    position: fixed !important;
+    top: var(--masthead-bottom);
     left: 0;
     right: 0;
     flex-direction: column;
@@ -158,7 +176,7 @@
     border-radius: 0 0 12px 12px;
     box-shadow: 0 12px 30px rgba(20, 30, 50, 0.18);
     padding: 6px 0;
-    z-index: 60;
+    z-index: 1000;
   }
   .greedy-nav.is-open .hidden-links {
     display: flex !important;
