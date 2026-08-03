@@ -20,24 +20,45 @@
   var vlinks = nav.querySelector('.visible-links');
   var hlinks = nav.querySelector('.hidden-links');
   var btn = nav.querySelector('button');
-  function restoreNavItems() {
+  /* < 768px => mobile: restore Minimal Mistakes native hamburger menu.
+     >= 768px => desktop/tablet: locked 方案 A full horizontal nav, no hamburger. */
+  var MOBILE_MAX = 767;
+
+  function sortedItems() {
+    var items = Array.prototype.slice.call(vlinks.children);
+    items.sort(function (a, b) {
+      return (parseInt(a.getAttribute('data-nav-index'), 10) || 0) - (parseInt(b.getAttribute('data-nav-index'), 10) || 0);
+    });
+    return items;
+  }
+
+  function applyDesktop() {
+    /* Move every nav item back into .visible-links in the locked original order,
+       and suppress the greedy hamburger. (方案 A — desktop/tablet, unchanged.) */
     var item;
-    if (vlinks && hlinks) {
-      while ((item = hlinks.querySelector('li'))) vlinks.appendChild(item);
-    }
-    /* Restore the original order captured before main.min.js ran. */
-    if (vlinks) {
-      var items = Array.prototype.slice.call(vlinks.children);
-      items.sort(function (a, b) {
-        return (parseInt(a.getAttribute('data-nav-index'), 10) || 0) - (parseInt(b.getAttribute('data-nav-index'), 10) || 0);
-      });
-      for (var i = 0; i < items.length; i++) vlinks.appendChild(items[i]);
-    }
+    if (hlinks) { while ((item = hlinks.querySelector('li'))) vlinks.appendChild(item); }
+    sortedItems().forEach(function (li) { vlinks.appendChild(li); });
     if (btn) btn.classList.add('hidden');
     if (hlinks) hlinks.classList.add('hidden');
   }
-  restoreNavItems();
-  window.addEventListener('resize', restoreNavItems);
+
+  function applyMobile() {
+    /* Hand the menu to the native hamburger: every nav item (incl. brand) lives
+       in .hidden-links, which MM's own button handler toggles open on tap.
+       Keep .hidden-links collapsed (do NOT remove its 'hidden' class here). */
+    if (!vlinks || !hlinks) return;
+    var kids = Array.prototype.slice.call(vlinks.children);
+    kids.forEach(function (li) { hlinks.appendChild(li); });
+    if (btn) btn.classList.remove('hidden');
+  }
+
+  function applyMode() {
+    if (window.innerWidth <= MOBILE_MAX) applyMobile();
+    else applyDesktop();
+  }
+
+  applyMode();
+  window.addEventListener('resize', applyMode);
 })();
 </script>
 <style>
