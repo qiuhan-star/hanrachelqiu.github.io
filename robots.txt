@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qiuhan-star.github.io/hanrachelqiu.github.io/sitemap.xml
