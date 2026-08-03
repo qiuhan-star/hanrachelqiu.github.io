@@ -18,5 +18,28 @@
   window.addEventListener('resize', restoreNavItems);
 })();
 </script>
+<style>
+/* Neutralize Minimal Mistakes greedy-nav table layout so the locked
+   4-core + More design does not overlap at narrower desktop widths.
+   This only overrides CSS display values; it does NOT change
+   masthead.html structure or any locked sizing tokens. */
+.greedy-nav .visible-links {
+  display: flex !important;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.greedy-nav .visible-links li {
+  display: block;
+  flex: 0 0 auto;
+}
+.greedy-nav .visible-links a {
+  white-space: nowrap;
+}
+.greedy-nav {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+</style>
 
 {% include analytics.html %}
