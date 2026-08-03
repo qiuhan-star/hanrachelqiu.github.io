@@ -65,8 +65,8 @@
   .talkmap-city .inst-meta .n { font-weight:600; color:var(--text-muted); white-space:nowrap; }
   .talkmap-city .inst-meta .dot { opacity:.5; }
   /* award tag */
-  .talkmap-city .city-awards { display:flex; align-items:center; justify-content:center; gap:6px; text-align:center; font-size:.8rem; font-weight:600; color:#92732a; background:#fff7e0; border:1px solid #f0e0b0; border-radius:8px; padding:7px 10px; margin:10px 0 2px; }
-  :root[data-theme="dark"] .talkmap-city .city-awards { background:#2f2a1c; color:#d8c074; border-color:#4a3f1f; }
+  .talkmap-city .city-awards { display:flex; align-items:center; justify-content:center; gap:6px; text-align:center; font-size:.8rem; font-weight:600; color:#92400e; background:#FEF3C7; border:1px solid #FDE68A; border-radius:8px; padding:7px 10px; margin:10px 0 2px; }
+  :root[data-theme="dark"] .talkmap-city .city-awards { background:#3a2f12; color:#fcd9a5; border-color:#5a4a1f; }
   /* actions pinned to bottom — footer height identical across all cards */
   .talkmap-city .city-actions { display:flex; gap:8px; margin-top:auto; padding-top:12px; }
   .talkmap-city .city-actions .talkmap-res { flex:1 1 0; justify-content:center; margin:0; }
@@ -88,21 +88,21 @@
   .talkmap-jcard .m { color:var(--text-secondary); font-size:.83rem; margin-top:2px; display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
   .talkmap-jcard .sep { color:var(--text-secondary); opacity:.5; }
   .talkmap-jcard .zh { color:var(--text-secondary); font-weight:600; }
-  .talkmap-jcard .lang-tag { display:inline-block; font-size:.75rem; font-weight:600; color:#64748b; background:#f1f5f9; padding:2px 6px; border-radius:4px; }
-  :root[data-theme="dark"] .talkmap-jcard .lang-tag { color:#9aa6b6; background:#2a313c; }
+  .talkmap-jcard .lang-tag { display:inline-block; font-size:.75rem; font-weight:600; color:#64748b; background:#f8fafc; border:1px solid #e2e8f0; padding:2px 6px; border-radius:4px; }
+  :root[data-theme="dark"] .talkmap-jcard .lang-tag { color:#9aa6b6; background:#2a313c; border:1px solid #3a4250; }
   /* award now rendered inside .badge-cluster as .award-pill */
-  .talkmap-jcard .pill { display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.01em; padding:2px 9px; border-radius:6px; }
-  .talkmap-jcard .pill.conf { background:#dce9fc; color:#1f63c8; }
-  .talkmap-jcard .pill.work { background:#dcf3e4; color:#1d8a4e; }
-  .talkmap-jcard .pill.sem  { background:#efe8fb; color:#6f4fc0; }
-  .talkmap-jcard .pill.inv  { background:#fbf0d8; color:#9a6a14; }
+  .talkmap-jcard .pill { display:inline-block; font-size:.7rem; font-weight:500; letter-spacing:.01em; padding:2px 9px; border-radius:6px; }
+  .talkmap-jcard .pill.conf { background:#f1f5f9; color:#475569; }
+  .talkmap-jcard .pill.work { background:#ecfdf5; color:#047857; }
+  .talkmap-jcard .pill.sem  { background:#f3e8ff; color:#6b21a8; }
+  .talkmap-jcard .pill.inv  { background:#eef2ff; color:#4338ca; }
   /* badge cluster — type + award, top-right anchor (out of title/meta flow) */
   .badge-cluster { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-start; align-items:center; }
-  .award-pill { display:inline-block; font-size:.7rem; font-weight:700; padding:2px 9px; border-radius:6px; background:#fff7e0; color:#92732a; border:1px solid #f0e0b0; }
+  .award-pill { display:inline-block; font-size:.7rem; font-weight:500; padding:2px 9px; border-radius:6px; background:#FEF3C7; color:#92400e; border:1px solid #FDE68A; }
   .talkmap-jcard .badge-cluster { position:absolute; top:11px; right:15px; margin:0; }
   .talkmap-jcard .t-row .badge-cluster { position:static; top:auto; right:auto; margin:2px 0 0; flex:0 0 auto; }
   .talkmap-jaxis { width:120px; position:relative; text-align:right; padding-right:6px; }
-  .talkmap-jaxis .dot { position:absolute; left:-9px; top:13px; width:18px; height:18px; border-radius:50%; background:var(--accent); border:3px solid var(--bg-base); z-index:1; }
+  .talkmap-jaxis .dot { position:absolute; left:-9px; top:13px; width:18px; height:18px; border-radius:50%; background:#6366F1; border:3px solid var(--bg-base); z-index:1; }
   /* axis node (dot + date) top-aligned to card's first title line; dot color unified to --accent */
   .talkmap-jaxis .date { font-weight:700; font-size:.9rem; color:var(--text-primary); margin-top:13px; }
   /* de-duplicated month: reserve identical space but hide the repeated number */
@@ -130,11 +130,11 @@
   .talkmap-text .sep { color:var(--text-secondary); opacity:.5; }
   .talkmap-text .zh { color:var(--text-secondary); font-weight:600; }
   .talkmap-text .award { color:#92732a; font-weight:600; }
-  .talkmap-text .pill { display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.01em; padding:2px 9px; border-radius:6px; }
-  .talkmap-text .pill.conf { background:#dce9fc; color:#1f63c8; }
-  .talkmap-text .pill.work { background:#dcf3e4; color:#1d8a4e; }
-  .talkmap-text .pill.sem  { background:#efe8fb; color:#6f4fc0; }
-  .talkmap-text .pill.inv  { background:#fbf0d8; color:#9a6a14; }
+  .talkmap-text .pill { display:inline-block; font-size:.7rem; font-weight:500; letter-spacing:.01em; padding:2px 9px; border-radius:6px; }
+  .talkmap-text .pill.conf { background:#f1f5f9; color:#475569; }
+  .talkmap-text .pill.work { background:#ecfdf5; color:#047857; }
+  .talkmap-text .pill.sem  { background:#f3e8ff; color:#6b21a8; }
+  .talkmap-text .pill.inv  { background:#eef2ff; color:#4338ca; }
   .talkmap-text .venue-em { color:var(--accent); font-weight:600; }
   .talkmap-yh .cnt { font-size:.8rem; color:var(--text-secondary); font-weight:400; margin-left:8px; }
 
@@ -153,19 +153,20 @@
   /* floating type badge — split "Conference Presentation" into two lines at the space */
   .talkmap-jcard .t-row .badge-cluster .pill { white-space:normal; max-width:100px; text-align:center; line-height:1.14; padding:5px 8px; }
   /* award: de-emphasized, sits at the end of the card (not a bold gold pill) */
-  .tm-award { display:block; font-size:.8rem; font-weight:500; color:#92732a; margin:9px 0 0; opacity:.9; }
-  :root[data-theme="dark"] .tm-award { background:transparent; border:none; color:#d8c074; }
+  .tm-award { display:block; font-size:.8rem; font-weight:500; color:#92400e; margin:9px 0 0; opacity:.9; }
+  :root[data-theme="dark"] .tm-award { background:transparent; border:none; color:#fcd9a5; }
   .loc-full { color:var(--accent); font-weight:600; }
   /* award now rendered inside .badge-cluster as .award-pill */
-  .talkmap-chev { display:inline-block; margin-top:10px; color:var(--accent); font-size:.8rem; font-weight:600; background:var(--accent-soft); border:1px solid var(--accent); padding:5px 12px; border-radius:8px; cursor:pointer; }
+  .talkmap-chev { display:inline-block; margin-top:10px; color:#64748b; font-size:.8rem; font-weight:600; background:#f8fafc; border:1px solid #e2e8f0; padding:5px 12px; border-radius:8px; cursor:pointer; }
   .talkmap-acc-body { max-height:0; overflow:hidden; transition:max-height .28s ease; }
   .talkmap-acc.open .talkmap-acc-body { max-height:2000px; }
   .talkmap-acc-inner { padding:0 15px 14px; border-top:1px dashed var(--border-subtle); margin-top:-1px; }
   .talkmap-acc-abs { color:var(--text-secondary); font-size:.9rem; margin:12px 0 10px; }
   .talkmap-res-row { display:flex; flex-wrap:wrap; gap:0; margin:8px 0; }
-  .talkmap-res { display:inline-flex; align-items:center; gap:5px; text-decoration:none; font-size:.78rem; font-weight:600; border:1px solid var(--border-subtle); color:var(--accent); background:transparent; padding:6px 11px; border-radius:8px; margin:0 6px 6px 0; }
-  .talkmap-res.btn-primary { background:var(--accent); color:#fff; border-color:var(--accent); }
-  .talkmap-res:hover { background:var(--accent); color:#fff; }
+  .talkmap-res { display:inline-flex; align-items:center; gap:5px; text-decoration:none; font-size:.78rem; font-weight:600; border:1px solid #e2e8f0; color:#334155; background:#ffffff; padding:6px 11px; border-radius:8px; margin:0 6px 6px 0; }
+  .talkmap-res.btn-primary { background:#0F172A; color:#fff; border-color:#0F172A; }
+  .talkmap-res:hover { background:#f1f5f9; color:#0F172A; border-color:#cbd5e1; }
+  .talkmap-res.btn-primary:hover { background:#1E293B; border-color:#1E293B; }
   .talkmap-muted { color:var(--text-muted); font-size:.82rem; }
 
   /* timeline cards are now collapsible (merged with List's accordion behavior) */
@@ -179,11 +180,16 @@
   html { scroll-behavior:smooth; }
 
   /* 4-color pills — dark theme overrides */
-  :root[data-theme="dark"] .talkmap-jcard .pill.conf, :root[data-theme="dark"] .talkmap-text .pill.conf { background:#15294d; color:#7fb0ff; }
-  :root[data-theme="dark"] .talkmap-jcard .pill.work, :root[data-theme="dark"] .talkmap-text .pill.work { background:#15301f; color:#7fc79a; }
-  :root[data-theme="dark"] .talkmap-jcard .pill.sem,  :root[data-theme="dark"] .talkmap-text .pill.sem  { background:#241f38; color:#b9a8e8; }
-  :root[data-theme="dark"] .talkmap-jcard .pill.inv,  :root[data-theme="dark"] .talkmap-text .pill.inv  { background:#2f2a1c; color:#d8c074; }
-  :root[data-theme="dark"] .award-pill { background:#2f2a1c; color:#d8c074; border-color:#4a3f1f; }
+  :root[data-theme="dark"] .talkmap-jcard .pill.conf, :root[data-theme="dark"] .talkmap-text .pill.conf { background:#1e293b; color:#cbd5e1; }
+  :root[data-theme="dark"] .talkmap-jcard .pill.work, :root[data-theme="dark"] .talkmap-text .pill.work { background:#0f2e22; color:#6ee7b7; }
+  :root[data-theme="dark"] .talkmap-jcard .pill.sem,  :root[data-theme="dark"] .talkmap-text .pill.sem  { background:#2e1f47; color:#d8b4fe; }
+  :root[data-theme="dark"] .talkmap-jcard .pill.inv,  :root[data-theme="dark"] .talkmap-text .pill.inv  { background:#1e1b4b; color:#a5b4fc; }
+  :root[data-theme="dark"] .award-pill { background:#3a2f12; color:#fcd9a5; border-color:#5a4a1f; }
+  :root[data-theme="dark"] .talkmap-res { background:#1e293b; color:#e2e8f0; border-color:#334155; }
+  :root[data-theme="dark"] .talkmap-res:hover { background:#334155; color:#fff; border-color:#475569; }
+  :root[data-theme="dark"] .talkmap-res.btn-primary { background:#e2e8f0; color:#0f172a; border-color:#e2e8f0; }
+  :root[data-theme="dark"] .talkmap-res.btn-primary:hover { background:#fff; border-color:#fff; }
+  :root[data-theme="dark"] .talkmap-chev { background:#1e293b; color:#94a3b8; border-color:#334155; }
   strong.pres { font-weight:700; color:var(--text-primary); }
   .talkmap-jcard .conf, .talkmap-text .conf { min-width:0; }
 
