@@ -128,6 +128,7 @@
     var els = document.querySelectorAll('[data-lang="' + lang + '"]');
     for (var i = 0; i < els.length; i++) {
       var el = els[i];
+      if (el === document.documentElement) continue; /* <html> 本身带 data-lang 记录语言状态，跳过 */
       if (el.closest && el.closest('.masthead, header, nav, .lang-dd')) continue;
       return true;
     }

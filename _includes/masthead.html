@@ -8,8 +8,23 @@
         <ul class="visible-links">
           <li class="masthead__menu-item masthead__menu-item--lg"><a href="{{ '/' | absolute_url }}"><span data-lang="en">{{ site.title }}</span><span data-lang="zh">{{ site.title_zh }}</span></a></li>
           {% for link in site.data.navigation.main %}
-            {% if link.url contains 'http' %}{% assign domain = '' %}{% else %}{% assign domain = base_path %}{% endif %}
-            <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}"><span data-lang="en">{{ link.title }}</span><span data-lang="zh">{{ link.title_zh }}</span></a></li>
+            {% if link.children %}
+              <li class="masthead__menu-item dropdown" id="nav-more-wrap">
+                <button type="button" class="nav-more-btn" aria-haspopup="true" aria-expanded="false" aria-controls="nav-more-menu">
+                  <span data-lang="en">{{ link.title }}</span><span data-lang="zh">{{ link.title_zh }}</span>
+                  <span class="nav-caret" aria-hidden="true"></span>
+                </button>
+                <ul class="nav-more-menu" id="nav-more-menu" role="menu">
+                  {% for child in link.children %}
+                    {% if child.url contains 'http' %}{% assign cdomain = '' %}{% else %}{% assign cdomain = base_path %}{% endif %}
+                    <li role="none"><a href="{{ cdomain }}{{ child.url }}" role="menuitem"><span data-lang="en">{{ child.title }}</span><span data-lang="zh">{{ child.title_zh }}</span></a></li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% else %}
+              {% if link.url contains 'http' %}{% assign domain = '' %}{% else %}{% assign domain = base_path %}{% endif %}
+              <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}"><span data-lang="en">{{ link.title }}</span><span data-lang="zh">{{ link.title_zh }}</span></a></li>
+            {% endif %}
           {% endfor %}
         </ul>
         <ul class="hidden-links hidden"></ul>
@@ -111,6 +126,38 @@
     color: var(--masthead-hover);
   }
 
+  /* ===== More 二级下拉 ===== */
+  .masthead__menu-item.dropdown { position: relative; }
+  .nav-more-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: transparent; border: 0; cursor: pointer; font-family: inherit;
+    color: var(--masthead-text); font-weight: 600; font-size: 14px;
+    padding: 8px 13px; border-radius: 8px;
+  }
+  .nav-more-btn:hover { color: var(--masthead-hover); }
+  .nav-caret {
+    width: 0; height: 0; margin-top: 2px;
+    border-left: 4px solid transparent; border-right: 4px solid transparent;
+    border-top: 5px solid currentColor; transition: transform .15s; display: inline-block;
+  }
+  .dropdown.open .nav-caret { transform: rotate(180deg); }
+  .nav-more-menu {
+    position: absolute; top: calc(100% + 8px); right: 0;
+    min-width: 212px; list-style: none; margin: 0; padding: 6px;
+    background: var(--bg-raised); border: 1px solid var(--masthead-border);
+    border-radius: 12px; box-shadow: 0 10px 30px rgba(20,30,50,.18);
+    z-index: 60; display: none;
+  }
+  .dropdown.open .nav-more-menu,
+  .dropdown:hover .nav-more-menu { display: block; }
+  .nav-more-menu li { margin: 0; }
+  .nav-more-menu a {
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: 8px; text-decoration: none;
+    color: var(--text-primary); font-weight: 600; font-size: 14px; white-space: nowrap;
+  }
+  .nav-more-menu a:hover { background: var(--accent); color: #fff; }
+
   /* 正文与通用组件 */
   .page__content,
   #main,
@@ -161,3 +208,24 @@
     overflow: visible;
   }
 </style>
+
+<script>
+(function () {
+  var dd = document.getElementById('nav-more-wrap');
+  if (!dd) return;
+  var btn = dd.querySelector('.nav-more-btn');
+  var menu = document.getElementById('nav-more-menu');
+  if (!btn || !menu) return;
+  function openDD() { dd.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+  function closeDD() { dd.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (dd.classList.contains('open')) { closeDD(); } else { openDD(); }
+  });
+  menu.addEventListener('click', function (e) { e.stopPropagation(); });
+  document.addEventListener('click', function () { if (dd.classList.contains('open')) closeDD(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' || e.keyCode === 27) { if (dd.classList.contains('open')) closeDD(); }
+  });
+})();
+</script>

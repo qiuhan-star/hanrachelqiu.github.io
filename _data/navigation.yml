@@ -11,52 +11,28 @@ main:
     title_zh: "经历"
     url: /experience/
 
-  - title: "Awards"
-    title_zh: "获奖"
-    url: /awards/
-
-  - title: "Services"
-    title_zh: "服务"
-    url: /services/
-
   - title: "CV"
     title_zh: "简历"
     url: /cv/
 
-  - title: "Blog"
-    title_zh: "博客"
-    url: /method-notes/
-
-  - title: "Portfolio"
-    title_zh: "作品集"
-    url: /portfolio/
-
-  - title: "Guide"
-    title_zh: "指南"
-    url: /markdown/
-
-  - title: "PhD Simulator"
-    title_zh: "PhD 模拟器"
-    url: /game-details.html
-
-zh-CN:
-  - title: "出版物"
-    url: /zh/publications/
-  - title: "演讲"
-    url: /zh/talks/
-  - title: "经历"
-    url: /zh/experience/
-  - title: "获奖"
-    url: /zh/awards/
-  - title: "服务"
-    url: /zh/services/
-  - title: "简历"
-    url: /zh/cv/
-  - title: "博客"
-    url: /method-notes/
-  - title: "作品集"
-    url: /zh/portfolio/
-  - title: "指南"
-    url: /zh/markdown/
-  - title: "PhD 模拟器"
-    url: /zh/game-details.html/
+  - title: "More"
+    title_zh: "更多"
+    children:
+      - title: "Awards"
+        title_zh: "获奖"
+        url: /awards/
+      - title: "Services"
+        title_zh: "服务"
+        url: /services/
+      - title: "Blog"
+        title_zh: "博客"
+        url: /method-notes/
+      - title: "Portfolio"
+        title_zh: "作品集"
+        url: /portfolio/
+      - title: "Guide"
+        title_zh: "指南"
+        url: /markdown/
+      - title: "PhD Simulator"
+        title_zh: "PhD 模拟器"
+        url: /game-details.html
