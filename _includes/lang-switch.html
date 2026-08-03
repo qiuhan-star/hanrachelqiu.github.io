@@ -137,7 +137,7 @@
     if (e.key === 'Escape') closeMenu();
   });
 
-  /* 首屏应用：脚本位于顶栏（在正文 {{ content }} 之前解析），若立即调用，
+  /* 首屏应用：脚本位于顶栏（在正文之前解析），若立即调用，
      querySelectorAll('[data-lang]') 只能命中顶栏导航，正文译文块尚未解析、永不被显隐。
      故等 DOMContentLoaded（整页解析完）再整体应用一次；若已解析（readyState 非 loading）则立即执行。
      未就绪前由 html:not(.lang-ready) [data-lang]{display:none} 把所有译文藏好，避免闪错语言。 */
