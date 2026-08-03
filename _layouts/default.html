@@ -555,10 +555,14 @@ layout: compress
       /* ===== 站点开屏动画：刷新/首次访问/站外进入播放，站内链接跳转不播放；蝴蝶代码不变 ===== */
       (function () {
         var PRELOADER_TEXT = "Han (Rachel) Qiu";
-        var CURTAIN_MS = 950, HARD_CAP_MS = 15000;
+        var CURTAIN_MS = 950, HARD_CAP_MS = 3000;
 
         var preloader = document.getElementById('preloader');
         if (!preloader) return;
+
+        /* 兜底提前设置：无论下方 DOM 操作/事件绑定是否抛错，都在 HARD_CAP_MS 后强制进入，
+           防止开屏永久卡死导致页面“打不开” */
+        setTimeout(enterSite, HARD_CAP_MS);
 
         /* 标记站内跳转：点击任意同域站内链接时写标记，用以在下一页跳过开屏动画。
            这样「点标题回首页」与「点 Publications 等」行为一致——都不重播。
@@ -600,22 +604,24 @@ layout: compress
 
         /* 拆词 -> 字母，错峰入场 */
         var wrap = document.getElementById('ml13');
-        var words = PRELOADER_TEXT.trim().split(/\s+/);
-        var idx = 0;
-        words.forEach(function (word, w) {
-          var wSpan = document.createElement('span');
-          wSpan.className = 'word';
-          word.split('').forEach(function (ch) {
-            var l = document.createElement('span');
-            l.className = 'letter';
-            l.textContent = ch;
-            l.style.animationDelay = (idx * 0.055) + 's';
-            wSpan.appendChild(l);
-            idx++;
+        if (wrap) {
+          var words = PRELOADER_TEXT.trim().split(/\s+/);
+          var idx = 0;
+          words.forEach(function (word, w) {
+            var wSpan = document.createElement('span');
+            wSpan.className = 'word';
+            word.split('').forEach(function (ch) {
+              var l = document.createElement('span');
+              l.className = 'letter';
+              l.textContent = ch;
+              l.style.animationDelay = (idx * 0.055) + 's';
+              wSpan.appendChild(l);
+              idx++;
+            });
+            wrap.appendChild(wSpan);
+            if (w < words.length - 1) wrap.appendChild(document.createTextNode(' '));
           });
-          wrap.appendChild(wSpan);
-          if (w < words.length - 1) wrap.appendChild(document.createTextNode(' '));
-        });
+        }
 
         /* 播放期间锁定滚动，避免看到动画层后面的内容在动 */
         document.documentElement.style.overflow = 'hidden';
@@ -642,13 +648,14 @@ layout: compress
         }
         window.addEventListener('wheel', onIntent, { passive: true });
         window.addEventListener('keydown', onIntent);
+        preloader.addEventListener('click', enterSite);
         var tStartY = null;
         window.addEventListener('touchstart', function (e) { tStartY = e.touches[0].clientY; }, { passive: true });
         window.addEventListener('touchmove', function (e) {
           if (tStartY !== null && e.touches[0].clientY < tStartY - 40) enterSite();
         }, { passive: true });
 
-        setTimeout(enterSite, HARD_CAP_MS); /* 兜底：15 秒后自动进入 */
+        /* 兜底已提前到 preloader 获取之后设置，确保不依赖此处后续逻辑 */
       })();
     </script>
 
