@@ -39,13 +39,13 @@
   .talkmap-city .en { font-size:.78rem; color:var(--text-secondary); margin-left:6px; }
   .talkmap-city .count { float:right; background:var(--bg-raised); color:var(--text-secondary); font-weight:700; font-size:.82rem; padding:2px 10px; border-radius:20px; }
   .talkmap-city ul { list-style:none; margin:10px 0 0; padding:0; }
-  .talkmap-city li { display:flex; align-items:center; gap:8px; padding:5px 0; border-top:1px dashed var(--border-subtle); font-size:.9rem; }
+  .talkmap-city li { position:relative; display:flex; align-items:center; gap:8px; padding:5px 6px 5px 0; border-top:1px dashed var(--border-subtle); font-size:.9rem; }
   .talkmap-city li:first-child { border-top:none; }
   .talkmap-dot { width:10px; height:10px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); flex:0 0 auto; }
   .talkmap-dot.school { background:#2a7f3e; }
   .talkmap-dot.award { background:#d4af37; }
-  .talkmap-city li .n2 { margin-left:auto; color:var(--text-secondary); font-size:.8rem; }
-  .talkmap-aw { font-size:.7rem; color:#b8860b; background:#fff7e0; border:1px solid #f0e0b0; padding:1px 6px; border-radius:10px; margin-left:6px; }
+  .talkmap-city li .n2 { color:var(--text-secondary); font-size:.8rem; }
+  .talkmap-city li .badge-cluster { position:absolute; top:5px; right:2px; }
 
   /* journey — vertical timeline, spine on right, bottom→top, separators between nodes */
   .talkmap-jtrack { position:relative; display:flex; flex-direction:column-reverse; padding:6px 0 2px; }
@@ -60,15 +60,16 @@
   .talkmap-jcard .m { color:var(--text-secondary); font-size:.83rem; margin-top:5px; display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
   .talkmap-jcard .sep { color:var(--text-secondary); opacity:.5; }
   .talkmap-jcard .zh { color:var(--text-secondary); font-weight:600; }
-  .talkmap-jcard .award { color:#92732a; font-weight:600; }
-  .talkmap-jcard .award-line { margin-top:7px; }
+  /* award now rendered inside .badge-cluster as .award-pill */
   .talkmap-jcard .pill { display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.01em; padding:2px 9px; border-radius:6px; }
   .talkmap-jcard .pill.conf { background:#dce9fc; color:#1f63c8; }
   .talkmap-jcard .pill.work { background:#dcf3e4; color:#1d8a4e; }
   .talkmap-jcard .pill.sem  { background:#efe8fb; color:#6f4fc0; }
   .talkmap-jcard .pill.inv  { background:#fbf0d8; color:#9a6a14; }
-  /* floating pill — top-right anchor, out of the title/meta flow */
-  .talkmap-jcard > .pill { position:absolute; top:11px; right:15px; }
+  /* badge cluster — type + award, top-right anchor (out of title/meta flow) */
+  .badge-cluster { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; max-width:160px; }
+  .award-pill { display:inline-block; font-size:.7rem; font-weight:700; padding:2px 9px; border-radius:6px; background:#fff7e0; color:#92732a; border:1px solid #f0e0b0; }
+  .talkmap-jcard .badge-cluster { position:absolute; top:11px; right:15px; }
   .talkmap-jaxis { width:120px; position:relative; text-align:right; padding-right:6px; }
   .talkmap-jaxis .dot { position:absolute; left:-9px; top:8px; width:18px; height:18px; border-radius:50%; background:var(--accent); border:3px solid var(--bg-base); z-index:1; }
   .talkmap-jaxis.award .dot { background:#d4af37; }
@@ -110,16 +111,14 @@
   .talkmap-acc-head { display:flex; align-items:flex-start; gap:12px; padding:12px 15px; cursor:pointer; }
   .talkmap-acc-main { flex:1; min-width:0; position:relative; }
   .talkmap-acc .t-title { font-weight:600; font-size:.98rem; line-height:1.5; color:var(--text-primary); padding-right:160px; }
-  /* floating pill — top-right anchor of the accordion head */
-  .talkmap-acc-main > .pill { position:absolute; top:2px; right:0; }
+  .talkmap-acc-main .badge-cluster { position:absolute; top:2px; right:0; }
   .talkmap-acc .t-meta { color:var(--text-secondary); font-size:.84rem; margin-top:6px; display:block; }
   /* structured multi-row meta: each field on its own wrapping row */
   .tm-row { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:5px; }
   .tm-row1 { margin-top:0; }
   .tm-dot { color:var(--text-secondary); opacity:.5; }
   .loc-full { color:var(--accent); font-weight:600; }
-  .award-tag { display:inline-block; font-size:.72rem; font-weight:700; padding:2px 9px; border-radius:6px; background:#fff7e0; color:#92732a; border:1px solid #f0e0b0; }
-  :root[data-theme="dark"] .award-tag { background:#2f2a1c; color:#d8c074; border-color:#4a3f1f; }
+  /* award now rendered inside .badge-cluster as .award-pill */
   .talkmap-chev { color:var(--text-muted); transition:transform .2s ease; font-size:.8rem; padding-top:3px; }
   .talkmap-acc.open .talkmap-chev { transform:rotate(180deg); }
   .talkmap-acc-body { max-height:0; overflow:hidden; transition:max-height .28s ease; }
@@ -141,6 +140,7 @@
   :root[data-theme="dark"] .talkmap-jcard .pill.work, :root[data-theme="dark"] .talkmap-text .pill.work { background:#15301f; color:#7fc79a; }
   :root[data-theme="dark"] .talkmap-jcard .pill.sem,  :root[data-theme="dark"] .talkmap-text .pill.sem  { background:#241f38; color:#b9a8e8; }
   :root[data-theme="dark"] .talkmap-jcard .pill.inv,  :root[data-theme="dark"] .talkmap-text .pill.inv  { background:#2f2a1c; color:#d8c074; }
+  :root[data-theme="dark"] .award-pill { background:#2f2a1c; color:#d8c074; border-color:#4a3f1f; }
   strong.pres { font-weight:700; color:var(--text-primary); }
   .talkmap-jcard .conf, .talkmap-text .conf { min-width:0; }
 
@@ -153,30 +153,26 @@
 </style>
 
 <div id="talkMapWrap">
-  {% if page.lang == 'zh-CN' %}
-    {% assign talk_items = site.talks | where_exp: "t", "t.lang == 'zh-CN'" %}
-  {% else %}
-    {% assign talk_items = site.talks | where_exp: "t", "t.lang != 'zh-CN'" %}
-  {% endif %}
+  {% assign talk_items = site.talks | where_exp: "t", "t.lang != 'zh-CN'" %}
   {% assign _yrs = talk_items | map: 'date' | sort %}
-  <p class="talkmap-summary"><strong>{{ talk_items.size }}</strong> {% if page.lang == 'zh-CN' %}场演讲与报告（{{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }}）{% else %}Talks &amp; Presentations ({{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }}){% endif %}</p>
+  <p class="talkmap-summary"><strong>{{ talk_items.size }}</strong> <span data-lang="en">Talks &amp; Presentations ({{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }})</span><span data-lang="zh">场演讲与报告（{{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }}）</span></p>
 
   <div class="talkmap-toolbar">
     <div class="talkmap-seg" id="talkMapSeg">
-      <button data-mode="wall">{% if page.lang == 'zh-CN' %}按城市<span class="sub">按地点分组</span>{% else %}By City<span class="sub">group by place</span>{% endif %}</button>
-      <button data-mode="journey">{% if page.lang == 'zh-CN' %}时间轴<span class="sub">学术轨迹</span>{% else %}Timeline<span class="sub">career track</span>{% endif %}</button>
-      <button data-mode="text">{% if page.lang == 'zh-CN' %}列表<span class="sub">可折叠</span>{% else %}List<span class="sub">collapsible</span>{% endif %}</button>
+      <button data-mode="wall"><span data-lang="en">By City<span class="sub">group by place</span></span><span data-lang="zh">按城市<span class="sub">按地点分组</span></span></button>
+      <button data-mode="journey"><span data-lang="en">Timeline<span class="sub">career track</span></span><span data-lang="zh">时间轴<span class="sub">学术轨迹</span></span></button>
+      <button data-mode="text"><span data-lang="en">List<span class="sub">collapsible</span></span><span data-lang="zh">列表<span class="sub">可折叠</span></span></button>
     </div>
     <div class="talkmap-tools">
       <div class="talkmap-filters" id="talkMapFilters">
-        <button data-facet="all" class="active">{% if page.lang == 'zh-CN' %}全部{% else %}All{% endif %}</button>
-        <button data-facet="year">{% if page.lang == 'zh-CN' %}年份{% else %}Year{% endif %}</button>
-        <button data-facet="location">{% if page.lang == 'zh-CN' %}地点{% else %}Location{% endif %}</button>
-        <button data-facet="type">{% if page.lang == 'zh-CN' %}类型{% else %}Type{% endif %}</button>
+        <button data-facet="all" class="active"><span data-lang="en">All</span><span data-lang="zh">全部</span></button>
+        <button data-facet="year"><span data-lang="en">Year</span><span data-lang="zh">年份</span></button>
+        <button data-facet="location"><span data-lang="en">Location</span><span data-lang="zh">地点</span></button>
+        <button data-facet="type"><span data-lang="en">Type</span><span data-lang="zh">类型</span></button>
       </div>
-      <input id="talkMapSearch" placeholder="{% if page.lang == 'zh-CN' %}搜索演讲…{% else %}Search talks…{% endif %}" />
-      <button id="talkMapExport">{% if page.lang == 'zh-CN' %}导出 PDF{% else %}Export PDF{% endif %}</button>
-      <button id="talkMapZip" disabled title="Enable after hosting slide files">{% if page.lang == 'zh-CN' %}下载全部{% else %}Download All{% endif %}</button>
+      <input id="talkMapSearch" placeholder="Search talks…" />
+      <button id="talkMapExport"><span data-lang="en">Export PDF</span><span data-lang="zh">导出 PDF</span></button>
+      <button id="talkMapZip" disabled title="Enable after hosting slide files"><span data-lang="en">Download All</span><span data-lang="zh">下载全部</span></button>
     </div>
   </div>
 
@@ -216,7 +212,7 @@ var talksData = [
 /* geo views (map / wall / journey / map+wall / list+loc) exclude text-only entries */
 var geoTalks = talksData.filter(function(t){ return !t.hide_on_map; });
 
-var isZh = {% if page.lang == 'zh-CN' %}true{% else %}false{% endif %};
+var isZh = (document.documentElement.getAttribute('data-lang') === 'zh');
 
 /* venue -> coordinates + short labels (only the geographic lookup is hardcoded) */
 var venueCoords = {
@@ -388,7 +384,21 @@ function renderWall(){
     Object.keys(c.schools).forEach(function(v){
       var s = c.schools[v];
       var liRes = (s.count === 1 && s.talk) ? resRow(s.talk) : '';
-      html += '<li><span class="talkmap-dot ' + (s.award ? 'award' : 'school') + '"></span>' + escapeHtml(fullVenue({ venue:v })) + (s.award ? '<span class="talkmap-aw">🏆</span>' : '') + '<span class="n2">' + s.count + '</span>' + liRes + '</li>';
+      var liBadge = '';
+      if(s.count === 1 && s.talk){
+        var wk = (s.talk.kind || 'conference');
+        var wcls = (wk === 'workshop') ? 'work' : (wk === 'seminar') ? 'sem' : (wk === 'invited') ? 'inv' : 'conf';
+        var wmap = { conference:'Conference Presentation', workshop:'Workshop', seminar:'Seminar', invited:'Invited Talk' };
+        liBadge = '<div class="badge-cluster"><span class="pill ' + wcls + '">' + (wmap[wk] || 'Conference Presentation') + '</span>'
+          + (s.award ? '<span class="award-pill">🏆</span>' : '') + '</div>';
+      } else if(s.award){
+        liBadge = '<div class="badge-cluster"><span class="award-pill">🏆</span></div>';
+      }
+      html += '<li>' + liBadge
+        + '<span class="talkmap-dot ' + (s.award ? 'award' : 'school') + '"></span>'
+        + escapeHtml(fullVenue({ venue:v }))
+        + ' <span class="n2">' + s.count + '</span>'
+        + liRes + '</li>';
     });
     html += '</ul></div>';
   });
@@ -411,18 +421,18 @@ function renderJourney(){
     if(t.permalink){ titleHtml = '<a href="' + escapeHtml(t.permalink) + '">' + titleHtml + '</a>'; }
     var meta = ' <span class="sep">·</span> ' + metaConf(t)
       + (t.lang ? ' <span class="sep">·</span> <span class="zh">' + escapeHtml(langLabel(t)) + '</span>' : '');
-    var awardHtml = t.award ? '<div class="award-line"><span class="award-tag">🏆 ' + escapeHtml(t.award) + '</span></div>' : '';
+    var awardPill = t.award ? '<span class="award-pill">🏆 ' + escapeHtml(t.award) + '</span>' : '';
+    var badgeCluster = '<div class="badge-cluster">' + kindPill(t) + awardPill + '</div>';
     var cityParts = (t.city || '').split(',');
     var cityName = cityParts[0].trim();
     var countryName = cityParts.length > 1 ? cityParts.slice(1).join(',').trim() : '';
     var cityLoc = '<span class="loc-full"><span class="loc-city">' + escapeHtml(cityName) + '</span>'
       + (countryName ? '<span class="loc-country">' + escapeHtml(countryName) + '</span>' : '')
       + '</span>';
-    html += '<div class="talkmap-jnode"><div class="talkmap-jcard">' + kindPill(t)
+    html += '<div class="talkmap-jnode"><div class="talkmap-jcard">' + badgeCluster
       + '<div class="t">' + titleHtml + '</div>'
       + '<div class="m">' + meta + '</div>'
       + '<div class="venue">' + escapeHtml(fullVenue(t)) + '</div>'
-      + awardHtml
       + resRow(t)
       + '</div>'
       + '<div class="talkmap-jaxis' + (t.award ? ' award' : '') + '"><span class="dot"></span>'
@@ -441,6 +451,10 @@ function renderText(){
     var cls = (k === 'workshop') ? 'work' : (k === 'seminar') ? 'sem' : (k === 'invited') ? 'inv' : 'conf';
     return '<span class="pill ' + cls + '">' + (map[k] || 'Conference Presentation') + '</span>';
   }
+  function badgeCluster(t){
+    var awardPill = t.award ? '<span class="award-pill">🏆 ' + escapeHtml(t.award) + '</span>' : '';
+    return '<div class="badge-cluster">' + pillOf(t) + awardPill + '</div>';
+  }
   function buildMeta(t){
     var map = { conference:'Conference Presentation', workshop:'Workshop', seminar:'Seminar', invited:'Invited Talk' };
     var k = (t.kind || 'conference');
@@ -451,7 +465,6 @@ function renderText(){
     var loc  = '<span class="loc-full">' + escapeHtml(t.city) + '</span>';  /* full "City, Country" */
     var date = escapeHtml(t.date);
     var lang = t.lang ? '<span class="zh">' + escapeHtml(langLabel(t)) + '</span>' : '';
-    var award = t.award ? '<span class="award-tag">🏆 ' + escapeHtml(t.award) + '</span>' : '';
     var h = '';
     /* row 1: role (Presenter / with collaborators) — the type pill now floats top-right of the card */
     h += '<div class="tm-row tm-row1"><span class="conf-sep">' + role + '</span></div>';
@@ -461,8 +474,6 @@ function renderText(){
     h += '<div class="tm-row">' + loc + ' <span class="tm-dot">·</span> ' + date;
     if(lang){ h += ' <span class="tm-dot">·</span> ' + lang; }
     h += '</div>';
-    /* row 4 (optional): award */
-    if(award){ h += '<div class="tm-row">' + award + '</div>'; }
     return h;
   }
   var filtered = talksData.filter(matches);
@@ -477,7 +488,7 @@ function renderText(){
     years[y].forEach(function(t){
       var titleHtml = escapeHtml(dispTitle(t));
       html += '<div class="talkmap-acc"><div class="talkmap-acc-head" onclick="hqToggleAcc(this)">'
-        + '<div class="talkmap-acc-main">' + pillOf(t)
+        + '<div class="talkmap-acc-main">' + badgeCluster(t)
         + '<div class="t-title">' + titleHtml + '</div>'
         + '<div class="t-meta">' + buildMeta(t) + '</div>' + resRow(t) + '</div>'
         + '<div class="talkmap-chev">▾</div></div>'
@@ -535,5 +546,20 @@ document.getElementById('talkMapExport').addEventListener('click', function(){ w
   renderDyn();
   if(saved && seg.querySelector('button[data-mode="' + saved + '"]')){ activate(saved); }
   else { activate('text'); }
+})();
+
+/* live re-render when the global language toggle flips data-lang on <html> */
+(function(){
+  function syncTalkLang(){
+    isZh = (document.documentElement.getAttribute('data-lang') === 'zh');
+    var s = document.getElementById('talkMapSearch');
+    if(s){ s.placeholder = isZh ? '搜索演讲…' : 'Search talks…'; }
+    renderAll(); renderDyn();
+    try { activate(activeMode); } catch(e){}
+  }
+  var _h = document.documentElement;
+  if(window.MutationObserver){
+    new MutationObserver(syncTalkLang).observe(_h, { attributes: true, attributeFilter: ['data-lang'] });
+  }
 })();
 </script>
