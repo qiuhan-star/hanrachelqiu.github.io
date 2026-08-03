@@ -1,3 +1,22 @@
 <script src="{{ base_path }}/assets/js/main.min.js"></script>
+<script>
+(function () {
+  var nav = document.getElementById('site-nav');
+  if (!nav) return;
+  var vlinks = nav.querySelector('.visible-links');
+  var hlinks = nav.querySelector('.hidden-links');
+  var btn = nav.querySelector('button');
+  function restoreNavItems() {
+    var item;
+    if (vlinks && hlinks) {
+      while ((item = hlinks.querySelector('li'))) vlinks.appendChild(item);
+    }
+    if (btn) btn.classList.add('hidden');
+    if (hlinks) hlinks.classList.add('hidden');
+  }
+  restoreNavItems();
+  window.addEventListener('resize', restoreNavItems);
+})();
+</script>
 
 {% include analytics.html %}
