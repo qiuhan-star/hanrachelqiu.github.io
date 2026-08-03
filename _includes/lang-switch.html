@@ -70,6 +70,19 @@
   .lang-dd__opt:hover { background: var(--accent-soft, rgba(90,124,216,0.10)); color: var(--accent, #5a7cd8); }
   .lang-dd__opt.is-active { color: var(--accent, #5a7cd8); font-weight: 700; }
   .lang-dd__opt.is-active::after { content: " \2713"; }
+  /* 回退提示条：切到某语言但该页无对应译文时显示，避免正文不动像坏掉 */
+  .lang-fallback {
+    display: none;
+    margin: 0 0 1.25rem;
+    padding: 0.6rem 0.95rem;
+    border: 1px solid var(--accent-soft, rgba(90,124,216,0.28));
+    background: var(--accent-soft, rgba(90,124,216,0.08));
+    color: var(--accent, #5a7cd8);
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.45;
+  }
 </style>
 
 <script>
@@ -105,7 +118,47 @@
     opts.forEach(function (o) {
       o.classList.toggle('is-active', o.getAttribute('data-lang-opt') === l);
     });
+    showFallback(l);
   };
+
+  /* 回退提示：切到某语言但该页无对应译文时，显示「即将推出」提示，避免正文不动/空白看着像坏掉。
+     检测“正文级”译文块：排除顶栏导航( .masthead/header/nav )与下拉框自身的 [data-lang]。 */
+  var fallbackEl = null;
+  function pageHasLang(lang) {
+    var els = document.querySelectorAll('[data-lang="' + lang + '"]');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      if (el.closest && el.closest('.masthead, header, nav, .lang-dd')) continue;
+      return true;
+    }
+    return false;
+  }
+  function ensureFallback() {
+    if (fallbackEl) return fallbackEl;
+    fallbackEl = document.getElementById('langFallback');
+    if (!fallbackEl) {
+      fallbackEl = document.createElement('div');
+      fallbackEl.id = 'langFallback';
+      fallbackEl.className = 'lang-fallback';
+      fallbackEl.setAttribute('role', 'status');
+      var host = document.querySelector('.page__content') || document.querySelector('main') || document.querySelector('article');
+      if (host) host.insertBefore(fallbackEl, host.firstChild);
+    }
+    return fallbackEl;
+  }
+  function showFallback(l) {
+    var el = ensureFallback();
+    if (!el) return;
+    if (l === 'zh' && !pageHasLang('zh')) {
+      el.textContent = '中文版即将推出 · Chinese version coming soon';
+      el.style.display = 'block';
+    } else if (l === 'ko' && !pageHasLang('ko')) {
+      el.textContent = '한국어 번역 준비 중 · Korean version in preparation';
+      el.style.display = 'block';
+    } else {
+      el.style.display = 'none';
+    }
+  }
 
   function setLang(l) {
     if (VALID.indexOf(l) < 0) return;
