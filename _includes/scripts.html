@@ -44,12 +44,18 @@
   }
 
   function applyMobile() {
-    /* Hand the menu to the hamburger: every nav item (incl. brand) lives in
-       .hidden-links, collapsed by default; our own button handler reveals it. */
+    /* Hand the menu to the hamburger: only the actual nav items
+       ( Publications / Talks / Experience / CV ) move into .hidden-links.
+       The site-title/home item stays in .visible-links, which is hidden on
+       mobile via CSS, so it does not appear twice in the dropdown. */
     nav.classList.remove('is-open');
     if (!vlinks || !hlinks) return;
     var kids = Array.prototype.slice.call(vlinks.children);
-    kids.forEach(function (li) { hlinks.appendChild(li); });
+    kids.forEach(function (li) {
+      if (!li.classList.contains('masthead__menu-item--lg')) {
+        hlinks.appendChild(li);
+      }
+    });
     if (btn) btn.classList.remove('hidden');
   }
 
@@ -138,6 +144,7 @@
 @media (max-width: 767px) {
   .masthead {
     position: relative;
+    z-index: 100;
   }
   .greedy-nav .hidden-links {
     position: absolute !important;
@@ -157,6 +164,11 @@
     display: flex !important;
   }
   /* Make the hamburger a comfortable 40x40 tap target on phones. */
+  /* On phones the inline nav list is replaced by the hamburger; hide the
+     list itself (the site-title/home link inside it is duplicated elsewhere). */
+  .greedy-nav .visible-links {
+    display: none !important;
+  }
   .greedy-nav button {
     position: static !important;
     display: inline-flex !important;
