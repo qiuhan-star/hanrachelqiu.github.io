@@ -83,6 +83,12 @@
 
     rerunScripts(oldMain);
 
+    /* 翻页后重新应用当前语言：pjax 只换 #main，<html data-lang> 沿用上一页（默认值由
+       default.html 首屏脚本从 localStorage 读出，下拉切换时由 setLang 写入），但新内容里的
+       [data-lang] 块是全新节点、尚无 lang-hidden 类。重跑 __applyLang 让它们按当前语言显隐，
+       保证语言选择跨页一致（A 选中文→B/C 也是中文；B 切回英文→A/C 也变英文）。 */
+    if (window.__applyLang) window.__applyLang();
+
     var newTitle = newDoc.querySelector('title');
     if (newTitle) document.title = newTitle.textContent;
 
