@@ -61,6 +61,7 @@
   .talkmap-jcard .sep { color:var(--text-secondary); opacity:.5; }
   .talkmap-jcard .zh { color:var(--text-secondary); font-weight:600; }
   .talkmap-jcard .award { color:#92732a; font-weight:600; }
+  .talkmap-jcard .award-line { margin-top:7px; }
   .talkmap-jcard .pill { display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.02em; padding:2px 9px; border-radius:6px; text-transform:uppercase; }
   .talkmap-jcard .pill.conf { background:#e0f3f1; color:#0e8f86; }
   .talkmap-jcard .pill.work { background:#e7f5ec; color:#2f7d4f; }
@@ -395,12 +396,14 @@ function renderJourney(){
     if(t.permalink){ titleHtml = '<a href="' + escapeHtml(t.permalink) + '">' + titleHtml + '</a>'; }
     var meta = kindPill(t)
       + ' <span class="sep">·</span> ' + metaConf(t)
-      + (t.lang ? ' <span class="sep">·</span> <span class="zh">' + escapeHtml(langLabel(t)) + '</span>' : '')
-      + (t.award ? ' <span class="sep">·</span> <span class="award">🏆 ' + escapeHtml(t.award) + '</span>' : '');
+      + (t.lang ? ' <span class="sep">·</span> <span class="zh">' + escapeHtml(langLabel(t)) + '</span>' : '');
+    var awardHtml = t.award ? '<div class="award-line"><span class="award-tag">🏆 ' + escapeHtml(t.award) + '</span></div>' : '';
     var cityLoc = '<span class="loc-full">' + escapeHtml(t.city) + '</span>';
     html += '<div class="talkmap-jnode"><div class="talkmap-jcard"><div class="t">' + titleHtml + '</div>'
       + '<div class="m">' + meta + '</div>'
-      + '<div class="venue">' + escapeHtml(fullVenue(t)) + '</div></div>'
+      + '<div class="venue">' + escapeHtml(fullVenue(t)) + '</div>'
+      + awardHtml
+      + '</div>'
       + '<div class="talkmap-jaxis' + (t.award ? ' award' : '') + '"><span class="dot"></span>'
       + '<div class="date">' + escapeHtml(t.date.slice(0,7)) + '</div>'
       + '<div class="loc">' + cityLoc + '</div></div></div>';
