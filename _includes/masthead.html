@@ -228,8 +228,16 @@
     e.stopPropagation();
     if (dd.classList.contains('open')) { closeDD(); } else { openDD(); }
   });
-  menu.addEventListener('click', function (e) { e.stopPropagation(); });
-  document.addEventListener('click', function () { if (dd.classList.contains('open')) closeDD(); });
+  /* 点击菜单项后关闭下拉。注意：这里不要调用 stopPropagation——
+     否则事件无法冒泡到 document，pjax-nav 的同域链接拦截就收不到，
+     会退化成整页跳转并重新播放开屏动画（这正是"More 子项会刷新"的坑）。 */
+  menu.addEventListener('click', function (e) {
+    if (e.target.closest('a')) closeDD();
+  });
+  /* 只在点击下拉之外区域时关闭（用 contains 判断，菜单内部点击不会被误关） */
+  document.addEventListener('click', function (e) {
+    if (dd.classList.contains('open') && !dd.contains(e.target)) closeDD();
+  });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' || e.keyCode === 27) { if (dd.classList.contains('open')) closeDD(); }
   });
