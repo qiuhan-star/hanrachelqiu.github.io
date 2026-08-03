@@ -8,6 +8,7 @@ lang_alt: /talks/2024-06-11-blockchain
 venue: "国立台湾大学"
 date: 2024-06-11
 location: "中国台北"
+conf_url: https://dgsociety.org/dgo-2024/
 kind: conference
 hide_on_map: true
 ---

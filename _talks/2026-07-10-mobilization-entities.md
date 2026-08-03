@@ -10,4 +10,5 @@ lang_alt: /zh/talks/2026-07-10-mobilization-entities
 venue: "Xi'an Jiaotong University"
 date: 2026-07-10
 location: "Xi'an, China"
+conf_url: http://csa.cssn.cn
 ---

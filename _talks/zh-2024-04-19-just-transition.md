@@ -9,6 +9,7 @@ lang_alt: /talks/2024-04-19-just-transition
 venue: "清华大学"
 date: 2024-04-19
 location: "中国北京"
+conf_url: https://www.sppm.tsinghua.edu.cn/english/info/1070/1998.htm
 ---
 关于会议
 -

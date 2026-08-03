@@ -335,9 +335,7 @@ function facetValues(facet){
   return vals;
 }
 function resBtn(label,url){ return '<a class="talkmap-res" href="'+escapeHtml(url)+'" target="_blank" rel="noopener">'+label+'</a>'; }
-function detailHtml(t){
-  var h='';
-  if(t.abstract){ h+='<p class="talkmap-acc-abs">'+escapeHtml(t.abstract)+'</p>'; }
+function resRow(t){
   var res='';
   if(t.slides_url) res+=resBtn('📄 Slides', t.slides_url);
   if(t.video_url) res+=resBtn('▶ Video', t.video_url);
@@ -345,7 +343,12 @@ function detailHtml(t){
   if(t.doi) res+=resBtn('🔗 DOI', 'https://doi.org/'+t.doi);
   if(t.conf_url) res+=resBtn('🌐 Conference', t.conf_url);
   if(t.permalink) res+=resBtn('🔗 Open talk page', t.permalink);
-  if(res){ h+='<div class="talkmap-res-row">'+res+'</div>'; }
+  return res ? '<div class="talkmap-res-row">'+res+'</div>' : '';
+}
+function detailHtml(t){
+  var h='';
+  if(t.abstract){ h+='<p class="talkmap-acc-abs">'+escapeHtml(t.abstract)+'</p>'; }
+  h += resRow(t);
   return h;
 }
 
@@ -359,6 +362,7 @@ function renderWall(){
     if(!cities[c].schools[t.venue]){ cities[c].schools[t.venue] = { short: shortOf(t.venue), count:0, award:false }; }
     cities[c].schools[t.venue].count++;
     cities[c].schools[t.venue].award = cities[c].schools[t.venue].award || !!t.award;
+    if(!cities[c].schools[t.venue].talk){ cities[c].schools[t.venue].talk = t; }
     cities[c].count++;
   });
   var cityNames = Object.keys(cities);
@@ -373,7 +377,8 @@ function renderWall(){
     html += '<div class="talkmap-city"><span class="count">' + c.count + (isZh ? ' 场' : '') + '</span><div class="cityrow"><span class="cn">' + escapeHtml(cn) + '</span><span class="cc">' + cc + '</span></div><ul>';
     Object.keys(c.schools).forEach(function(v){
       var s = c.schools[v];
-      html += '<li><span class="talkmap-dot ' + (s.award ? 'award' : 'school') + '"></span>' + escapeHtml(fullVenue({ venue:v })) + (s.award ? '<span class="talkmap-aw">🏆</span>' : '') + '<span class="n2">' + s.count + '</span></li>';
+      var liRes = (s.count === 1 && s.talk) ? resRow(s.talk) : '';
+      html += '<li><span class="talkmap-dot ' + (s.award ? 'award' : 'school') + '"></span>' + escapeHtml(fullVenue({ venue:v })) + (s.award ? '<span class="talkmap-aw">🏆</span>' : '') + '<span class="n2">' + s.count + '</span>' + liRes + '</li>';
     });
     html += '</ul></div>';
   });
@@ -403,6 +408,7 @@ function renderJourney(){
       + '<div class="m">' + meta + '</div>'
       + '<div class="venue">' + escapeHtml(fullVenue(t)) + '</div>'
       + awardHtml
+      + resRow(t)
       + '</div>'
       + '<div class="talkmap-jaxis' + (t.award ? ' award' : '') + '"><span class="dot"></span>'
       + '<div class="date">' + escapeHtml(t.date.slice(0,7)) + '</div>'
@@ -451,7 +457,7 @@ function renderText(){
       var titleHtml = escapeHtml(dispTitle(t));
       html += '<div class="talkmap-acc"><div class="talkmap-acc-head" onclick="hqToggleAcc(this)">'
         + '<div class="talkmap-acc-main"><div class="t-title">' + titleHtml + '</div>'
-        + '<div class="t-meta">' + buildMeta(t) + '</div></div>'
+        + '<div class="t-meta">' + buildMeta(t) + '</div>' + resRow(t) + '</div>'
         + '<div class="talkmap-chev">▾</div></div>'
         + '<div class="talkmap-acc-body"><div class="talkmap-acc-inner">' + detailHtml(t) + '</div></div></div>';
     });

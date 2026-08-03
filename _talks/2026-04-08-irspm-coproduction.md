@@ -8,4 +8,5 @@ lang_alt: /zh/talks/2026-04-08-irspm-coproduction
 venue: "Edith Cowan University"
 date: 2026-04-08
 location: "Perth, Australia"
+conf_url: https://www.irspm.org/conferences/conference-2026
 ---

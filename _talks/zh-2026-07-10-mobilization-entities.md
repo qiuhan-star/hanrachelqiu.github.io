@@ -9,4 +9,5 @@ lang_alt: /talks/2026-07-10-mobilization-entities
 venue: "西安交通大学"
 date: 2026-07-10
 location: "中国西安"
+conf_url: http://csa.cssn.cn
 ---

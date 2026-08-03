@@ -9,4 +9,5 @@ lang_alt: /talks/2026-04-08-irspm-coproduction
 venue: "埃迪斯科文大学"
 date: 2026-04-08
 location: "澳大利亚珀斯"
+conf_url: https://www.irspm.org/conferences/conference-2026
 ---
