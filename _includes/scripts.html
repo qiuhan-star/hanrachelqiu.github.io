@@ -156,6 +156,20 @@
   .greedy-nav.is-open .hidden-links {
     display: flex !important;
   }
+  /* Make the hamburger a comfortable 40x40 tap target on phones. */
+  .greedy-nav button {
+    position: static !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 40px !important;
+    height: 40px !important;
+    margin: 0 4px 0 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
   .greedy-nav .hidden-links li {
     width: 100%;
     border-top: 1px solid var(--masthead-border);
