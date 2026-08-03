@@ -21,3 +21,6 @@ images/portfolio/
 
 # Services plaintext source: encrypted at build time, never committed in cleartext
 _services/
+
+# macOS folder view metadata — never commit
+.DS_Store
