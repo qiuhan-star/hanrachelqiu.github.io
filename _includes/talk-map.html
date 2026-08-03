@@ -90,11 +90,11 @@
   .talkmap-text .sep { color:var(--text-secondary); opacity:.5; }
   .talkmap-text .zh { color:var(--text-secondary); font-weight:600; }
   .talkmap-text .award { color:#92732a; font-weight:600; }
-  .talkmap-text .pill { display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.02em; padding:2px 9px; border-radius:6px; text-transform:uppercase; }
-  .talkmap-text .pill.conf { background:#e0f3f1; color:#0e8f86; }
-  .talkmap-text .pill.work { background:#e7f5ec; color:#2f7d4f; }
-  .talkmap-text .pill.sem  { background:#f1ecfa; color:#6f5bb0; }
-  .talkmap-text .pill.inv  { background:#faf3e2; color:#92732a; }
+  .talkmap-text .pill { display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.01em; padding:2px 9px; border-radius:6px; }
+  .talkmap-text .pill.conf { background:#dce9fc; color:#1f63c8; }
+  .talkmap-text .pill.work { background:#dcf3e4; color:#1d8a4e; }
+  .talkmap-text .pill.sem  { background:#efe8fb; color:#6f4fc0; }
+  .talkmap-text .pill.inv  { background:#fbf0d8; color:#9a6a14; }
   .talkmap-text .venue-em { color:var(--accent); font-weight:600; }
   .talkmap-yh .cnt { font-size:.8rem; color:var(--text-secondary); font-weight:400; margin-left:8px; }
 
@@ -129,8 +129,8 @@
   html { scroll-behavior:smooth; }
 
   /* 4-color pills — dark theme overrides */
-  :root[data-theme="dark"] .talkmap-jcard .pill.conf, :root[data-theme="dark"] .talkmap-text .pill.conf { background:#16302e; color:#5fc7bd; }
-  :root[data-theme="dark"] .talkmap-jcard .pill.work, :root[data-theme="dark"] .talkmap-text .pill.work { background:#16301f; color:#7fc79a; }
+  :root[data-theme="dark"] .talkmap-jcard .pill.conf, :root[data-theme="dark"] .talkmap-text .pill.conf { background:#15294d; color:#7fb0ff; }
+  :root[data-theme="dark"] .talkmap-jcard .pill.work, :root[data-theme="dark"] .talkmap-text .pill.work { background:#15301f; color:#7fc79a; }
   :root[data-theme="dark"] .talkmap-jcard .pill.sem,  :root[data-theme="dark"] .talkmap-text .pill.sem  { background:#241f38; color:#b9a8e8; }
   :root[data-theme="dark"] .talkmap-jcard .pill.inv,  :root[data-theme="dark"] .talkmap-text .pill.inv  { background:#2f2a1c; color:#d8c074; }
   strong.pres { font-weight:700; color:var(--text-primary); }
@@ -313,7 +313,7 @@ geoTalks.forEach(function(t){ byCityGlobal[t.city.split(',')[0].trim()] = 1; });
 
 /* ===== filter / search state ===== */
 var state = { facet:'all', facetValue:null, query:'' };
-function kindLabel(k){ var m={conference:'Conference',workshop:'Workshop',seminar:'Seminar',invited:'Invited'}; return m[k]||'Conference'; }
+function kindLabel(k){ var m={conference:'Conference Presentation',workshop:'Workshop',seminar:'Seminar',invited:'Invited Talk'}; return m[k]||'Conference Presentation'; }
 function matches(t){
   if(state.facet!=='all' && state.facetValue){
     if(state.facet==='year' && t.date.slice(0,4)!==state.facetValue) return false;
@@ -384,7 +384,7 @@ function renderWall(){
 /* ---- journey panel: vertical timeline, spine on the right, bottom→top ---- */
 function renderJourney(){
   function kindPill(t){
-    var map = { conference:'Conference', workshop:'Workshop', seminar:'Seminar', invited:'Invited' };
+    var map = { conference:'Conference Presentation', workshop:'Workshop', seminar:'Seminar', invited:'Invited Talk' };
     var k = (t.kind || 'conference');
     var cls = (k === 'workshop') ? 'work' : (k === 'seminar') ? 'sem' : (k === 'invited') ? 'inv' : 'conf';
     return '<span class="pill ' + cls + '">' + (map[k] || 'Conference') + '</span>';
@@ -415,7 +415,7 @@ function renderJourney(){
 /* ---- text / List panel (collapsible accordion) ---- */
 function renderText(){
   function buildMeta(t){
-    var map = { conference:'Conference', workshop:'Workshop', seminar:'Seminar', invited:'Invited' };
+    var map = { conference:'Conference Presentation', workshop:'Workshop', seminar:'Seminar', invited:'Invited Talk' };
     var k = (t.kind || 'conference');
     var kl = map[k] || 'Conference';
     var cls = (k === 'workshop') ? 'work' : (k === 'seminar') ? 'sem' : (k === 'invited') ? 'inv' : 'conf';
