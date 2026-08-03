@@ -1,3 +1,17 @@
+<script>
+/* Capture original nav item order BEFORE Minimal Mistakes greedy-navigation
+   mutates the DOM, so we can restore it exactly afterwards. */
+(function () {
+  var nav = document.getElementById('site-nav');
+  if (!nav) return;
+  var vlinks = nav.querySelector('.visible-links');
+  if (!vlinks) return;
+  var items = vlinks.querySelectorAll('li');
+  for (var i = 0; i < items.length; i++) {
+    items[i].setAttribute('data-nav-index', i);
+  }
+})();
+</script>
 <script src="{{ base_path }}/assets/js/main.min.js"></script>
 <script>
 (function () {
@@ -10,6 +24,14 @@
     var item;
     if (vlinks && hlinks) {
       while ((item = hlinks.querySelector('li'))) vlinks.appendChild(item);
+    }
+    /* Restore the original order captured before main.min.js ran. */
+    if (vlinks) {
+      var items = Array.prototype.slice.call(vlinks.children);
+      items.sort(function (a, b) {
+        return (parseInt(a.getAttribute('data-nav-index'), 10) || 0) - (parseInt(b.getAttribute('data-nav-index'), 10) || 0);
+      });
+      for (var i = 0; i < items.length; i++) vlinks.appendChild(items[i]);
     }
     if (btn) btn.classList.add('hidden');
     if (hlinks) hlinks.classList.add('hidden');
@@ -41,11 +63,15 @@
   min-width: 0;
 }
 /* At 1024-1279 the 294px left margin (for brand/content alignment) leaves
-   too little room for the 4 core items + brand + More; relax it so the
-   menu has enough horizontal space without overlapping. */
+   too little room for the 4 core items + brand + More. Relax the margin
+   and slightly tighten nav item padding so everything fits without overlap. */
 @media (min-width: 1024px) and (max-width: 1279px) {
   .masthead__menu {
     margin-left: 200px !important;
+  }
+  .masthead__menu-item a {
+    padding-left: 0.6em !important;
+    padding-right: 0.6em !important;
   }
 }
 </style>
