@@ -40,6 +40,14 @@
   align-items: center;
   min-width: 0;
 }
+/* At 1024-1279 the 294px left margin (for brand/content alignment) leaves
+   too little room for the 4 core items + brand + More; relax it so the
+   menu has enough horizontal space without overlapping. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .masthead__menu {
+    margin-left: 200px !important;
+  }
+}
 </style>
 
 {% include analytics.html %}
