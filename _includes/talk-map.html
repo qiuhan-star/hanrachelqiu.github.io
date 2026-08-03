@@ -52,12 +52,14 @@
   .talkmap-city .en { font-size:.78rem; color:var(--text-secondary); margin-left:6px; }
   .talkmap-city .count { float:right; background:var(--bg-raised); color:var(--text-secondary); font-weight:700; font-size:.82rem; padding:2px 10px; border-radius:20px; }
   .talkmap-city ul { list-style:none; margin:10px 0 0; padding:0; }
-  .talkmap-city li { position:relative; display:flex; align-items:center; gap:8px; padding:5px 6px 5px 0; border-top:1px dashed var(--border-subtle); font-size:.9rem; }
+  .talkmap-city li { position:relative; display:flex; align-items:center; gap:8px; padding:5px 6px 5px 0; border-top:1px dashed var(--border-subtle); font-size:.9rem; flex-wrap:wrap; }
   .talkmap-city li:first-child { border-top:none; }
   .talkmap-dot { width:10px; height:10px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); flex:0 0 auto; }
   .talkmap-dot.school { background:#2a7f3e; }
   .talkmap-dot.award { background:#d4af37; }
   .talkmap-city li .n2 { color:var(--text-secondary); font-size:.8rem; }
+  /* wall list: resource buttons drop to their own line (not crammed inline) */
+  .talkmap-city li .talkmap-res-row { flex-basis:100%; margin-top:6px; }
   .talkmap-city li .badge-cluster { display:inline-flex; flex-wrap:wrap; gap:5px; align-items:center; margin-left:8px; }
 
   /* journey — vertical timeline, spine on right, bottom→top, separators between nodes */
