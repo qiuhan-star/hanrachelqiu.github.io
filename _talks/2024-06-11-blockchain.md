@@ -10,6 +10,5 @@ date: 2024-06-11
 location: "Taipei, China"
 conf_url: https://dgsociety.org/dgo-2024/
 kind: conference
-hide_on_map: true
 ---
 *Accepted to the proceedings; invitation accepted but unable to attend due to travel restrictions.*
