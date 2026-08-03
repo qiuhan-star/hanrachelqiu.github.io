@@ -64,6 +64,19 @@
     });
   }
 
+  /* GA4：PJAX 换页后补发 page_view，让站内导航被计入浏览量（首次整页加载已由 gtag('config') 计一次） */
+  function trackPageView(pvUrl, title) {
+    if (typeof gtag !== 'function') return;
+    try {
+      var u = new URL(pvUrl, location.href);
+      gtag('event', 'page_view', {
+        page_title: title || document.title,
+        page_location: u.href,
+        page_path: u.pathname + u.search
+      });
+    } catch (e) {}
+  }
+
   /* 把新文档的 #main 换入：保留现有 .sidebar(含音乐 iframe，不重建)，只替换其余正文 */
   function swapMain(newDoc, url) {
     var newMain = newDoc.querySelector(MAIN);
@@ -103,6 +116,8 @@
         window.scrollTo(0, 0);
       }
     }
+    /* 补发 GA4 page_view：用新文档标题与当前 URL（点击导航传 url，前进/后退用 location.href） */
+    trackPageView(url || location.href, newTitle ? newTitle.textContent : document.title);
     return true;
   }
 
