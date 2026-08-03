@@ -72,7 +72,7 @@
   .talkmap-jcard .badge-cluster { position:absolute; top:11px; right:15px; margin:0; }
   .talkmap-jaxis { width:120px; position:relative; text-align:right; padding-right:6px; }
   .talkmap-jaxis .dot { position:absolute; left:-9px; top:8px; width:18px; height:18px; border-radius:50%; background:var(--accent); border:3px solid var(--bg-base); z-index:1; }
-  .talkmap-jaxis.award .dot { background:#d4af37; }
+  /* award nodes no longer specially highlighted (kept neutral like others) */
   .talkmap-jaxis .date { font-weight:700; font-size:.9rem; color:var(--text-primary); }
   .talkmap-jaxis .loc { font-size:.8rem; color:var(--text-secondary); margin-top:2px; display:flex; justify-content:flex-end; align-items:center; gap:5px; }
   /* journey axis: force city + country onto two lines (right-aligned) */
@@ -120,8 +120,9 @@
   /* floating type badge — split "Conference Presentation" into two lines at the space */
   .talkmap-acc-main > .badge-cluster .pill,
   .talkmap-jcard > .badge-cluster .pill { white-space:normal; max-width:100px; text-align:center; line-height:1.14; padding:5px 8px; }
-  .tm-award { display:inline-block; font-size:.72rem; font-weight:700; padding:2px 9px; border-radius:6px; background:#fff7e0; color:#92732a; border:1px solid #f0e0b0; margin:0 0 8px; }
-  :root[data-theme="dark"] .tm-award { background:#2f2a1c; color:#d8c074; border-color:#4a3f1f; }
+  /* award: de-emphasized, sits at the end of the card (not a bold gold pill) */
+  .tm-award { display:block; font-size:.8rem; font-weight:500; color:#92732a; margin:9px 0 0; opacity:.9; }
+  :root[data-theme="dark"] .tm-award { background:transparent; border:none; color:#d8c074; }
   .loc-full { color:var(--accent); font-weight:600; }
   /* award now rendered inside .badge-cluster as .award-pill */
   .talkmap-chev { color:var(--text-muted); transition:transform .2s ease; font-size:.8rem; padding-top:3px; }
@@ -454,15 +455,15 @@ function renderJourney(){
     html += '<div class="talkmap-jnode"><div class="talkmap-jcard talkmap-acc">'
       + '<div class="talkmap-acc-head" onclick="hqToggleAcc(this)">'
       + '<div class="t">' + titleHtml + '</div>'
-      + awardTag
       + typeBadge
       + '<div class="m">' + meta + '</div>'
       + '<div class="venue">' + escapeHtml(fullVenue(t)) + '</div>'
+      + awardTag
       + '<div class="talkmap-chev">▾</div>'
       + '</div>'
       + '<div class="talkmap-acc-body"><div class="talkmap-acc-inner">' + detail + '</div></div>'
       + '</div>'
-      + '<div class="talkmap-jaxis' + (t.award ? ' award' : '') + '"><span class="dot"></span>'
+      + '<div class="talkmap-jaxis"><span class="dot"></span>'
       + '<div class="date">' + escapeHtml(t.date.slice(0,7)) + '</div>'
       + '<div class="loc">' + cityLoc + '</div></div></div>';
   });
@@ -502,9 +503,10 @@ function renderText(){
       html += '<div class="talkmap-acc"><div class="talkmap-acc-head" onclick="hqToggleAcc(this)">'
         + '<div class="talkmap-acc-main">'
         + '<div class="t-title">' + titleHtml + '</div>'
-        + (t.award ? '<div class="tm-award">🏆 ' + escapeHtml(t.award) + '</div>' : '')
         + badgeCluster(t)
-        + '<div class="t-meta">' + buildMeta(t) + '</div>' + resRow(t) + '</div>'
+        + '<div class="t-meta">' + buildMeta(t) + '</div>' + resRow(t)
+        + (t.award ? '<div class="tm-award">🏆 ' + escapeHtml(t.award) + '</div>' : '')
+        + '</div>'
         + '<div class="talkmap-chev">▾</div></div>'
         + '<div class="talkmap-acc-body"><div class="talkmap-acc-inner">' + detailHtml(t) + '</div></div></div>';
     });
