@@ -201,6 +201,16 @@
     align-items: center;
     flex-wrap: nowrap;
   }
+
+  /* 桌面端（侧栏显示时）让顶栏内缩与正文同列：
+     左留 294px = 侧栏(248) + 左距(30) + 间距(16)，与 .page 的
+     width:calc(100% - 294px) 完全对应，品牌字落在 About 正上方。 */
+  @media (min-width: 1024px) {
+    .masthead__inner-wrap {
+      box-sizing: border-box;
+      padding-left: 294px;
+    }
+  }
   .masthead__menu {
     display: flex;
     align-items: center;
