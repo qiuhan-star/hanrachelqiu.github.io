@@ -204,7 +204,8 @@ var talksData = [
     "video_url": {{ t.video_url | jsonify }},
     "poster_url": {{ t.poster_url | jsonify }},
     "doi": {{ t.doi | jsonify }},
-    "conf_url": {{ t.conf_url | jsonify }}
+    "conf_url": {{ t.conf_url | jsonify }},
+    "wechat_url": {{ t.wechat_url | jsonify }}
   }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 ];
@@ -346,6 +347,7 @@ function resRow(t){
   if(t.poster_url) res+=resBtn('🖼 Poster', t.poster_url);
   if(t.doi) res+=resBtn('🔗 DOI', 'https://doi.org/'+t.doi);
   if(t.conf_url) res+=resBtn('🌐 Conference', t.conf_url);
+  if(t.wechat_url) res+=resBtn('🔗 WeChat', t.wechat_url);
   if(t.permalink) res+=resBtn('🔗 Open talk page', t.permalink);
   return res ? '<div class="talkmap-res-row">'+res+'</div>' : '';
 }

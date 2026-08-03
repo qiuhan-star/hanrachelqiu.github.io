@@ -10,4 +10,5 @@ venue: "Xi'an Jiaotong University"
 date: 2026-07-10
 location: "Xi'an, China"
 conf_url: http://csa.cssn.cn
+wechat_url: "https://mp.weixin.qq.com/s/mMRQ8mETd82-15bD5nqpdQ?scene=1"
 ---

@@ -10,4 +10,5 @@ venue: "西安交通大学"
 date: 2026-07-10
 location: "中国西安"
 conf_url: http://csa.cssn.cn
+wechat_url: "https://mp.weixin.qq.com/s/mMRQ8mETd82-15bD5nqpdQ?scene=1"
 ---
