@@ -8,27 +8,30 @@
         <ul class="visible-links">
           <li class="masthead__menu-item masthead__menu-item--lg"><a href="{{ '/' | absolute_url }}"><span data-lang="en">{{ site.title }}</span><span data-lang="zh">{{ site.title_zh }}</span></a></li>
           {% for link in site.data.navigation.main %}
-            {% if link.children %}
-              <li class="masthead__menu-item dropdown" id="nav-more-wrap">
-                <button type="button" class="nav-more-btn" aria-haspopup="true" aria-expanded="false" aria-controls="nav-more-menu">
-                  <span data-lang="en">{{ link.title }}</span><span data-lang="zh">{{ link.title_zh }}</span>
-                  <span class="nav-caret" aria-hidden="true"></span>
-                </button>
-                <ul class="nav-more-menu" id="nav-more-menu" role="menu">
-                  {% for child in link.children %}
-                    {% if child.url contains 'http' %}{% assign cdomain = '' %}{% else %}{% assign cdomain = base_path %}{% endif %}
-                    <li role="none"><a href="{{ cdomain }}{{ child.url }}" role="menuitem"><span data-lang="en">{{ child.title }}</span><span data-lang="zh">{{ child.title_zh }}</span></a></li>
-                  {% endfor %}
-                </ul>
-              </li>
-            {% else %}
+            {% unless link.children %}
               {% if link.url contains 'http' %}{% assign domain = '' %}{% else %}{% assign domain = base_path %}{% endif %}
               <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}"><span data-lang="en">{{ link.title }}</span><span data-lang="zh">{{ link.title_zh }}</span></a></li>
-            {% endif %}
+            {% endunless %}
           {% endfor %}
         </ul>
         <ul class="hidden-links hidden"></ul>
       </nav>
+      {% for link in site.data.navigation.main %}
+        {% if link.children %}
+          <div class="masthead__menu-item dropdown" id="nav-more-wrap">
+            <button type="button" class="nav-more-btn" aria-haspopup="true" aria-expanded="false" aria-controls="nav-more-menu">
+              <span data-lang="en">{{ link.title }}</span><span data-lang="zh">{{ link.title_zh }}</span>
+              <span class="nav-caret" aria-hidden="true"></span>
+            </button>
+            <ul class="nav-more-menu" id="nav-more-menu" role="menu">
+              {% for child in link.children %}
+                {% if child.url contains 'http' %}{% assign cdomain = '' %}{% else %}{% assign cdomain = base_path %}{% endif %}
+                <li role="none"><a href="{{ cdomain }}{{ child.url }}" role="menuitem"><span data-lang="en">{{ child.title }}</span><span data-lang="zh">{{ child.title_zh }}</span></a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
     {% include lang-switch.html %}
       <button id="light-toggle" class="theme-toggle" title="Change theme" aria-label="Change theme">
@@ -198,6 +201,8 @@
     flex-wrap: nowrap;
   }
   .masthead__menu {
+    display: flex;
+    align-items: center;
     flex: 1 1 auto;
     min-width: 0;
   }
