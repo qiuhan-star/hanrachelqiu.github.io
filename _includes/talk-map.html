@@ -103,11 +103,18 @@
   .talkmap-acc-head { display:flex; align-items:flex-start; gap:12px; padding:12px 15px; cursor:pointer; }
   .talkmap-acc-main { flex:1; min-width:0; }
   .talkmap-acc .t-title { font-weight:600; font-size:.98rem; line-height:1.5; color:var(--text-primary); }
-  .talkmap-acc .t-meta { color:var(--text-secondary); font-size:.84rem; margin-top:4px; }
+  .talkmap-acc .t-meta { color:var(--text-secondary); font-size:.84rem; margin-top:6px; display:block; }
+  /* structured multi-row meta: each field on its own wrapping row */
+  .tm-row { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:5px; }
+  .tm-row1 { margin-top:0; }
+  .tm-dot { color:var(--text-secondary); opacity:.5; }
+  .loc-full { color:var(--accent); font-weight:600; }
+  .award-tag { display:inline-block; font-size:.72rem; font-weight:700; padding:2px 9px; border-radius:6px; background:#fff7e0; color:#92732a; border:1px solid #f0e0b0; }
+  :root[data-theme="dark"] .award-tag { background:#2f2a1c; color:#d8c074; border-color:#4a3f1f; }
   .talkmap-chev { color:var(--text-muted); transition:transform .2s ease; font-size:.8rem; padding-top:3px; }
   .talkmap-acc.open .talkmap-chev { transform:rotate(180deg); }
   .talkmap-acc-body { max-height:0; overflow:hidden; transition:max-height .28s ease; }
-  .talkmap-acc.open .talkmap-acc-body { max-height:1400px; }
+  .talkmap-acc.open .talkmap-acc-body { max-height:2000px; }
   .talkmap-acc-inner { padding:0 15px 14px; border-top:1px dashed var(--border-subtle); margin-top:-1px; }
   .talkmap-acc-abs { color:var(--text-secondary); font-size:.9rem; margin:12px 0 10px; }
   .talkmap-res-row { display:flex; flex-wrap:wrap; gap:0; margin:8px 0; }
@@ -330,7 +337,6 @@ function resBtn(label,url){ return '<a class="talkmap-res" href="'+escapeHtml(ur
 function detailHtml(t){
   var h='';
   if(t.abstract){ h+='<p class="talkmap-acc-abs">'+escapeHtml(t.abstract)+'</p>'; }
-  else { h+='<p class="talkmap-acc-abs talkmap-muted">Abstract to be added.</p>'; }
   var res='';
   if(t.slides_url) res+=resBtn('📄 Slides', t.slides_url);
   if(t.video_url) res+=resBtn('▶ Video', t.video_url);
@@ -338,7 +344,7 @@ function detailHtml(t){
   if(t.doi) res+=resBtn('🔗 DOI', 'https://doi.org/'+t.doi);
   if(t.conf_url) res+=resBtn('🌐 Conference', t.conf_url);
   if(t.permalink) res+=resBtn('🔗 Open talk page', t.permalink);
-  h+= res ? '<div class="talkmap-res-row">'+res+'</div>' : '<div class="talkmap-res-row talkmap-muted">No resource links yet.</div>';
+  if(res){ h+='<div class="talkmap-res-row">'+res+'</div>'; }
   return h;
 }
 
@@ -391,7 +397,7 @@ function renderJourney(){
       + ' <span class="sep">·</span> ' + metaConf(t)
       + (t.lang ? ' <span class="sep">·</span> <span class="zh">' + escapeHtml(langLabel(t)) + '</span>' : '')
       + (t.award ? ' <span class="sep">·</span> <span class="award">🏆 ' + escapeHtml(t.award) + '</span>' : '');
-    var cityLoc = '<span class="city">' + escapeHtml(t.city.split(',')[0].trim()) + '</span><span class="cc">' + countryOf(t) + '</span>';
+    var cityLoc = '<span class="loc-full">' + escapeHtml(t.city) + '</span>';
     html += '<div class="talkmap-jnode"><div class="talkmap-jcard"><div class="t">' + titleHtml + '</div>'
       + '<div class="m">' + meta + '</div>'
       + '<div class="venue">' + escapeHtml(fullVenue(t)) + '</div></div>'
@@ -410,19 +416,30 @@ function renderText(){
     var k = (t.kind || 'conference');
     var kl = map[k] || 'Conference';
     var cls = (k === 'workshop') ? 'work' : (k === 'seminar') ? 'sem' : (k === 'invited') ? 'inv' : 'conf';
-    var out = '<span class="pill ' + cls + '">' + kl + '</span>'
-      + ' <span class="sep">·</span> ' + metaConf(t)
-      + ' <span class="sep">·</span> ' + '<span class="venue-em">' + escapeHtml(fullVenue(t)) + '</span>'
-      + ' <span class="sep">·</span> <span class="city">' + escapeHtml(t.city.split(',')[0].trim()) + '</span> <span class="cc">' + countryOf(t) + '</span>'
-      + ' <span class="sep">·</span> ' + escapeHtml(t.date);
-    if(t.lang){ out += ' <span class="sep">·</span> <span class="zh">' + escapeHtml(langLabel(t)) + '</span>'; }
-    if(t.award){ out += ' <span class="sep">·</span> <span class="award">🏆 ' + escapeHtml(t.award) + '</span>'; }
-    return out;
+    var role = metaConf(t);              /* Presenter (bold) / with X */
+    var inst = '<span class="venue-em">' + escapeHtml(fullVenue(t)) + '</span>';
+    var loc  = '<span class="loc-full">' + escapeHtml(t.city) + '</span>';  /* full "City, Country" */
+    var date = escapeHtml(t.date);
+    var lang = t.lang ? '<span class="zh">' + escapeHtml(langLabel(t)) + '</span>' : '';
+    var award = t.award ? '<span class="award-tag">🏆 ' + escapeHtml(t.award) + '</span>' : '';
+    var h = '';
+    /* row 1: type label + role (Presenter / with collaborators) */
+    h += '<div class="tm-row tm-row1"><span class="pill ' + cls + '">' + kl + '</span> <span class="conf-sep">' + role + '</span></div>';
+    /* row 2: host institution (full name) */
+    h += '<div class="tm-row">' + inst + '</div>';
+    /* row 3: location · date · language */
+    h += '<div class="tm-row">' + loc + ' <span class="tm-dot">·</span> ' + date;
+    if(lang){ h += ' <span class="tm-dot">·</span> ' + lang; }
+    h += '</div>';
+    /* row 4 (optional): award */
+    if(award){ h += '<div class="tm-row">' + award + '</div>'; }
+    return h;
   }
   var filtered = talksData.filter(matches);
   var years = {};
   filtered.forEach(function(t){ var y = t.date.slice(0,4); (years[y] = years[y] || []).push(t); });
   var ys = Object.keys(years).sort().reverse();
+  ys.forEach(function(y){ years[y].sort(function(a,b){ return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); }); });
   var html = '';
   if(!ys.length){ html = '<div class="talkmap-muted" style="padding:22px 4px">No talks match.</div>'; }
   ys.forEach(function(y){

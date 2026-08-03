@@ -6,7 +6,7 @@ permalink: /talks/2024-06-11-blockchain
 lang_alt: /zh/talks/2024-06-11-blockchain
 venue: "National Taiwan University"
 date: 2024-06-11
-location: "Taipei, Taiwan, China"
+location: "Taipei, China"
 kind: conference
 hide_on_map: true
 ---
