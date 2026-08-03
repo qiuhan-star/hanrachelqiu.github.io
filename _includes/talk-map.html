@@ -94,7 +94,7 @@
     {% assign talk_items = site.talks | where_exp: "t", "t.lang != 'zh-CN'" %}
   {% endif %}
   {% assign _yrs = talk_items | map: 'date' | sort %}
-  <p class="talkmap-summary"><strong>{{ talk_items.size }}</strong> {% if page.lang == 'zh-CN' %}场受邀演讲{% else %}invited talks{% endif %} · {{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }}</p>
+  <p class="talkmap-summary"><strong>{{ talk_items.size }}</strong> {% if page.lang == 'zh-CN' %}场受邀演讲（{{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }}）{% else %}invited talks ({{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }}){% endif %}</p>
 
   <div class="talkmap-seg" id="talkMapSeg">
     <button data-mode="wall">{% if page.lang == 'zh-CN' %}城市墙{% else %}City wall{% endif %}</button>
@@ -243,7 +243,7 @@ geoTalks.forEach(function(t){
   });
   var cityNames = Object.keys(cities);
   var html = '<div class="talkmap-stat">'
-    + '<div class="box"><div class="n">' + geoTalks.length + '</div><div class="l">' + (isZh ? '场受邀演讲' : 'talks') + '</div></div>'
+    + '<div class="box"><div class="n">' + talksData.length + '</div><div class="l">' + (isZh ? '场受邀演讲' : 'talks') + '</div></div>'
     + '<div class="box"><div class="n">' + cityNames.length + '</div><div class="l">' + (isZh ? '座城市' : 'cities') + '</div></div>'
     + '<div class="box"><div class="n">' + Object.keys(byVenue).length + '</div><div class="l">' + (isZh ? '所学校' : 'schools') + '</div></div>'
     + '</div><div class="talkmap-grid">';
