@@ -53,17 +53,20 @@
   .talkmap-city .cc { font-size:.66rem; font-weight:700; letter-spacing:.04em; padding:1px 6px; border-radius:5px; background:var(--bg-raised); color:var(--accent); }
   .talkmap-city .count { margin-left:auto; background:var(--bg-raised); color:var(--text-secondary); font-weight:700; font-size:.82rem; padding:2px 10px; border-radius:20px; }
   .talkmap-city .city-list { list-style:none; margin:0 0 6px; padding:0; }
-  .talkmap-city .city-list li { display:flex; align-items:baseline; gap:7px; flex-wrap:wrap; padding:7px 0; border-top:1px dashed var(--border-subtle); }
-  .talkmap-city .city-list li:first-child { border-top:none; }
-  .talkmap-city .city-list .pin { flex:0 0 auto; }
-  .talkmap-city .city-list .inst { font-size:.9rem; font-weight:600; color:var(--text-primary); line-height:1.35; }
-  .talkmap-city .city-list .n2 { color:var(--text-muted); font-size:.8rem; font-weight:600; white-space:nowrap; }
-  .talkmap-city .city-list .badge-cluster { display:inline-flex; flex-wrap:wrap; gap:5px; align-items:center; }
+  .talkmap-city .city-list li { display:block; padding:0; }
+  .talkmap-city .city-list li:first-child { padding-top:2px; }
+  .talkmap-city .city-list li + li { border-top:1px dashed var(--border-subtle); margin-top:12px; padding-top:12px; }
+  .talkmap-city .institution-item { display:flex; flex-direction:column; gap:3px; }
+  .talkmap-city .inst-name { font-size:.9rem; font-weight:600; color:var(--text-primary); line-height:1.35; }
+  .talkmap-city .inst-meta { display:flex; align-items:center; gap:7px; flex-wrap:wrap; color:var(--text-secondary); font-size:.8rem; }
+  .talkmap-city .inst-meta .n { font-weight:600; color:var(--text-muted); white-space:nowrap; }
+  .talkmap-city .inst-meta .dot { opacity:.5; }
   /* award tag */
-  .talkmap-city .city-awards { font-size:.8rem; font-weight:600; color:#92732a; background:#fff7e0; border:1px solid #f0e0b0; border-radius:8px; padding:5px 10px; margin:4px 0 2px; }
+  .talkmap-city .city-awards { display:flex; align-items:center; justify-content:center; gap:6px; text-align:center; font-size:.8rem; font-weight:600; color:#92732a; background:#fff7e0; border:1px solid #f0e0b0; border-radius:8px; padding:7px 10px; margin:10px 0 2px; }
   :root[data-theme="dark"] .talkmap-city .city-awards { background:#2f2a1c; color:#d8c074; border-color:#4a3f1f; }
-  /* actions pinned to bottom */
-  .talkmap-city .city-actions { display:flex; flex-wrap:wrap; gap:0; margin-top:auto; padding-top:10px; }
+  /* actions pinned to bottom — footer height identical across all cards */
+  .talkmap-city .city-actions { display:flex; gap:8px; margin-top:auto; padding-top:12px; }
+  .talkmap-city .city-actions .talkmap-res { flex:1 1 0; justify-content:center; margin:0; }
 
   /* journey — vertical timeline, spine on right, bottom→top, separators between nodes */
   .talkmap-jtrack { position:relative; display:flex; flex-direction:column-reverse; padding:6px 0 2px; }
@@ -429,18 +432,17 @@ function renderWall(){
       + '<ul class="city-list">';
     Object.keys(c.schools).forEach(function(v){
       var s = c.schools[v];
-      var liBadge = '';
+      var metaInner = '<span class="n">' + s.count + (s.count === 1 ? (isZh ? ' 场' : ' talk') : (isZh ? ' 场' : ' talks')) + '</span>';
       if(s.count === 1 && s.talk){
         var wk = (s.talk.kind || 'conference');
         var wcls = (wk === 'workshop') ? 'work' : (wk === 'seminar') ? 'sem' : (wk === 'invited') ? 'inv' : 'conf';
         var wmap = { conference:'Conference Presentation', workshop:'Workshop', seminar:'Seminar', invited:'Invited Talk' };
-        liBadge = '<span class="badge-cluster"><span class="pill ' + wcls + '">' + (wmap[wk] || 'Conference Presentation') + '</span></span>';
+        metaInner += '<span class="dot">·</span><span class="pill ' + wcls + '">' + (wmap[wk] || 'Conference Presentation') + '</span>';
       }
-      html += '<li>'
-        + '<span class="pin">📍</span>'
-        + '<span class="inst">' + escapeHtml(fullVenue({ venue:v })) + '</span>'
-        + '<span class="n2">' + s.count + (s.count === 1 ? (isZh ? ' 场' : ' talk') : (isZh ? ' 场' : ' talks')) + '</span>'
-        + liBadge + '</li>';
+      html += '<li><div class="institution-item">'
+        + '<div class="inst-name">📍 ' + escapeHtml(fullVenue({ venue:v })) + '</div>'
+        + '<div class="inst-meta">' + metaInner + '</div>'
+        + '</div></li>';
     });
     html += '</ul>';
     if(c.award > 0){
