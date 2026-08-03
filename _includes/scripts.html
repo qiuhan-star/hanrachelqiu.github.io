@@ -62,16 +62,27 @@
   align-items: center;
   min-width: 0;
 }
-/* At 1024-1279 the 294px left margin (for brand/content alignment) leaves
-   too little room for the 4 core items + brand + More. Relax the margin
-   and slightly tighten nav item padding so everything fits without overlap. */
-@media (min-width: 1024px) and (max-width: 1279px) {
+/* Narrow-desktop / tablet-landscape (1024-1199px): relax the left margin and
+   tighten nav typography so the 4 core items + brand + More all fit on one
+   row without overlapping. This is a responsive exception only for this width
+   band; >=1200px keeps the locked 18px spec untouched. */
+@media (min-width: 1024px) and (max-width: 1199px) {
   .masthead__menu {
-    margin-left: 200px !important;
+    margin-left: 120px !important;
   }
   .masthead__menu-item a {
-    padding-left: 0.6em !important;
-    padding-right: 0.6em !important;
+    font-size: 14px !important;
+    padding-left: 0.45em !important;
+    padding-right: 0.45em !important;
+    letter-spacing: -0.01em !important;
+  }
+  .masthead__menu-item--lg a {
+    font-size: 13px !important;
+  }
+  .nav-more-btn {
+    font-size: 14px !important;
+    padding-left: 0.45em !important;
+    padding-right: 0.45em !important;
   }
 }
 </style>
