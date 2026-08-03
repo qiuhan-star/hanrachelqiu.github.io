@@ -1,5 +1,6 @@
 ---
 title: "Embracing Agile Governance: Cultivating Innovation and Addressing the Challenges of Generative Artificial Intelligence in Higher Education"
+title_zh: "拥抱敏捷治理：培育创新并应对生成式人工智能在高等教育中的挑战"
 collection: talks
 type: "Presenter at the 6th Chengzhi Graduate Academic Salon"
 kind: seminar

@@ -1,5 +1,6 @@
 ---
 title: "On-chain City Governance: How Can Blockchain in China Achieve Empowerment?"
+title_zh: "链上城市治理：区块链如何在中国实现赋能？"
 collection: talks
 type: "Presenter at the 25th Annual International Conference on Digital Government Research — dg.o 2024"
 permalink: /talks/2024-06-11-blockchain

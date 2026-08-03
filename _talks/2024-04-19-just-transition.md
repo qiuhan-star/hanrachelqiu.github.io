@@ -1,5 +1,6 @@
 ---
 title: "Towards a Just Transition Future: A Quantitative Comparative Analysis of 30 Sub-national Governments in China (2010-2020)"
+title_zh: "迈向公正转型未来：对中国30个地方政府（2010–2020）的定性比较分析"
 collection: talks
 type: "Presenter at the International Conference on Comparative Public Policy" #演讲类型
 kind: conference

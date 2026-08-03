@@ -1,5 +1,6 @@
 ---
 title: "Mobilized Giving and Voluntary Donation: Impact Mechanisms and the Moderating Role of Age"
+title_zh: "动员式捐赠与自愿捐赠：影响机制及年龄的调节作用"
 collection: talks
 type: "Presenter at the Chinese Sociological Association 2026 Annual Conference, Public Welfare, Charity and Social Responsibility Forum"
 kind: conference

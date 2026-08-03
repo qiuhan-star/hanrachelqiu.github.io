@@ -1,5 +1,6 @@
 ---
 title: "Embracing Agile Governance: Cultivating Innovation and Addressing the Challenges of Generative Artificial Intelligence in Higher Education"
+title_zh: "拥抱敏捷治理：培育创新并应对生成式人工智能在高等教育中的挑战"
 collection: talks
 type: "Presenter at Journal of Asian Public Policy Special Issue Authors' Workshop"
 kind: workshop

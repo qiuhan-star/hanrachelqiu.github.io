@@ -1,5 +1,6 @@
 ---
 title: "Pathways to a Just Transition: Evidence from 30 Sub-national Governments in China"
+title_zh: "迈向公正转型的路径：来自中国30个地方政府的证据"
 collection: talks
 type: "Presenter at the 20th Cross-Strait and Hong Kong-Macao Public Administration Academic Seminar"
 kind: conference
