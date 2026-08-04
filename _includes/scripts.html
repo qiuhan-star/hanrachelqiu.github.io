@@ -1,11 +1,28 @@
 <script>
-/* Capture original nav item order BEFORE Minimal Mistakes greedy-navigation
-   mutates the DOM, so we can restore it exactly afterwards. */
+/* Lift the site brand out of the greedy-nav <ul> and pin it to the far left of
+   the header (directly above the sidebar avatar) BEFORE Minimal Mistakes'
+   greedy-navigation measures the list — so the brand is never treated as a
+   collapsible nav item. Runs once; guarded against PJAX re-runs.
+   This keeps masthead.html (locked) untouched. */
 (function () {
+  var inner = document.querySelector('.masthead__inner-wrap');
   var nav = document.getElementById('site-nav');
   if (!nav) return;
   var vlinks = nav.querySelector('.visible-links');
   if (!vlinks) return;
+  var brand = vlinks.querySelector('.masthead__menu-item--lg');
+  if (brand && inner && !document.querySelector('.site-brand')) {
+    var a = brand.querySelector('a');
+    if (a) {
+      var sb = document.createElement('a');
+      sb.className = 'site-brand';
+      sb.href = a.getAttribute('href') || '/';
+      sb.innerHTML = a.innerHTML; /* keep bilingual EN/ZH spans */
+      inner.insertBefore(sb, inner.firstChild);
+    }
+    brand.parentNode.removeChild(brand);
+  }
+  /* Capture original nav item order so we can restore it exactly afterwards. */
   var items = vlinks.querySelectorAll('li');
   for (var i = 0; i < items.length; i++) {
     items[i].setAttribute('data-nav-index', i);
@@ -44,18 +61,14 @@
   }
 
   function applyMobile() {
-    /* Hand the menu to the hamburger: only the actual nav items
-       ( Publications / Talks / Experience / CV ) move into .hidden-links.
-       The site-title/home item stays in .visible-links, which is hidden on
-       mobile via CSS, so it does not appear twice in the dropdown. */
+    /* Hand the menu to the hamburger: every remaining nav item
+       ( Publications / Talks / Experience / CV ) moves into .hidden-links.
+       The site brand is no longer in this list (lifted to the header's far
+       left by the pre-greedy script), so it never appears in the dropdown. */
     nav.classList.remove('is-open');
     if (!vlinks || !hlinks) return;
     var kids = Array.prototype.slice.call(vlinks.children);
-    kids.forEach(function (li) {
-      if (!li.classList.contains('masthead__menu-item--lg')) {
-        hlinks.appendChild(li);
-      }
-    });
+    kids.forEach(function (li) { hlinks.appendChild(li); });
     if (btn) btn.classList.remove('hidden');
   }
 
@@ -127,19 +140,79 @@
   align-items: center;
   min-width: 0;
 }
+/* Site brand: lifted out of the greedy-nav list and pinned to the far-left of
+   the header. On desktop it occupies the sidebar column (248 + 30 margin + 16
+   gap = 294px) so it sits directly above the avatar and the nav aligns with the
+   page content; on mobile it stays left-aligned beside the hamburger. */
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--masthead-text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.site-brand:hover {
+  color: var(--masthead-hover);
+}
+@media (min-width: 1024px) {
+  .masthead__menu {
+    margin-left: 0 !important;
+  }
+  .site-brand {
+    flex: 0 0 294px;
+    padding-left: 30px;
+    padding-right: 16px;
+    font-size: 17px;
+  }
+}
+@media (max-width: 767px) {
+  .site-brand {
+    flex: 0 0 auto;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    margin-right: 12px;
+  }
+  .masthead__menu {
+    margin-left: 0 !important;
+    flex: 0 0 auto;
+  }
+}
+/* Tablet-landscape / narrow laptop (768-1023px): sidebar is hidden and space is
+   tight, so shrink both brand and nav items to keep the full row from overlapping. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .site-brand {
+    font-size: 15px;
+    margin-right: 12px;
+  }
+  .masthead__menu-item a {
+    font-size: 13px !important;
+    padding-left: 0.4em !important;
+    padding-right: 0.4em !important;
+  }
+  .nav-more-btn {
+    font-size: 13px !important;
+    padding-left: 0.4em !important;
+    padding-right: 0.4em !important;
+  }
+}
 /* The greedy dropdown (.hidden-links) is always collapsed by default.
    It only appears when the mobile hamburger adds .is-open (see media query
    below). This prevents the MM bug where the dropdown expands in normal flow. */
 .greedy-nav .hidden-links {
   display: none !important;
 }
-/* Narrow-desktop / tablet-landscape (1024-1199px): relax the left margin and
-   tighten nav typography so the 4 core items + brand + More all fit on one
-   row without overlapping. This is a responsive exception only for this width
-   band; >=1200px keeps the locked 18px spec untouched. */
+/* Narrow-desktop / tablet-landscape (1024-1199px): tighten nav typography so the
+   4 core items + More all fit comfortably. The left column is now owned by the
+   lifted site brand (294px), so we no longer fight the margin here. */
 @media (min-width: 1024px) and (max-width: 1199px) {
   .masthead__menu {
-    margin-left: 120px !important;
+    margin-left: 0 !important;
   }
   .masthead__menu-item a {
     font-size: 14px !important;
@@ -147,13 +220,15 @@
     padding-right: 0.45em !important;
     letter-spacing: -0.01em !important;
   }
-  .masthead__menu-item--lg a {
-    font-size: 13px !important;
-  }
   .nav-more-btn {
     font-size: 14px !important;
     padding-left: 0.45em !important;
     padding-right: 0.45em !important;
+  }
+  .site-brand {
+    flex-basis: 250px;
+    font-size: 15px;
+    padding-left: 24px;
   }
 }
 /* Mobile (< 768px): native hamburger dropdown. Anchored to .masthead so it
