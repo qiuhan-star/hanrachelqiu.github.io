@@ -39,3 +39,6 @@
 @import "vendor/font-awesome/brands";
 @import "vendor/magnific-popup/magnific-popup";
 @import "print";
+
+// 布局宽度修正：见 _sass/_layout-width.scss（覆盖 MM container mixin 的 925px 上限）
+@import "layout-width";
