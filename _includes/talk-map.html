@@ -463,10 +463,10 @@ var COUNTRY = {
 };
 var CITY_ZH = { 'Hong Kong':'香港', 'Shenyang':'沈阳', 'Xiamen':'厦门', 'Beijing':'北京', 'Taipei':'台北', 'Perth':'珀斯', 'Xi\'an':'西安' };
 var KIND_MAP = {
-  conference:{ l:'Conference', c:'conf' },
-  workshop:{ l:'Workshop', c:'work' },
-  seminar:{ l:'Seminar', c:'sem' },
-  invited:{ l:'Invited Talk', c:'inv' }
+  conference:{ l:'Conference', zh:'会议报告', c:'conf' },
+  workshop:{ l:'Workshop', zh:'工作坊', c:'work' },
+  seminar:{ l:'Seminar', zh:'研讨会', c:'sem' },
+  invited:{ l:'Invited Talk', zh:'特邀报告', c:'inv' }
 };
 
 function renderWall(){
@@ -517,10 +517,10 @@ function renderWall(){
         if(hasOfficial){ actions += resBtn(isZh ? '会议官网' : 'Official Site', t.conf_url, 'btn-secondary'); }
         actions += resBtn(isZh ? '查看详情' : 'View Details', t.permalink || '#', 'btn-primary');
         html += '<li class="tm-talk">'
-          + '<a class="tt-title" href="' + escapeHtml(t.permalink || '#') + '">' + escapeHtml(t.title) + '</a>'
+          + '<a class="tt-title" href="' + escapeHtml(t.permalink || '#') + '">' + escapeHtml(dispTitle(t)) + '</a>'
           + '<div class="tt-meta"><span class="venue">' + escapeHtml(shortOf(t.venue)) + '</span>'
           + '<span class="dot">·</span><span>' + escapeHtml(t.date) + '</span>'
-          + '<span class="pill ' + k.c + '">' + k.l + '</span>'
+          + '<span class="pill ' + k.c + '">' + (isZh ? k.zh : k.l) + '</span>'
           + (t.award ? '<span class="award-chip">🏆</span>' : '')
           + '</div>'
           + '<div class="tm-actions' + (hasOfficial ? '' : ' single') + '">' + actions + '</div>'

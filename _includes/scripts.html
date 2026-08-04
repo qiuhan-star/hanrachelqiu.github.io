@@ -17,7 +17,13 @@
       var sb = document.createElement('a');
       sb.className = 'site-brand';
       sb.href = a.getAttribute('href') || '/';
-      sb.innerHTML = a.innerHTML; /* keep bilingual EN/ZH spans */
+      /* On phones the full site title is too long next to the hamburger; use the
+         shorter personal-name form the user suggested as an alternative. */
+      if (window.innerWidth <= 767) {
+        sb.innerHTML = '<span data-lang="en">Rachel Qiu</span><span data-lang="zh">邱涵</span>';
+      } else {
+        sb.innerHTML = a.innerHTML; /* keep bilingual EN/ZH spans */
+      }
       inner.insertBefore(sb, inner.firstChild);
     }
     brand.parentNode.removeChild(brand);
@@ -184,21 +190,27 @@
   }
 }
 /* Tablet-landscape / narrow laptop (768-1023px): sidebar is hidden and space is
-   tight, so shrink both brand and nav items to keep the full row from overlapping. */
+   tight. Keep the full site title at a slightly smaller size, and shrink nav
+   items aggressively, so the full row (brand + 4 core + More + lang + toggle)
+   stays on one line without overlap. */
 @media (min-width: 768px) and (max-width: 1023px) {
   .site-brand {
-    font-size: 15px;
-    margin-right: 12px;
+    flex: 0 0 auto;
+    max-width: 190px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    margin-right: 10px;
   }
   .masthead__menu-item a {
-    font-size: 13px !important;
-    padding-left: 0.4em !important;
-    padding-right: 0.4em !important;
+    font-size: 12px !important;
+    padding-left: 0.25em !important;
+    padding-right: 0.25em !important;
   }
   .nav-more-btn {
-    font-size: 13px !important;
-    padding-left: 0.4em !important;
-    padding-right: 0.4em !important;
+    font-size: 12px !important;
+    padding-left: 0.25em !important;
+    padding-right: 0.25em !important;
   }
 }
 /* The greedy dropdown (.hidden-links) is always collapsed by default.
