@@ -147,8 +147,8 @@
   min-width: 0;
 }
 /* Site brand: lifted out of the greedy-nav list and pinned to the far-left of
-   the header. On desktop it occupies the sidebar column (248 + 30 margin + 16
-   gap = 294px) so it sits directly above the avatar and the nav aligns with the
+   the header. On desktop it occupies the sidebar column (360 + 30 margin + 16
+  gap = 406px) so it sits directly above the avatar and the nav aligns with the
    page content; on mobile it stays left-aligned beside the hamburger. */
 .site-brand {
   display: inline-flex;
@@ -169,7 +169,7 @@
     margin-left: 0 !important;
   }
   .site-brand {
-    flex: 0 0 294px;
+    flex: 0 0 406px;
     padding-left: 30px;
     padding-right: 16px;
     font-size: 17px;
@@ -221,7 +221,7 @@
 }
 /* Narrow-desktop / tablet-landscape (1024-1199px): tighten nav typography so the
    4 core items + More all fit comfortably. The left column is now owned by the
-   lifted site brand (294px), so we no longer fight the margin here. */
+   lifted site brand (406px), so we no longer fight the margin here. */
 @media (min-width: 1024px) and (max-width: 1199px) {
   .masthead__menu {
     margin-left: 0 !important;
@@ -238,7 +238,7 @@
     padding-right: 0.45em !important;
   }
   .site-brand {
-    flex-basis: 250px;
+    flex-basis: 406px;
     font-size: 15px;
     padding-left: 24px;
   }

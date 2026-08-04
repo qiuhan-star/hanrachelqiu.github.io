@@ -19,9 +19,9 @@
 .page {
   @include breakpoint($large) {
     float: right;
-    // 固定间距布局：内容宽度 = 容器宽 − (侧栏248 + 左距30 + 间距16)，
+    // 固定间距布局：内容宽度 = 容器宽 − (侧栏360 + 左距30 + 间距16)，
     // 使侧栏与内容的间距在所有 ≥925px 宽度下恒定、永不重叠（原 span(9) 在 925–1279px 会重叠）。
-    width: calc(100% - 294px);
+    width: calc(100% - 406px);
     margin-right: 0;
     padding-left: 1.5em;
     padding-right: 1.5em;
