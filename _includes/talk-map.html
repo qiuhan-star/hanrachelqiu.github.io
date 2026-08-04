@@ -277,6 +277,7 @@ var talksData = [
     "date": "{{ t.date | date: '%Y-%m-%d' }}",
     "lang": {{ t.presented_in | jsonify }},
     "award": {{ t.award | jsonify }},
+    "award_zh": {{ zh_sib.award | jsonify }},
     "kind": {{ t.kind | jsonify }},
     "hide_on_map": {{ t.hide_on_map | jsonify }},
     "important": {{ t.important | jsonify }},
@@ -553,7 +554,7 @@ function renderJourney(){
     if(t.permalink){ titleHtml = '<a href="' + escapeHtml(t.permalink) + '">' + titleHtml + '</a>'; }
     var langTag = (t.lang === 'zh') ? (isZh ? '中文' : 'Chinese') : '';
     var meta = metaConf(t);
-    var awardTag = t.award ? '<div class="tm-award">🏆 ' + escapeHtml(t.award) + '</div>' : '';
+    var awardTag = t.award ? '<div class="tm-award">🏆 ' + escapeHtml(isZh ? (t.award_zh || t.award) : t.award) + '</div>' : '';
     var typeBadge = '<div class="badge-cluster">' + kindPill(t) + '</div>';
     var cityParts = (dispLoc(t) || '').split(',');
     var cityName = cityParts[0].trim();
