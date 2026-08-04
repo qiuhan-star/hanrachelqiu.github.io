@@ -419,12 +419,27 @@ layout: compress
       .pub-title { font-size: 1.12rem; line-height: 1.35; margin: 0 0 .35rem; font-weight: 650; }
       .pub-title a { color: var(--text-primary); }
       .pub-byline { margin: .1rem 0 .6rem; font-size: .86rem; color: var(--text-muted); }
+      /* 作者本人高亮：加粗 + 学术蓝 + 极浅蓝底，手机小屏扫读也能一眼定位 */
+      .pub-byline .author-me {
+        font-weight: 700;
+        color: var(--accent-hover);
+        background: var(--accent-soft);
+        padding: .04em .3em;
+        border-radius: 4px;
+        white-space: nowrap;
+      }
       .pub-meta { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: .7rem; }
       .pub-chip {
         display: inline-flex; align-items: center; gap: .35rem;
         font-size: .78rem; font-weight: 600; color: var(--accent);
         background: var(--accent-soft); border: 1px solid var(--border-subtle);
         padding: .22rem .6rem; border-radius: 999px;
+      }
+      /* 年份 Badge 降级为中性灰，与期刊名微蓝块拉开主次 */
+      .pub-chip.year {
+        color: #475569;
+        background: #f1f5f9;
+        border-color: var(--border-subtle);
       }
       .pub-abstract { margin: .2rem 0 .9rem; color: var(--text-secondary); font-size: .95rem; }
       .pub-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
@@ -435,16 +450,26 @@ layout: compress
         padding: .34rem .7rem; border-radius: 8px; text-decoration: none;
       }
       .pub-btn:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-      .pub-btn.primary { color: #fff; background: var(--accent); border-color: var(--accent); }
-      .pub-btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
+      /* 主按钮收敛为 Slate 墨灰（亮色 #0F172A 白字；暗色反转见下方覆盖） */
+      .pub-btn.primary { color: #fff; background: #0f172a; border-color: #0f172a; }
+      .pub-btn.primary:hover { background: #334155; border-color: #334155; color: #fff; }
+      /* 收回列表项右留白，让论文卡片吃满内容区（仅 Publications 生效，不影响 Talks 等页） */
+      .list__item:has(.pub-card) { padding-right: 0; }
+      .pub-card { width: 100%; box-sizing: border-box; }
       .pub-note {
-        margin-top: 1.5rem; padding: .9rem 1rem;
+        margin-top: 1.5rem; padding: .7rem .9rem;
         border-left: 3px solid var(--accent);
-        background: var(--bg-raised);
+        background: var(--bg-base);
         border-radius: 0 8px 8px 0;
-        font-size: .9rem; color: var(--text-secondary);
+        font-size: .88rem; color: var(--text-secondary);
       }
       .pub-note strong { color: var(--text-primary); }
+
+      /* ===== 暗色模式组件覆盖（Slate 按钮反转 / 年份 Badge 灰 / 作者高亮） ===== */
+      [data-theme="dark"] .pub-btn.primary { color: #0f172a; background: #e2e8f0; border-color: #e2e8f0; }
+      [data-theme="dark"] .pub-btn.primary:hover { background: #cbd5e1; border-color: #cbd5e1; color: #0f172a; }
+      [data-theme="dark"] .pub-chip.year { color: #cbd5e1; background: rgba(255,255,255,0.07); border-color: var(--border-subtle); }
+      [data-theme="dark"] .pub-byline .author-me { color: var(--accent-hover); background: var(--accent-soft); }
 
       /* 顶栏背景强制走 token，覆盖编译主题写死的 background:white */
       .masthead { background-color: var(--masthead-bg) !important; }

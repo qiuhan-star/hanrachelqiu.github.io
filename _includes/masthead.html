@@ -207,18 +207,21 @@
      但中间的 .masthead__menu 整体右移 294px = 侧栏(248) + 左距(30) + 间距(16)，
      与 .page 的 width:calc(100% - 294px) 完全对应。 */
   @media (min-width: 1024px) {
+    /* 品牌字标移到最左侧，与左侧栏头像左缘对齐（不再右移 294px）。
+       移除后导航项获得更宽空间，品牌作为首项也不会被贪婪导航折叠。 */
     .masthead__menu {
-      margin-left: 294px;
+      margin-left: 0;
     }
-    /* 品牌字号与右侧留白在 1280 容器下需要收紧，否则 307px 的品牌加上
-       5 个导航项会超出可用空间导致 CV/More 重叠。 */
+    /* 品牌：字重 700 + 与导航项之间留出间距，明确区分 Brand vs Navigation 语义 */
     .masthead__menu-item--lg {
-      font-size: 15px;
-      padding-right: 0.5em;
+      font-size: 16px;
+      font-weight: 700;
+      padding-right: 1.25em;
       flex-shrink: 0;
     }
     .masthead__menu-item--lg > a {
       white-space: nowrap;
+      color: var(--masthead-text);
     }
   }
   .masthead__menu {
