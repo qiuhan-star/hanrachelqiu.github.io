@@ -15,6 +15,7 @@
 
   /* control bar: view switcher + search + filter + export on one row */
   .tm-bar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin:0 0 12px; }
+  .tm-jtool { display:none; }
   .tm-tools { display:flex; flex-wrap:wrap; gap:10px; align-items:center; flex:1 1 auto; justify-content:flex-end; }
   #talkMapSearch { border:1px solid var(--border-subtle); background:var(--bg-base); color:var(--text-primary); border-radius:8px; padding:0 13px; font-size:.85rem; min-width:170px; flex:1 1 170px; max-width:260px; font-family:inherit; height:38px; outline:none; transition:border-color .15s; box-sizing:border-box; vertical-align:middle; }
   #talkMapSearch:focus { border-color:#94a3b8; }
@@ -94,8 +95,8 @@
   /* legacy .talkmap-city card styles removed — superseded by the Country->City wall above */
 
   /* journey — vertical timeline, spine on right, bottom→top, separators between nodes */
-  .talkmap-jtrack { position:relative; display:flex; flex-direction:column-reverse; padding:6px 0 2px; }
-  .talkmap-jtrack::after { content:''; position:absolute; top:14px; bottom:14px; right:120px; width:2px; background:var(--border-subtle); z-index:0; }
+  .talkmap-jtrack { position:relative; display:flex; flex-direction:column; padding:6px 0 2px; }
+  .talkmap-jtrack::after { content:''; position:absolute; top:14px; bottom:14px; right:140px; width:2px; background:var(--border-subtle); z-index:0; }
   .talkmap-jnode { position:relative; display:flex; align-items:flex-start; margin:0; padding:11px 0; border-bottom:1px dashed var(--border-subtle); }
   .talkmap-jnode:last-child { border-bottom:none; }
   .talkmap-jcard { flex:1; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:10px; padding:11px 15px; margin-right:22px; position:relative; transition:transform .18s ease, box-shadow .18s ease; }
@@ -120,12 +121,16 @@
   .award-pill { display:inline-block; font-size:.7rem; font-weight:500; padding:2px 9px; border-radius:6px; background:#FEF3C7; color:#92400e; border:1px solid #FDE68A; }
   .talkmap-jcard .badge-cluster { position:absolute; top:11px; right:15px; margin:0; }
   .talkmap-jcard .t-row .badge-cluster { position:static; top:auto; right:auto; margin:2px 0 0; flex:0 0 auto; }
-  .talkmap-jaxis { width:120px; position:relative; text-align:right; padding-right:6px; }
+  .talkmap-jaxis { width:140px; position:relative; text-align:right; padding-right:6px; }
   .talkmap-jaxis .dot { position:absolute; left:-9px; top:13px; width:18px; height:18px; border-radius:50%; background:#6366F1; border:3px solid var(--bg-base); z-index:1; }
   /* axis node (dot + date) top-aligned to card's first title line; dot color unified to --accent */
   .talkmap-jaxis .date { font-weight:700; font-size:.9rem; color:var(--text-primary); margin-top:13px; }
   /* de-duplicated month: reserve identical space but hide the repeated number */
   .talkmap-jaxis .date.date--ghost { visibility:hidden; }
+  /* year divider inside the timeline (full-width band aligned with the spine) */
+  .talkmap-jyear { width:100%; box-sizing:border-box; margin:16px 0 4px; padding:5px 0 6px 12px; border-left:4px solid var(--accent); font-size:1.05rem; font-weight:800; color:var(--text-primary); letter-spacing:.02em; }
+  .talkmap-jyear:first-child { margin-top:2px; }
+  :root[data-theme="dark"] .talkmap-jyear { color:#e2e8f0; }
   .talkmap-jaxis .loc { font-size:.8rem; color:var(--text-secondary); margin-top:2px; display:flex; justify-content:flex-end; align-items:center; gap:5px; }
   /* journey axis: force city + country onto two lines (right-aligned) */
   .talkmap-jaxis .loc .loc-full { display:block; text-align:right; line-height:1.25; }
@@ -220,11 +225,18 @@
   strong.pres { font-weight:700; color:var(--text-primary); }
   .talkmap-jcard .conf, .talkmap-text .conf { min-width:0; }
 
-  /* print: hide chrome, expand all accordions */
+  /* print: clean talks list (expand all, hide chrome) */
   @media print {
-    .tm-bar, .talkmap-dynfilter, .talkmap-seg, #talkMapSearch, .tm-drop { display:none !important; }
-    .talkmap-acc-body { max-height:none !important; }
-    .talkmap-acc { box-shadow:none !important; break-inside:avoid; }
+    body { background:#fff !important; }
+    .masthead, .sidebar, .page__footer, .page__related, .page__share, .comment, nav, #recent { display:none !important; }
+    #main, #talkMapWrap { max-width:100% !important; }
+    .talkmap-jtrack { max-height:none !important; }
+    .tm-bar, .talkmap-dynfilter, .talkmap-seg, #talkMapSearch, .tm-drop, .tm-jtool, .talkmap-chev { display:none !important; }
+    .talkmap-acc-body { max-height:none !important; overflow:visible !important; }
+    .talkmap-acc { box-shadow:none !important; border-color:#cbd5e1 !important; break-inside:avoid; margin-bottom:8px !important; }
+    .talkmap-jcard, .talkmap-jnode { break-inside:avoid; }
+    .talkmap-jyear { break-after:avoid; }
+    a { color:#0f172a !important; text-decoration:none !important; }
   }
 </style>
 
@@ -244,6 +256,9 @@
         <button class="tm-drop-btn" id="tmFilterBtn" title="Filter by year / location / type">▾ <span data-lang="en">Filter</span><span data-lang="zh">筛选</span></button>
         <div class="tm-drop-menu" id="tmFilterMenu"></div>
       </div>
+      <button class="tm-drop-btn tm-jtool" id="tmSortBtn" data-show="journey" title="Sort order"><span class="lbl">最新</span></button>
+      <button class="tm-drop-btn tm-jtool" id="tmExpandBtn" data-show="journey" title="Expand / collapse all"><span class="lbl">展开全部</span></button>
+      <button class="tm-drop-btn" id="tmPrintBtn" title="Print / PDF"><svg class="export-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span data-lang="en">Print</span><span data-lang="zh">打印</span></button>
       <div class="tm-drop" id="tmExportWrap">
         <button class="tm-drop-btn tm-ghost" id="tmExportBtn" title="Export options"><svg class="export-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span data-lang="en">Export</span><span data-lang="zh">导出</span> ▾</button>
         <div class="tm-drop-menu">
@@ -411,7 +426,7 @@ geoTalks.forEach(function(t){ byCityGlobal[t.city.split(',')[0].trim()] = 1; });
 /* (Leaflet map builders removed; remaining modes: By City / Timeline / List) */
 
 /* ===== filter / search state ===== */
-var state = { facet:'all', facetValue:null, query:'' };
+var state = { facet:'all', facetValue:null, query:'', sort:'desc', expandAll:false };
 function kindLabel(k){
   var m = isZh
     ? { conference:'会议报告', workshop:'工作坊', seminar:'研讨会', invited:'特邀报告' }
@@ -542,11 +557,19 @@ function renderJourney(){
     var cls = (k === 'workshop') ? 'work' : (k === 'seminar') ? 'sem' : (k === 'invited') ? 'inv' : 'conf';
     return '<span class="pill ' + cls + '">' + kindLabel(k) + '</span>';
   }
-  var items = geoTalks.filter(matches).slice().sort(function(a,b){ return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
+  var dir = (state.sort === 'asc') ? 1 : -1;
+  var items = geoTalks.filter(matches).slice().sort(function(a,b){ return a.date < b.date ? -dir : (a.date > b.date ? dir : 0); });
   if(items.length === 0){ document.getElementById('panel-journey').innerHTML = talkmapEmptyState(); return; }
   var html = '<div class="talkmap-jtrack">';
+  var prevYear = null;
   items.forEach(function(t, idx){
-    /* 每个节点都显示完整时间戳（YYYY-MM-DD），不做同月去重省略。 */
+    /* 每个节点都显示完整时间戳（YYYY-MM-DD），不做同月去重省略 */
+    var year = (t.date || '').slice(0,4);
+    var slug = (t.permalink || ('t' + idx)).replace(/\/$/, '').split('/').pop() || ('t' + idx);
+    if(year && year !== prevYear){
+      html += '<div class="talkmap-jyear">' + escapeHtml(year) + '</div>';
+      prevYear = year;
+    }
     var titleHtml = escapeHtml(dispTitle(t));
     if(t.permalink){ titleHtml = '<a href="' + escapeHtml(t.permalink) + '">' + titleHtml + '</a>'; }
     var langTag = (t.lang === 'zh') ? (isZh ? '中文' : 'Chinese') : '';
@@ -556,22 +579,21 @@ function renderJourney(){
     var cityParts = (dispLoc(t) || '').split(',');
     var cityName = cityParts[0].trim();
     var countryName = cityParts.length > 1 ? cityParts.slice(1).join(',').trim() : '';
-    var cityLoc = '<span class="loc-full"><span class="loc-city">' + escapeHtml(cityName) + '</span>'
-      + (countryName ? '<span class="loc-country">' + escapeHtml(countryName) + '</span>' : '')
-      + '</span>';
-    /* collapsed header: title · type badge · meta · venue; links hidden until expand */
     var detail = '';
     if(t.abstract){ detail += '<p class="talkmap-acc-abs">' + escapeHtml(t.abstract) + '</p>'; }
     detail += resRow(t);
-    html += '<div class="talkmap-jnode"><div class="talkmap-jcard talkmap-acc">'
-      + '<div class="talkmap-acc-head" onclick="hqToggleAcc(this)">'
+    var isOpen = !!state.expandAll;
+    var chevArrow = isOpen ? '▲ ' : '▼ ';
+    var chevLabel = isZh ? (isOpen ? '收起摘要' : '展开摘要') : (isOpen ? 'Hide Abstract' : 'Show Abstract');
+    html += '<div class="talkmap-jnode" id="talk-' + escapeHtml(slug) + '"><div class="talkmap-jcard talkmap-acc' + (isOpen ? ' open' : '') + '">'
+      + '<div class="talkmap-acc-head" role="button" tabindex="0" aria-expanded="' + (isOpen ? 'true' : 'false') + '" onclick="hqToggleAcc(this)" onkeydown="hqAccKey(event,this)">'
       + '<div class="t-row"><div class="t">' + titleHtml + '</div>'
       + typeBadge
       + '</div>'
       + (meta.replace(/<[^>]*>/g,'').trim() ? '<div class="m">' + meta + '</div>' : '')
       + '<div class="venue">' + escapeHtml(fullVenue(t)) + (dispLoc(t) ? ', ' + escapeHtml(dispLoc(t)) : '') + (langTag ? ' <span class="lang-tag">' + escapeHtml(langTag) + '</span>' : '') + '</div>'
       + awardTag
-      + '<div class="talkmap-chev">▼ <span class="chev-label">'+(isZh?'展开摘要':'Show Abstract')+'</span></div>'
+      + '<div class="talkmap-chev">' + chevArrow + '<span class="chev-label">' + chevLabel + '</span></div>'
       + '</div>'
       + '<div class="talkmap-acc-body"><div class="talkmap-acc-inner">' + detail + '</div></div>'
       + '</div>'
@@ -585,16 +607,49 @@ function renderJourney(){
 /* ---- text / List panel removed: UI exposes only Timeline + By City ---- */
 
 function renderAll(){ renderWall(); renderJourney(); }
-function hqToggleAcc(el){
-  var acc = el.closest('.talkmap-acc');
-  if(!acc) return;
-  var open = acc.classList.toggle('open');
+function setAccOpen(acc, open){
+  acc.classList.toggle('open', open);
   var chev = acc.querySelector('.talkmap-chev');
   if(chev){
     var lab = chev.querySelector('.chev-label');
     if(lab){ lab.textContent = isZh ? (open ? '收起摘要' : '展开摘要') : (open ? 'Hide Abstract' : 'Show Abstract'); }
     if(chev.firstChild && chev.firstChild.nodeType === 3){ chev.firstChild.nodeValue = open ? '▲ ' : '▼ '; }
   }
+  var head = acc.querySelector('.talkmap-acc-head');
+  if(head){ head.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  if(open){
+    var node = acc.closest('.talkmap-jnode');
+    if(node && node.id){ try { history.replaceState(null, '', '#' + node.id); } catch(e){} }
+  }
+}
+function hqToggleAcc(el){
+  var acc = el.closest('.talkmap-acc');
+  if(!acc) return;
+  setAccOpen(acc, !acc.classList.contains('open'));
+}
+function hqAccKey(e, el){
+  if(e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar'){ e.preventDefault(); hqToggleAcc(el); }
+}
+function updateJourneyToolLabels(){
+  var sb = document.getElementById('tmSortBtn');
+  if(sb){ sb.querySelector('.lbl').textContent = (state.sort === 'asc') ? (isZh ? '最早' : 'Oldest') : (isZh ? '最新' : 'Newest'); }
+  var eb = document.getElementById('tmExpandBtn');
+  if(eb){ eb.querySelector('.lbl').textContent = state.expandAll ? (isZh ? '收起全部' : 'Collapse all') : (isZh ? '展开全部' : 'Expand all'); }
+}
+function expandAllJourney(open){
+  state.expandAll = open;
+  document.querySelectorAll('#panel-journey .talkmap-acc').forEach(function(a){ setAccOpen(a, open); });
+  updateJourneyToolLabels();
+}
+function toggleSort(){
+  state.sort = (state.sort === 'asc') ? 'desc' : 'asc';
+  renderJourney();
+  updateJourneyToolLabels();
+}
+function printTalks(){
+  activate('journey');
+  expandAllJourney(true);
+  setTimeout(function(){ window.print(); }, 80);
 }
 
 /* active filter chip (single, removable) */
@@ -616,6 +671,7 @@ function activate(mode){
   activeMode = mode;
   seg.querySelectorAll('button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-mode') === mode); });
   document.querySelectorAll('.talkmap-panel').forEach(function(p){ p.classList.toggle('active', p.id === 'panel-' + mode); });
+  document.querySelectorAll('[data-show="journey"]').forEach(function(el){ el.style.display = (mode === 'journey') ? '' : 'none'; });
   try { localStorage.setItem('hq-talks-mode', mode); } catch(e){}
 }
 seg.addEventListener('click', function(e){
@@ -624,6 +680,10 @@ seg.addEventListener('click', function(e){
 });
 /* search */
 document.getElementById('talkMapSearch').addEventListener('input', function(e){ state.query = e.target.value.trim(); renderAll(); });
+/* journey tools: sort + expand/collapse all + print */
+document.getElementById('tmSortBtn').addEventListener('click', toggleSort);
+document.getElementById('tmExpandBtn').addEventListener('click', function(){ expandAllJourney(!state.expandAll); });
+document.getElementById('tmPrintBtn').addEventListener('click', printTalks);
 
 /* ---- Filter dropdown (concrete values grouped by Year / Location / Type) ---- */
 var tmFilterWrap = document.getElementById('tmFilterWrap');
@@ -671,7 +731,7 @@ document.getElementById('tmExportBtn').addEventListener('click', function(e){ tm
 tmExportWrap.querySelector('.tm-drop-menu').addEventListener('click', function(e){
   var b=e.target.closest('button[data-act]'); if(!b) return;
   e.stopPropagation();
-  if(b.getAttribute('data-act')==='pdf'){ window.print(); }
+  if(b.getAttribute('data-act')==='pdf'){ printTalks(); }
   tmCloseAllDrops();
 });
 document.addEventListener('click', tmCloseAllDrops);
@@ -689,6 +749,18 @@ document.getElementById('panel-wall').addEventListener('click', function(e){
   buildFilterMenu();
   renderAll();
   renderDyn();
+  updateJourneyToolLabels();
+  /* deep-link: #talk-<slug> expands & scrolls to that talk */
+  var hash = window.location.hash;
+  if(hash && hash.indexOf('#talk-') === 0){
+    var tgt = document.getElementById(hash.slice(1));
+    if(tgt){
+      activate('journey');
+      var tacc = tgt.querySelector('.talkmap-acc');
+      if(tacc){ setAccOpen(tacc, true); }
+      setTimeout(function(){ tgt.scrollIntoView({ behavior:'smooth', block:'center' }); }, 80);
+    }
+  }
   /* deep-link: ?location=City, Country applies a Location filter and shows the Timeline */
   var params = new URLSearchParams(window.location.search);
   var locParam = params.get('location');
