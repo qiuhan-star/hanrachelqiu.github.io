@@ -786,6 +786,7 @@ document.getElementById('panel-wall').addEventListener('click', function(e){
     if(s){ s.placeholder = isZh ? '搜索演讲…' : 'Search talks…'; }
     buildFilterMenu();
     renderAll(); renderDyn();
+    updateJourneyToolLabels();
     try { activate(activeMode); } catch(e){}
   }
   var _h = document.documentElement;
