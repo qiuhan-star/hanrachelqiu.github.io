@@ -11,8 +11,8 @@
 
   @include breakpoint($large) {
     float: right;
-    // 与 .page 同步：恒定间距、永不重叠（见 _page.scss 注释）。
-    width: calc(100% - 294px);
+    // 与 .page 同步：恒定间距、永不重叠（侧栏 360px + 30px margin + 16px 间距 = 406px）。
+    width: calc(100% - 406px);
     margin-right: 0;
     padding-left: 1.5em;
     padding-right: 1.5em;

@@ -545,11 +545,12 @@ function renderJourney(){
   var items = geoTalks.filter(matches).slice().sort(function(a,b){ return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
   if(items.length === 0){ document.getElementById('panel-journey').innerHTML = talkmapEmptyState(); return; }
   var html = '<div class="talkmap-jtrack">';
-  var prevMonth = null;
-  items.forEach(function(t){
-    var month = t.date.slice(0,7);
-    var showDate = (month !== prevMonth);
-    prevMonth = month;
+  items.forEach(function(t, idx){
+    var month = (t.date || '').slice(0,7);
+    /* 时间轴视觉为「最新在上」(column-reverse)，故以「下一项(更新的)」判断月份切换：
+       让每个月分组里最新的一条显示日期，保证顶部节点始终带日期（避免同月两条时顶部一条被 date--ghost 隐藏）。 */
+    var nextMonth = (idx + 1 < items.length) ? (items[idx + 1].date || '').slice(0,7) : null;
+    var showDate = (month !== nextMonth);
     var titleHtml = escapeHtml(dispTitle(t));
     if(t.permalink){ titleHtml = '<a href="' + escapeHtml(t.permalink) + '">' + titleHtml + '</a>'; }
     var langTag = (t.lang === 'zh') ? (isZh ? '中文' : 'Chinese') : '';
