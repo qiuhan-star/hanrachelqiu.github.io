@@ -5,8 +5,8 @@
 <style>
   #talkMapWrap { position: relative; max-width:880px; }
   .talkmap-summary { color:var(--text-secondary); font-size:0.95rem; margin:0 0 1em; }
-  .talkmap-seg { display:flex; flex-wrap:wrap; gap:4px; background:var(--bg-raised); border-radius:10px; padding:4px; margin:0 0 20px; }
-  .talkmap-seg button { border:none; background:transparent; color:var(--text-secondary); font-size:0.9rem; padding:8px 14px; border-radius:8px; cursor:pointer; font-family:inherit; line-height:1.2; }
+  .talkmap-seg { display:inline-flex; align-items:center; gap:2px; background:var(--bg-raised); border-radius:10px; padding:3px; }
+  .talkmap-seg button { border:none; background:transparent; color:var(--text-secondary); font-size:0.85rem; padding:0 15px; border-radius:7px; cursor:pointer; font-family:inherit; height:32px; line-height:1; display:inline-flex; align-items:center; }
   .talkmap-seg button .sub { display:block; font-size:.68rem; color:var(--text-muted); margin-top:2px; opacity:.85; }
   .talkmap-seg button.active { background:var(--bg-surface); color:var(--text-primary); font-weight:600; box-shadow:0 1px 2px rgba(0,0,0,.08); }
   .talkmap-seg button.active .sub { color:var(--accent); opacity:1; }
@@ -14,13 +14,16 @@
   .talkmap-panel.active { display:block; }
 
   /* control bar: view switcher + search + filter + export on one row */
-  .tm-bar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; margin:0 0 12px; }
-  .tm-tools { display:flex; flex-wrap:wrap; gap:8px; align-items:center; flex:1 1 auto; justify-content:flex-end; }
-  #talkMapSearch { border:1px solid var(--border-subtle); background:var(--bg-base); color:var(--text-primary); border-radius:8px; padding:7px 12px; font-size:.82rem; min-width:160px; flex:1 1 160px; max-width:260px; font-family:inherit; }
+  .tm-bar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin:0 0 12px; }
+  .tm-tools { display:flex; flex-wrap:wrap; gap:10px; align-items:center; flex:1 1 auto; justify-content:flex-end; }
+  #talkMapSearch { border:1px solid var(--border-subtle); background:var(--bg-base); color:var(--text-primary); border-radius:8px; padding:0 13px; font-size:.85rem; min-width:170px; flex:1 1 170px; max-width:260px; font-family:inherit; height:38px; outline:none; transition:border-color .15s; }
+  #talkMapSearch:focus { border-color:#94a3b8; }
+  #talkMapSearch::placeholder { color:#94a3b8; }
   /* dropdown (Filter / Export) */
   .tm-drop { position:relative; }
-  .tm-drop-btn { border:1px solid var(--border-subtle); background:var(--bg-raised); color:var(--text-secondary); padding:7px 13px; border-radius:8px; cursor:pointer; font-size:.82rem; font-family:inherit; display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
-  .tm-drop-btn:hover { border-color:var(--accent); color:var(--accent); }
+  .tm-drop-btn { border:1px solid var(--border-subtle); background:var(--bg-raised); color:var(--text-secondary); padding:0 13px; border-radius:8px; cursor:pointer; font-size:.85rem; font-family:inherit; display:inline-flex; align-items:center; gap:6px; white-space:nowrap; height:38px; transition:all .15s; }
+  .tm-drop-btn:hover { border-color:#94a3b8; background:#f8fafc; color:var(--text-primary); }
+  .export-icon { width:16px; height:16px; stroke:#64748b; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex:none; }
   .tm-drop-btn.tm-ghost { background:transparent; color:var(--text-secondary); border-color:var(--border-subtle); }
   .tm-drop-btn.tm-ghost:hover { background:transparent; color:var(--accent); border-color:var(--accent); }
   .tm-drop.open .tm-drop-btn { border-color:var(--accent); color:var(--accent); }
@@ -190,6 +193,12 @@
   :root[data-theme="dark"] .talkmap-res.btn-primary { background:#e2e8f0; color:#0f172a; border-color:#e2e8f0; }
   :root[data-theme="dark"] .talkmap-res.btn-primary:hover { background:#fff; border-color:#fff; }
   :root[data-theme="dark"] .talkmap-chev { background:#1e293b; color:#94a3b8; border-color:#334155; }
+  :root[data-theme="dark"] #talkMapSearch { background:var(--bg-base); border-color:#334155; color:var(--text-primary); }
+  :root[data-theme="dark"] #talkMapSearch:focus { border-color:#475569; }
+  :root[data-theme="dark"] #talkMapSearch::placeholder { color:#64748b; }
+  :root[data-theme="dark"] .tm-drop-btn { background:transparent; border-color:#334155; color:var(--text-secondary); }
+  :root[data-theme="dark"] .tm-drop-btn:hover { background:#334155; border-color:#475569; color:var(--text-primary); }
+  :root[data-theme="dark"] .export-icon { stroke:#94a3b8; }
   strong.pres { font-weight:700; color:var(--text-primary); }
   .talkmap-jcard .conf, .talkmap-text .conf { min-width:0; }
 
@@ -218,7 +227,7 @@
         <div class="tm-drop-menu" id="tmFilterMenu"></div>
       </div>
       <div class="tm-drop" id="tmExportWrap">
-        <button class="tm-drop-btn tm-ghost" id="tmExportBtn" title="Export options">📥 <span data-lang="en">Export</span><span data-lang="zh">导出</span> ▾</button>
+        <button class="tm-drop-btn tm-ghost" id="tmExportBtn" title="Export options"><svg class="export-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span data-lang="en">Export</span><span data-lang="zh">导出</span> ▾</button>
         <div class="tm-drop-menu">
           <button class="tm-drop-item" data-act="pdf"><span data-lang="en">Export PDF</span><span data-lang="zh">导出 PDF</span></button>
           <button class="tm-drop-item" data-act="zip" disabled><span data-lang="en">Download All</span><span data-lang="zh">下载全部</span></button>
