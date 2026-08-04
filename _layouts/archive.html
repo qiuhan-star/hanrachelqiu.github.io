@@ -17,7 +17,13 @@ layout: default
 
   <div class="archive">
     {% unless page.header.overlay_color or page.header.overlay_image %}
-      <h1 class="page__title">{{ page.title }}</h1>
+      <h1 class="page__title">
+        {% if page.title_zh %}
+          <span data-lang="en">{{ page.title }}</span><span data-lang="zh">{{ page.title_zh }}</span>
+        {% else %}
+          {{ page.title }}
+        {% endif %}
+      </h1>
     {% endunless %}
     {{ content }}
   </div>
