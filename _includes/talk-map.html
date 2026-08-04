@@ -472,62 +472,64 @@ var KIND_MAP = {
 function renderWall(){
   var filtered = geoTalks.filter(matches);
   if(filtered.length === 0){ document.getElementById('panel-wall').innerHTML = talkmapEmptyState(); return; }
-  var cities = {};
+  /* group filtered talks by country (after comma) -> city (before comma) */
+  var byCountry = {};
   filtered.forEach(function(t){
-    var c = t.city.split(',')[0].trim();
-    if(!cities[c]){ cities[c] = { en: t.city, zh: t.location_zh, schools:{}, count:0, award:0, confUrl:null }; }
-    if(!cities[c].schools[t.venue]){ cities[c].schools[t.venue] = { short: shortOf(t.venue), count:0, award:false, talk:null }; }
-    cities[c].schools[t.venue].count++;
-    cities[c].schools[t.venue].award = cities[c].schools[t.venue].award || !!t.award;
-    if(t.award){ cities[c].award++; }
-    if(!cities[c].schools[t.venue].talk){ cities[c].schools[t.venue].talk = t; }
-    if(t.conf_url && !cities[c].confUrl){ cities[c].confUrl = t.conf_url; }
-    cities[c].count++;
+    var parts = (t.city || '').split(',');
+    var cityEn = (parts[0] || '').trim();
+    var countryEn = (parts[1] || '').trim() || 'Other';
+    byCountry[countryEn] = byCountry[countryEn] || {};
+    byCountry[countryEn][cityEn] = byCountry[countryEn][cityEn] || [];
+    byCountry[countryEn][cityEn].push(t);
   });
-  var cityNames = Object.keys(cities);
   var html = '<div class="talkmap-stat">'
     + '<div class="box"><div class="n">' + talksData.length + '</div><div class="l">' + (isZh ? '场受邀演讲' : 'talks') + '</div></div>'
     + '<div class="box"><div class="n">' + Object.keys(byCityGlobal).length + '</div><div class="l">' + (isZh ? '座城市' : 'cities') + '</div></div>'
     + '<div class="box"><div class="n">' + Object.keys(byVenue).length + '</div><div class="l">' + (isZh ? '所机构' : 'institutions') + '</div></div>'
-    + '</div><div class="talkmap-grid">';
-  cityNames.forEach(function(cn){
-    var c = cities[cn];
-    var cc = countryFromLoc(isZh ? (c.zh || c.en) : c.en);
-    /* single-talk city → that talk's permalink; otherwise → city-filtered talks page */
-    var viewHref = '#';
-    if(c.count === 1){
-      Object.keys(c.schools).forEach(function(v){ if(c.schools[v].talk && c.schools[v].talk.permalink) viewHref = c.schools[v].talk.permalink; });
-    } else {
-      viewHref = '/talks/?location=' + encodeURIComponent(c.en);
-    }
-    html += '<div class="talkmap-city" data-href="' + escapeHtml(viewHref) + '">'
-      + '<div class="cityrow"><span class="cn">' + escapeHtml(isZh ? ((c.zh || c.en).split(',')[0].trim()) : cn) + '</span><span class="cc">' + cc + '</span><span class="count">' + c.count + (isZh ? ' 场' : '') + '</span></div>'
-      + '<ul class="city-list">';
-    Object.keys(c.schools).forEach(function(v){
-      var s = c.schools[v];
-      var metaInner = '<span class="n">' + s.count + (s.count === 1 ? (isZh ? ' 场' : ' talk') : (isZh ? ' 场' : ' talks')) + '</span>';
-      if(s.count === 1 && s.talk){
-        var wk = (s.talk.kind || 'conference');
-        var wcls = (wk === 'workshop') ? 'work' : (wk === 'seminar') ? 'sem' : (wk === 'invited') ? 'inv' : 'conf';
-        metaInner += '<span class="dot">·</span><span class="pill ' + wcls + '">' + kindLabel(wk) + '</span>';
-      }
-      html += '<li><div class="institution-item">'
-        + '<div class="inst-name">📍 ' + escapeHtml(fullVenue({ venue:v, venue_zh: s.talk.venue_zh })) + '</div>'
-        + '<div class="inst-meta">' + metaInner + '</div>'
-        + '</div></li>';
+    + '</div>';
+  var countryNames = Object.keys(byCountry);
+  countryNames.forEach(function(co){
+    var cinfo = COUNTRY[co] || { flag:'🌐', en:co, zh:co };
+    var cities = byCountry[co];
+    var cityNames = Object.keys(cities);
+    var total = 0; cityNames.forEach(function(ci){ total += cities[ci].length; });
+    html += '<section class="tm-country">'
+      + '<div class="tm-country-head"><span class="flag">' + cinfo.flag + '</span>'
+      + '<span class="cname">' + (isZh ? cinfo.zh : cinfo.en) + '</span>'
+      + '<span class="csub">' + (isZh ? cinfo.en : cinfo.zh) + '</span>'
+      + '<span class="ccount">' + total + (isZh ? ' 场' : ' Talks') + '</span></div>';
+    html += '<div class="tm-citygrid">';
+    cityNames.forEach(function(ci){
+      var list = cities[ci];
+      var zhName = CITY_ZH[ci] || ci;
+      var hasAward = list.some(function(t){ return !!t.award; });
+      html += '<article class="tm-city"><div class="tm-city-head">'
+        + '<span class="pin">📍</span>'
+        + '<span class="ccn">' + escapeHtml(isZh ? zhName : ci) + '</span>'
+        + '<span class="cen">' + escapeHtml(isZh ? ci : zhName) + '</span>'
+        + (hasAward ? '<span class="award">🏆 ' + (isZh ? '获奖' : 'Award') + '</span>' : '')
+        + '<span class="ccount">' + list.length + (isZh ? ' 场' : ' Talks') + '</span></div>';
+      html += '<ul class="tm-talklist">';
+      list.forEach(function(t){
+        var k = KIND_MAP[t.kind] || KIND_MAP.conference;
+        var hasOfficial = !!t.conf_url;
+        var actions = '';
+        if(hasOfficial){ actions += resBtn(isZh ? '会议官网' : 'Official Site', t.conf_url, 'btn-secondary'); }
+        actions += resBtn(isZh ? '查看详情' : 'View Details', t.permalink || '#', 'btn-primary');
+        html += '<li class="tm-talk">'
+          + '<a class="tt-title" href="' + escapeHtml(t.permalink || '#') + '">' + escapeHtml(t.title) + '</a>'
+          + '<div class="tt-meta"><span class="venue">' + escapeHtml(shortOf(t.venue)) + '</span>'
+          + '<span class="dot">·</span><span>' + escapeHtml(t.date) + '</span>'
+          + '<span class="pill ' + k.c + '">' + k.l + '</span>'
+          + (t.award ? '<span class="award-chip">🏆</span>' : '')
+          + '</div>'
+          + '<div class="tm-actions' + (hasOfficial ? '' : ' single') + '">' + actions + '</div>'
+          + '</li>';
+      });
+      html += '</ul></article>';
     });
-    html += '</ul>';
-    if(c.award > 0){
-      var awLabel = isZh ? '优秀论文奖' : ('Outstanding Research Paper Award' + (c.award > 1 ? 's' : ''));
-      html += '<div class="city-awards">🏆 ' + c.award + ' ' + awLabel + '</div>';
-    }
-    var hasOfficial = !!c.confUrl;
-    var actions = '';
-    if(hasOfficial){ actions += resBtn('Official Site', c.confUrl, 'btn-secondary'); }
-    actions += resBtn('View Details', viewHref, 'btn-primary');
-    html += '<div class="city-actions' + (hasOfficial ? '' : ' single') + '">' + actions + '</div></div>';
+    html += '</div></section>';
   });
-  html += '</div>';
   document.getElementById('panel-wall').innerHTML = html;
 }
 
