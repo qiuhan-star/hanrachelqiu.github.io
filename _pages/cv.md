@@ -110,6 +110,8 @@ redirect_from:
 
 <button class="collapsible"><span data-lang="en">Service and leadership</span><span data-lang="zh">服务与领导</span></button>
 <div class="content">
+{% include password-gate.html id="cv-sal" mode="section" title="Password Required" title_zh="请输入密码" desc="This section is password protected." desc_zh="本部分已加密。" btn="Unlock" btn_zh="解锁" err="Incorrect password." err_zh="密码错误。" %}
+<div id="cv-sal-content" style="display:none">
 <div data-lang="en" markdown="1">
 
 <h2 class="section-title">Journal Services</h2>
@@ -199,6 +201,7 @@ redirect_from:
     <li><span class="role">教育与辅导</span>：为<span class="role">西双版纳勐满镇</span>的孩子们提供针对性的<span class="role">汉语教育</span>，帮助他们克服母语者学习普通话的难题。在社区内提供<span class="role">深入辅导</span>与<span class="role">学业指导</span>，重点关注升学准备与学科专项辅导，以支持教育发展。</li>
     <li><span class="role">新冠社区响应</span>：牵头组织个人防护装备（PPE）发放，开展每日体温检测，并管理健康码核验以保障社区安全。筹集资金并捐赠口罩等必需物资，支援高风险人群与一线工作者。开展疫苗接种宣传，提升社区健康与免疫意识。</li>
 </ul>
+</div>
 </div>
 </div>
 
