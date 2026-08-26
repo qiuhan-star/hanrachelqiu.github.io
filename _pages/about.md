@@ -75,7 +75,7 @@ As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal gam
 
 现为[浙江大学](https://www.zju.edu.cn/)[公共管理学院](https://www.spa.zju.edu.cn/)行政管理专业博士研究生，导师为[吴中盛教授](https://mypage.zju.edu.cn/en/0022142)。
 
-硕士阶段同样就读于[厦门大学](https://www.xmu.edu.cn/)[公共管理学院](https://spa.xmu.edu.cn/)行政管理专业，导师为[于文轩教授](https://spa.xmu.edu.cn/info/1237/3095.htm)。
+硕士阶段就读于[厦门大学](https://www.xmu.edu.cn/)[公共管理学院](https://spa.xmu.edu.cn/)行政管理专业，导师为[于文轩教授](https://spa.xmu.edu.cn/info/1237/3095.htm)。
 
 2022 年获[亚利桑那州立大学](https://www.asu.edu/)公共服务与公共政策理学学士与[海南大学](https://www.hainanu.edu.cn/)行政管理文学学士；海南大学期间师从[林海英教授](https://haitc.hainanu.edu.cn/cslm/jzyg/szdw/xzgl.htm)。
 
