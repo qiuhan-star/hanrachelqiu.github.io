@@ -7,17 +7,5 @@ redirect_from:
   - /methods/
   - /methodnotes/
 ---
-
-<div data-lang="en" markdown="1">
-A running series of practical, public-administration–anchored method notes — preregistration, spatial analysis, statistics, and whatever I am learning next.
-</div>
-
-<div data-lang="zh" markdown="1">
-一个持续更新的方法笔记系列，以公共管理为锚点——预注册、空间分析、统计学，以及我接下来要学习的一切。
-</div>
-
-{% include base_path %}
-{% assign method_posts = site.posts | where_exp: "p", "p.tags contains 'Methods Notes'" %}
-{% for post in method_posts %}
-  {% include archive-single.html %}
-{% endfor %}
+{% include blog-cipher.html %}
+{% include gate-decrypt.html cipher_var="BLOG_CIPHER" title="Password Required" title_zh="请输入密码" desc="This page is password protected." desc_zh="本页面已加密。" btn="Unlock" btn_zh="解锁" err="Incorrect password." err_zh="密码错误。" %}

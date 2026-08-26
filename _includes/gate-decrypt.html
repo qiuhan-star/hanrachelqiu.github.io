@@ -1,0 +1,83 @@
+<div id="gate-overlay" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--bg-base, #fafbfc);">
+  <div style="text-align:center;max-width:340px;padding:2.5em 2em;">
+    <div style="font-size:2.8em;line-height:1;margin-bottom:0.4em;">🔒</div>
+    <h2 style="margin:0 0 0.5em;font-size:1.4em;color:var(--text-base, #1a1d24);">
+      <span data-lang="en">{{ include.title | default: "Password Required" }}</span>
+      {% if include.title_zh %}<span data-lang="zh">{{ include.title_zh }}</span>{% endif %}
+    </h2>
+    <p style="margin:0 0 1.2em;color:var(--text-muted, #6b7280);">
+      <span data-lang="en">{{ include.desc | default: "This page is password protected." }}</span>
+      {% if include.desc_zh %}<span data-lang="zh">{{ include.desc_zh }}</span>{% endif %}
+    </p>
+    <input id="gate-pwd" type="password" autocomplete="off" style="width:100%;box-sizing:border-box;padding:0.6em 0.8em;font-size:1em;border:1px solid var(--border-base, #d0d7de);border-radius:8px;background:var(--surface, #fff);color:var(--text-base, #1a1d24);margin-bottom:0.8em;" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" />
+    <button id="gate-go" style="width:100%;padding:0.6em 1em;font-size:1em;border:none;border-radius:8px;background:var(--accent, #5a7cd8);color:#fff;cursor:pointer;">
+      <span data-lang="en">{{ include.btn | default: "Unlock" }}</span>
+      {% if include.btn_zh %}<span data-lang="zh">{{ include.btn_zh }}</span>{% endif %}
+    </button>
+    <p id="gate-err" style="display:none;color:#c0392b;margin:0.8em 0 0;font-size:0.9em;">
+      <span data-lang="en">{{ include.err | default: "Incorrect password." }}</span>
+      {% if include.err_zh %}<span data-lang="zh">{{ include.err_zh }}</span>{% endif %}
+    </p>
+  </div>
+</div>
+<div id="gate-content" style="display:none"></div>
+<script>
+/* AES-GCM gate: ciphertext lives in window[ "{{ include.cipher_var }}" ].
+   Decrypt in-browser with the typed passphrase (PBKDF2 + AES-GCM). No plaintext ships.
+   After injecting, re-run window.__applyLang() so the right language shows. */
+(function () {
+  var CIPHER_VAR = "{{ include.cipher_var }}";
+  var PASS = "{{ include.pass | default: '123456' }}";
+  var ov = document.getElementById("gate-overlay");
+  var ct = document.getElementById("gate-content");
+  var inp = document.getElementById("gate-pwd");
+  var btn = document.getElementById("gate-go");
+  var err = document.getElementById("gate-err");
+  var ITER = 150000, SALT_LEN = 16, IV_LEN = 12;
+
+  function toBuf(b64) {
+    var bin = atob(b64);
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return bytes;
+  }
+  function decrypt(pass) {
+    var c = window[CIPHER_VAR];
+    if (!c) return Promise.reject(new Error("missing cipher"));
+    var bytes = toBuf(c);
+    var salt = bytes.slice(0, SALT_LEN);
+    var iv = bytes.slice(SALT_LEN, SALT_LEN + IV_LEN);
+    var data = bytes.slice(SALT_LEN + IV_LEN);
+    return crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"])
+      .then(function (baseKey) {
+        return crypto.subtle.deriveKey(
+          { name: "PBKDF2", salt: salt, iterations: ITER, hash: "SHA-256" },
+          baseKey, { name: "AES-GCM", length: 256 }, false, ["decrypt"]
+        );
+      }).then(function (key) {
+        return crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, key, data);
+      }).then(function (plain) {
+        return new TextDecoder().decode(plain);
+      });
+  }
+  function unlock() {
+    if (!inp.value) return;
+    decrypt(inp.value).then(function (html) {
+      err.style.display = "none";
+      ct.innerHTML = html;
+      if (window.__applyLang) window.__applyLang();
+      ct.style.display = "block";
+      ov.style.display = "none";
+    }).catch(function () {
+      err.style.display = "block";
+      inp.value = "";
+      inp.focus();
+    });
+  }
+  if (btn) btn.addEventListener("click", unlock);
+  if (inp) {
+    inp.addEventListener("keydown", function (e) { if (e.key === "Enter") unlock(); });
+    inp.focus();
+  }
+})();
+</script>
