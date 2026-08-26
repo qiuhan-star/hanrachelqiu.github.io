@@ -3,7 +3,6 @@ permalink: /services/
 title: "Services"
 author_profile: true
 ---
-{% include password-gate.html id="services" title="Password Required" title_zh="请输入密码" desc="This page is password protected." desc_zh="本页面已加密。" btn="Unlock" btn_zh="解锁" err="Incorrect password." err_zh="密码错误。" %}
 
 <div data-lang="en" markdown="1">
 ## Journal Services
