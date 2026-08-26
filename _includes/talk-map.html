@@ -243,21 +243,21 @@
 <div id="talkMapWrap">
   {% assign talk_items = site.talks | where_exp: "t", "t.lang != 'zh-CN'" %}
   {% assign _yrs = talk_items | map: 'date' | sort %}
-  <p class="talkmap-summary"><strong>{{ talk_items.size }}</strong> <span data-lang="en">Talks &amp; Presentations ({{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }})</span><span data-lang="zh">场演讲与报告（{{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }}）</span></p>
+  <p class="talkmap-summary"><strong>{{ talk_items.size }}</strong> Talks &amp; Presentations ({{ _yrs.first | date: '%Y' }}–{{ _yrs.last | date: '%Y' }})</p>
 
   <div class="tm-bar">
     <div class="talkmap-seg" id="talkMapSeg">
-      <button data-mode="journey" title="Collapsible vertical timeline"><span data-lang="en">Timeline</span><span data-lang="zh">时间轴</span></button>
-      <button data-mode="wall" title="Group talks by city"><span data-lang="en">By City</span><span data-lang="zh">按城市</span></button>
+      <button data-mode="journey" title="Collapsible vertical timeline">Timeline</button>
+      <button data-mode="wall" title="Group talks by city">By City</button>
     </div>
     <div class="tm-tools">
       <input id="talkMapSearch" placeholder="Search talks…" />
       <div class="tm-drop" id="tmFilterWrap">
-        <button class="tm-drop-btn" id="tmFilterBtn" title="Filter by year / location / type">▾ <span data-lang="en">Filter</span><span data-lang="zh">筛选</span></button>
+        <button class="tm-drop-btn" id="tmFilterBtn" title="Filter by year / location / type">▾ Filter</button>
         <div class="tm-drop-menu" id="tmFilterMenu"></div>
       </div>
-      <button class="tm-drop-btn tm-jtool" id="tmSortBtn" data-show="journey" title="Sort order"><span class="lbl">最新</span></button>
-      <button class="tm-drop-btn tm-jtool" id="tmExpandBtn" data-show="journey" title="Expand / collapse all"><span class="lbl">展开全部</span></button>
+      <button class="tm-drop-btn tm-jtool" id="tmSortBtn" data-show="journey" title="Sort order"><span class="lbl">Newest</span></button>
+      <button class="tm-drop-btn tm-jtool" id="tmExpandBtn" data-show="journey" title="Expand / collapse all"><span class="lbl">Expand all</span></button>
       <button class="tm-drop-btn" id="tmPrintBtn" title="Print / PDF"><svg class="export-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span data-lang="en">Print</span><span data-lang="zh">打印</span></button>
       <div class="tm-drop" id="tmExportWrap">
         <button class="tm-drop-btn tm-ghost" id="tmExportBtn" title="Export options"><svg class="export-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span data-lang="en">Export</span><span data-lang="zh">导出</span> ▾</button>
@@ -310,7 +310,7 @@ var talksData = [
 /* geo views (map / wall / journey / map+wall / list+loc) exclude text-only entries */
 var geoTalks = talksData.filter(function(t){ return !t.hide_on_map; });
 
-var isZh = (document.documentElement.getAttribute('data-lang') === 'zh');
+var isZh = false; /* Talks interface is English-only; Chinese display disabled */
 
 /* venue -> coordinates + short labels (only the geographic lookup is hardcoded) */
 var venueCoords = {
@@ -468,8 +468,7 @@ function detailHtml(t){
 /* ---- wall panel ---- */
 /* lightweight empty-state when a filter/search yields no talks */
 function talkmapEmptyState(){
-  return '<div class="talkmap-empty"><span data-lang="en">No presentations found. Try clearing your filters.</span>'
-       + '<span data-lang="zh">未找到匹配的演讲，请尝试清除筛选条件。</span></div>';
+  return '<div class="talkmap-empty">No presentations found. Try clearing your filters.</div>';
 }
 
 /* country / city / talk-kind display maps for the Country->City wall */
