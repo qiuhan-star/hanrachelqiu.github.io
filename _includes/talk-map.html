@@ -780,7 +780,7 @@ document.getElementById('panel-wall').addEventListener('click', function(e){
 /* live re-render when the global language toggle flips data-lang on <html> */
 (function(){
   function syncTalkLang(){
-    isZh = (document.documentElement.getAttribute('data-lang') === 'zh');
+    isZh = false; /* keep Talks English-only regardless of the global language toggle */
     var s = document.getElementById('talkMapSearch');
     if(s){ s.placeholder = isZh ? '搜索演讲…' : 'Search talks…'; }
     buildFilterMenu();

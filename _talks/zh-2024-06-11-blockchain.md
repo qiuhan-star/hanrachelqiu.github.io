@@ -1,7 +1,7 @@
 ---
 title: "链上城市治理：区块链如何在中国实现赋能？"
 collection: talks
-type: "在 2024 年第 25 届数字政府研究国际会议（dg.o 2024）上做报告"
+type: "论文被第 25 届数字政府研究国际会议（dg.o 2024）论文集收录（受邀，因出行限制未能现场出席）"
 permalink: /zh/talks/2024-06-11-blockchain
 lang: zh-CN
 lang_alt: /talks/2024-06-11-blockchain
