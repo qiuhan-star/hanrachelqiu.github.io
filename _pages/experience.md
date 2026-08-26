@@ -10,10 +10,10 @@ author_profile: true
 ### Mutual-Aid Elderly Care Project
 *Research Team Member* · *Zhejiang University* · *Dec. 2025 – Present*
 
-*Confidential.*
+> **This project is currently confidential and has not yet been made public.**
 
 ### Brand Development Pathways for State Grid Public Welfare Projects
-*Research Team Member (PI: Zhongsheng Wu)* · *Zhejiang University, School of Public Affairs* · *Nov. 2025 – Present*
+*Research Team Member (PI: Zhongsheng Wu)* · *Zhejiang University, School of Public Affairs* · *2026 – Present*
 - Conducted a multi-case study of 10 representative public-welfare projects selected from 24 initiatives under State Grid Zhejiang Electric Power.
 - Examined the transition from project-based operations to systematic brand development using case analysis, in-depth interviews, and focus groups.
 - Identified challenges (fragmented implementation, limited communication impact, weak sustainability) and proposed brand-oriented transformation pathways.
@@ -41,10 +41,10 @@ author_profile: true
 ### 互助养老项目
 *课题研究团队成员* · *浙江大学* · *2025年12月 – 至今*
 
-涉及保密
+> **该项目目前保密，尚未公开。**
 
 ### 国网公益项目品牌化发展路径研究
-*课题研究团队成员（PI：吴中盛）* · *浙江大学公共管理学院* · *2025年11月 – 至今*
+*课题研究团队成员（PI：吴中盛）* · *浙江大学公共管理学院* · *2026 – 至今*
 - 从国网浙江电力的 24 项公益行动中筛选出 10 个代表性项目，开展多案例研究。
 - 运用案例分析、深度访谈与焦点小组，探讨项目化运作向系统化品牌建设的转型。
 - 识别实施碎片化、传播效能有限、可持续性薄弱等挑战，提出品牌化转型发展路径。
