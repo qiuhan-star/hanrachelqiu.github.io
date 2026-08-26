@@ -1,4 +1,4 @@
-{% comment %} PJAX 站内翻页：只换 #main 正文、保留 .sidebar(含音乐 iframe)，使音乐翻页不断。本文件只用 /* */ 注释，避免 compress 布局压缩时 // 与下一行合并出错。 {% endcomment %}
+{% comment %} PJAX 站内翻页：只换 #main 正文、保留 .sidebar，避免侧栏重复渲染。本文件只用 /* */ 注释，避免 compress 布局压缩时 // 与下一行合并出错。 {% endcomment %}
 <script>
 (function () {
   /* 仅对支持 history API 与 DOMParser 的浏览器启用；不支持则退回普通翻页 */
@@ -77,17 +77,17 @@
     } catch (e) {}
   }
 
-  /* 把新文档的 #main 换入：保留现有 .sidebar(含音乐 iframe，不重建)，只替换其余正文 */
+  /* 把新文档的 #main 换入：保留现有 .sidebar，不重建，只替换其余正文 */
   function swapMain(newDoc, url) {
     var newMain = newDoc.querySelector(MAIN);
     var oldMain = document.querySelector(MAIN);
     if (!newMain || !oldMain) return false;
 
-    var liveSidebar = oldMain.querySelector(SIDEBAR); /* 关键：保留现存节点，iframe 全程不脱离文档，播放不中断 */
+    var liveSidebar = oldMain.querySelector(SIDEBAR); /* 关键：保留现存侧栏节点，避免其脱离文档被浏览器重载 */
     var newSidebar = newMain.querySelector(SIDEBAR);
     if (newSidebar && newSidebar.parentNode) newSidebar.parentNode.removeChild(newSidebar);
 
-    /* 只移除正文子节点，绝不 detach 侧栏(含音乐 iframe)，避免 iframe 因脱离文档被某些浏览器重载 */
+    /* 只移除正文子节点，绝不 detach 侧栏，避免侧栏因脱离文档被某些浏览器重载 */
     var kids = Array.prototype.slice.call(oldMain.childNodes);
     kids.forEach(function (k) {
       if (k !== liveSidebar && k.parentNode === oldMain) oldMain.removeChild(k);
@@ -137,7 +137,7 @@
       .catch(function () { window.location.href = url; }); /* 失败 → 整页兜底 */
   });
 
-  /* 前进/后退：同样只换内容，保持音乐 */
+  /* 前进/后退：同样只换内容，保持侧栏 */
   window.addEventListener('popstate', function () {
     fetch(location.href, { credentials: 'same-origin' })
       .then(function (r) { if (!r.ok) throw new Error('http'); return r.text(); })

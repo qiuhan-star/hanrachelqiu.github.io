@@ -13,7 +13,7 @@ author_profile: true
 > **This project is currently confidential and has not yet been made public.**
 
 ### Brand Development Pathways for State Grid Public Welfare Projects
-*Research Team Member (PI: Zhongsheng Wu)* · *Zhejiang University, School of Public Affairs* · *2026 – Present*
+*Research Team Member (Advisor: Zhongsheng Wu)* · *Zhejiang University, School of Public Affairs* · *2026 – Present*
 - Conducted a multi-case study of 10 representative public-welfare projects selected from 24 initiatives under State Grid Zhejiang Electric Power.
 - Examined the transition from project-based operations to systematic brand development using case analysis, in-depth interviews, and focus groups.
 - Identified challenges (fragmented implementation, limited communication impact, weak sustainability) and proposed brand-oriented transformation pathways.
