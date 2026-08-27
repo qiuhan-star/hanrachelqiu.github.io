@@ -199,9 +199,6 @@
     if (l === 'zh' && !pageHasLang('zh')) {
       el.textContent = '中文版即将推出 · Chinese version coming soon';
       el.style.display = 'block';
-    } else if (l === 'ko' && hasKo) {
-      el.textContent = '⚠️ 한국어 번역은 기계 번역 초안입니다 · 韩文为机器翻译草稿，待校对 · Korean is a machine-translation draft, pending review';
-      el.style.display = 'block';
     } else if (l === 'ko' && !hasKo) {
       el.textContent = '此页暂无韩文译文 · 한국어 번역 준비 중 · Korean version not yet available';
       el.style.display = 'block';
