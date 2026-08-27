@@ -18,8 +18,10 @@ layout: default
   <div class="archive">
     {% unless page.header.overlay_color or page.header.overlay_image %}
       <h1 class="page__title">
-        {% if page.title_zh %}
-          <span data-lang="en">{{ page.title }}</span><span data-lang="zh">{{ page.title_zh }}</span>
+        {% if page.title_zh or page.title_ko %}
+          <span data-lang="en">{{ page.title }}</span>
+          {% if page.title_zh %}<span data-lang="zh">{{ page.title_zh }}</span>{% endif %}
+          {% if page.title_ko %}<span data-lang="ko">{{ page.title_ko }}</span>{% endif %}
         {% else %}
           {{ page.title }}
         {% endif %}
