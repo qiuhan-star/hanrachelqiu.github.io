@@ -46,7 +46,7 @@ redirect_from:
   <span id="cv-downloads" style="margin-left:12px;font-size:0.9em;color:#555;"><span data-lang="en" class="dl-en">downloads: 0</span><span data-lang="zh" class="dl-zh">下载量 0</span><span data-lang="ko" class="dl-ko">다운로드 0</span></span>
 </p>
 
-<button class="collapsible"><span data-lang="en">Education</span><span data-lang="zh">教育背景</span><span data-lang="ko">교육 배경</span></button>
+<button class="collapsible"><span data-lang="en">Education</span><span data-lang="zh">教育背景</span><span data-lang="ko">학력</span></button>
 <div class="content">
 <div data-lang="en" markdown="1">
   <p>* Ph.D. in Public Administration, Zhejiang University, Sept. 2025 - Present</p>
@@ -63,7 +63,7 @@ redirect_from:
 <div data-lang="ko" markdown="1">
   <p>* 공공관리학 박사, 저장대학교, 2025년 9월 - 현재</p>
   <p>* 행정관리 석사, 샤먼대학교(厦门大学), 2022년 9월 - 2025년 6월</p>
-  <p>* 공공관리학 학사, 하이난 대학교(海南大学), 2018년 9월 - 2022년 6월</p>
+  <p>* 공공관리학 학사, 하이난대학교(海南大学), 2018년 9월 - 2022년 6월</p>
   <p>* 공공서비스 및 공공정책 이학사, 애리조나 주립대학교, 2018년 9월 - 2022년 5월</p>
 </div>
 </div>
@@ -241,23 +241,23 @@ redirect_from:
 <h2 class="section-title">학생 조직 봉사</h2>
 <ul>
     <li><span class="role">반장</span>, 2024 - 2025</li>
-    <li><span class="role">회원</span>, 학생회, 하이난 대학교, 2018 - 2021</li>
-    <li><span class="role">회원</span>, 종합관리실, 하이난 대학교, 2018 - 2020</li>
+    <li><span class="role">회원</span>, 학생회, 하이난대학교, 2018 - 2021</li>
+    <li><span class="role">회원</span>, 종합관리실, 하이난대학교, 2018 - 2020</li>
     <li><span class="role">부부장</span>, 실천부, 단과대학 공청단 위원회, HAITC, 2019 - 2021</li>
 </ul>
 
 <h2 class="section-title">동아리 봉사</h2>
 <ul>
-    <li><span class="role">회원 겸 프로젝트 기획자</span>, 영어 동아리, 하이난 대학교, 2019 - 2022</li>
-    <li><span class="role">회원</span>, 사진 동아리, 하이난 대학교, 2018 - 2019</li>
+    <li><span class="role">회원 겸 프로젝트 기획자</span>, 영어 동아리, 하이난대학교, 2019 - 2022</li>
+    <li><span class="role">회원</span>, 사진 동아리, 하이난대학교, 2018 - 2019</li>
 </ul>
 
 <h2 class="section-title">자원봉사</h2>
 <ul>
     <li>자원봉사자 협회, 샤먼대학교, 2023년 4월</li>
-    <li>자원봉사자 협회, 공공관리학원, 샤먼대학교, 2023년 4월 - 현재</li>
+    <li>자원봉사자 협회, 공공관리대학, 샤먼대학교, 2023년 4월 - 현재</li>
     <li>청년 자원봉사자 협회, 하이커우시, 하이난성, 2019년 5월 - 2020년 1월</li>
-    <li>청년 자원봉사자 협회, 하이난 대학교, 2019년 3월 - 2020년 3월</li>
+    <li>청년 자원봉사자 협회, 하이난대학교, 2019년 3월 - 2020년 3월</li>
     <li>고등학교 햇살 자원봉사 연합회, 2016년 10월 - 2018년 6월</li>
 </ul>
 
@@ -266,14 +266,14 @@ redirect_from:
     <li><span class="role">환경 보호</span>: 하이커우 '어머니 강' 프로젝트에 참여하여 습지 보전과 맹그로브 생태계 보호에 주력했습니다. 환경 교육 프로그램을 진행하고, 지역사회 주도의 쓰레기 분리수거 및 재활용 프로그램을 시작하여 지속 가능한 폐기물 관리를 추진했습니다.</li>
     <li><span class="role">노인 돌봄</span>: 지역사회 내 노인 주민을 정기적으로 방문하여 동행과 일상 업무 지원을 제공하고, 삶의 질 향상을 위한 활동을 기획했습니다.</li>
     <li><span class="role">자유무역구 상인 지원</span>: 자유무역구 내 상인들에게 영어 지원을 제공하여 외국 방문객과의 소통 능력을 높이고 다문화 마케팅 전략 발전에 기여했습니다.</li>
-    <li><span class="role">교육 및 멘토링</span>: 시솽반나 멍만진(勐满镇)의 아동들에게 중국어 교육을 제공하여 모어 화자들의 표준어 습득 문제를 돕고, 지역사회 내 심화 과외와 학업 지도(대학 진학 준비 및 전공 과목 지도)를 제공하여 교육 발전을 지원했습니다.</li>
+    <li><span class="role">교육 및 멘토링</span>: 시솽반나 멍만진(勐满镇)의 아동들에게 중국어 교육을 제공하여 모국어 화자들의 표준어 습득 문제를 돕고, 지역사회 내 심화 과외와 학업 지도(대학 진학 준비 및 전공 과목 지도)를 제공하여 교육 발전을 지원했습니다.</li>
     <li><span class="role">코로나19 지역사회 대응</span>: 개인보호장비(PPE) 배포, 매일 체온 검사, 건강 QR 코드 확인을 주도하여 지역사회 안전을 확보했습니다. 마스크 등 필수 물품 기부를 위한 모금을 진행하고, 예방접종 인식 캠페인을 벌여 지역사회 건강과 면역력 향상을 도모했습니다.</li>
 </ul>
 </div>
 </div>
 </div>
 
-<button class="collapsible"><span data-lang="en">Work experience</span><span data-lang="zh">工作经历</span><span data-lang="ko">경력 / 업무 경력</span></button>
+<button class="collapsible"><span data-lang="en">Work experience</span><span data-lang="zh">工作经历</span><span data-lang="ko">경력</span></button>
 <div class="content">
 <div data-lang="en">
   <div class="weGate" data-cipher="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">

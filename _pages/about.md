@@ -127,15 +127,15 @@ As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal gam
 
 <div data-lang="ko" markdown="1">
 ## 저는 누구인가요?
-안녕하세요! 저는 구함(邱涵, Han Qiu)이고, 영어 이름은 Rachel입니다.
+안녕하세요! 저는 한치우(邱涵, Han Qiu)라고 합니다. 영어 이름은 Rachel입니다.
 
-현재 저장대학교(浙江大学) 공공관리학원(公共管理学院) 행정관리 전공 박사과정에 재학 중이며, 우중성(吴中盛) 교수의 지도를 받고 있습니다.
+현재 저장대학교(浙江大学) 공공관리대학(公共管理学院) 행정관리 전공 박사과정에 재학 중이며, 우중성(吴中盛) 교수의 지도를 받고 있습니다.
 
-지원대학교(厦门大学) 공공관리학원에서 행정관리 석사 학위를 받았으며, 위원쉬안(于文轩) 교수의 지도를 받았습니다.
+샤먼대학교(厦门大学) 공공관리대학에서 행정관리 석사 학위를 받았으며, 위원쉬안(于文轩) 교수의 지도를 받았습니다.
 
-애리조나 주립대학교(Arizona State University, 2022)에서 공공서비스 및 공공정책 학사, 하이난 대학교(海南大学, 2022)에서 행정관리 학사 학위를 받았으며, 린하이잉(林海英) 교수의 지도를 받았습니다.
+애리조나 주립대학교(Arizona State University, 2022)에서 공공서비스 및 공공정책 학사, 하이난대학교(海南大学, 2022)에서 행정관리 학사 학위를 받았으며, 린하이잉(林海英) 교수의 지도를 받았습니다.
 
-저의 연구 관심 분야는 공공 및 비영리 조직 관리, 정부 투명성과 책무성, 디지털 정부와 GovTech, 협력 생산 및 협력 거버넌스, 그리고 환경 거버넌스입니다. [**자세히 보기**]({{ '/portfolio/' | absolute_url }})
+저의 연구 관심 분야는 공공 및 비영리 조직 관리, 정부 투명성과 책무성, 디지털 정부와 GovTech, 공동생산 및 협력 거버넌스, 그리고 환경 거버넌스입니다. [**자세히 보기**]({{ '/portfolio/' | absolute_url }})
 
 연구 협력과 학술 교류를 언제든 기꺼이 논의합니다. 제 연구에 관심이 있으시거나 연락을 원하시면 언제든 rachel.hanqiu@gmail.com으로 연락해 주세요!
 
@@ -160,7 +160,7 @@ As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal gam
 <details markdown="1">
 <summary>더 보기</summary>
 
-<span style="color: #888888;">**[2024년 12월]**</span> 📚 **초청 심사위원:** *AI 및 공공행정 교육 관련 논문 초청 심사.* 🌟 **“우수 심사위원”** 🌟 으로 선정되었습니다. >> [**상세 보기**](https://www.webofscience.com/wos/author/record/LTM-0273-2024)
+<span style="color: #888888;">**[2024년 12월]**</span> 📚 **초청 심사위원:** *AI 및 공공행정 교육 관련 논문 초청 심사.* 🌟 **“우수 심사위원”** 🌟으로 선정되었습니다. >> [**상세 보기**](https://www.webofscience.com/wos/author/record/LTM-0273-2024)
 
 <span style="color: #888888;">**[2024년 11월]**</span> 🎉 **학술 성과:** *제 연구 논문이 단과대학의 찬사를 받았습니다!* >> [**자세히 보기**](https://mp.weixin.qq.com/s/2TYL9l8GGay93hLLRQBzYw)
 
