@@ -1,5 +1,7 @@
-{% comment %} 同页多语下拉框：中文 / English / 한국어。选择后仅切换语言，不跳转 URL；
- 当前语言存 localStorage，默认英文。한국어 暂留作第三选项（无译文时回落英文）。{% endcomment %}
+{% comment %} 同页多语下拉框：中文 / English / 한국어 / 繁體中文。选择后仅切换语言，不跳转 URL；
+ 当前语言存 localStorage，默认英文。한국어 暂留作第三选项（无译文时回落英文）；
+ 繁體中文由 s2t-map.html 的 S2T 映射在客户端将简体 zh 文本转繁体。{% endcomment %}
+{% include s2t-map.html %}
 <div class="lang-dd" id="langDD">
   <button type="button" class="lang-dd__btn" id="langBtn" aria-haspopup="listbox" aria-expanded="false">
     <svg class="lang-dd__globe" aria-hidden="true" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -13,6 +15,7 @@
   <ul class="lang-dd__menu" id="langMenu" role="listbox">
     <li class="lang-dd__opt" data-lang-opt="en" role="option">English</li>
     <li class="lang-dd__opt" data-lang-opt="zh" role="option">中文</li>
+    <li class="lang-dd__opt" data-lang-opt="zh-Hant" role="option">繁體中文</li>
     <li class="lang-dd__opt" data-lang-opt="ko" role="option">&#54620;&#44397;&#50612;</li>
   </ul>
 </div>
@@ -97,28 +100,71 @@
   var label = document.getElementById('langBtnLabel');
   var menu = document.getElementById('langMenu');
   var opts = menu ? Array.prototype.slice.call(menu.querySelectorAll('.lang-dd__opt')) : [];
-  var LABELS = { zh: '中文', en: 'English', ko: '한국어' };
-  var VALID = ['zh', 'en', 'ko'];
+  var LABELS = { zh: '中文', en: 'English', ko: '한국어', 'zh-Hant': '繁體中文' };
+  var VALID = ['zh', 'en', 'ko', 'zh-Hant'];
 
   function currentLang() {
     var l = document.documentElement.getAttribute('data-lang');
     return VALID.indexOf(l) >= 0 ? l : 'en';
   }
 
+  /* 简→繁：将 data-lang="zh" 元素的文本节点按 S2T 映射转繁体；
+     首次转换时把原文存进 data-zh-orig，切回其它语言时还原，保证可逆。 */
+  function toTraditionalText(s) {
+    if (!window.S2T) return s;
+    var out = '';
+    for (var i = 0; i < s.length; i++) {
+      var c = s[i];
+      out += (window.S2T[c] !== undefined) ? window.S2T[c] : c;
+    }
+    return out;
+  }
+  function walkConvert(el, fn) {
+    if (!el) return;
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+    var list = [], n;
+    while ((n = walker.nextNode())) {
+      if (n.parentNode && (n.parentNode.nodeName === 'STYLE' || n.parentNode.nodeName === 'SCRIPT')) continue;
+      list.push(n);
+    }
+    for (var i = 0; i < list.length; i++) list[i].nodeValue = fn(list[i].nodeValue);
+  }
+  function applyHant(enable) {
+    if (!window.S2T) return;
+    var nodes = document.querySelectorAll('[data-lang="zh"]');
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      if (enable) {
+        if (!el.hasAttribute('data-zh-orig')) el.setAttribute('data-zh-orig', el.innerHTML);
+        walkConvert(el, toTraditionalText);
+      } else {
+        if (el.hasAttribute('data-zh-orig')) {
+          el.innerHTML = el.getAttribute('data-zh-orig');
+          el.removeAttribute('data-zh-orig');
+        }
+      }
+    }
+  }
+
   window.__applyLang = function () {
     var l = currentLang();
-    var show = (l === 'ko') ? 'en' : l; /* 한국어暂回落英文 */
+    var hasKo = pageHasLang('ko');
+    /* 한국어：有译文则显示 ko；无正文译文回落英文（html.ko-fallback 控制 CSS） */
+    document.documentElement.classList.toggle('ko-fallback', (l === 'ko') && !hasKo);
+    /* ko 无译文回落英文；zh-Hant 复用 zh 文本（随后由 applyHant 转繁体） */
+    var show = (l === 'ko') ? (hasKo ? 'ko' : 'en') : (l === 'zh-Hant' ? 'zh' : l);
     /* 只切换正文/导航的 [data-lang]；下拉项用 data-lang-opt，不会被隐藏 */
     var nodes = document.querySelectorAll('[data-lang]');
     for (var i = 0; i < nodes.length; i++) {
       var el = nodes[i];
       el.classList.toggle('lang-hidden', el.getAttribute('data-lang') !== show);
     }
+    applyHant(l === 'zh-Hant');
     if (label) label.textContent = LABELS[l] || LABELS.en;
     opts.forEach(function (o) {
       o.classList.toggle('is-active', o.getAttribute('data-lang-opt') === l);
     });
-    showFallback(l);
+    showFallback(l, hasKo);
   };
 
   /* 回退提示：切到某语言但该页无对应译文时，显示「即将推出」提示，避免正文不动/空白看着像坏掉。
@@ -147,13 +193,16 @@
     }
     return fallbackEl;
   }
-  function showFallback(l) {
+  function showFallback(l, hasKo) {
     var el = ensureFallback();
     if (!el) return;
     if (l === 'zh' && !pageHasLang('zh')) {
       el.textContent = '中文版即将推出 · Chinese version coming soon';
       el.style.display = 'block';
-    } else if (l === 'ko' && !pageHasLang('ko')) {
+    } else if (l === 'ko' && hasKo) {
+      el.textContent = '⚠️ 한국어 번역은 기계 번역 초안입니다 · 韩文为机器翻译草稿，待校对 · Korean is a machine-translation draft, pending review';
+      el.style.display = 'block';
+    } else if (l === 'ko' && !hasKo) {
       el.textContent = '此页暂无韩文译文 · 한국어 번역 준비 중 · Korean version not yet available';
       el.style.display = 'block';
     } else {

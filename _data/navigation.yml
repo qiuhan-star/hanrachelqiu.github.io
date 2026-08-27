@@ -1,38 +1,49 @@
 main:
   - title: "Publications"
     title_zh: "出版物"
+    title_ko: "논문"
     url: /publications/
 
   - title: "Talks"
     title_zh: "演讲"
+    title_ko: "강연"
     url: /talks/
 
   - title: "Experience"
     title_zh: "经历"
+    title_ko: "경력"
     url: /experience/
 
   - title: "CV"
     title_zh: "简历"
+    title_ko: "이력서"
     url: /cv/
 
   - title: "More"
     title_zh: "更多"
+    title_ko: "더 보기"
     children:
       - title: "Awards"
         title_zh: "获奖"
+        title_ko: "수상"
         url: /awards/
       - title: "Services"
         title_zh: "服务"
+        title_ko: "서비스"
         url: /services/
       - title: "Blog"
         title_zh: "博客"
+        title_ko: "블로그"
         url: /method-notes/
       - title: "Portfolio"
         title_zh: "作品集"
+        title_ko: "포트폴리오"
         url: /portfolio/
       - title: "Guide"
         title_zh: "指南"
+        title_ko: "가이드"
         url: /markdown/
       - title: "PhD Simulator"
         title_zh: "PhD 模拟器"
+        title_ko: "PhD 시뮬레이터"
         url: /game-details.html/

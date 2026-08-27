@@ -220,7 +220,7 @@ layout: compress
           l = 'zh';
         } else {
           try { l = localStorage.getItem('site-lang-v2'); } catch (e) {}
-          if (l !== 'zh' && l !== 'en' && l !== 'ko') l = 'en';
+          if (l !== 'zh' && l !== 'en' && l !== 'ko' && l !== 'zh-Hant') l = 'en';
         }
         document.documentElement.setAttribute('data-lang', l);
         document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : l);
@@ -228,10 +228,18 @@ layout: compress
     </script>
 
     <style>
-      /* ===== 同页多语：JS 就绪前先隐藏所有 [data-lang]，避免开屏闪错语言；
-         就绪后由 .lang-hidden 类显隐（한국어 暂无译文时回落英文）===== */
-      html:not(.lang-ready) [data-lang] { display: none !important; }
-      [data-lang].lang-hidden { display: none !important; }
+      /* ===== 同页多语：以 <html data-lang> 为准，CSS 直接显隐；
+         默认（含 JS 禁用 / 出错）显示英文、不白屏；JS 只负责切到其它语言 ===== */
+      /* 无 data-lang（JS 被禁用）时，只显示英文，隐藏其它语言 */
+      html:not([data-lang]) [data-lang="zh"],
+      html:not([data-lang]) [data-lang="ko"] { display: none !important; }
+      /* 选中某语言时只显示该语言；ko 无译文回落英文；zh-Hant 复用 zh 文本并由 JS 转繁体 */
+      html[data-lang="en"] [data-lang]:not([data-lang="en"]),
+      html[data-lang="zh"] [data-lang]:not([data-lang="zh"]),
+      html[data-lang="zh-Hant"] [data-lang]:not([data-lang="zh"]),
+      html[data-lang="ko"] [data-lang]:not([data-lang="ko"]) { display: none !important; }
+      /* 한국어无正文译文时（html.ko-fallback）回落英文，避免空白 */
+      html.ko-fallback[data-lang="ko"] [data-lang]:not([data-lang="en"]) { display: none !important; }
 
       /* ============================================================
          明暗主题 token 体系（2026-08-02 重设计）

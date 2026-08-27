@@ -83,3 +83,45 @@ author_profile: True
   <strong>在研项目。</strong> 除上述成果外，我还有若干关于共同生产、数字政府与环境治理的工作论文及在研项目（共计约 6 项，详情可索取）。
 </div>
 </div>
+<div data-lang="ko">
+{% if site.author.googlescholar %}
+  <div class="wordwrap">Google Scholar 프로필에서도 제 논문을 확인하실 수 있습니다: <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
+{% endif %}
+
+{% include base_path %}
+
+{% if site.publication_category %}
+  {% for category in site.publication_category  %}
+    {% assign title_shown = false %}
+    {% assign ko_title = category[1].title %}
+    {% case category[0] %}
+      {% when 'books' %}{% assign ko_title = '단행본' %}
+      {% when 'journal articles' %}{% assign ko_title = '저널 논문' %}
+      {% when 'conferences' %}{% assign ko_title = '학술대회 논문' %}
+      {% when 'paper under review' %}{% assign ko_title = '심사 중 논문' %}
+      {% when 'working paper' %}{% assign ko_title = '작업 논문' %}
+      {% when 'case report' %}{% assign ko_title = '사례 보고' %}
+    {% endcase %}
+    {% for post in site.publications reversed %}
+      {% if post.lang == 'zh-CN' %}{% continue %}{% endif %}
+      {% if post.category != category[0] %}
+        {% continue %}
+      {% endif %}
+      {% unless title_shown %}
+        <h2>{{ ko_title }}</h2><hr />
+        {% assign title_shown = true %}
+      {% endunless %}
+      {% include archive-single.html %}
+    {% endfor %}
+  {% endfor %}
+{% else %}
+  {% for post in site.publications reversed %}
+      {% if post.lang == 'zh-CN' %}{% continue %}{% endif %}
+    {% include archive-single.html %}
+  {% endfor %}
+{% endif %}
+
+<div class="pub-note">
+  <strong>진행 중인 연구.</strong> 위에 열거된 성과 외에도, 공동 생산·디지털 정부·환경 거버넌스 관련 작업 논문 및 진행 중인 프로젝트가 추가로 있습니다(총 약 6건, 상세 내용은 요청 시 제공 가능).
+</div>
+</div>

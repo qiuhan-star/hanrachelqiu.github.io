@@ -124,3 +124,57 @@ As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal gam
 
 </details>
 </div>
+
+<div data-lang="ko" markdown="1">
+## 저는 누구인가요?
+안녕하세요! 저는 구함(邱涵, Han Qiu)이고, 영어 이름은 Rachel입니다.
+
+현재 저장대학교(浙江大学) 공공관리학원(公共管理学院) 행정관리 전공 박사과정에 재학 중이며, 우중성(吴中盛) 교수의 지도를 받고 있습니다.
+
+지원대학교(厦门大学) 공공관리학원에서 행정관리 석사 학위를 받았으며, 위원쉬안(于文轩) 교수의 지도를 받았습니다.
+
+애리조나 주립대학교(Arizona State University, 2022)에서 공공서비스 및 공공정책 학사, 하이난 대학교(海南大学, 2022)에서 행정관리 학사 학위를 받았으며, 린하이잉(林海英) 교수의 지도를 받았습니다.
+
+저의 연구 관심 분야는 공공 및 비영리 조직 관리, 정부 투명성과 책무성, 디지털 정부와 GovTech, 협력 생산 및 협력 거버넌스, 그리고 환경 거버넌스입니다. [**자세히 보기**]({{ '/portfolio/' | absolute_url }})
+
+연구 협력과 학술 교류를 언제든 기꺼이 논의합니다. 제 연구에 관심이 있으시거나 연락을 원하시면 언제든 rachel.hanqiu@gmail.com으로 연락해 주세요!
+
+## 연구 외 활동:
+- 저는 사회 정의의 열렬한 옹호자이며, 공공 서비스가 지닌 변화의 힘을 굳게 믿습니다. 공공 복지에 헌신하며, 지역사회에 실질적인 변화를 가져올 수 있는 방법을 끊임없이 모색합니다.
+- 여가 시간에는 라틴 댄스, 서핑, 조깅, 사진 촬영, 스케치 등을 즐깁니다.
+- 또한 독일어, 한국어, 일본어 등 새로운 언어 학습에 열정을 갖고 있습니다.
+<br><br>
+
+🌟 흥미로운 공유 🌟
+======
+박사 학위 진학을 고민하던 중 우연히 정말 훌륭한 게임인 [**PhD 시뮬레이터**](https://research.wmz.ninja/projects/phd/index.html)를 발견했습니다! 이를 더 많은 분께 알리고 싶습니다. 자세한 내용은 [**전체 이야기 읽기**]({{ '/game-details.html' | absolute_url }})를 참고하세요.
+<br><br>
+
+🔥 최신 소식
+======
+
+<span style="color: #888888;">**[2026년 4월]**</span> 🎤 **학술 활동:** *호주 퍼스에서 열린 IRSPM 2026 학술대회에서 발표하게 되어 기쁩니다.* >> [**학술대회 상세**]({{ '/talks/2026-04-08-irspm-coproduction' | absolute_url }})
+
+<span style="color: #888888;">**[2026년 7월]**</span> 🎤 **학술 활동:** *시안 교통대학교(西安交通大学)에서 열린 중국사회학회 2026 연례학술대회에서 두 편의 발표를 진행했습니다:* >> [**단일 주체 대 다중 주체**]({{ '/talks/2026-07-10-mobilization-entities' | absolute_url }}) >> [**동원된 기부와 자발적 기부**]({{ '/talks/2026-07-10-mobilized-giving' | absolute_url }})
+
+<details markdown="1">
+<summary>더 보기</summary>
+
+<span style="color: #888888;">**[2024년 12월]**</span> 📚 **초청 심사위원:** *AI 및 공공행정 교육 관련 논문 초청 심사.* 🌟 **“우수 심사위원”** 🌟 으로 선정되었습니다. >> [**상세 보기**](https://www.webofscience.com/wos/author/record/LTM-0273-2024)
+
+<span style="color: #888888;">**[2024년 11월]**</span> 🎉 **학술 성과:** *제 연구 논문이 단과대학의 찬사를 받았습니다!* >> [**자세히 보기**](https://mp.weixin.qq.com/s/2TYL9l8GGay93hLLRQBzYw)
+
+<span style="color: #888888;">**[2024년 12월]**</span> 🎤 **학술 활동:** *홍콩 중문대학교(香港中文大学)에서 열린 제20회 해협양안 및 홍콩·마카오 공공행정 학술세미나에 참석하게 되어 기쁩니다.* >> [**학술대회 상세**]({{ '/talks/2024-05-09-just-transition' | absolute_url }})
+
+<span style="color: #888888;">**[2024년 12월]**</span> 🎤 **학술 활동:** *베이징 칭화대학교(清华大学)에서 열린 국제비교공공정책학회에 참여하게 되어 매우 기쁩니다.* >> [**학술대회 상세**]({{ '/talks/2024-04-19-just-transition' | absolute_url }})
+
+<span style="color: #888888;">**[2023년 12월]**</span> 🚀 **학술 이정표:** *홍콩과기대학교(香港科技大学) 국제학술대회에서 첫 발표를 진행하고 단과대학 방송에 소개되었습니다!* >> [**학술대회 상세**]({{ '/talks/2023-12-01-agile-governance' | absolute_url }}) >> [**자세히 보기**](https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg)
+
+<span style="color: #888888;">**[2023년 12월]**</span> 🗨️ **학술 살롱:** *단과대학 커뮤니티 내에서 제 연구 통찰을 공유하게 되어 기쁩니다!* >> [**자세히 보기**](https://mp.weixin.qq.com/s/dn-2_kHyLDbNC0hQ042xEw)
+
+<span style="color: #888888;">**[2022년 5월]**</span> 🎓 **졸업했습니다!** *최우등(Summa Cum Laude) 성적으로 졸업하며 저를 지지해 주신 분들께 진심으로 감사드립니다!* 🌟👩‍🎓>> [**더 보기**]({{ '/news-2022.html' | absolute_url }})
+
+[모든 소식 보기 →]({{ '/year-archive/' | absolute_url }})
+
+</details>
+</div>
