@@ -1,81 +1,51 @@
 <style>
-/* =============  SECTION DIVIDER ============= */
-.talk-divider {
-  display:flex; align-items:center; gap:12px; margin:32px 0 20px;
-  font-size:.75rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
-  color:var(--accent); opacity:.7;
+/* section headers */
+.talk-section-header {
+  display:flex; align-items:center; gap:10px; margin:28px 0 14px;
+  font-size:.85rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--accent);
 }
-.talk-divider::before, .talk-divider::after {
-  content:''; flex:1; height:1px;
-  background:linear-gradient(90deg, transparent, var(--accent), transparent);
+.talk-section-header::after {
+  content:''; flex:1; height:1px; background:rgba(0,0,0,.08);
 }
-.talk-divider:first-child::before,
-.talk-divider:last-child::after { display:none; }
 
-/* =============  EVENT INFO ============= */
+/* event info card */
 .talk-event-card {
-  border-radius:12px; overflow:hidden;
-  background:linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 70%, #fff) 100%);
-  padding:24px 28px; margin:20px 0;
-  box-shadow:0 4px 20px color-mix(in srgb, var(--accent) 25%, transparent);
+  border:1px solid rgba(0,0,0,.06); border-radius:10px; padding:18px 22px; margin:16px 0;
+  background:rgba(0,0,0,.02);
 }
 .talk-event-card .label {
-  font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
-  color:rgba(255,255,255,.6); margin-bottom:10px;
+  font-size:.7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--accent); margin-bottom:6px; opacity:.7;
 }
-.talk-event-grid {
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:12px;
-}
-.talk-event-item {
-  display:flex; align-items:flex-start; gap:10px;
-  color:rgba(255,255,255,.9); font-size:.82rem; line-height:1.4;
-}
-.talk-event-item .icon { font-size:1.1rem; flex-shrink:0; margin-top:1px; }
-.talk-event-item .val { font-weight:500; }
-.talk-event-item .sub { display:block; font-size:.72rem; opacity:.7; margin-top:1px; }
+.talk-event-card p { margin:0; font-size:.92rem; line-height:1.7; color:var(--text-color); }
 .talk-event-link {
-  display:inline-block; margin-top:14px; padding:7px 18px;
-  border-radius:8px; background:rgba(255,255,255,.2);
-  color:#fff; font-size:.82rem; font-weight:600; text-decoration:none;
-  backdrop-filter:blur(4px); transition:background .2s;
+  display:inline-block; margin-top:10px; padding:5px 14px;
+  border-radius:6px; background:var(--accent); color:#fff;
+  font-size:.8rem; font-weight:600; text-decoration:none; transition:opacity .15s;
 }
-.talk-event-link:hover { background:rgba(255,255,255,.35); color:#fff; text-decoration:none; }
+.talk-event-link:hover { opacity:.85; color:#fff; text-decoration:none; }
 
-/* =============  REFLECTIONS ============= */
-.talk-reflections-wrap {
-  position:relative; margin:24px 0;
-}
-.talk-reflections-wrap::before {
-  content:''; position:absolute; top:0; left:0; bottom:0; width:4px;
-  background:linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 50%, transparent));
-  border-radius:2px;
-}
-.talk-reflections {
-  padding:0 0 0 20px;
-}
+/* reflections collapsible */
+.talk-reflections { margin:16px 0; }
 .talk-reflections summary {
-  cursor:pointer; font-size:.95rem; font-weight:700; padding:10px 0 10px 16px;
-  border-radius:8px; transition:background .15s; letter-spacing:.02em;
-  color:var(--accent); list-style:none; display:flex; align-items:center; gap:8px;
+  cursor:pointer; font-weight:600; font-size:.92rem;
+  color:var(--accent); padding:8px 0; list-style:none; display:flex; align-items:center; gap:8px;
 }
 .talk-reflections summary::-webkit-details-marker { display:none; }
 .talk-reflections summary::before {
-  content:'▶'; font-size:.7rem; transition:transform .2s; color:var(--accent);
+  content:'▶'; font-size:.65rem; transition:transform .2s; color:var(--accent); opacity:.6;
 }
 .talk-reflections[open] summary::before { transform:rotate(90deg); }
-.talk-reflections summary:hover { background:rgba(0,0,0,.02); }
+.talk-reflections summary:hover { opacity:.8; }
 .talk-reflections .content {
-  padding:16px 20px; margin-top:4px;
-  background:rgba(0,0,0,.015); border-radius:0 10px 10px 0;
-  line-height:1.8; font-size:.92rem;
+  padding:14px 18px; margin-top:4px; border-left:3px solid var(--accent);
+  background:rgba(0,0,0,.015); border-radius:0 8px 8px 0; line-height:1.8; font-size:.92rem;
 }
-.talk-reflections .content p { margin:8px 0; }
+.talk-reflections .content p { margin:6px 0; }
 .talk-reflections .content p:first-child { margin-top:0; }
 .talk-reflections .content p:last-child { margin-bottom:0; }
 
-/* =============  PHOTOS ============= */
-.talk-photos-wrap {
-  margin:24px 0; padding:20px 0 4px;
-  border-top:1px solid rgba(0,0,0,.06);
-}
+/* photos section */
+.talk-photos { margin:20px 0; }
 </style>

@@ -14,16 +14,13 @@ location: "中国香港"
 
 <div class="talk-event-card">
   <div class="label">会议信息</div>
-  <p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin-bottom:12px;">
-    《亚洲公共政策期刊》专刊作者工作坊（香港科技大学）相关报道。
-  </p>
+  <p>《亚洲公共政策期刊》专刊作者工作坊（香港科技大学）相关报道。</p>
   <a class="talk-event-link" href="https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg">阅读更多 →</a>
 </div>
 
-<div class="talk-reflections-wrap">
-  <details class="talk-reflections">
-    <summary>展开感悟</summary>
-    <div class="content">
+<details class="talk-reflections">
+  <summary>展开感悟</summary>
+  <div class="content">
       <p>🇭🇰 港科大之行～</p>
       <p>作为硕士生，第一次参加学术会议！
       我和我的合作者很幸运地以全场唯一的学生身份入选并参会～
@@ -39,9 +36,8 @@ location: "中国香港"
       继续加油！💪💪</p>
     </div>
   </details>
-</div>
 
-<div class="talk-photos-wrap">
-  <div class="talk-divider">照片</div>
-  {% include talk-gallery.html id="stakeholder" prefix="Talk-2023-12-01" count=4 ext=".PNG" label="Photos" %}
+<div class="talk-section-header">照片</div>
+<div class="talk-photos">
+{% include talk-gallery.html id="stakeholder" prefix="Talk-2023-12-01" count=4 ext=".PNG" label="Photos" %}
 </div>

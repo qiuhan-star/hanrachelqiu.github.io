@@ -14,15 +14,12 @@ location: "中国香港"
 
 <div class="talk-event-card">
   <div class="label">会议信息</div>
-  <p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin-bottom:0;">
-    在第20届海峡两岸暨港澳地区公共管理学术研讨会上做报告，由香港中文大学主办。
-  </p>
+  <p>在第20届海峡两岸暨港澳地区公共管理学术研讨会上做报告，由香港中文大学主办。</p>
 </div>
 
-<div class="talk-reflections-wrap">
-  <details class="talk-reflections">
-    <summary>展开感悟</summary>
-    <div class="content">
+<details class="talk-reflections">
+  <summary>展开感悟</summary>
+  <div class="content">
       <p>🇭🇰 香港中文大学之行～</p>
       <p>🌟🌟非常荣幸受邀参加在香港中文大学举办的第20届海峡两岸暨港澳地区公共管理学术研讨会，并分享了我们的初步研究成果🌹</p>
       <p>📝海峡两岸暨港澳地区公共管理学术研讨会（前称两岸四地公共管理学术研讨会），自2005年由中国人民大学公共管理学院首次举办以来，已经成功举办了20届。细览历届会议的主题，我们能感受到这20年间时代的浪潮以及公共管理议题的发展。这背后，是主办方和倡议者们对时代问题的敏锐洞察和对未来的深远预见。每一届的会议，都汇聚了新鲜的思想和热情的参与者，这份对学术探索的热爱和对会议初衷的坚守，充满着活力和感染力❣️在开幕式上，听到会议的历史和背后的故事，让我深受感动。我相信，这种长期的坚持和始终如一的热情，将继续激励着每一位参与者，并不断传承下去。</p>
@@ -30,9 +27,8 @@ location: "中国香港"
       <p>继续前行～💪✨</p>
     </div>
   </details>
-</div>
 
-<div class="talk-photos-wrap">
-  <div class="talk-divider">照片</div>
-  {% include talk-gallery.html id="just-transition" prefix="Talk-2024-05-09" count=10 ext=".JPG" label="Photos" %}
+<div class="talk-section-header">照片</div>
+<div class="talk-photos">
+{% include talk-gallery.html id="just-transition" prefix="Talk-2024-05-09" count=10 ext=".JPG" label="Photos" %}
 </div>

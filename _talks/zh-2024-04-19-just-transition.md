@@ -15,15 +15,12 @@ conf_url: https://www.sppm.tsinghua.edu.cn/english/info/1070/1998.htm
 
 <div class="talk-event-card">
   <div class="label">会议信息</div>
-  <p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin-bottom:0;">
-    比较公共政策国际会议由清华大学公共管理学院、《比较政策分析期刊》（JCPA）与国际比较政策分析论坛（ICPA-Forum）联合举办。
-  </p>
+  <p>比较公共政策国际会议由清华大学公共管理学院、《比较政策分析期刊》（JCPA）与国际比较政策分析论坛（ICPA-Forum）联合举办。</p>
 </div>
 
-<div class="talk-reflections-wrap">
-  <details class="talk-reflections">
-    <summary>展开感悟</summary>
-    <div class="content">
+<details class="talk-reflections">
+  <summary>展开感悟</summary>
+  <div class="content">
       <p>🇨🇳 清华之行～</p>
       <p>清华参会，收获满满！🌟</p>
       <p>🙌 衷心感谢讨论嘉宾的精彩点评和宝贵建议 - 令人深受启发！🤝🤝</p>
@@ -32,9 +29,8 @@ conf_url: https://www.sppm.tsinghua.edu.cn/english/info/1070/1998.htm
       <p>带着热情与知识满载而归，准备继续奋斗！💪✨</p>
     </div>
   </details>
-</div>
 
-<div class="talk-photos-wrap">
-  <div class="talk-divider">照片</div>
-  {% include talk-gallery.html id="just-transition" prefix="Talk-2024-04-19" count=7 ext=".JPG" label="Photos" %}
+<div class="talk-section-header">照片</div>
+<div class="talk-photos">
+{% include talk-gallery.html id="just-transition" prefix="Talk-2024-04-19" count=7 ext=".JPG" label="Photos" %}
 </div>

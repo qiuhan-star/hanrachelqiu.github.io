@@ -15,15 +15,12 @@ date: 2024-04-19
 
 <div class="talk-event-card">
   <div class="label">EVENT INFO</div>
-  <p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin-bottom:0;">
-    The International Conference on Comparative Public Policy was jointly organized by the School of Public Policy and Management at Tsinghua University, the Journal of Comparative Policy Analysis (JCPA), and the International Comparative Policy Analysis Forum (ICPA-Forum).
-  </p>
+  <p>The International Conference on Comparative Public Policy was jointly organized by the School of Public Policy and Management at Tsinghua University, the Journal of Comparative Policy Analysis (JCPA), and the International Comparative Policy Analysis Forum (ICPA-Forum).</p>
 </div>
 
-<div class="talk-reflections-wrap">
-  <details class="talk-reflections">
-    <summary>Personal Insights</summary>
-    <div class="content">
+<details class="talk-reflections">
+  <summary>Personal Insights</summary>
+  <div class="content">
       <p>🇨🇳 Academic Journey at Tsinghua University～</p>
       <p>清华参会，收获满满！🌟</p>
       <p>🙌 衷心感谢讨论嘉宾的精彩点评和宝贵建议 - Truly Enlightening! 🤝🤝</p>
@@ -33,9 +30,8 @@ date: 2024-04-19
       <p>Homeward bound with passion and knowledge, ready to hustle! 💪✨</p>
     </div>
   </details>
-</div>
 
-<div class="talk-photos-wrap">
-  <div class="talk-divider">PHOTOS</div>
-  {% include talk-gallery.html id="just-transition" prefix="Talk-2024-04-19" count=7 ext=".JPG" label="Photos" %}
+<div class="talk-section-header">PHOTOS</div>
+<div class="talk-photos">
+{% include talk-gallery.html id="just-transition" prefix="Talk-2024-04-19" count=7 ext=".JPG" label="Photos" %}
 </div>

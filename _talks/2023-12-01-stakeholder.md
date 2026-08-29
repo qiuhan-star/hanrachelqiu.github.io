@@ -14,16 +14,13 @@ location: "Hong Kong, China"
 
 <div class="talk-event-card">
   <div class="label">EVENT INFO</div>
-  <p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin-bottom:12px;">
-    Coverage from the Journal of Asian Public Policy Special Issue Authors' Workshop at HKUST.
-  </p>
+  <p>Coverage from the Journal of Asian Public Policy Special Issue Authors' Workshop at HKUST.</p>
   <a class="talk-event-link" href="https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg">Read More →</a>
 </div>
 
-<div class="talk-reflections-wrap">
-  <details class="talk-reflections">
-    <summary>Personal Insights</summary>
-    <div class="content">
+<details class="talk-reflections">
+  <summary>Personal Insights</summary>
+  <div class="content">
       <p>🇭🇰 Academic Journey at HKUST ~</p>
       <p>作为硕士生，第一次参加学术会议！
       我和我的合作者很幸运地以全场唯一的学生身份入选并参会～
@@ -39,11 +36,10 @@ location: "Hong Kong, China"
       Continue fighting![加油]💪💪</p>
     </div>
   </details>
-</div>
 
-<div class="talk-photos-wrap">
-  <div class="talk-divider">PHOTOS</div>
-  {% include talk-gallery.html id="2023-12-01" prefix="Talk-2023-12-01" count=4 ext=".PNG" label="Photo" %}
+<div class="talk-section-header">PHOTOS</div>
+<div class="talk-photos">
+{% include talk-gallery.html id="2023-12-01" prefix="Talk-2023-12-01" count=4 ext=".PNG" label="Photo" %}
 </div>
 
 #Talk #AcademicLife
