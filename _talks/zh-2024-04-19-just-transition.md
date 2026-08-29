@@ -11,47 +11,35 @@ date: 2024-04-19
 location: "中国北京"
 conf_url: https://www.sppm.tsinghua.edu.cn/english/info/1070/1998.htm
 ---
-关于会议
--
-比较公共政策国际会议由清华大学公共管理学院、《比较政策分析期刊》（JCPA）与国际比较政策分析论坛（ICPA-Forum）联合举办。
+{% include talk-sections.html %}
 
-<style>
-  /* 样式定义 */
-  #reflections-content {
-    display: none; /* 默认不显示 */
-    padding: 15px;
-    border-left: 3px solid #ccc;
-    margin-left: 20px;
-  }
-
-  /* 鼠标悬停在链接上时的样式 */
-  a:hover {
-    color: #007bff;
-    text-decoration: underline;
-  }
-</style>
-<script>
-  function toggleReflections() {
-    var content = document.getElementById('reflections-content');
-    if (content.style.display === 'none') {
-      content.style.display = 'block';
-    } else {
-      content.style.display = 'none';
-    }
-  }
-</script>
-<h2>个人感悟</h2>
-<a href="#" onclick="toggleReflections()">展开感悟</a>
-<div id="reflections-content" style="display:none;">
-    <p>🇨🇳 清华之行～</p>
-    <p>清华参会，收获满满！🌟</p>
-    <p>🙌 衷心感谢讨论嘉宾的精彩点评和宝贵建议 - 令人深受启发！🤝🤝</p>
-    <p>👥 遇见了很多热情和有想法的小伙伴们，东道主的热情款待令人倍感温馨。</p>
-    <p>🍰 还品尝到了美味的茶歇小食～</p>
-    <p>带着热情与知识满载而归，准备继续奋斗！💪✨</p>
+<div class="talk-section">
+  <h2>会议信息</h2>
+  <div class="content">
+    <p>关于会议</p>
+    <p>比较公共政策国际会议由清华大学公共管理学院、《比较政策分析期刊》（JCPA）与国际比较政策分析论坛（ICPA-Forum）联合举办。</p>
+  </div>
 </div>
 
-照片
--
-定格精彩瞬间！📸
-{% include talk-gallery.html id="just-transition" prefix="Talk-2024-04-19" count=7 ext=".JPG" label="Photos" %}
+<div class="talk-section">
+  <h2>个人感悟</h2>
+  <details class="talk-reflections">
+    <summary>展开感悟</summary>
+    <div class="content">
+      <p>🇨🇳 清华之行～</p>
+      <p>清华参会，收获满满！🌟</p>
+      <p>🙌 衷心感谢讨论嘉宾的精彩点评和宝贵建议 - 令人深受启发！🤝🤝</p>
+      <p>👥 遇见了很多热情和有想法的小伙伴们，东道主的热情款待令人倍感温馨。</p>
+      <p>🍰 还品尝到了美味的茶歇小食～</p>
+      <p>带着热情与知识满载而归，准备继续奋斗！💪✨</p>
+    </div>
+  </details>
+</div>
+
+<div class="talk-section">
+  <h2>照片</h2>
+  <div class="content">
+    定格精彩瞬间！📸
+    {% include talk-gallery.html id="just-transition" prefix="Talk-2024-04-19" count=7 ext=".JPG" label="Photos" %}
+  </div>
+</div>
