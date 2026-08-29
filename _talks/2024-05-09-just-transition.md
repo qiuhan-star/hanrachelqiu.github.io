@@ -12,15 +12,14 @@ location: "Hong Kong, China"
 ---
 {% include talk-sections.html %}
 
-<div class="talk-section">
-  <h2>EVENT INFO</h2>
-  <div class="content">
-    <p>Presented at the 20th Cross-Strait and Hong Kong-Macao Public Administration Academic Seminar, hosted by the Chinese University of Hong Kong.</p>
-  </div>
+<div class="talk-event-card">
+  <div class="label">EVENT INFO</div>
+  <p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin-bottom:0;">
+    Presented at the 20th Cross-Strait and Hong Kong-Macao Public Administration Academic Seminar, hosted by the Chinese University of Hong Kong.
+  </p>
 </div>
 
-<div class="talk-section">
-  <h2>REFLECTIONS</h2>
+<div class="talk-reflections-wrap">
   <details class="talk-reflections">
     <summary>Personal Insights</summary>
     <div class="content">
@@ -33,10 +32,7 @@ location: "Hong Kong, China"
   </details>
 </div>
 
-<div class="talk-section">
-  <h2>PHOTOS</h2>
-  <div class="content">
-    Captured in the moment! 📸
-    {% include talk-gallery.html id="just-transition" prefix="Talk-2024-05-09" count=10 ext=".JPG" label="Photos" %}
-  </div>
+<div class="talk-photos-wrap">
+  <div class="talk-divider">PHOTOS</div>
+  {% include talk-gallery.html id="just-transition" prefix="Talk-2024-05-09" count=10 ext=".JPG" label="Photos" %}
 </div>

@@ -12,16 +12,15 @@ location: "Hong Kong, China"
 ---
 {% include talk-sections.html %}
 
-<div class="talk-section">
-  <h2>EVENT INFO</h2>
-  <div class="content">
-    <p>News</p>
-    <p><a href="https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg">&gt;Read More</a></p>
-  </div>
+<div class="talk-event-card">
+  <div class="label">EVENT INFO</div>
+  <p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin-bottom:12px;">
+    Coverage from the Journal of Asian Public Policy Special Issue Authors' Workshop at HKUST.
+  </p>
+  <a class="talk-event-link" href="https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg">Read More →</a>
 </div>
 
-<div class="talk-section">
-  <h2>REFLECTIONS</h2>
+<div class="talk-reflections-wrap">
   <details class="talk-reflections">
     <summary>Personal Insights</summary>
     <div class="content">
@@ -42,12 +41,9 @@ location: "Hong Kong, China"
   </details>
 </div>
 
-<div class="talk-section">
-  <h2>PHOTOS</h2>
-  <div class="content">
-    Captured in the moment! 📸
-    {% include talk-gallery.html id="stakeholder" prefix="Talk-2023-12-01" count=4 ext=".PNG" label="Photos" %}
-  </div>
+<div class="talk-photos-wrap">
+  <div class="talk-divider">PHOTOS</div>
+  {% include talk-gallery.html id="stakeholder" prefix="Talk-2023-12-01" count=4 ext=".PNG" label="Photos" %}
 </div>
 
 

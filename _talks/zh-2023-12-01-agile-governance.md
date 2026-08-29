@@ -12,16 +12,15 @@ location: "中国香港"
 ---
 {% include talk-sections.html %}
 
-<div class="talk-section">
-  <h2>会议信息</h2>
-  <div class="content">
-    <p>动态</p>
-    <p><a href="https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg">&gt;阅读更多</a></p>
-  </div>
+<div class="talk-event-card">
+  <div class="label">会议信息</div>
+  <p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin-bottom:12px;">
+    《亚洲公共政策期刊》专刊作者工作坊（香港科技大学）相关报道。
+  </p>
+  <a class="talk-event-link" href="https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg">阅读更多 →</a>
 </div>
 
-<div class="talk-section">
-  <h2>个人感悟</h2>
+<div class="talk-reflections-wrap">
   <details class="talk-reflections">
     <summary>展开感悟</summary>
     <div class="content">
@@ -42,10 +41,7 @@ location: "中国香港"
   </details>
 </div>
 
-<div class="talk-section">
-  <h2>照片</h2>
-  <div class="content">
-    定格精彩瞬间！📸
-    {% include talk-gallery.html id="stakeholder" prefix="Talk-2023-12-01" count=4 ext=".PNG" label="Photos" %}
-  </div>
+<div class="talk-photos-wrap">
+  <div class="talk-divider">照片</div>
+  {% include talk-gallery.html id="stakeholder" prefix="Talk-2023-12-01" count=4 ext=".PNG" label="Photos" %}
 </div>

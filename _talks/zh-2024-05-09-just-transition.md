@@ -12,15 +12,14 @@ location: "中国香港"
 ---
 {% include talk-sections.html %}
 
-<div class="talk-section">
-  <h2>会议信息</h2>
-  <div class="content">
-    <p>在第20届海峡两岸暨港澳地区公共管理学术研讨会上做报告，由香港中文大学主办。</p>
-  </div>
+<div class="talk-event-card">
+  <div class="label">会议信息</div>
+  <p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin-bottom:0;">
+    在第20届海峡两岸暨港澳地区公共管理学术研讨会上做报告，由香港中文大学主办。
+  </p>
 </div>
 
-<div class="talk-section">
-  <h2>个人感悟</h2>
+<div class="talk-reflections-wrap">
   <details class="talk-reflections">
     <summary>展开感悟</summary>
     <div class="content">
@@ -33,10 +32,7 @@ location: "中国香港"
   </details>
 </div>
 
-<div class="talk-section">
-  <h2>照片</h2>
-  <div class="content">
-    定格精彩瞬间！📸
-    {% include talk-gallery.html id="just-transition" prefix="Talk-2024-05-09" count=10 ext=".JPG" label="Photos" %}
-  </div>
+<div class="talk-photos-wrap">
+  <div class="talk-divider">照片</div>
+  {% include talk-gallery.html id="just-transition" prefix="Talk-2024-05-09" count=10 ext=".JPG" label="Photos" %}
 </div>

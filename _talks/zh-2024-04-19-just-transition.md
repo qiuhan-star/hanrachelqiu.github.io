@@ -13,16 +13,14 @@ conf_url: https://www.sppm.tsinghua.edu.cn/english/info/1070/1998.htm
 ---
 {% include talk-sections.html %}
 
-<div class="talk-section">
-  <h2>会议信息</h2>
-  <div class="content">
-    <p>关于会议</p>
-    <p>比较公共政策国际会议由清华大学公共管理学院、《比较政策分析期刊》（JCPA）与国际比较政策分析论坛（ICPA-Forum）联合举办。</p>
-  </div>
+<div class="talk-event-card">
+  <div class="label">会议信息</div>
+  <p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin-bottom:0;">
+    比较公共政策国际会议由清华大学公共管理学院、《比较政策分析期刊》（JCPA）与国际比较政策分析论坛（ICPA-Forum）联合举办。
+  </p>
 </div>
 
-<div class="talk-section">
-  <h2>个人感悟</h2>
+<div class="talk-reflections-wrap">
   <details class="talk-reflections">
     <summary>展开感悟</summary>
     <div class="content">
@@ -36,10 +34,7 @@ conf_url: https://www.sppm.tsinghua.edu.cn/english/info/1070/1998.htm
   </details>
 </div>
 
-<div class="talk-section">
-  <h2>照片</h2>
-  <div class="content">
-    定格精彩瞬间！📸
-    {% include talk-gallery.html id="just-transition" prefix="Talk-2024-04-19" count=7 ext=".JPG" label="Photos" %}
-  </div>
+<div class="talk-photos-wrap">
+  <div class="talk-divider">照片</div>
+  {% include talk-gallery.html id="just-transition" prefix="Talk-2024-04-19" count=7 ext=".JPG" label="Photos" %}
 </div>

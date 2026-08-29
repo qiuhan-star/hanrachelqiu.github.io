@@ -13,16 +13,14 @@ date: 2024-04-19
 ---
 {% include talk-sections.html %}
 
-<div class="talk-section">
-  <h2>EVENT INFO</h2>
-  <div class="content">
-    <p>About the Conference</p>
-    <p>The International Conference on Comparative Public Policy was jointly organized by the School of Public Policy and Management at Tsinghua University, the Journal of Comparative Policy Analysis (JCPA), and the International Comparative Policy Analysis Forum (ICPA-Forum).</p>
-  </div>
+<div class="talk-event-card">
+  <div class="label">EVENT INFO</div>
+  <p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin-bottom:0;">
+    The International Conference on Comparative Public Policy was jointly organized by the School of Public Policy and Management at Tsinghua University, the Journal of Comparative Policy Analysis (JCPA), and the International Comparative Policy Analysis Forum (ICPA-Forum).
+  </p>
 </div>
 
-<div class="talk-section">
-  <h2>REFLECTIONS</h2>
+<div class="talk-reflections-wrap">
   <details class="talk-reflections">
     <summary>Personal Insights</summary>
     <div class="content">
@@ -37,10 +35,7 @@ date: 2024-04-19
   </details>
 </div>
 
-<div class="talk-section">
-  <h2>PHOTOS</h2>
-  <div class="content">
-    Captured in the moment! 📸
-    {% include talk-gallery.html id="just-transition" prefix="Talk-2024-04-19" count=7 ext=".JPG" label="Photos" %}
-  </div>
+<div class="talk-photos-wrap">
+  <div class="talk-divider">PHOTOS</div>
+  {% include talk-gallery.html id="just-transition" prefix="Talk-2024-04-19" count=7 ext=".JPG" label="Photos" %}
 </div>
