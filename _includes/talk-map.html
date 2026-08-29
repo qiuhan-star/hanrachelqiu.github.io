@@ -521,7 +521,7 @@ function renderWall(){
       html += '<article class="tm-city"><div class="tm-city-head">'
         + '<span class="pin">📍</span>'
         + '<span class="ccn">' + escapeHtml(isZh ? zhName : ci) + '</span>'
-        + '<span class="cen">' + escapeHtml(isZh ? ci : zhName) + '</span>'
+        + (isZh ? '<span class="cen">' + escapeHtml(ci) + '</span>' : '')
         + (hasAward ? '<span class="award">🏆 ' + (isZh ? '获奖' : 'Award') + '</span>' : '')
         + '<span class="ccount">' + list.length + (isZh ? ' 场' : ' Talks') + '</span></div>';
       html += '<ul class="tm-talklist">';
