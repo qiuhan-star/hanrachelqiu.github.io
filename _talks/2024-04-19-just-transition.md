@@ -11,16 +11,13 @@ location: "Beijing, China" #演讲地点
 conf_url: https://www.sppm.tsinghua.edu.cn/english/info/1070/1998.htm
 date: 2024-04-19
 ---
-{% include talk-sections.html %}
 
-<div class="talk-event-card">
-  <div class="label">EVENT INFO</div>
-  <p>The International Conference on Comparative Public Policy was jointly organized by the School of Public Policy and Management at Tsinghua University, the Journal of Comparative Policy Analysis (JCPA), and the International Comparative Policy Analysis Forum (ICPA-Forum).</p>
-</div>
+<h2>Event Info</h2>
+<p>The International Conference on Comparative Public Policy was jointly organized by the School of Public Policy and Management at Tsinghua University, the Journal of Comparative Policy Analysis (JCPA), and the International Comparative Policy Analysis Forum (ICPA-Forum).</p>
 
-<details class="talk-reflections">
+<details>
   <summary>Personal Insights</summary>
-  <div class="content">
+  
       <p>🇨🇳 Academic Journey at Tsinghua University～</p>
       <p>清华参会，收获满满！🌟</p>
       <p>🙌 衷心感谢讨论嘉宾的精彩点评和宝贵建议 - Truly Enlightening! 🤝🤝</p>
@@ -28,10 +25,8 @@ date: 2024-04-19
       <p>🍰 还品尝到了美味的茶歇小食～</p>
       <p>🍰 还品尝到了美味的茶歇小食～</p>
       <p>Homeward bound with passion and knowledge, ready to hustle! 💪✨</p>
-    </div>
-  </details>
+    </details>
 
-<div class="talk-section-header">PHOTOS</div>
-<div class="talk-photos">
+<h2>Photos</h2>
+
 {% include talk-gallery.html id="just-transition" prefix="Talk-2024-04-19" count=7 ext=".JPG" label="Photos" %}
-</div>

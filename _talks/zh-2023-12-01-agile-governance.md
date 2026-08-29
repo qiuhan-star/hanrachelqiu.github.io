@@ -10,17 +10,14 @@ venue: "香港科技大学（HKUST）"
 date: 2023-12-01
 location: "中国香港"
 ---
-{% include talk-sections.html %}
 
-<div class="talk-event-card">
-  <div class="label">会议信息</div>
-  <p>《亚洲公共政策期刊》专刊作者工作坊（香港科技大学）相关报道。</p>
-  <a class="talk-event-link" href="https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg">阅读更多 →</a>
-</div>
+<h2>会议信息</h2>
+<p>《亚洲公共政策期刊》专刊作者工作坊（香港科技大学）相关报道。</p>
+<p><a href="https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg">阅读更多 →</a></p>
 
-<details class="talk-reflections">
+<details>
   <summary>展开感悟</summary>
-  <div class="content">
+  
       <p>🇭🇰 港科大之行～</p>
       <p>作为硕士生，第一次参加学术会议！
       我和我的合作者很幸运地以全场唯一的学生身份入选并参会～
@@ -34,10 +31,8 @@ location: "中国香港"
       饱览了校内融合的山海美景[哇]～</p>
       <p>这既是一个结束，也是一个开始！
       继续加油！💪💪</p>
-    </div>
-  </details>
+    </details>
 
-<div class="talk-section-header">照片</div>
-<div class="talk-photos">
+<h2>照片</h2>
+
 {% include talk-gallery.html id="stakeholder" prefix="Talk-2023-12-01" count=4 ext=".PNG" label="Photos" %}
-</div>

@@ -10,17 +10,14 @@ venue: "The Hong Kong University of Science and Technology (HKUST)"
 date: 2023-12-01
 location: "Hong Kong, China"
 ---
-{% include talk-sections.html %}
 
-<div class="talk-event-card">
-  <div class="label">EVENT INFO</div>
-  <p>Coverage from the Journal of Asian Public Policy Special Issue Authors' Workshop at HKUST.</p>
-  <a class="talk-event-link" href="https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg">Read More →</a>
-</div>
+<h2>Event Info</h2>
+<p>Coverage from the Journal of Asian Public Policy Special Issue Authors' Workshop at HKUST.</p>
+<p><a href="https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg">Read More →</a></p>
 
-<details class="talk-reflections">
+<details>
   <summary>Personal Insights</summary>
-  <div class="content">
+  
       <p>🇭🇰 Academic Journey at HKUST ~</p>
       <p>作为硕士生，第一次参加学术会议！
       我和我的合作者很幸运地以全场唯一的学生身份入选并参会～
@@ -34,12 +31,10 @@ location: "Hong Kong, China"
       饱览了校内融合的山海美景[哇]～</p>
       <p>It marks both an ending and a beginning!
       Continue fighting![加油]💪💪</p>
-    </div>
-  </details>
+    </details>
 
-<div class="talk-section-header">PHOTOS</div>
-<div class="talk-photos">
+<h2>Photos</h2>
+
 {% include talk-gallery.html id="2023-12-01" prefix="Talk-2023-12-01" count=4 ext=".PNG" label="Photo" %}
-</div>
 
 #Talk #AcademicLife
