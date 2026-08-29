@@ -1,0 +1,25 @@
+<style>
+.talk-gallery { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px; margin:16px 0; }
+.talk-gallery img { width:100%; height:260px; object-fit:cover; border-radius:10px; cursor:pointer; border:1px solid rgba(0,0,0,.08); transition:transform .2s ease, box-shadow .2s ease; }
+.talk-gallery img:hover { transform:scale(1.02); box-shadow:0 4px 16px rgba(0,0,0,.12); }
+.talk-gallery-caption { font-size:.82rem; color:var(--text-secondary); margin:4px 0 0; }
+.talk-gallery-modal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.9); cursor:pointer; align-items:center; justify-content:center; }
+.talk-gallery-modal.open { display:flex; }
+.talk-gallery-modal img { max-width:90vw; max-height:90vh; object-fit:contain; border-radius:4px; }
+.talk-gallery-close { position:absolute; top:20px; right:28px; color:#fff; font-size:36px; font-weight:300; cursor:pointer; line-height:1; opacity:.7; }
+.talk-gallery-close:hover { opacity:1; }
+</style>
+<div class="talk-gallery" id="gallery-{{ include.id }}">
+  {% for i in (1..include.count) %}
+    {% assign ext = include.ext | default: '.JPG' %}
+    <img src="{{ site.url }}/images/talks/{{ include.prefix }}-{{ i }}{{ ext }}" alt="{{ include.label }} {{ i }}" loading="lazy" onclick="openGalleryModal(this.src)">
+  {% endfor %}
+</div>
+<div class="talk-gallery-modal" id="galleryModal" onclick="closeGalleryModal(event)">
+  <span class="talk-gallery-close">&times;</span>
+  <img id="galleryModalImg" src="">
+</div>
+<script>
+function openGalleryModal(src){ document.getElementById('galleryModal').classList.add('open'); document.getElementById('galleryModalImg').src=src; }
+function closeGalleryModal(e){ if(e.target===e.currentTarget||e.target.classList.contains('talk-gallery-close')) document.getElementById('galleryModal').classList.remove('open'); }
+</script>
