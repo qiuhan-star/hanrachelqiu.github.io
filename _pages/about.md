@@ -33,11 +33,6 @@ I am always glad to discuss research collaboration and academic exchange. If you
 - I am also passionate about learning new languages: German, Korean, and Japanese.
 <br><br>
 
-🌟 Interesting Sharing 🌟
-======
-As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal game -- the [**PhD Simulator**](https://research.wmz.ninja/projects/phd/index.html)! I'm eager to spread the word. For a deeper dive into the details, [**read the full story**]({{ '/game-details.html' | absolute_url }}).
-<br><br>
-
 🔥 Latest News
 ======
 <!-- 在此处添加你 2025–2026 的新动态（复制下面格式，去掉注释符号即可）： -->
@@ -89,11 +84,6 @@ As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal gam
 - 我也热爱语言学习，目前正在学习德语、韩语与日语。
 <br><br>
 
-🌟 有趣的分享 🌟
-======
-在考虑是否读博时，我偶然发现了一款很有意思的游戏——[**博士模拟器**](https://research.wmz.ninja/projects/phd/index.html)！我很想把它推荐给更多人。想了解背后的细节，欢迎[**阅读完整故事**]({{ '/game-details.html' | absolute_url }})。
-<br><br>
-
 🔥 最新动态
 ======
 <!-- 在此处添加你 2025–2026 的新动态（复制下面格式，去掉注释符号即可）： -->
@@ -143,11 +133,6 @@ As I was weighing the decision to pursue a PhD, I stumbled upon a phenomenal gam
 - 저는 사회 정의의 열렬한 옹호자이며, 공공 서비스가 지닌 변화의 힘을 굳게 믿습니다. 공공 복지에 헌신하며, 지역사회에 실질적인 변화를 가져올 수 있는 방법을 끊임없이 모색합니다.
 - 여가 시간에는 라틴 댄스, 서핑, 조깅, 사진 촬영, 스케치 등을 즐깁니다.
 - 또한 독일어, 한국어, 일본어 등 새로운 언어 학습에 열정을 갖고 있습니다.
-<br><br>
-
-🌟 흥미로운 공유 🌟
-======
-박사 학위 진학을 고민하던 중 우연히 정말 훌륭한 게임인 [**PhD 시뮬레이터**](https://research.wmz.ninja/projects/phd/index.html)를 발견했습니다! 이를 더 많은 분께 알리고 싶습니다. 자세한 내용은 [**전체 이야기 읽기**]({{ '/game-details.html' | absolute_url }})를 참고하세요.
 <br><br>
 
 🔥 최신 소식

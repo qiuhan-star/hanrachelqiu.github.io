@@ -65,9 +65,8 @@
 
     {% if is_pub %}
     <div class="pub-actions">
-      <a class="pub-btn primary" href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fas fa-external-link-alt" aria-hidden="true"></i> {{ site.data.ui-text[page.lang].pub_details_label | default: site.data.ui-text[site.locale].pub_details_label | default: "View Paper" }}</a>
       {% if post.paperurl %}<a class="pub-btn" href="{{ post.paperurl }}" download><i class="fas fa-file-pdf" aria-hidden="true"></i> {{ site.data.ui-text[page.lang].pub_pdf_label | default: site.data.ui-text[site.locale].pub_pdf_label | default: "PDF" }}</a>{% endif %}
-      {% if post.viewpaperurl %}<a class="pub-btn" href="{{ post.viewpaperurl }}"><i class="fas fa-link" aria-hidden="true"></i> {{ site.data.ui-text[page.lang].pub_doi_label | default: site.data.ui-text[site.locale].pub_doi_label | default: "DOI" }}</a>{% endif %}
+      {% if post.viewpaperurl %}<a class="pub-btn primary" href="{{ post.viewpaperurl }}"><i class="fas fa-link" aria-hidden="true"></i> {{ site.data.ui-text[page.lang].pub_doi_label | default: site.data.ui-text[site.locale].pub_doi_label | default: "DOI" }}</a>{% endif %}
     </div>
     {% endif %}
 

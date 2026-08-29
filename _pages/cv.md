@@ -90,20 +90,20 @@ redirect_from:
 <button class="collapsible"><span data-lang="en">Publications</span><span data-lang="zh">发表论文</span><span data-lang="ko">논문</span></button>
 <div class="content">
 <div data-lang="en" markdown="1">
-  <!-- Publications content here -->
-  <ul>{% for post in site.publications reversed %}
+  <!-- 英文版：只显示非中文论文 -->
+  <ul>{% assign en_pubs = site.publications | where_exp: "pub", "pub.lang != 'zh-CN'" %}{% for post in en_pubs reversed %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
 </div>
 <div data-lang="zh" markdown="1">
-  <!-- 论文内容 -->
-  <ul>{% for post in site.publications reversed %}
+  <!-- 中文版：只显示中文论文 -->
+  <ul>{% assign zh_pubs = site.publications | where_exp: "pub", "pub.lang == 'zh-CN'" %}{% for post in zh_pubs reversed %}
     {% include archive-single-cv.html  %}
   {% endfor %}</ul>
 </div>
 <div data-lang="ko" markdown="1">
-  <!-- 논문 내용 (영문 목록과 동일) -->
-  <ul>{% for post in site.publications reversed %}
+  <!-- 韩文版：显示非中文论文（与英文版相同） -->
+  <ul>{% assign ko_pubs = site.publications | where_exp: "pub", "pub.lang != 'zh-CN'" %}{% for post in ko_pubs reversed %}
     {% include archive-single-cv.html  %}
   {% endfor %}</ul>
 </div>
