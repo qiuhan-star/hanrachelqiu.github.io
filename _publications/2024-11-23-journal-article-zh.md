@@ -10,7 +10,7 @@ date: 2024-11-23
 venue: '亚洲公共政策期刊'
 author: '杨家西，邱涵*，于文轩'
 viewpaperurl: 'https://doi.org/10.1080/17516234.2024.2429046'
-paperurl: "https://qiuhan-star.github.io/hanrachelqiu.github.io/files/paper1.pdf"
+paperurl: "https://qiuhan-star.github.io/hanrachelqiu.github.io/files/JAPP_2024_Stakeholder_Engagements.pdf"
 citation: 'Yang, Jiaxi, Han Qiu*, and Wenxuan Yu. 2024. Surging Currents: A Systematic Review of the Literature on Dynamic Stakeholder Engagements in Higher Education in the Generative Artificial Intelligence Era. *Journal of Asian Public Policy*, November, 1–29. https://doi.org/10.1080/17516234.2024.2429046'
 ---
 <div style="display: flex;">

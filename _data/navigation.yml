@@ -43,7 +43,3 @@ main:
         title_zh: "指南"
         title_ko: "가이드"
         url: /markdown/
-      - title: "PhD Simulator"
-        title_zh: "PhD 模拟器"
-        title_ko: "PhD 시뮬레이터"
-        url: /game-details.html/
