@@ -296,7 +296,7 @@ var talksData = [
     "kind": {{ t.kind | jsonify }},
     "hide_on_map": {{ t.hide_on_map | jsonify }},
     "important": {{ t.important | jsonify }},
-    "permalink": {{ t.permalink | jsonify }},
+    "permalink": {{ t.permalink | prepend: site.url | jsonify }},
     "abstract": {{ t.abstract | jsonify }},
     "slides_url": {{ t.slides_url | jsonify }},
     "video_url": {{ t.video_url | jsonify }},
