@@ -310,7 +310,7 @@ var talksData = [
 /* geo views (map / wall / journey / map+wall / list+loc) exclude text-only entries */
 var geoTalks = talksData.filter(function(t){ return !t.hide_on_map; });
 
-var isZh = false; /* Talks interface is English-only; Chinese display disabled */
+var isZh = (document.documentElement.getAttribute('data-lang') || 'en') === 'zh';
 
 /* venue -> coordinates + short labels (only the geographic lookup is hardcoded) */
 var venueCoords = {
@@ -780,7 +780,8 @@ document.getElementById('panel-wall').addEventListener('click', function(e){
 /* live re-render when the global language toggle flips data-lang on <html> */
 (function(){
   function syncTalkLang(){
-    isZh = false; /* keep Talks English-only regardless of the global language toggle */
+    var lang = document.documentElement.getAttribute('data-lang') || 'en';
+    isZh = (lang === 'zh');
     var s = document.getElementById('talkMapSearch');
     if(s){ s.placeholder = isZh ? '搜索演讲…' : 'Search talks…'; }
     buildFilterMenu();
