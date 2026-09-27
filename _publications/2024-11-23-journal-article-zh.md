@@ -8,7 +8,8 @@ lang_alt: /publication/2024-11-23-journal-article
 excerpt: '人工智能正在如何重塑教育领域的角色与潜能？本文强调了教育者、学生、管理者、科技企业与政府的关键作用。'
 date: 2025-01-01
 venue: '亚洲公共政策期刊'
-author: '杨家西，邱涵*，于文轩'
+author: '杨家西，邱涵，于文轩'
+author_me: '邱涵'
 viewpaperurl: 'https://doi.org/10.1080/17516234.2024.2429046'
 paperurl: "https://qiuhan-star.github.io/hanrachelqiu.github.io/files/JAPP_2024_Stakeholder_Engagements.pdf"
 citation: 'Yang, Jiaxi, Han Qiu*, and Wenxuan Yu. 2025. Surging Currents: A Systematic Review of the Literature on Dynamic Stakeholder Engagements in Higher Education in the Generative Artificial Intelligence Era. *Journal of Asian Public Policy*, 18(2), 282–310. https://doi.org/10.1080/17516234.2024.2429046'

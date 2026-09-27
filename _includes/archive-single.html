@@ -40,7 +40,7 @@
         {% if post.collection == 'teaching' %}
           <p> {{ post.type }}, <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif post.collection == 'publications' %}
-          {% if post.author %}<p class="pub-byline">{{ post.author | replace: "Han Qiu*", '<span class="author-me">Han Qiu*</span>' | replace: "邱涵*", '<span class="author-me">邱涵*</span>' }}</p>{% endif %}
+          {% if post.author %}<p class="pub-byline">{% if post.author_me %}{% capture me_span %}<span class="author-me">{{ post.author_me }}</span>{% endcapture %}{{ post.author | replace: post.author_me, me_span }}{% else %}{{ post.author }}{% endif %}</p>{% endif %}
           <div class="pub-meta">
             <span class="pub-chip"><i class="fas fa-book" aria-hidden="true"></i> {{ post.venue }}</span>
             <span class="pub-chip year"><i class="fas fa-calendar" aria-hidden="true"></i> {{ post.date | default: "1900-01-01" | date: "%Y" }}</span>

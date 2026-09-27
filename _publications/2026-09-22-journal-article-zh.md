@@ -8,10 +8,11 @@ lang_alt: /publication/2026-09-22-journal-article
 excerpt: '什么因素决定了中国地方政府的透明度？本研究发现，政治与财政因素发挥主导作用，经济因素并不显著，社会因素仅产生条件性影响——表明透明度主要由纵向的政治逻辑驱动。'
 date: 2026-09-22
 venue: '亚太公共行政期刊'
-author: '邱涵，李在庆'
+author: '邱涵，李济京'
+author_me: '邱涵'
 viewpaperurl: 'https://doi.org/10.1080/23276665.2026.2735397'
 paperurl: "https://qiuhan-star.github.io/hanrachelqiu.github.io/files/APJPA_2026_Accountability_Transparency.pdf"
-citation: 'Qiu, Han, and Jekyung Lee. 2026. Vertical and Horizontal Accountability: Determinants of Government Transparency in China. *Asia Pacific Journal of Public Administration*, 1–24. https://doi.org/10.1080/23276665.2026.2735397'
+citation: 'Qiu, Han*, and Jekyung Lee. 2026. Vertical and Horizontal Accountability: Determinants of Government Transparency in China. *Asia Pacific Journal of Public Administration*, 1–24. https://doi.org/10.1080/23276665.2026.2735397'
 ---
 <div style="display: flex;">
   <div style="flex: 2; padding-right: 20px;">

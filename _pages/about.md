@@ -38,9 +38,9 @@ I am always glad to discuss research collaboration and academic exchange. If you
 <!-- 在此处添加你 2025–2026 的新动态（复制下面格式，去掉注释符号即可）： -->
 <!-- <span style="color: #888888;">**[MON. YEAR]**</span> 📌 **标题** >> [**View**](链接) -->
 
-<span style="color: #888888;">**[APR. 2026]**</span> 🎤 **Academic Engagement:** *Delighted to present at the IRSPM 2026 Conference in Perth, Australia.* >> [**Conference Details**]({{ '/talks/2026-04-08-irspm-coproduction' | absolute_url }})
-
 <span style="color: #888888;">**[JUL. 2026]**</span> 🎤 **Academic Engagement:** *Presented two talks at the Chinese Sociological Association 2026 Annual Conference at Xi'an Jiaotong University:* >> [**Single vs. Multiple Agents**]({{ '/talks/2026-07-10-mobilization-entities' | absolute_url }}) >> [**Mobilized Giving and Voluntary Donation**]({{ '/talks/2026-07-10-mobilized-giving' | absolute_url }})
+
+<span style="color: #888888;">**[APR. 2026]**</span> 🎤 **Academic Engagement:** *Delighted to present at the IRSPM 2026 Conference in Perth, Australia.* >> [**Conference Details**]({{ '/talks/2026-04-08-irspm-coproduction' | absolute_url }})
 
 <details markdown="1">
 <summary>Show more</summary>
@@ -49,9 +49,9 @@ I am always glad to discuss research collaboration and academic exchange. If you
 
 <span style="color: #888888;">**[NOV. 2024]**</span> 🎉 **Academic Achievement:** *My Research Paper Earns College Acclaim!* >> [**Read More**](https://mp.weixin.qq.com/s/2TYL9l8GGay93hLLRQBzYw)
 
-<span style="color: #888888;">**[DEC. 2024]**</span> 🎤 **Academic Engagement:** *Delighted to be attending the 20th Cross-Strait and Hong Kong-Macao Public Administration Academic Seminar at the Chinese University of Hong Kong.* >> [**Conference Details**]({{ '/talks/2024-05-09-just-transition' | absolute_url }})
+<span style="color: #888888;">**[MAY 2024]**</span> 🎤 **Academic Engagement:** *Delighted to be attending the 20th Cross-Strait and Hong Kong-Macao Public Administration Academic Seminar at the Chinese University of Hong Kong.* >> [**Conference Details**]({{ '/talks/2024-05-09-just-transition' | absolute_url }})
 
-<span style="color: #888888;">**[DEC. 2024]**</span> 🎤 **Academic Engagement:** *Thrilled to be participating in the International Conference on Comparative Public Policy at Tsinghua University, Beijing.* >> [**Conference Details**]({{ '/talks/2024-04-19-just-transition' | absolute_url }})
+<span style="color: #888888;">**[APR. 2024]**</span> 🎤 **Academic Engagement:** *Thrilled to be participating in the International Conference on Comparative Public Policy at Tsinghua University, Beijing.* >> [**Conference Details**]({{ '/talks/2024-04-19-just-transition' | absolute_url }})
 
 <span style="color: #888888;">**[DEC. 2023]**</span> 🚀 **Academic Milestone:** *Making My Debut at the International Academic Conference at HKUST, Featured in College Broadcast!* >> [**Conference Details**]({{ '/talks/2023-12-01-agile-governance' | absolute_url }}) >> [**Read More**](https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg)
 
@@ -89,9 +89,9 @@ I am always glad to discuss research collaboration and academic exchange. If you
 <!-- 在此处添加你 2025–2026 的新动态（复制下面格式，去掉注释符号即可）： -->
 <!-- <span style="color: #888888;">**[月. 年]**</span> 📌 **标题** >> [**查看**](链接) -->
 
-<span style="color: #888888;">**[2026年4月]**</span> 🎤 **学术参与：** *很高兴赴澳大利亚珀斯参加 IRSPM 2026 会议。* >> [**会议详情**]({{ '/zh/talks/2026-04-08-irspm-coproduction' | absolute_url }})
-
 <span style="color: #888888;">**[2026年7月]**</span> 🎤 **学术参与：** *在中国社会学会 2026 年会（西安交通大学）作两场报告：* >> [**单主体 vs. 多主体**]({{ '/zh/talks/2026-07-10-mobilization-entities' | absolute_url }}) >> [**动员式捐赠与自愿捐赠**]({{ '/zh/talks/2026-07-10-mobilized-giving' | absolute_url }})
+
+<span style="color: #888888;">**[2026年4月]**</span> 🎤 **学术参与：** *很高兴赴澳大利亚珀斯参加 IRSPM 2026 会议。* >> [**会议详情**]({{ '/zh/talks/2026-04-08-irspm-coproduction' | absolute_url }})
 
 <details markdown="1">
 <summary>显示更多</summary>
@@ -138,9 +138,9 @@ I am always glad to discuss research collaboration and academic exchange. If you
 🔥 최신 소식
 ======
 
-<span style="color: #888888;">**[2026년 4월]**</span> 🎤 **학술 활동:** *호주 퍼스에서 열린 IRSPM 2026 학술대회에서 발표하게 되어 기쁩니다.* >> [**학술대회 상세**]({{ '/talks/2026-04-08-irspm-coproduction' | absolute_url }})
-
 <span style="color: #888888;">**[2026년 7월]**</span> 🎤 **학술 활동:** *시안 교통대학교(西安交通大学)에서 열린 중국사회학회 2026 연례학술대회에서 두 편의 발표를 진행했습니다:* >> [**단일 주체 대 다중 주체**]({{ '/talks/2026-07-10-mobilization-entities' | absolute_url }}) >> [**동원된 기부와 자발적 기부**]({{ '/talks/2026-07-10-mobilized-giving' | absolute_url }})
+
+<span style="color: #888888;">**[2026년 4월]**</span> 🎤 **학술 활동:** *호주 퍼스에서 열린 IRSPM 2026 학술대회에서 발표하게 되어 기쁩니다.* >> [**학술대회 상세**]({{ '/talks/2026-04-08-irspm-coproduction' | absolute_url }})
 
 <details markdown="1">
 <summary>더 보기</summary>
@@ -149,9 +149,9 @@ I am always glad to discuss research collaboration and academic exchange. If you
 
 <span style="color: #888888;">**[2024년 11월]**</span> 🎉 **학술 성과:** *제 연구 논문이 단과대학의 찬사를 받았습니다!* >> [**자세히 보기**](https://mp.weixin.qq.com/s/2TYL9l8GGay93hLLRQBzYw)
 
-<span style="color: #888888;">**[2024년 12월]**</span> 🎤 **학술 활동:** *홍콩 중문대학교(香港中文大学)에서 열린 제20회 해협양안 및 홍콩·마카오 공공행정 학술세미나에 참석하게 되어 기쁩니다.* >> [**학술대회 상세**]({{ '/talks/2024-05-09-just-transition' | absolute_url }})
+<span style="color: #888888;">**[2024년 5월]**</span> 🎤 **학술 활동:** *홍콩 중문대학교(香港中文大学)에서 열린 제20회 해협양안 및 홍콩·마카오 공공행정 학술세미나에 참석하게 되어 기쁩니다.* >> [**학술대회 상세**]({{ '/talks/2024-05-09-just-transition' | absolute_url }})
 
-<span style="color: #888888;">**[2024년 12월]**</span> 🎤 **학술 활동:** *베이징 칭화대학교(清华大学)에서 열린 국제비교공공정책학회에 참여하게 되어 매우 기쁩니다.* >> [**학술대회 상세**]({{ '/talks/2024-04-19-just-transition' | absolute_url }})
+<span style="color: #888888;">**[2024년 4월]**</span> 🎤 **학술 활동:** *베이징 칭화대학교(清华大学)에서 열린 국제비교공공정책학회에 참여하게 되어 매우 기쁩니다.* >> [**학술대회 상세**]({{ '/talks/2024-04-19-just-transition' | absolute_url }})
 
 <span style="color: #888888;">**[2023년 12월]**</span> 🚀 **학술 이정표:** *홍콩과기대학교(香港科技大学) 국제학술대회에서 첫 발표를 진행하고 단과대학 방송에 소개되었습니다!* >> [**학술대회 상세**]({{ '/talks/2023-12-01-agile-governance' | absolute_url }}) >> [**자세히 보기**](https://mp.weixin.qq.com/s/EuHTxNFZpdGGEOrvOj-RPg)
 
