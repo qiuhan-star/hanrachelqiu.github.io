@@ -12,7 +12,7 @@ author: '邱涵，李济京'
 author_me: '邱涵'
 viewpaperurl: 'https://doi.org/10.1080/23276665.2026.2735397'
 paperurl: "https://qiuhan-star.github.io/hanrachelqiu.github.io/files/APJPA_2026_Accountability_Transparency.pdf"
-citation: 'Qiu, Han*, and Jekyung Lee. 2026. Vertical and Horizontal Accountability: Determinants of Government Transparency in China. *Asia Pacific Journal of Public Administration*, 1–24. https://doi.org/10.1080/23276665.2026.2735397'
+citation: 'Qiu, Han, and Jekyung Lee*. 2026. Vertical and Horizontal Accountability: Determinants of Government Transparency in China. *Asia Pacific Journal of Public Administration*, 1–24. https://doi.org/10.1080/23276665.2026.2735397'
 ---
 <div style="display: flex;">
   <div style="flex: 2; padding-right: 20px;">
