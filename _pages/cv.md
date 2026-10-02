@@ -42,7 +42,7 @@ redirect_from:
 <body>
 
 <p style="margin: 0 0 1.5em 0;">
-  <a id="pdf-cv-link" href="{{ '/files/CV_HanQiu.pdf' | absolute_url }}" target="_blank" rel="noopener" style="display:inline-block;background:#777;color:#fff;padding:8px 14px;border-radius:4px;text-decoration:none;cursor:pointer;font-size:15px;"><span data-lang="en">📄 PDF CV</span><span data-lang="zh">📄 PDF 简历</span><span data-lang="ko">📄 PDF 이력서</span></a>
+  <a id="pdf-cv-link" href="{{ '/files/CV_HanQiu.pdf' | absolute_url }}" target="_blank" rel="noopener" style="display:inline-block;background:#777;color:#fff;padding:8px 14px;border-radius:4px;text-decoration:none;cursor:pointer;font-size:15px;"><span data-lang="en">📄 Download CV (PDF)</span><span data-lang="zh">📄 下载简历 (PDF)</span><span data-lang="ko">📄 이력서 다운로드 (PDF)</span></a>
   <span id="cv-downloads" style="margin-left:12px;font-size:0.9em;color:#555;"><span data-lang="en" class="dl-en">downloads: 0</span><span data-lang="zh" class="dl-zh">下载量 0</span><span data-lang="ko" class="dl-ko">다운로드 0</span></span>
 </p>
 
