@@ -346,16 +346,18 @@ for (i = 0; i < coll.length; i++) {
 
 <script>
 (function(){
-  var KEY = "hanrachelqiu-cv-downloads";
-  var API = "https://api.countapi.xyz";
+  var BASE = "https://abacus.jasoncameron.dev";
+  var NS = "hanrachelqiu";
+  var KEY = "cv-pdf";
   var en = document.querySelector("#cv-downloads .dl-en");
   var zh = document.querySelector("#cv-downloads .dl-zh");
-  function render(n){ if(en){ en.textContent = "downloads: " + n; } if(zh){ zh.textContent = "下载量 " + n; } var ko=document.querySelector("#cv-downloads .dl-ko"); if(ko){ ko.textContent = "다운로드 " + n; } }
+  var ko = document.querySelector("#cv-downloads .dl-ko");
+  function render(n){ if(en){ en.textContent = "downloads: " + n; } if(zh){ zh.textContent = "下载量 " + n; } if(ko){ ko.textContent = "다운로드 " + n; } }
   /* read current count on load */
-  fetch(API + "/get/" + KEY).then(function(r){return r.json();}).then(function(d){ if(d && typeof d.value !== "undefined"){ render(d.value); } else { render(0); } }).catch(function(){ render(0); });
+  fetch(BASE + "/get/" + NS + "/" + KEY).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){ render(d && typeof d.value !== "undefined" ? d.value : 0); }).catch(function(){ render(0); });
   /* increment on click (fire-and-forget) */
   var link = document.getElementById("pdf-cv-link");
-  if(link){ link.addEventListener("click", function(){ fetch(API + "/hit/" + KEY).then(function(r){return r.json();}).then(function(d){ if(d && typeof d.value !== "undefined"){ render(d.value); } }).catch(function(){}); }); }
+  if(link){ link.addEventListener("click", function(){ fetch(BASE + "/hit/" + NS + "/" + KEY).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){ if(d && typeof d.value !== "undefined"){ render(d.value); } }).catch(function(){}); }); }
 })();
 </script>
 
