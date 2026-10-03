@@ -21,7 +21,7 @@ I am currently a PhD student in Public Administration at the [School of Public A
 
 I completed my M.A. in Public Administration at the [School of Public Affairs](https://spa.xmu.edu.cn/), [Xiamen University](https://www.xmu.edu.cn/), where I was fortunate to be guided by [Professor Wenxuan Yu](https://spa.xmu.edu.cn/info/1237/3095.htm).
 
-I hold a B.S. degree in Public Service & Public Policy from [Arizona State University](https://www.asu.edu/) (2022) and a B.A. degree in Public Administration from [Hainan University](https://www.hainanu.edu.cn/) (2022), where I was fortunate to be mentored by [Professor Haiying Lin](https://haitc.hainanu.edu.cn/cslm/jzyg/szdw/xzgl.htm).
+I hold a B.S. degree in Public Service & Public Policy from [Arizona State University](https://www.asu.edu/) (2022) and a B.A. degree in Public Administration from [Hainan University](https://www.hainanu.edu.cn/) (2022), where my advisor was [Professor Haiying Lin](https://haitc.hainanu.edu.cn/cslm/jzyg/szdw/xzgl.htm).
 
 My research interests lie in public and nonprofit management, government transparency and accountability, digital government and GovTech, co-production and collaborative governance, and environmental governance. [**Read More**]({{ '/portfolio/' | absolute_url }})
 
@@ -123,7 +123,7 @@ I am always glad to discuss research collaboration and academic exchange. If you
 
 샤먼대학교(厦门大学) 공공관리대학에서 행정관리 석사 학위를 받았으며, 위원쉬안(于文轩) 교수의 지도를 받았습니다.
 
-애리조나 주립대학교(Arizona State University, 2022)에서 공공서비스 및 공공정책 학사, 하이난대학교(海南大学, 2022)에서 행정관리 학사 학위를 받았으며, 린하이잉(林海英) 교수의 지도를 받았습니다.
+애리조나 주립대학교(Arizona State University, 2022)에서 공공서비스 및 공공정책 학사, 하이난대학교(海南大学, 2022)에서 행정관리 학사 학위를 받았으며, 지도교수는 린하이잉(林海英) 교수였습니다.
 
 저의 연구 관심 분야는 공공 및 비영리 조직 관리, 정부 투명성과 책무성, 디지털 정부와 GovTech, 공동생산 및 협력 거버넌스, 그리고 환경 거버넌스입니다. [**자세히 보기**]({{ '/portfolio/' | absolute_url }})
 
