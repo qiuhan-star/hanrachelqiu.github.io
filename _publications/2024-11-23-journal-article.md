@@ -7,7 +7,7 @@ lang_alt: /zh/publication/2024-11-23-journal-article
 excerpt: 'How artificial intelligence is reshaping the role and potential in the field of education? This paper highlights key roles for educators, students, admins, tech firms, and governments.'
 date: 2025-01-01
 venue: 'Journal of Asian Public Policy'
-author: 'Yang, Jiaxi, Han Qiu, & Wenxuan Yu'
+author: 'Yang, Jiaxi, Han Qiu*, & Wenxuan Yu'
 author_me: 'Han Qiu'
 viewpaperurl: 'https://doi.org/10.1080/17516234.2024.2429046'
 paperurl: "https://qiuhan-star.github.io/hanrachelqiu.github.io/files/JAPP_2024_Stakeholder_Engagements.pdf"
