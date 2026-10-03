@@ -7,7 +7,7 @@ lang_alt: /zh/publication/2026-09-22-journal-article
 excerpt: 'What drives subnational government transparency in China? This study finds that political and fiscal factors play dominant roles, while economic factors are insignificant and social factors exert only conditional influence — suggesting transparency is primarily driven by a vertical political logic.'
 date: 2026-09-22
 venue: 'Asia Pacific Journal of Public Administration'
-author: 'Qiu, Han, & Jekyung Lee'
+author: 'Qiu, Han, & Jekyung Lee*'
 author_me: 'Qiu, Han'
 viewpaperurl: 'https://doi.org/10.1080/23276665.2026.2735397'
 paperurl: "https://qiuhan-star.github.io/hanrachelqiu.github.io/files/APJPA_2026_Accountability_Transparency.pdf"
