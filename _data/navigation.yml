@@ -27,14 +27,14 @@ main:
         title_zh: "获奖"
         title_ko: "수상"
         url: /awards/
-      - title: "Blog"
-        title_zh: "博客"
-        title_ko: "블로그"
-        url: /method-notes/
       - title: "Guide"
         title_zh: "指南"
         title_ko: "가이드"
         url: /markdown/
+      - title: "Blog"
+        title_zh: "博客"
+        title_ko: "블로그"
+        url: /method-notes/
       - title: "Services"
         title_zh: "服务"
         title_ko: "서비스"
